@@ -1,0 +1,106 @@
+.menu input[type="checkbox"] {
+    display: none;
+}
+
+.menu label[for="user_dropdown"] {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.menu input[type="checkbox"]:checked ~ ul.user_dropdown {
+    display: block;
+}
+
+.menu ul.user_dropdown {
+    display: none;
+    position: absolute;
+    right: -15px;
+    top: 3.76rem;
+    background: #eaccda;
+    padding: 10px;
+    min-width: 250px;
+    border-radius: 15px;
+}
+
+    .menu ul.user_dropdown > li {
+        text-align: left;
+        display: block;
+    }
+
+    .menu ul.user_dropdown .titlebar {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        border-bottom: 2px solid #dba8bd;
+        padding-bottom: 5px;
+    }
+
+        .menu ul.user_dropdown .titlebar > span {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 100%;
+            flex: 1;
+            display: inline-block;
+        }
+
+        .menu ul.user_dropdown .titlebar > a {
+            display: flex;
+            flex-grow: initial;
+            text-decoration: none;
+            color: #000;
+        }
+
+    .menu ul.user_dropdown .userinfo {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        width: 100%;
+        padding: 0.5em 0;
+    }
+
+        .menu ul.user_dropdown .userinfo .profile {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            border: 1px solid #e078a1;
+            background: #e078a1;
+            color: #FFF;
+            overflow: hidden;
+            padding: 0;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 18px;
+        }
+
+        .menu ul.user_dropdown .userinfo .meta {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 100%;
+            flex: 1;
+        }
+
+            .menu ul.user_dropdown .userinfo .meta > span.email {
+                font-size: 12px;
+            }

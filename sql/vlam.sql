@@ -193,6 +193,9 @@ CREATE TABLE `settings` (
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `username` varchar(30) DEFAULT NULL,
+  `firstname` text NOT NULL,
+  `middlename` text NOT NULL,
+  `lastname` text NOT NULL,
   `status` varchar(255) DEFAULT NULL,
   `status_message` varchar(255) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 0,
