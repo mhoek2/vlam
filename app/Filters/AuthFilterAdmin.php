@@ -15,16 +15,16 @@ class AuthFilterAdmin implements FilterInterface
 
 		if($user == NULL)
 		{
-			return redirect()->to('/login');
+			return redirect()->to('/');
 		}
 	
 		if (!$user->inGroup('admin')) {	
-			return redirect()->to('/login');
+			return redirect()->to('/home');
 		}
 		
-		if (!auth()->user()->can('test.control')) {
-			return redirect()->to('/login');
-		}
+		//if (!auth()->user()->can('test.control')) {
+		//	return redirect()->to('/');
+		//}
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

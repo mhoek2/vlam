@@ -6,16 +6,16 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class AuthFilterGuest implements FilterInterface
+class AuthFilterSession implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
 		// https://shield.codeigniter.com/quick_start_guide/using_authorization/
 		$user = auth()->user();
-        
-		if($user != NULL)
+
+		if($user == NULL)
 		{
-			return redirect()->to('/home');
+			return redirect()->to('/login');
 		}
     }
 

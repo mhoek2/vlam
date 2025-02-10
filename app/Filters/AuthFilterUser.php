@@ -18,13 +18,8 @@ class AuthFilterUser implements FilterInterface
 			return redirect()->to('/login');
 		}
 
-		
 		if (!$user->inGroup('user')) {	
-			if ($user->inGroup('admin')) {	
-				return redirect()->to('/admin');
-			}
-
-			return redirect()->to('/404');
+			return redirect()->to('/home');
 		}
 		
 		//if (!auth()->user()->can('test.control')) {
