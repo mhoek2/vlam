@@ -33,7 +33,8 @@ class AssignmentController extends BaseController
 
 		$data['assignment'] = $this->assignments->find($assignment_id);
 		$data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
-		
+		$data['entry_types'] = $this->assignmentEntry->type_enum;
+
 		$data['meeting'] = $this->meetings->find($data['assignment']['meeting_id']);
 
 		// Check if assignment exists, otherwise show an error or a message
@@ -51,6 +52,7 @@ class AssignmentController extends BaseController
 	//
 	// ENTRY
 	//
+
 	public function add_entry( $assignment_id )
 	{
 		$new_entry_name = $this->request->getPost('entry_name');

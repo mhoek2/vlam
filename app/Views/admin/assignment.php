@@ -46,12 +46,15 @@
 			<?php foreach ($entries as $item) { ?>
 				<div class="entry grid-item" data-id="<?= $item['id'] ?>" data-entry-id="<?= $item['id'] ?>" data-type="<?= $item['type'] ?>">
 					<h3 class="entry-name" data-entry-id="<?= $item['id'] ?>" contenteditable="true"><?= $item['name'] ?></h3>
+					
 					<select class="entry-type-select" data-entry-id="<?= $item['id'] ?>">
-						<option value="text_input" <?= $item['type'] == 'text_input' ? 'selected' : '' ?>>Text Input</option>
-						<option value="mcq" <?= $item['type'] == 'mcq' ? 'selected' : '' ?>>Multiple Choice</option>
-						<option value="text_separator" <?= $item['type'] == 'text_separator' ? 'selected' : '' ?>>Text Separator</option>
+						<?php foreach($entry_types as $type): ?>
+							<option value="<?=$type["type"]?>" <?= $item['type'] == $type['type'] ? 'selected' : '' ?>>
+								<?=$type['name']?>
+							</option>
+						<?php endforeach ?>
 					</select>
-                
+
 					<button class="toggle-properties">Show/Hide</button>
                 
 					<div class="properties" style="display: none;">

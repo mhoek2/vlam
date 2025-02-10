@@ -10,4 +10,10 @@ class AssignmentEntry extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = ['id', 'type', 'name', 'sort_order', 'info'];
+    public $type_enum = [ 
+        ['type' => 'mcq',               'name' => 'Multiple Choice'], 
+        ['type' => 'text_input',        'name' => 'Text Input'], 
+        ['type' => 'text_separator',    'name' => 'Text Separator']
+    ];
+
 }
