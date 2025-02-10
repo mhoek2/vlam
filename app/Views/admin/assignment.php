@@ -34,13 +34,16 @@
 	}
 </style>
 
+<div class="breadcrumbs">
+   	<ul>
+		<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
+		<li><a href="<?=base_url('admin/meeting/').$meeting['id']?>"><?=$meeting['info']?></a></li>
+		<li><span><?=$assignment['name']?></span></li>
+	</ul>
+</div>
+
 <section class="main">
     <div class="content">
-   		<ul>
-			<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
-			<li><a href="<?=base_url('admin/meeting/').$meeting['id']?>"><?=$meeting['info']?></a></li>
-			<li><span><?=$assignment['name']?></span></li>
-		</ul>
 
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
@@ -154,39 +157,39 @@
 			}
 		});		
 		
-<?php		
-/*
-	<select class="entry-type-select" data-entry-id="${entryId}">
-		<option value="text_input" <?= $item['type'] == 'text_input' ? 'selected' : '' ?>>Text Input</option>
-		<option value="mcq" <?= $item['type'] == 'mcq' ? 'selected' : '' ?>>Multiple Choice</option>
-		<option value="text_separator" <?= $item['type'] == 'text_separator' ? 'selected' : '' ?>>Text Separator</option>
-	</select>
-
-
+		/**
+		 left off here 
+		 */
 		function add_entry( entryId )
 		{
+			let name = "NAME";
+			let type = "msq";
+
             $('.grid-container').append(`
-				<div class="entry grid-item" data-id="${entryId}" data-entry-id="${entryId}" data-type="<?= $item['type'] ?>">
-					<h3 class="entry-name" data-entry-id="${entryId}" contenteditable="true"><?= $item['name'] ?></h3>
+				<div class="entry grid-item" data-id="${entryId}" data-entry-id="${entryId}" data-type=${type}">
+					<h3 class="entry-name" data-entry-id="${entryId}" contenteditable="true">${name}</h3>
+
+					<select class="entry-type-select" data-entry-id="${entryId}">
+						<?php foreach($entry_types as $type): ?>
+							<option value="<?=$type["type"]?>">
+								<?=$type['name']?>
+							</option>
+						<?php endforeach ?>
+					</select>
 
 					<button class="toggle-properties">Show/Hide</button>
 
 					<div class="properties" style="display: none;">
-						<ul id="properties-list-<?= $item['id'] ?>"></ul>
+						<ul id="properties-list-${entryId}"></ul>
 						<div class="properties-actions">
-							<input type="text" id="new-property-<?= $item['id'] ?>" placeholder="option">
-							<button class="add-property" data-entry-id="<?= $item['id'] ?>">Add Option</button>
-							<?php if ($item['type'] == 'mcq'): ?>
-							<?php elseif ($item['type'] == 'text_input'): ?>
-							<?php elseif ($item['type'] == 'text_separator'): ?>	
-							<?php endif; ?>
+							<input type="text" id="new-property-${entryId}" placeholder="option">
+							<button class="add-property" data-entry-id="${entryId}">Add Option</button>
 						</div>
 					</div>
 				</div>
 			`);
 		}
-*/
-?>
+
 		$('.add-entry').on('click', function () {
 			const newEntryName = $(this).siblings('#new-entry-name').val().trim();
 			
@@ -195,11 +198,12 @@
 					url: '<?=current_url()?>/add_entry',
 					method: 'POST',
 					data: {
-						entry_name: newEntryName
+						entry_name: newEntryName,
+						assignment_id: <?=$assignment['id']?>,
 					},
 					success: function (response) {
 						if (response.status === 'success') {
-							
+							add_entry( response.insert_id );
 						}
 					}
 				});

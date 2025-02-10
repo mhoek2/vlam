@@ -1,14 +1,15 @@
 <?php echo $header; ?>
 
-<!-- CONTENT -->
+<div class="breadcrumbs">
+    <ul>
+	    <li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
+	    <li><span><?=$meeting['info']?></span></li>
+    </ul>
+</div>
 
 <section class="main">
     <div class="content">
-   		<ul>
-			<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
-			<li><span><?=$meeting['info']?></span></li>
-		</ul>
-       <form id="edit_meeting" method="POST">
+        <form id="edit_meeting" method="POST">
             <label>Info<lable>
             <input type="text" name="info" value="<?=$meeting["info"]?>">
 
@@ -17,7 +18,7 @@
 
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
             <button type="submit">Opslaan</button>
-       </form>
+        </form>
     </div>
 </section>
 

@@ -69,7 +69,7 @@ class AssignmentController extends BaseController
 		$this->assignmentEntry->insert([
 			'assignment_id' => $assignment_id, 
 			'name' => $new_entry_name, 
-			'sort_order' => 99999 ]
+			'sort_order' => $new_sort_order ]
 		);
 		
 		$insert_id = $this->assignmentEntry->insertID();

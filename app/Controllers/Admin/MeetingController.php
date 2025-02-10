@@ -44,7 +44,7 @@ class MeetingController extends BaseController
         $data["current_meeting"] = $data["meeting"] != false ? $meeting_id : false;
 
 
-        $data['assignments'] = $this->assignments->orderBy('sort_order', 'ASC')->findAll();
+        $data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
         $data['assignments_view'] = view('admin/assignments', $data);
 
         return view('admin/meeting', $data);

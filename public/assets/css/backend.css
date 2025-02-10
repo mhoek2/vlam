@@ -1,11 +1,15 @@
+:root {
+    --max-width: 1600px;
+}
+
 * {
     transition: background-color 300ms ease, color 300ms ease;
 }
 
-    *:focus {
-        background-color: rgba(221, 72, 20, .2);
-        outline: none;
-    }
+*:focus {
+    background-color: rgba(221, 72, 20, .2);
+    outline: none;
+}
 
 html, body {
     color: rgba(33, 37, 41, 1);
@@ -166,7 +170,7 @@ header .heroe {
 
 section {
     margin: 0 auto;
-    max-width: 1600px;
+    max-width: var(--max-width);
     padding: 2.5rem 1.75rem 3.5rem 1.75rem;
 }
 
@@ -297,4 +301,50 @@ footer {
     border-radius: 10px;
     background: #f1f1f1;
     padding:2em;
+}
+
+.breadcrumbs {
+    margin: 0 auto;
+    max-width: var(--max-width);
+    padding: 2.5rem 1.75rem 3.5rem 1.75rem;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.breadcrumbs > ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    gap:10px;
+}
+
+.breadcrumbs > ul > li {
+    display: inline;
+}
+
+.breadcrumbs > ul > li a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+.breadcrumbs > ul > li a:hover {
+    color: #0056b3;
+}
+
+.breadcrumbs > ul > li:not(:last-child)::after {
+    content: "\f054"; /* FontAwesome right arrow icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900; /* Make sure the icon is displayed as solid */
+    margin-left: 10px;
+    color: #666;
+}
+
+.breadcrumbs > ul > li span {
+    color: #666;
+    font-weight: bold;
 }
