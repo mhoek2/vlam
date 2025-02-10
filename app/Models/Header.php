@@ -3,50 +3,16 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\User;
 
 class Header extends Model
 {
-    private static function generateShortName( $user ) {
-        $first_name = $user['firstname'] ?? '';
-        $last_name = $user['lastname'] ?? '';
-
-        return strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-    }
-    private function getUser() {
-        $user = auth()->user();
-
-        if($user == NULL)
-            return false;
-
-        //auth()->user()->username;
-        //Get logged-in User email:
-        //
-        //auth()->user()->getEmail();
-        //Get the 'date & time' when the logged-in User account was created:
-        //
-        //auth()->user()->created_at->toDateTimeString();
-        //Get all logged-in User data.
-        //
-        //auth()->user()->toRawArray();
-
-
-        //$header["username"] = auth()->user()->username;
-        //$header["name"] = auth()->user()->name;
-
-        $data = $user->toRawArray();
-        $data["shortname"] = $this->generateShortName( $data );
-
-        $data["is_admin"] = $user->inGroup('admin');
-
-        return($data);
-    }
-
     public function getHeader( &$data ) {
+        $user = new User();
+
         $header = array();
+		$header["user"] = $user->getUserInfo();
 
-		$header["user"] = $this->getUser();
-
-        $data["header"] = view('header', $header);
+        $data["header"] = view('front/header', $header);
     }
 }
-

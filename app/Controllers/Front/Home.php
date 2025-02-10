@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Front;
+
+use App\Controllers\BaseController;
 
 use App\Models\Header;
 use App\Models\Meetings;
@@ -18,7 +20,7 @@ class Home extends BaseController
         $this->header->getHeader( $data );
 
 
-        return view('welcome_message', $data);
+        return view('front/welcome_message', $data);
     }
 
     public function application(): string
@@ -30,6 +32,6 @@ class Home extends BaseController
         $data["meetings"] = $this->meetings->get_all_meetings();
         $data["current_meeting"] = false;
 
-        return view('dashboard', $data);
+        return view('front/dashboard', $data);
     }
 }

@@ -5,12 +5,12 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/',		'Home::index', 				['filter' => \App\Filters\AuthFilterGuest::class]);
-$routes->get('/home',	'Home::application', 		['filter' => \App\Filters\AuthFilterUser::class]);
+$routes->get('/',		'Front\Home::index', 			['filter' => \App\Filters\AuthFilterGuest::class]);
+$routes->get('/home',	'Front\Home::application', 		['filter' => \App\Filters\AuthFilterUser::class]);
 
 $routes->get('/admin',	'Admin\Home::dashboard', 	['filter' => \App\Filters\AuthFilterUser::class]);
 
-$routes->get('meeting/(:any)',			'Meeting::index/$1');
+$routes->get('meeting/(:any)',			'Front\Meeting::index/$1');
 
 /**
  * admin

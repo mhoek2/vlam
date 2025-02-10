@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Front;
+
+use App\Controllers\BaseController;
 
 use App\Models\Header;
 use App\Models\User;
@@ -25,6 +27,6 @@ class Meeting extends BaseController
         $data["meeting"] = $this->meetings->get_meeting($id);
         $data["current_meeting"] = $data["meeting"] != false ? $id : false;
 
-        return view('meeting', $data);
+        return view('front/meeting', $data);
     }
 }
