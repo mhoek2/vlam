@@ -6,10 +6,12 @@
     <div class="meetings">
         <ul>
 <?php foreach( $meetings as $item ){ ?>
+            <a href="<?= site_url('meeting/'.$item->id.'/') ?>">
             <li>
                 <span class="name"> <?=$item->name;?></span>
                 <span class="info"> <?=$item->info;?></span>
             </li>
+            </a>
 <?php } ?>
         <ul>
     </div>

@@ -7,5 +7,6 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('meeting/(:any)', 'Meeting::index/$1');
+$routes->post('meeting/(:any)/save', 'Meeting::save/$1');
 
 service('auth')->routes($routes);

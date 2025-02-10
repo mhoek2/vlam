@@ -29,5 +29,20 @@ class Meetings extends Model
 			return false;
 		}
 	}
+
+	public function set_meeting( $id, $data )
+	{
+		// check for admin again?
+		$db = db_connect();
+		$builder = $db->table('meetings');
+		$builder->where('id', $id);
+		$builder->update($data);
+
+		if ($db->affectedRows() > 0) {
+			return true;
+		}
+
+		return false;
+	}
 }
 

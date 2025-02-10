@@ -18,6 +18,46 @@ html, body {
     text-rendering: optimizeLegibility;
 }
 
+label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+    }
+
+    input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover, textarea:hover {
+        border-color: #b3b3b3;
+    }
+
+    input::placeholder, textarea::placeholder {
+        color: #999;
+        opacity: 1;
+    }
+
+textarea {
+    resize: vertical;
+}
+
+
 header {
     background-color: rgba(247, 248, 249, 1);
     padding: .4rem 0 0;
