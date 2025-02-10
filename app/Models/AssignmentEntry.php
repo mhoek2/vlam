@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Assignment extends Model
+class AssignmentEntry extends Model
 {
     protected $table      = 'assignment_entry';
     protected $primaryKey = 'id';

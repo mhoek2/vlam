@@ -34,43 +34,45 @@
 	}
 </style>
 
-<section>
-   	<ul>
-		<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
-		<li><a href="<?=base_url('admin/meeting/').$meeting['id']?>"><?=$meeting['info']?></a></li>
-		<li><span><?=$assignment['name']?></span></li>
-    </ul>
+<section class="main">
+    <div class="content">
+   		<ul>
+			<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
+			<li><a href="<?=base_url('admin/meeting/').$meeting['id']?>"><?=$meeting['info']?></a></li>
+			<li><span><?=$assignment['name']?></span></li>
+		</ul>
 
-    <div class="grid-container" id="sortable">
-        <?php foreach ($entries as $item) { ?>
-            <div class="entry grid-item" data-id="<?= $item['id'] ?>" data-entry-id="<?= $item['id'] ?>" data-type="<?= $item['type'] ?>">
-                <h3 class="entry-name" data-entry-id="<?= $item['id'] ?>" contenteditable="true"><?= $item['name'] ?></h3>
-				<select class="entry-type-select" data-entry-id="<?= $item['id'] ?>">
-					<option value="text_input" <?= $item['type'] == 'text_input' ? 'selected' : '' ?>>Text Input</option>
-					<option value="mcq" <?= $item['type'] == 'mcq' ? 'selected' : '' ?>>Multiple Choice</option>
-					<option value="text_separator" <?= $item['type'] == 'text_separator' ? 'selected' : '' ?>>Text Separator</option>
-				</select>
+		<div class="grid-container" id="sortable">
+			<?php foreach ($entries as $item) { ?>
+				<div class="entry grid-item" data-id="<?= $item['id'] ?>" data-entry-id="<?= $item['id'] ?>" data-type="<?= $item['type'] ?>">
+					<h3 class="entry-name" data-entry-id="<?= $item['id'] ?>" contenteditable="true"><?= $item['name'] ?></h3>
+					<select class="entry-type-select" data-entry-id="<?= $item['id'] ?>">
+						<option value="text_input" <?= $item['type'] == 'text_input' ? 'selected' : '' ?>>Text Input</option>
+						<option value="mcq" <?= $item['type'] == 'mcq' ? 'selected' : '' ?>>Multiple Choice</option>
+						<option value="text_separator" <?= $item['type'] == 'text_separator' ? 'selected' : '' ?>>Text Separator</option>
+					</select>
                 
-                <button class="toggle-properties">Show/Hide</button>
+					<button class="toggle-properties">Show/Hide</button>
                 
-                <div class="properties" style="display: none;">
-                    <ul id="properties-list-<?= $item['id'] ?>"></ul>
-                    <div class="properties-actions">
-						<input type="text" id="new-property-<?= $item['id'] ?>" placeholder="option">
-						<button class="add-property" data-entry-id="<?= $item['id'] ?>">Add Option</button>
-	                    <?php if ($item['type'] == 'mcq'): ?>
-						<?php elseif ($item['type'] == 'text_input'): ?>
-						<?php elseif ($item['type'] == 'text_separator'): ?>	
-						<?php endif; ?>
+					<div class="properties" style="display: none;">
+						<ul id="properties-list-<?= $item['id'] ?>"></ul>
+						<div class="properties-actions">
+							<input type="text" id="new-property-<?= $item['id'] ?>" placeholder="option">
+							<button class="add-property" data-entry-id="<?= $item['id'] ?>">Add Option</button>
+							<?php if ($item['type'] == 'mcq'): ?>
+							<?php elseif ($item['type'] == 'text_input'): ?>
+							<?php elseif ($item['type'] == 'text_separator'): ?>	
+							<?php endif; ?>
+						</div>
 					</div>
-                </div>
-            </div>
-        <?php }; ?>
-    </div>
+				</div>
+			<?php }; ?>
+		</div>
     
-    <div class="entry-actions">
-    	<input type="text" id="new-entry-name" placeholder="option">
-    	<button class="add-entry">Add Entry</button>
+		<div class="entry-actions">
+    		<input type="text" id="new-entry-name" placeholder="option">
+    		<button class="add-entry">Add Entry</button>
+		</div>
     </div>
 </section>
 

@@ -1,11 +1,13 @@
 <style>
         .grid-container {
+            box-sizing: border-box;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
         .grid-item {
-            width: 300px;
+            box-sizing: border-box;
+            flex-basis: calc(20% - 10px);
             height: 175px;
             background-color: lightgray;
             padding: 10px;
@@ -18,20 +20,14 @@
         }	
 </style>
 
-<section>
-   	<ul>
-		<li><a href="<?=base_url('admin/assignments')?>">Opdrachten</a></li>
-    </ul>
-      
-    <div class="grid-container" id="sortable">
-        <?php foreach ($assignments as $item) { ?>
-            <div class="grid-item" data-id="<?= $item['id'] ?>">
-               	<a href="<?=base_url('admin/assignments/')?><?=$item['id']?>"><?= $item['name'] ?></a>
-                <p><?= esc($item['info']) ?></p>
-            </div>
-        <?php }; ?>
-    </div>
-</section>
+<div class="grid-container" id="sortable">
+    <?php foreach ($assignments as $item) { ?>
+        <div class="grid-item" data-id="<?= $item['id'] ?>">
+            <a href="<?=base_url('admin/assignments/')?><?=$item['id']?>"><?= $item['name'] ?></a>
+            <p><?= esc($item['info']) ?></p>
+        </div>
+    <?php }; ?>
+</div>
 
 <script>
 	$(document).ready(function() {

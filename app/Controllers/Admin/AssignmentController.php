@@ -8,7 +8,7 @@ use App\Models\Admin\Header;
 
 use App\Models\Meetings;
 use App\Models\Assignments;
-use App\Models\Assignment;
+use App\Models\AssignmentEntry;
 use App\Models\AssignmentEntryProperties;
 
 class AssignmentController extends BaseController
@@ -22,7 +22,7 @@ class AssignmentController extends BaseController
         $this->meetings = new Meetings();
 
         $this->assignments = new Assignments();
-        $this->assignment = new Assignment();
+        $this->assignmentEntry = new assignmentEntry();
         $this->assignmentEntryProperties = new AssignmentEntryProperties();
     }
 	
@@ -32,7 +32,7 @@ class AssignmentController extends BaseController
         $this->header->getHeader( $data );
 
 		$data['assignment'] = $this->assignments->find($assignment_id);
-		$data['entries'] = $this->assignment->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
+		$data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		
 		$data['meeting'] = $this->meetings->find($data['assignment']['meeting_id']);
 
@@ -55,7 +55,7 @@ class AssignmentController extends BaseController
 	{
 		$new_entry_name = $this->request->getPost('entry_name');
 
-		$existing_entries = $this->assignment->where('assignment_id', $assignment_id)->findAll();
+		$existing_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
 
 		$max_sort_order = 0;
 		if ($existing_entries) {
@@ -64,13 +64,13 @@ class AssignmentController extends BaseController
 
 		$new_sort_order = $max_sort_order + 1;	
 		
-		$this->assignment->insert([
+		$this->assignmentEntry->insert([
 			'assignment_id' => $assignment_id, 
 			'name' => $new_entry_name, 
 			'sort_order' => 99999 ]
 		);
 		
-		$insert_id = $this->assignment->insertID();
+		$insert_id = $this->assignmentEntry->insertID();
 		
 		return $this->response->setJSON(['status' => 'success', 'insert_id' => $insert_id]);
 	}
@@ -80,7 +80,7 @@ class AssignmentController extends BaseController
 		$sort_order = $this->request->getPost('sort_order');
 
         foreach ($sort_order as $order => $id) {
-			$result = $this->assignment->where('assignment_id', (int)$assignment_id)
+			$result = $this->assignmentEntry->where('assignment_id', (int)$assignment_id)
                                        ->update($id, ['sort_order' => $order]);
         }
 
@@ -92,7 +92,7 @@ class AssignmentController extends BaseController
 		$entry_id = $this->request->getPost('entry_id');
 		$new_entry_name = $this->request->getPost('entry_name');
 
-		$this->assignment->update($entry_id, ['name' => $new_entry_name]);
+		$this->assignmentEntry->update($entry_id, ['name' => $new_entry_name]);
 
 		return $this->response->setJSON(['status' => 'success']);
 	}
@@ -105,7 +105,7 @@ class AssignmentController extends BaseController
 		// clear properties
 		$this->clear_entry_properties($entry_id);
 		
-		$this->assignment->update($entry_id, ['type' => $new_type]);
+		$this->assignmentEntry->update($entry_id, ['type' => $new_type]);
 
 		// add default property if required for the new type
 		if ($new_type === "text_separator") {

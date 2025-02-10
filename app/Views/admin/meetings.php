@@ -4,7 +4,9 @@
 
 <section class="main">
     <div class="content">
-        Meetings
+   	    <ul>
+		    <li><span>Meetings</span></li>
+        </ul>
 
         <ul>
         <?php foreach( $meetings as $item):?>
