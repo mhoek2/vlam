@@ -17,6 +17,15 @@ class Home extends BaseController
         $data = array();
         $this->header->getHeader( $data );
 
+
+        return view('welcome_message', $data);
+    }
+
+    public function application(): string
+    {
+        $data = array();
+        $this->header->getHeader( $data );
+
         // Meetings
         $data["meetings"] = $this->meetings->get_all_meetings();
         $data["current_meeting"] = false;

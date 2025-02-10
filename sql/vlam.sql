@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2025 at 08:51 AM
+-- Generation Time: Feb 10, 2025 at 11:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,18 +30,65 @@ SET time_zone = "+00:00";
 CREATE TABLE `assignments` (
   `id` int(11) NOT NULL,
   `meeting_id` int(11) NOT NULL,
-  `type` enum('podcast','interactive','','') NOT NULL,
-  `title` text NOT NULL,
-  `intro` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `sort_order` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `info` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `assignments`
 --
 
-INSERT INTO `assignments` (`id`, `meeting_id`, `type`, `title`, `intro`) VALUES
-(1, 1, 'podcast', 'Opdracht 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
-(2, 1, 'podcast', 'Opdracht 2', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `info`) VALUES
+(1, 1, 0, 'Opdracht 1', 'Opdracht 1'),
+(2, 1, 2, 'Opdracht 2', 'Opdracht 2'),
+(3, 1, 3, 'Opdracht 3', 'Opdracht 3'),
+(4, 1, 1, 'Opdracht 4', 'Opdracht 4'),
+(5, 1, 4, 'Opdracht 5', 'Opdracht 5'),
+(6, 1, 5, 'Opdracht 6', 'Opdracht 6');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment_entry`
+--
+
+CREATE TABLE `assignment_entry` (
+  `id` int(11) NOT NULL,
+  `sort_order` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `info` text NOT NULL,
+  `assignment_id` int(11) NOT NULL,
+  `type` enum('mcq','text_input','text_separator','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `assignment_entry`
+--
+
+INSERT INTO `assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`) VALUES
+(1, 4, 'Vraag 1', 'Vraag 1', 1, 'mcq');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment_entry_properties`
+--
+
+CREATE TABLE `assignment_entry_properties` (
+  `id` int(11) NOT NULL,
+  `entry_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `sort_order` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `assignment_entry_properties`
+--
+
+INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
+(1, 1, 'Ja', 0),
+(2, 1, 'Nee', 0);
 
 -- --------------------------------------------------------
 
@@ -158,12 +205,12 @@ CREATE TABLE `meetings` (
 --
 
 INSERT INTO `meetings` (`id`, `name`, `info`, `intro`) VALUES
-(1, 1, 'Kennismaking en werkvoorwaarden', '<h2>Dit is een test</h2><blockquote><p><i><strong>as</strong></i><span style=\"background-color:hsl(0,0%,90%);\"><i><strong>d</strong></i></span><span style=\"background-color:hsl(0,0%,90%);color:hsl(60,75%,60%);\"><i><strong>asdasd</strong></i></span><span style=\"background-color:hsl(0,0%,90%);\"><i><strong>a</strong></i></span></p></blockquote><p><i><strong>asdasd</strong></i>sadasd</p>'),
+(1, 1, 'Kennismaking en werkvoorwaarden', '<h2>Dit is een test2</h2><blockquote><p><i><strong>as</strong></i><span style=\"background-color:hsl(0,0%,90%);\"><i><strong>d</strong></i></span><span style=\"background-color:hsl(0,0%,90%);color:hsl(60,75%,60%);\"><i><strong>asdasd</strong></i></span><span style=\"background-color:hsl(0,0%,90%);\"><i><strong>a</strong></i></span></p></blockquote><p><i><strong>asdasd</strong></i>sadasd</p>'),
 (2, 2, 'Kwaliteiten en persoonlijk profiel', ''),
 (3, 3, 'Het belang van een sterk CV', ''),
 (4, 4, 'Openheid geven', ''),
 (5, 5, 'Ervaringen van een oud student', ''),
-(6, 6, 'Solicitatiegesprek en actieplan', '');
+(6, 6, 'Solicitatiegesprek en actieplan', '<p>2</p>');
 
 -- --------------------------------------------------------
 
@@ -236,6 +283,18 @@ CREATE TABLE `users` (
 -- Indexes for table `assignments`
 --
 ALTER TABLE `assignments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assignment_entry`
+--
+ALTER TABLE `assignment_entry`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assignment_entry_properties`
+--
+ALTER TABLE `assignment_entry_properties`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -317,6 +376,18 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `assignment_entry`
+--
+ALTER TABLE `assignment_entry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `assignment_entry_properties`
+--
+ALTER TABLE `assignment_entry_properties`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --

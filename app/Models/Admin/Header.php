@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 
@@ -18,21 +18,6 @@ class Header extends Model
         if($user == NULL)
             return false;
 
-        //auth()->user()->username;
-        //Get logged-in User email:
-        //
-        //auth()->user()->getEmail();
-        //Get the 'date & time' when the logged-in User account was created:
-        //
-        //auth()->user()->created_at->toDateTimeString();
-        //Get all logged-in User data.
-        //
-        //auth()->user()->toRawArray();
-
-
-        //$header["username"] = auth()->user()->username;
-        //$header["name"] = auth()->user()->name;
-
         $data = $user->toRawArray();
         $data["shortname"] = $this->generateShortName( $data );
 
@@ -46,7 +31,6 @@ class Header extends Model
 
 		$header["user"] = $this->getUser();
 
-        $data["header"] = view('header', $header);
+        $data["header"] = view('admin/header', $header);
     }
 }
-

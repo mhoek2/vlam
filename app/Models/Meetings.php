@@ -6,6 +6,11 @@ use CodeIgniter\Model;
 
 class Meetings extends Model
 {
+    protected $table      = 'meetings';
+    protected $primaryKey = 'id';
+
+    protected $allowedFields = ['id', 'name', 'info', 'intro'];
+
 	public function get_all_meetings() 
 	{
 		$db = db_connect();
