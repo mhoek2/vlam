@@ -164,10 +164,6 @@
 			if ($(`#properties-list-${entryId}`).children().length === 0) {
 				loadProperties( entryId, entryType);
 			}
-	
-			/*else if(entryType === "text_separator"){
-				loadText(entryId);
-			}*/
 		});
 		
 		$(document).on('click', '.add-property', function () {
@@ -192,11 +188,7 @@
 				});
 			}
 		});	
-		
-		function loadText( entryId) {
-			
-		}
-				
+	
         function loadProperties( entryId, entryType ) {
 			$.ajax({
 				url: '<?=current_url()?>/get_properties/' + entryId,
