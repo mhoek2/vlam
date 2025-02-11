@@ -1,51 +1,36 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\Front;
 
 use App\Controllers\BaseController;
 
-use App\Models\Admin\Header;
-
+use App\Models\Header;
+use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Assignments;
-
-use Config\CKeditor;
 
 class MeetingController extends BaseController
 {
     public function __construct() {
         $this->header = new Header();
+        $this->user = new User();
         $this->meetings = new Meetings();
         $this->assignments = new Assignments();
-    }
-
-    public function save( $meeting_id )
-    {
-        $meeting_info = $this->request->getPost('info');
-        $meeting_intro = $this->request->getPost('intro');
-
-		$this->meetings->update($meeting_id, [
-            'info' => $meeting_info,
-            'intro' => $meeting_intro
-        ]);
-
-        return $this->response->setJSON(['message' => 'Form submitted successfully!']);
     }
 
     public function index( $meeting_id ): string
     {
         $data = array();
+
         $this->header->getHeader( $data );
 
+        // Meeting
         $data['meeting'] = $this->meetings->find( $meeting_id );
         $data["current_meeting"] = $data["meeting"] != false ? $meeting_id : false;
 
-
+        // Assignment
         $data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-        $data['assignments_view'] = view('admin/assignments', $data);
 
-        $data['CKeditorApiKey'] = (new CKeditor())->apiKey;
-
-        return view('admin/meeting', $data);
+        return view('front/meeting', $data);
     }
 }

@@ -121,6 +121,8 @@ header .logo {
     float: left;
     height: 44px;
     padding: .4rem .5rem;
+    max-width: 30px;
+    overflow: hidden;
 }
 
 header .menu-toggle {

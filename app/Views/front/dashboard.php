@@ -1,18 +1,16 @@
 <?php echo $header; ?>
 
-<!-- CONTENT -->
-
 <section class="main">
     <div class="meetings">
         <ul>
-<?php foreach( $meetings as $item ){ ?>
-            <a href="<?= site_url('meeting/'.$item->id.'/') ?>">
-            <li>
-                <span class="name"> <?=$item->name;?></span>
-                <span class="info"> <?=$item->info;?></span>
-            </li>
+            <?php foreach( $meetings as $item ): ?>
+            <a href="<?= site_url('meeting/'.$item['id'].'/') ?>">
+                <li>
+                    <span class="name"> <?=$item['name'];?></span>
+                    <span class="info"> <?=$item['info'];?></span>
+                </li>
             </a>
-<?php } ?>
+            <?php endforeach ?>
         <ul>
     </div>
 
@@ -20,9 +18,6 @@
         The content of the page
     </div>
 </section>
-
-
-<!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
 
 <footer>
     <div class="environment">
@@ -34,8 +29,6 @@
     </div>
 </footer>
 
-<!-- SCRIPTS -->
-
 <script {csp-script-nonce}>
     document.getElementById("menuToggle").addEventListener('click', toggleMenu);
     function toggleMenu() {
@@ -46,8 +39,6 @@
         }
     }
 </script>
-
-<!-- -->
 
 </body>
 </html>

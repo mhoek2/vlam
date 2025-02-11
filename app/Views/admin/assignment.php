@@ -44,6 +44,24 @@
 
 <section class="main">
     <div class="content">
+        <form id="edit_assignment" method="POST">
+            <label>Name<lable>
+            <input type="text" name="name" value="<?=$assignment["name"]?>">
+            
+			<label>Info<lable>
+            <input type="text" name="info" value="<?=$assignment["info"]?>">
+
+            <label>Intro<lable>
+            <textarea name="intro" id="intro"><?=$assignment["intro"]?></textarea>
+
+            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+            <button type="submit">Opslaan</button>
+        </form>
+    </div>
+</section>
+
+<section class="main">
+    <div class="content">
 
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
@@ -77,6 +95,32 @@
             List,
             TodoList,
 	    } = CKEDITOR;
+
+		set_ck_editor("#intro");
+		/* 
+		ASSIGNMENT
+		*/
+        $(document).ready(function () {
+            $('#edit_assignment').submit(function (event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '<?= site_url('admin/assignments/'.$assignment["id"].'/save') ?>',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Handle the response from the server
+                        $('#responseMessage').html('<p>' + response.message + '</p>');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle any error
+                        $('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
+                    }
+                });
+            });
+        });
 
 		/* 
 		ENTRIES 

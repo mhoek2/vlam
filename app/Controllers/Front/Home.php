@@ -29,7 +29,7 @@ class Home extends BaseController
         $this->header->getHeader( $data );
 
         // Meetings
-        $data["meetings"] = $this->meetings->get_all_meetings();
+        $data['meetings'] = $this->meetings->findAll();
         $data["current_meeting"] = false;
 
         return view('front/dashboard', $data);

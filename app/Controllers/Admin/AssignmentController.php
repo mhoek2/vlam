@@ -27,6 +27,21 @@ class AssignmentController extends BaseController
         $this->assignmentEntry = new assignmentEntry();
         $this->assignmentEntryProperties = new AssignmentEntryProperties();
     }
+
+	public function save( $assignment_id )
+	{
+        $name = $this->request->getPost('name');
+        $info = $this->request->getPost('info');
+        $intro = $this->request->getPost('intro');
+
+		$this->assignments->update($assignment_id, [
+            'name' => $name,
+            'info' => $info,
+            'intro' => $intro
+        ]);
+
+		return $this->response->setJSON(['message' => 'Form submitted successfully!']);
+	}
 	
     public function index( $assignment_id ): string
     {
@@ -51,7 +66,6 @@ class AssignmentController extends BaseController
 		
         return view('admin/assignment', $data);
     }
-	
 
 	//
 	// ENTRY
