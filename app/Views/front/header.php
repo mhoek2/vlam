@@ -39,7 +39,7 @@
             <ul class="user_dropdown">
                 <div class="titlebar">
                     <span><b>VLAM</b> Training</span>
-                    <a href="#">Logout</a>
+                    <a href="<?=site_url()."logout"?>">Logout</a>
                 </div>
                 <div class="userinfo">
                     <div class="profile"><?=$user["shortname"]?></div>
