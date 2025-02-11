@@ -48,7 +48,7 @@
                     <div class="profile"><?=$user["shortname"]?></div>
                     <div class="meta">
                         <span><b><?=$user["firstname"]?> <?=$user["middlename"]?></b> <?=$user["lastname"]?></span>
-                        <span class="email">jksunny@hotmail.com</span>
+                        <span class="email"><?=$user["username"]?></span>
                     </div>
                 </div>
                 <ul>
