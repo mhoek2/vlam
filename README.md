@@ -8,11 +8,11 @@ More information can be found at the [official site](https://codeigniter.com).
 Shield is the official authentication and authorization framework for CodeIgniter 4. \
 Shield provides two primary methods Session-based and Access Token authentication out of the box.
 
-It also provides HMAC SHA256 Token and JSON Web Token authentication.
+It also provides HMAC SHA256 Token and JSON Web Token authentication. [official site](https://shield.codeigniter.com/)
 
 # Devlogs:
 
-## Devlog 001 - Week 06
+## Devlog 001 - week 06
 Setup framework, implement front and admin controller and view separation. \
 Little work has been done on the design aspect, main focus lies in setting up core features.
 Example: Authentication, users roles and permissions, front and backend separation.
