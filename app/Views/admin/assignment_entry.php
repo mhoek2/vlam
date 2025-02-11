@@ -18,4 +18,6 @@
 			<button class="add-property" data-entry-id="<?= $id ?>">Add Option</button>
 		</div>
 	</div>
+
+	<button class="delete-entry" data-entry-id="<?= $id ?>">Delete</button>
 </div>

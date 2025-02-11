@@ -125,6 +125,25 @@ class AssignmentController extends BaseController
 		return $this->response->setJSON(['status' => 'success']);
 	}
 
+	public function delete_entry( $assignment_id )
+	{
+		$entry_id = $this->request->getPost('entry_id');
+
+		if (empty($entry_id) || empty($assignment_id)) {
+			return;
+		}
+
+		$this->assignmentEntry->where([
+            'assignment_id' => $assignment_id
+        ])->delete($entry_id);
+
+		$this->assignmentEntryProperties->where([
+            'entry_id' => $entry_id,
+        ])->delete();
+
+		return $this->response->setJSON(['status' => 'success']);
+	}
+
 	
 	//
 	// ENTRY PROPERTIES

@@ -152,6 +152,26 @@
 				});
 			}
 		});
+
+		$(document).on('click', '.delete-entry', function () {
+			const confirmation = confirm("Are you sure you want to delete this entry?");
+			const entryId = $(this).closest('.entry').data('entry-id');
+
+			if (confirmation) {
+				$.ajax({
+					url: '<?=current_url()?>/delete_entry',
+					method: 'POST',
+					data: {
+						entry_id: entryId,
+					},
+					success: function (response) {
+						if (response.status === 'success') {
+							$(this).closest('.entry').remove();
+						}
+					}.bind(this)
+				});
+			}
+		});
 		
 		/* 
 		PROPERTIES 
