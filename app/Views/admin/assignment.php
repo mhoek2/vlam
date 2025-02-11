@@ -58,8 +58,26 @@
     </div>
 </section>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.umd.js"></script>
 <script>
 	$(document).ready(function() {
+		let CKEditorArray = [];
+
+	    const {
+		    ClassicEditor,
+            Essentials,
+            Paragraph,
+            Bold,
+            Italic,
+            Font,
+            Heading,
+            Link,
+            BlockQuote,
+            CodeBlock,
+            List,
+            TodoList,
+	    } = CKEDITOR;
+
 		/* 
 		ENTRIES 
 		*/
@@ -71,8 +89,7 @@
 				saveEntrySortOrder(ids);
 			}
 		});
-
-		
+	
 		function saveEntrySortOrder(ids) {
 			$.ajax({
 				url: '<?=current_url()?>/entries_save_order',
@@ -209,6 +226,36 @@
 			}
 		});	
 	
+		function set_ck_editor( textareaId )
+		{
+			ClassicEditor.create( document.querySelector( textareaId ), {
+			    licenseKey: '<?=$CKeditorApiKey?>',
+                plugins: [ Essentials, Paragraph, Bold, Font, Heading, Link, Italic, BlockQuote, CodeBlock, List, TodoList, ],
+                toolbar: {
+                    items: [
+                        'undo', 'redo',
+                        '|',
+                        'heading',
+                        '|',
+                        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                        '|',
+                        'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
+                        '|',
+                        'link', 'uploadImage', 'blockQuote', 'codeBlock',
+                        '|',
+                        'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+                    ],
+                    shouldNotGroupWhenFull: false
+                }
+		    } )
+		    .then( editor => {
+				CKEditorArray[textareaId] = editor;
+		    } )
+		    .catch( error => {
+			    console.error( error );
+		    } );
+		}
+
         function loadProperties( entryId, entryType ) {
 			$.ajax({
 				url: '<?=current_url()?>/get_properties/' + entryId,
@@ -229,12 +276,16 @@
 						}
 						else if(entryType === "text_separator")
 						{
+							textareaId = "ckeditor_" + property.id;
+
 							propertyList.append(`
 								<li data-property-id="${property.id}">
-									<textarea class="edit-property" data-property-id="${property.id}">${property.content}</textarea>
+									<textarea id="${textareaId}" class="edit-property" data-property-id="${property.id}">${property.content}</textarea>
 									<button class="save-property" data-property-id="${property.id}">Save</button>
 								</li>
 							`);
+
+							set_ck_editor("#" + textareaId);
 						}
 					});
 					
@@ -274,12 +325,11 @@
 			const propertyId = $(this).data('property-id');
 			let newPropertyContent = $(this).siblings('.edit-property').val();
 
-			/*
 			// For CKEDITOR
 			if(entryType === "text_separator") {
-				newPropertyContent = $(this).siblings('.edit-property').text();
+				textareaId = "#ckeditor_" + propertyId;
+				newPropertyContent = CKEditorArray[textareaId].getData();
 			}
-			*/
 
 			if (newPropertyContent.trim()) {
 				$.ajax({

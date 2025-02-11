@@ -9,6 +9,8 @@ use App\Models\Admin\Header;
 use App\Models\Meetings;
 use App\Models\Assignments;
 
+use Config\CKeditor;
+
 class MeetingController extends BaseController
 {
     public function __construct() {
@@ -46,6 +48,8 @@ class MeetingController extends BaseController
 
         $data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
         $data['assignments_view'] = view('admin/assignments', $data);
+
+        $data['CKeditorApiKey'] = (new CKeditor())->apiKey;
 
         return view('admin/meeting', $data);
     }

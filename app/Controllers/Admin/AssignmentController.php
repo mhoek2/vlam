@@ -11,6 +11,8 @@ use App\Models\Assignments;
 use App\Models\AssignmentEntry;
 use App\Models\AssignmentEntryProperties;
 
+use Config\CKeditor;
+
 class AssignmentController extends BaseController
 {
     protected $assignments;
@@ -44,6 +46,8 @@ class AssignmentController extends BaseController
 			echo "Assignment not found.";
 			exit;
 		}
+
+		$data['CKeditorApiKey'] = (new CKeditor())->apiKey;
 		
         return view('admin/assignment', $data);
     }

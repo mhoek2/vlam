@@ -59,7 +59,7 @@
 	    } = CKEDITOR;
 	    ClassicEditor
 		    .create( document.querySelector( '#intro' ), {
-			    licenseKey: 'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzA0MjIzOTksImp0aSI6IjdiNzA0MzZhLWE2MDMtNGI2Yi1hOGQxLTJmYzk3MWEzYmIxYyIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIiwibG9jYWxob3N0IiwiMTkyLjE2OC4qLioiLCIxMC4qLiouKiIsIjE3Mi4qLiouKiIsIioudGVzdCIsIioubG9jYWxob3N0IiwiKi5sb2NhbCJdLCJ1c2FnZUVuZHBvaW50IjoiaHR0cHM6Ly9wcm94eS1ldmVudC5ja2VkaXRvci5jb20iLCJkaXN0cmlidXRpb25DaGFubmVsIjpbImNsb3VkIiwiZHJ1cGFsIl0sImxpY2Vuc2VUeXBlIjoiZGV2ZWxvcG1lbnQiLCJmZWF0dXJlcyI6WyJEUlVQIiwiQk9YIl0sInZjIjoiZDYwZjUzMDUifQ.z2QBK-JsDzcivBdrBMos8JHYhKbS4nUDXdFJkRtnmpyThmyA9JEfG5mFfGjIN8pZCdtrTYrirVWdxKcm5Ptkhw',
+			    licenseKey: '<?=$CKeditorApiKey?>',
                 plugins: [ Essentials, Paragraph, Bold, Font, Heading, Link, Italic, BlockQuote, CodeBlock, List, TodoList, ],
                 toolbar: {
                     items: [
