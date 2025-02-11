@@ -47,31 +47,7 @@
 
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
-				<div class="entry grid-item" data-id="<?= $item['id'] ?>" data-entry-id="<?= $item['id'] ?>" data-type="<?= $item['type'] ?>">
-					<h3 class="entry-name" data-entry-id="<?= $item['id'] ?>" contenteditable="true"><?= $item['name'] ?></h3>
-					
-					<select class="entry-type-select" data-entry-id="<?= $item['id'] ?>">
-						<?php foreach($entry_types as $type): ?>
-							<option value="<?=$type["type"]?>" <?= $item['type'] == $type['type'] ? 'selected' : '' ?>>
-								<?=$type['name']?>
-							</option>
-						<?php endforeach ?>
-					</select>
-
-					<button class="toggle-properties">Show/Hide</button>
-                
-					<div class="properties" style="display: none;">
-						<ul id="properties-list-<?= $item['id'] ?>"></ul>
-						<div class="properties-actions">
-							<input type="text" id="new-property-<?= $item['id'] ?>" placeholder="option">
-							<button class="add-property" data-entry-id="<?= $item['id'] ?>">Add Option</button>
-							<?php if ($item['type'] == 'mcq'): ?>
-							<?php elseif ($item['type'] == 'text_input'): ?>
-							<?php elseif ($item['type'] == 'text_separator'): ?>	
-							<?php endif; ?>
-						</div>
-					</div>
-				</div>
+				<?=view('admin/assignment_entry', $item);?>
 			<?php }; ?>
 		</div>
     
@@ -110,7 +86,7 @@
 			});
 		}
 		
-		$('.entry-type-select').on('change', function() {
+		$(document).on('change', '.entry-type-select', function() {
 			const entryId = $(this).data('entry-id');
 			const newType = $(this).val();
 			const confirmation = confirm("Are you sure you want to change the type? This will reset the entry");
@@ -157,40 +133,7 @@
 			}
 		});		
 		
-		/**
-		 left off here 
-		 */
-		function add_entry( entryId )
-		{
-			let name = "NAME";
-			let type = "msq";
-
-            $('.grid-container').append(`
-				<div class="entry grid-item" data-id="${entryId}" data-entry-id="${entryId}" data-type=${type}">
-					<h3 class="entry-name" data-entry-id="${entryId}" contenteditable="true">${name}</h3>
-
-					<select class="entry-type-select" data-entry-id="${entryId}">
-						<?php foreach($entry_types as $type): ?>
-							<option value="<?=$type["type"]?>">
-								<?=$type['name']?>
-							</option>
-						<?php endforeach ?>
-					</select>
-
-					<button class="toggle-properties">Show/Hide</button>
-
-					<div class="properties" style="display: none;">
-						<ul id="properties-list-${entryId}"></ul>
-						<div class="properties-actions">
-							<input type="text" id="new-property-${entryId}" placeholder="option">
-							<button class="add-property" data-entry-id="${entryId}">Add Option</button>
-						</div>
-					</div>
-				</div>
-			`);
-		}
-
-		$('.add-entry').on('click', function () {
+		$(document).on('click', '.add-entry', function () {
 			const newEntryName = $(this).siblings('#new-entry-name').val().trim();
 			
 			if (newEntryName !== "") {
@@ -203,7 +146,7 @@
 					},
 					success: function (response) {
 						if (response.status === 'success') {
-							add_entry( response.insert_id );
+							$('.grid-container').append(response.html);
 						}
 					}
 				});
@@ -213,7 +156,7 @@
 		/* 
 		PROPERTIES 
 		*/
-		$('.toggle-properties').on('click', function () {
+		$(document).on('click', '.toggle-properties', function () {
 			const entryId = $(this).closest('.entry').data('entry-id');
 			const entryType = $(this).closest('.entry').data('type');
 			$(`#properties-list-${entryId}`).parent().toggle();
@@ -227,7 +170,7 @@
 			}*/
 		});
 		
-	    $('.add-property').on('click', function () {
+		$(document).on('click', '.add-property', function () {
 			const entryId = $(this).data('entry-id');
 			const entryType = $(this).closest('.entry').data('type');
 			const propertyContent = $(`#new-property-${entryId}`).val();

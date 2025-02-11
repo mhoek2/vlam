@@ -52,7 +52,6 @@ class AssignmentController extends BaseController
 	//
 	// ENTRY
 	//
-
 	public function add_entry( $assignment_id )
 	{
 		$new_entry_name = $this->request->getPost('entry_name');
@@ -73,8 +72,14 @@ class AssignmentController extends BaseController
 		);
 		
 		$insert_id = $this->assignmentEntry->insertID();
-		
-		return $this->response->setJSON(['status' => 'success', 'insert_id' => $insert_id]);
+
+		$entry = $this->assignmentEntry->where('assignment_id', $assignment_id)->find( $insert_id );
+		$entry['entry_types'] = $this->assignmentEntry->type_enum;
+
+		return $this->response->setJSON([
+			'status' => 'success', 
+			'html' => view('admin/assignment_entry', $entry)
+		]);
 	}
 	
 	public function entries_save_order( $assignment_id )
