@@ -40,6 +40,8 @@ class AssignmentController extends BaseController
         $result_id = -1;
 
         $user = $this->user->getUserInfo();
+        $meeting = $this->meetings->find( $meeting_id );
+  
         $assignment = $this->assignments->find($assignment_id);
         $assignment_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
 
@@ -59,6 +61,7 @@ class AssignmentController extends BaseController
         // wanted to try both methods in codeigniter though..
         $exists = $this->assignmentResult->where([
             'user_id' => $user['id'],
+            'meeting' => $meeting['name']."_".$meeting['info'],
             'name' => $assignment['name']
         ])->first();
 
@@ -66,6 +69,7 @@ class AssignmentController extends BaseController
         if(is_null($exists)) {
 		    $this->assignmentResult->insert([
 			    'user_id' => $user['id'], 
+			    'meeting' => $meeting['name']."_".$meeting['info'],
 			    'name' => $assignment['name'], 
 			    'info' => $assignment['info'] ]
 		    );

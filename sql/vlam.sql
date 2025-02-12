@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2025 at 02:18 PM
+-- Generation Time: Feb 12, 2025 at 02:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -112,6 +112,7 @@ INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_or
 CREATE TABLE `assignment_result` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `meeting` text NOT NULL,
   `name` text NOT NULL,
   `info` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -120,8 +121,8 @@ CREATE TABLE `assignment_result` (
 -- Dumping data for table `assignment_result`
 --
 
-INSERT INTO `assignment_result` (`id`, `user_id`, `name`, `info`) VALUES
-(7, 2, 'Opdracht 1', 'Herken de werkervaring');
+INSERT INTO `assignment_result` (`id`, `user_id`, `meeting`, `name`, `info`) VALUES
+(12, 2, '1_Kennismaking en werkvoorwaarden', 'Opdracht 1', 'Herken de werkervaring');
 
 -- --------------------------------------------------------
 
@@ -142,9 +143,9 @@ CREATE TABLE `assignment_result_entry` (
 --
 
 INSERT INTO `assignment_result_entry` (`id`, `result_id`, `name`, `value`, `type`) VALUES
-(52, 7, 'Vraag 1', 'Nee', 'mcq'),
-(53, 7, 'Vraag 2', 'Nee', 'mcq'),
-(54, 7, 'Vraag 3', 'test 2', 'mcq');
+(67, 12, 'Vraag 1', 'Ja', 'mcq'),
+(68, 12, 'Vraag 2', 'Nee', 'mcq'),
+(69, 12, 'Vraag 3', 'test 2', 'mcq');
 
 -- --------------------------------------------------------
 
@@ -498,13 +499,13 @@ ALTER TABLE `assignment_entry_properties`
 -- AUTO_INCREMENT for table `assignment_result`
 --
 ALTER TABLE `assignment_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `assignment_result_entry`
 --
 ALTER TABLE `assignment_result_entry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `auth_groups_users`
