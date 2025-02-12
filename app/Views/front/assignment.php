@@ -46,10 +46,12 @@
 
         <?=$assignment['intro']?>
 
-        <form method="POST">
+        <form method="POST" id="assignment_form">
 		    <?php foreach ($entries as $item) { ?>
-			    <?=view('front/assignment_entry', $item);?>
+			    <?=view('front/assignment_entry', $item)?>
 		    <?php }; ?>
+
+            <button type="submit">Opslaan</button>
         </form>
     </div>
 </section>
@@ -63,6 +65,33 @@
 
     </div>
 </footer>
+
+<script>
+	$(document).ready(function() {
+        $(document).ready(function () {
+            $('#assignment_form').submit(function (event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                console.log(formData);
+                $.ajax({
+                    url: '<?=current_url().'/save'?>',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Handle the response from the server
+                        $('#responseMessage').html('<p>' + response.message + '</p>');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle any error
+                        $('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 <script {csp-script-nonce}>
         // HEADER

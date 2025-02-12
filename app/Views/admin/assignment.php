@@ -38,7 +38,7 @@
    	<ul>
 		<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
 		<li><a href="<?=base_url('admin/meeting/').$meeting['id']?>"><?=$meeting['info']?></a></li>
-		<li><span><?=$assignment['name']?></span></li>
+		<li><span><?=$assignment['name']?>: <?=$assignment['info']?></span></li>
 	</ul>
 </div>
 

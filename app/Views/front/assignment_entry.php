@@ -6,9 +6,9 @@
 
 	<?php elseif($type == "mcq"): ?>
 		<label><?=$name?></label>
-		<select name="property">
+		<select name="entries[<?=$id?>]">
 			<?php foreach ($properties as $property): ?>
-				<option value="<?= $property['id'] ?>"><?= $property['content'] ?></option>
+				<option value="<?= $property['content'] ?>" <?= $property['selected'] ? 'selected' : '' ?>><?= $property['content'] ?></option>
 			<?php endforeach; ?>
 		</select>
 

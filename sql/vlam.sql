@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2025 at 11:24 AM
+-- Generation Time: Feb 12, 2025 at 02:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,7 @@ CREATE TABLE `assignments` (
   `meeting_id` int(11) NOT NULL,
   `sort_order` int(11) NOT NULL,
   `name` text NOT NULL,
+  `intro` text NOT NULL,
   `info` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -39,13 +40,13 @@ CREATE TABLE `assignments` (
 -- Dumping data for table `assignments`
 --
 
-INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `info`) VALUES
-(1, 1, 0, 'Opdracht 1', 'Opdracht 1'),
-(2, 1, 2, 'Opdracht 2', 'Opdracht 2'),
-(3, 1, 3, 'Opdracht 3', 'Opdracht 3'),
-(4, 1, 1, 'Opdracht 4', 'Opdracht 4'),
-(5, 1, 4, 'Opdracht 5', 'Opdracht 5'),
-(6, 1, 5, 'Opdracht 6', 'Opdracht 6');
+INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `intro`, `info`) VALUES
+(1, 1, 0, 'Opdracht 1', '<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\">ivamu</span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', 'Herken de werkervaring'),
+(2, 1, 5, 'Opdracht 2', 'Opdracht 2', ''),
+(3, 1, 2, 'Opdracht 3', 'Opdracht 3', ''),
+(4, 1, 4, 'Opdracht 4', 'Opdracht 4', ''),
+(5, 1, 3, 'Opdracht 5', 'Opdracht 5', ''),
+(6, 1, 1, 'Opdracht 6', 'Opdracht 6', '');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,11 @@ CREATE TABLE `assignment_entry` (
 --
 
 INSERT INTO `assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`) VALUES
-(1, 4, 'Vraag 1', 'Vraag 1', 1, 'mcq');
+(24, 1, 'Vraag 1', '', 1, 'mcq'),
+(25, 2, 'Separator', '', 1, 'text_separator'),
+(28, 0, 'Separator', '', 1, 'text_separator'),
+(29, 3, 'Vraag 2', '', 1, 'mcq'),
+(30, 4, 'Vraag 3', '', 1, 'mcq');
 
 -- --------------------------------------------------------
 
@@ -87,8 +92,59 @@ CREATE TABLE `assignment_entry_properties` (
 --
 
 INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
-(1, 1, 'Ja', 0),
-(2, 1, 'Nee', 0);
+(26, 24, 'Ja', 1),
+(27, 24, 'Nee', 0),
+(32, 28, '<p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry.</span></p>', 0),
+(33, 25, '<p><i>Dit is ook Tekst</i></p>', 0),
+(34, 29, 'Nee', 0),
+(35, 29, 'Misschien', 1),
+(36, 29, 'Ja', 2),
+(37, 29, 'Zeker weten', 3),
+(38, 30, 'test 1', 0),
+(39, 30, 'test 2', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment_result`
+--
+
+CREATE TABLE `assignment_result` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `info` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `assignment_result`
+--
+
+INSERT INTO `assignment_result` (`id`, `user_id`, `name`, `info`) VALUES
+(7, 2, 'Opdracht 1', 'Herken de werkervaring');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment_result_entry`
+--
+
+CREATE TABLE `assignment_result_entry` (
+  `id` int(11) NOT NULL,
+  `result_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `value` text NOT NULL,
+  `type` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `assignment_result_entry`
+--
+
+INSERT INTO `assignment_result_entry` (`id`, `result_id`, `name`, `value`, `type`) VALUES
+(52, 7, 'Vraag 1', 'Nee', 'mcq'),
+(53, 7, 'Vraag 2', 'Nee', 'mcq'),
+(54, 7, 'Vraag 3', 'test 2', 'mcq');
 
 -- --------------------------------------------------------
 
@@ -102,6 +158,13 @@ CREATE TABLE `auth_groups_users` (
   `group` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `auth_groups_users`
+--
+
+INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
+(2, 2, 'admin', '2025-02-05 09:20:35');
 
 -- --------------------------------------------------------
 
@@ -124,6 +187,13 @@ CREATE TABLE `auth_identities` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `auth_identities`
+--
+
+INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$03WJ08uzWhj7t16adUAhD.lNkR.D1/HIQPwjWOIiAExsemWypgjZG', NULL, NULL, 0, '2025-02-12 08:29:17', '2025-02-05 09:20:35', '2025-02-12 08:29:17');
+
 -- --------------------------------------------------------
 
 --
@@ -140,6 +210,20 @@ CREATE TABLE `auth_logins` (
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `auth_logins`
+--
+
+INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identifier`, `user_id`, `date`, `success`) VALUES
+(15, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:10:40', 1),
+(16, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:13:07', 1),
+(17, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:15:10', 1),
+(18, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:18:58', 1),
+(19, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:28:16', 1),
+(20, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:58:47', 1),
+(21, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 12:15:51', 1),
+(22, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-12 08:29:17', 1);
 
 -- --------------------------------------------------------
 
@@ -205,7 +289,7 @@ CREATE TABLE `meetings` (
 --
 
 INSERT INTO `meetings` (`id`, `name`, `info`, `intro`) VALUES
-(1, 1, 'Kennismaking en werkvoorwaarden', '<h2>Dit is een test2</h2><blockquote><p><i><strong>as</strong></i><span style=\"background-color:hsl(0,0%,90%);\"><i><strong>d</strong></i></span><span style=\"background-color:hsl(0,0%,90%);color:hsl(60,75%,60%);\"><i><strong>asdasd</strong></i></span><span style=\"background-color:hsl(0,0%,90%);\"><i><strong>a</strong></i></span></p></blockquote><p><i><strong>asdasd</strong></i>sadasd</p>'),
+(1, 1, 'Kennismaking en werkvoorwaarden', '<h2><span style=\"color:hsl(270, 75%, 60%);\">Lorem Ipsum</span></h2><h4><i>\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"</i></h4><p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>'),
 (2, 2, 'Kwaliteiten en persoonlijk profiel', ''),
 (3, 3, 'Het belang van een sterk CV', ''),
 (4, 4, 'Openheid geven', ''),
@@ -276,6 +360,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `firstname`, `middlename`, `lastname`, `status`, `status_message`, `active`, `last_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 'vlam_admin', 'Admin', '', 'Vlam', NULL, NULL, 1, NULL, '2025-02-05 09:20:35', '2025-02-05 09:20:35', NULL);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -296,6 +387,19 @@ ALTER TABLE `assignment_entry`
 --
 ALTER TABLE `assignment_entry_properties`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assignment_result`
+--
+ALTER TABLE `assignment_result`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assignment_result_entry`
+--
+ALTER TABLE `assignment_result_entry`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`name`(200));
 
 --
 -- Indexes for table `auth_groups_users`
@@ -382,31 +486,43 @@ ALTER TABLE `assignments`
 -- AUTO_INCREMENT for table `assignment_entry`
 --
 ALTER TABLE `assignment_entry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry_properties`
 --
 ALTER TABLE `assignment_entry_properties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `assignment_result`
+--
+ALTER TABLE `assignment_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `assignment_result_entry`
+--
+ALTER TABLE `assignment_result_entry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_identities`
 --
 ALTER TABLE `auth_identities`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions_users`
@@ -448,7 +564,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
