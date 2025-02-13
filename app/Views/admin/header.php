@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="<?=base_url('assets/css/backend.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/meeting.css')?>">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css">
     
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"
             integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
             crossorigin="anonymous"></script>
@@ -33,7 +36,8 @@
                 <button id="menuToggle">&#9776;</button>
             </li>
             <li class="menu-item hidden"><a href="<?=site_url()."admin"?>">Home</a></li>
-            <li class="menu-item hidden"><a href="<?=site_url()."admin\meetings"?>">Meetings</a></li>
+            <li class="menu-item hidden"><a href="<?=site_url()."admin/meetings"?>">Meetings</a></li>
+            <li class="menu-item hidden"><a href="<?=site_url()."admin/trainings"?>">Trainings</a></li>
         </ul>
         <ul>
         <?php if ($user): ?>

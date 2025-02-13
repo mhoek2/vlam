@@ -17,6 +17,16 @@ $routes->get('meeting/(:any)',							'Front\MeetingController::index/$1',		['fil
  */
 $routes->get(	'admin',												'Admin\Home::dashboard', 									['filter' => \App\Filters\AuthFilterAdmin::class]);
 
+
+$routes->post(	'admin/trainings/add_training',							'Admin\TrainingsController::add_training', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/trainings/delete_training',						'Admin\TrainingsController::delete_training', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->get(	'admin/trainings',										'Admin\TrainingsController::index', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/training/(:any)/save',							'Admin\TrainingController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->get(	'admin/training/getUsersForAutocomplete',				'Admin\TrainingController::getUsersForAutocomplete', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/training/(:any)/add_member',						'Admin\TrainingController::add_member/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/training/(:any)/delete_member', 					'Admin\TrainingController::delete_member/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->get(	'admin/training/(:any)',								'Admin\TrainingController::index/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+
 $routes->get(	'admin/meetings',										'Admin\MeetingsController::index', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/meeting/(:any)/save',							'Admin\MeetingController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->get(	'admin/meeting/(:any)',									'Admin\MeetingController::index/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);

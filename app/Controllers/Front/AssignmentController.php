@@ -30,11 +30,6 @@ class AssignmentController extends BaseController
         $this->assignmentResultEntry = new AssignmentResultEntry();
     }
 
-    private static function find_properties( $entry_id, &$data )
-    {
-
-    }
-
     public function save( $meeting_id, $assignment_id )
     {
         $result_id = -1;
