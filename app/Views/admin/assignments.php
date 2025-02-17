@@ -20,11 +20,16 @@
         }	
 </style>
 
+<button id="add_assignment">
+	<i class="fa-solid fa-circle-plus"></i> Add Assignment
+</button>
+            
 <div class="grid-container" id="sortable">
     <?php foreach ($assignments as $item) { ?>
         <div class="grid-item" data-id="<?= $item['id'] ?>">
             <a href="<?=base_url('admin/assignments/')?><?=$item['id']?>"><?= $item['name'] ?></a>
             <p><?= esc($item['info']) ?></p>
+            <div id="delete_assignment" data-assignment-id="<?=$item['id']?>">Delete</div>
         </div>
     <?php }; ?>
 </div>
@@ -50,6 +55,45 @@
 					}*/
 				}
 			});
-		}		
+		}
+		
+        $(document).on('click', '#delete_assignment', function () 
+        {
+            const assignment_id = $(this).data('assignment-id');
+			const confirmation = confirm("Are you sure you want to remove this assignment");
+
+			if (confirmation) {
+                $.ajax({
+		            url: '<?=current_url()?>/delete_assignment',
+		            method: 'POST',
+		            data: {
+			            assignment_id: assignment_id,
+		            },
+		            success: function (response) {
+			            if (response.status === 'success') {
+                            //location.reload();
+			            }
+		            }
+	            });
+            }
+        });	
+		
+	    $(document).on('click', '#add_assignment', function () 
+        {
+            $.ajax({
+				url: '<?=current_url()?>/add_assignment',
+		        method: 'POST',
+		        data: {
+					name: 'Opdracht',
+					meeting_id: <?=$current_meeting?>
+		        },
+		        success: function (response) {
+			        if (response.status === 'success') {
+                        window.location = '<?=site_url()?>/admin/assignments/' + response.assignment_id;
+			        }
+		        }
+	        });
+        });		
+		
 	});		
 </script>

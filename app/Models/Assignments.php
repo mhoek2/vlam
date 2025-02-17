@@ -9,5 +9,5 @@ class Assignments extends Model
     protected $table      = 'assignments';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'meeting_id', 'name', 'sort_order', 'info', 'intro'];
+    protected $allowedFields = ['id', 'meeting_id', 'name', 'sort_order', 'intro', 'info', 'created_at'];
 }

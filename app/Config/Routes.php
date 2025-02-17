@@ -30,6 +30,8 @@ $routes->get(	'admin/training/(:any)',								'Admin\TrainingController::index/$
 $routes->get(	'admin/meetings',										'Admin\MeetingsController::index', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/meeting/(:any)/save',							'Admin\MeetingController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->get(	'admin/meeting/(:any)',									'Admin\MeetingController::index/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/meeting/(:any)/add_assignment', 					'Admin\AssignmentsController::add_assignment', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/meeting/(:any)/delete_assignment', 				'Admin\AssignmentsController::delete_assignment', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
 
 $routes->post(	'admin/assignments/(:any)/entries_save_order', 			'Admin\AssignmentController::entries_save_order/$1', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/assignments/(:any)/update_entry_name', 			'Admin\AssignmentController::update_entry_name', 			['filter' => \App\Filters\AuthFilterAdmin::class]);

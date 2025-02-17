@@ -3,8 +3,11 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use CodeIgniter\I18n\Time;
 
 use App\Models\Assignments;
+use App\Models\AssignmentEntry;
+use App\Models\AssignmentEntryProperties;
 
 class AssignmentsController extends BaseController
 {
@@ -24,5 +27,64 @@ class AssignmentsController extends BaseController
         }
 
         return $this->response->setJSON(['status' => 'success']);
+	}
+	
+    public function add_assignment()
+    {
+		$meeting_id = $this->request->getPost('meeting_id');
+		$name = $this->request->getPost('name');
+		
+		// find sort order 
+		$existing_entries = $this->assignments->where('meeting_id', $meeting_id)->findAll();
+
+		$max_sort_order = 0;
+		if ($existing_entries) {
+			$max_sort_order = max(array_column($existing_entries, 'sort_order'));
+		}
+		
+		// make sure new item is last
+		$new_sort_order = $max_sort_order + 1;		
+		
+		$this->assignments->insert([
+			'meeting_id' 	=> $meeting_id,
+			'name'			=> $name,
+			'sort_order'	=> $new_sort_order,
+            'created_at'	=> Time::now()
+        ]);
+
+		$insert_id = $this->assignments->insertID();
+
+		return $this->response->setJSON([
+			'status' => 'success', 
+			'assignment_id' => $insert_id
+		]);
+    }
+	
+	public function delete_assignment()
+	{
+		$assignment_id = $this->request->getPost('assignment_id');
+		
+		if ( empty($assignment_id)) {
+			return;
+		}
+
+	    $assignmentEntry = new assignmentEntry();
+        $assignmentEntryProperties = new AssignmentEntryProperties();
+		
+		$entries = $assignmentEntry->where('assignment_id', $assignment_id)->findAll();
+		foreach ( $entries as $entry )
+		{
+			$assignmentEntry->where([
+				'assignment_id' => $assignment_id,
+			])->delete($entry['id']);
+				
+			$assignmentEntryProperties->where([
+				'entry_id' => $entry['id'],
+			])->delete();	
+		}
+
+		$this->assignments->delete( $assignment_id );	
+		
+		return $this->response->setJSON(['status' => 'success']);
 	}
 }
