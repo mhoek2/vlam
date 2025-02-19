@@ -20,7 +20,7 @@ class MeetingController extends BaseController
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
 		
 		// Cases
-        $this->data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+        //$this->data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
 
 		load_header( $this->data );
 		load_sidebar( $this->data );

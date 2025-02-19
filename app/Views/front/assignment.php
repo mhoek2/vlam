@@ -30,7 +30,9 @@
 
         <form method="POST" id="assignment_form">
 		    <?php foreach ($entries as $item) { ?>
-			    <?=view('front/assignment_entry', $item)?>
+		    	<div class="assignment-entry">
+			    	<?=view('front/assignment_entry', $item)?>
+			    </div>
 		    <?php }; ?>
 
             <button type="submit">Opslaan</button>

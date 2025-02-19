@@ -9,7 +9,6 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-use App\Models\Header;
 use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Assignments;
@@ -61,7 +60,6 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
 		
-        $this->header = new Header();
         $this->user = new User();
         $this->meetings = new Meetings();
         $this->cases = new Cases();
@@ -73,6 +71,7 @@ abstract class BaseController extends Controller
 		$this->data['user'] = $this->user->getUserInfo();	
 		
 		// Meeting
+        $this->data['meetings'] = NULL;
         $this->data['meeting'] = NULL;
         $this->data["current_meeting"] = NULL;
 

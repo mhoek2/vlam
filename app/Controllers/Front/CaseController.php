@@ -13,9 +13,9 @@ class CaseController extends BaseController
         $this->caseEntry = new CaseEntry();
         $this->caseEntryProperties = new CaseEntryProperties();	
     }
-
-    public function index( $meeting_id, $assignment_id ): string
-    {
+	
+	public function entry( $meeting_id, $case_id, $entry_num )
+	{		
         // Meeting
         $this->data['meeting'] = $this->meetings->find( $meeting_id );
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
@@ -25,14 +25,21 @@ class CaseController extends BaseController
 	
         // Cases
         $this->data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['case'] = $this->cases->find($assignment_id);
-
+		
         // Entries
-        $this->data['entries'] = $this->caseEntry->where('case_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
+		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();	// to draw progressbar
+		
+        $this->data['entry'] = $this->caseEntry->where([
+			'case_id'		=> $case_id,
+			'sort_order'	=> $entry_num
+		])->first();
 		$this->data['entry_types'] = $this->caseEntry->type_enum;
-
-        // Entry properties
-		$this->data['properties'] = $this->caseEntryProperties->orderBy('sort_order', 'ASC')->findAll();
+		
+		
+		
+		
+		// Entry properties
+		$this->data['properties'] = $this->caseEntryProperties->where('entry_id', $this->data['entry']['id'])->orderBy('sort_order', 'ASC')->findAll();
 
         // Saved results
 		$this->data['result'] = NULL;
@@ -55,32 +62,62 @@ class CaseController extends BaseController
             return reset($filteredEntries) ?: null;
         }; 
 
-        foreach( $this->data['entries'] as $id => $entry )
-        {
-            // If assignment has aleady been saved, find the saved property meta for this entry
-            $saved_property = NULL;
-            if(!is_null($this->data['result']))
-            {
-                $saved_property = $getSavedPropertyByName($this->data['result']['entries'], $entry['name']);
-            }
+		// If assignment has aleady been saved, find the saved property meta for this entry
+		$saved_property = NULL;
+		if(!is_null($this->data['result']))
+		 {
+		    $saved_property = $getSavedPropertyByName($this->data['result']['entries'], $entry['name']);
+		}
 
-            foreach( $this->data['properties'] as $property ){
-                if ( $property['entry_id'] !== $entry['id'] )
-                    continue;
+		$this->data['entry']['properties'] = array();
+		
+		foreach( $this->data['properties'] as $property ){
+			if ( $property['entry_id'] !== $this->data['entry']['id'] )
+				continue;
 
-                if (!isset($this->data['entries'][$id]['properties']))
-                    $this->data['entries'][$id]['properties'] = array();
-             
-                // Mark a property as selected if matched with saved property
-                $property['selected'] = false;
-                if(!is_null($saved_property) && $saved_property['value'] == $property['content'])
-                {
-                    $property['selected'] = $saved_property['value'];
-                }
+			if (!isset($this->data['entry']['properties']))
+				$this->data['entry']['properties'] = array();
 
-                array_push( $this->data['entries'][$id]['properties'], $property );
-            }
-        }
+			// Mark a property as selected if matched with saved property
+			$property['selected'] = false;
+
+			if(!is_null($saved_property) && $saved_property['value'] == $property['content'])
+			{
+				$property['selected'] = $saved_property['value'];
+			}
+
+			array_push( $this->data['entry']['properties'], $property );
+		}
+	
+		
+
+		
+		
+		
+		
+		
+		
+		load_header( $this->data );
+		load_sidebar( $this->data );
+		
+        return view('front/case_entry', $this->data);		
+	}
+
+    public function index( $meeting_id, $case_id ): string
+    {
+        // Meeting
+        $this->data['meeting'] = $this->meetings->find( $meeting_id );
+        $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
+
+        // Assignment
+        $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+	
+        // Cases
+        $this->data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+		$this->data['case'] = $this->cases->find($case_id);
+
+        // Entries
+        $this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
 
 		if (!$this->data['case']) {
 			// Handle the case when the assignment is not found
