@@ -24,7 +24,15 @@
 
 <section class="main">
     <div class="content">
+    <h2>Assignments</h2>
     <?=$assignments_view?>
+    </div>
+</section>
+
+<section class="main">
+    <div class="content">
+    <h2>Cases</h2>
+    <?=$cases_view?>
     </div>
 </section>
 

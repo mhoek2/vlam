@@ -32,6 +32,8 @@ $routes->post(	'admin/meeting/(:any)/save',							'Admin\MeetingController::save
 $routes->get(	'admin/meeting/(:any)',									'Admin\MeetingController::index/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/meeting/(:any)/add_assignment', 					'Admin\AssignmentsController::add_assignment', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/meeting/(:any)/delete_assignment', 				'Admin\AssignmentsController::delete_assignment', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/meeting/(:any)/add_case', 						'Admin\CasesController::add_case', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/meeting/(:any)/delete_case', 					'Admin\CasesController::delete_case', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 
 $routes->post(	'admin/assignments/(:any)/entries_save_order', 			'Admin\AssignmentController::entries_save_order/$1', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/assignments/(:any)/update_entry_name', 			'Admin\AssignmentController::update_entry_name', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
@@ -46,5 +48,21 @@ $routes->post(	'admin/assignments/(:any)/add_property', 				'Admin\AssignmentCon
 $routes->get(	'admin/assignments/(:any)/', 							'Admin\AssignmentController::index/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);	
 $routes->post(	'admin/assignments/(:any)/save',						'Admin\AssignmentController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/assignments/assignments_save_order', 			'Admin\AssignmentsController::save_order', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
+
+
+$routes->post(	'admin/cases/(:any)/entries_save_order', 				'Admin\CaseController::entries_save_order/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/(:any)/update_entry_name', 				'Admin\CaseController::update_entry_name', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/(:any)/update_entry_type', 				'Admin\CaseController::update_entry_type', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/(:any)/add_entry', 						'Admin\CaseController::add_entry/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/(:any)/delete_entry', 						'Admin\CaseController::delete_entry/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->get(	'admin/cases/(:any)/delete_property/(:any)', 			'Admin\CaseController::delete_property/$1/$2', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->get(	'admin/cases/(:any)/get_properties/(:any)', 			'Admin\CaseController::get_properties/$1/$2', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/(:any)/properties_save_order', 			'Admin\CaseController::properties_save_order/$1', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/(:any)/update_property', 					'Admin\CaseController::update_property/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/(:any)/add_property', 						'Admin\CaseController::add_property', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->get(	'admin/cases/(:any)/', 									'Admin\CaseController::index/$1', 							['filter' => \App\Filters\AuthFilterAdmin::class]);	
+$routes->post(	'admin/cases/(:any)/save',								'Admin\CaseController::save/$1', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/cases/cases_save_order', 						'Admin\CasesController::save_order', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+
 
 service('auth')->routes($routes);

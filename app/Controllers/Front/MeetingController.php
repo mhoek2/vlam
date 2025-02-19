@@ -8,6 +8,7 @@ use App\Models\Header;
 use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Assignments;
+use App\Models\Cases;
 
 class MeetingController extends BaseController
 {
@@ -16,6 +17,7 @@ class MeetingController extends BaseController
         $this->user = new User();
         $this->meetings = new Meetings();
         $this->assignments = new Assignments();
+        $this->cases = new Cases();
     }
 
     public function index( $meeting_id ): string
@@ -30,6 +32,9 @@ class MeetingController extends BaseController
 
         // Assignment
         $data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+		
+		// Cases
+        $data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
 
         return view('front/meeting', $data);
     }

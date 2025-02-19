@@ -8,6 +8,7 @@ use App\Models\Admin\Header;
 
 use App\Models\Meetings;
 use App\Models\Assignments;
+use App\Models\Cases;
 
 use Config\CKeditor;
 
@@ -17,6 +18,7 @@ class MeetingController extends BaseController
         $this->header = new Header();
         $this->meetings = new Meetings();
         $this->assignments = new Assignments();
+        $this->cases = new Cases();
     }
 
     public function save( $meeting_id )
@@ -44,6 +46,9 @@ class MeetingController extends BaseController
         $data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
         $data['assignments_view'] = view('admin/assignments', $data);
 
+	    $data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+        $data['cases_view'] = view('admin/cases', $data);	
+		
         $data['CKeditorApiKey'] = (new CKeditor())->apiKey;
 
         return view('admin/meeting', $data);
