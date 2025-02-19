@@ -31,11 +31,11 @@ class CasesController extends BaseController
 	
     public function add_case()
     {
-		$meeting_id = $this->request->getPost('meeting_id');
+		$assignment_id = $this->request->getPost('assignment_id');
 		$name = $this->request->getPost('name');
 		
 		// find sort order 
-		$existing_entries = $this->cases->where('meeting_id', $meeting_id)->findAll();
+		$existing_entries = $this->cases->where('assignment_id', $assignment_id)->findAll();
 
 		$max_sort_order = 0;
 		if ($existing_entries) {
@@ -46,10 +46,10 @@ class CasesController extends BaseController
 		$new_sort_order = $max_sort_order + 1;		
 		
 		$this->cases->insert([
-			'meeting_id' 	=> $meeting_id,
-			'name'			=> $name,
-			'sort_order'	=> $new_sort_order,
-            'created_at'	=> Time::now()
+			'assignment_id' 	=> $assignment_id,
+			'name'				=> $name,
+			'sort_order'		=> $new_sort_order,
+            'created_at'		=> Time::now()
         ]);
 
 		$insert_id = $this->cases->insertID();

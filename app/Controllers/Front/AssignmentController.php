@@ -115,10 +115,7 @@ class AssignmentController extends BaseController
 		$this->data['assignment'] = $this->assignments->find($assignment_id);
 
         // Cases
-        $this->data['cases'] = $this->cases->where([
-			'meeting_id' 		=> $meeting_id,
-			'assignment_id' 	=> $assignment_id
-		])->orderBy('sort_order', 'ASC')->findAll();	
+        $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
 		
         // Entries
         $this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();

@@ -29,13 +29,6 @@
     </div>
 </section>
 
-<section class="main">
-    <div class="content">
-    <h2>Cases</h2>
-    <?=$cases_view?>
-    </div>
-</section>
-
 <!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
 
 <footer>

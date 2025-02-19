@@ -36,8 +36,7 @@ $routes->post(	'admin/meeting/(:any)/save',							'Admin\MeetingController::save
 $routes->get(	'admin/meeting/(:any)',									'Admin\MeetingController::index/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/meeting/(:any)/add_assignment', 					'Admin\AssignmentsController::add_assignment', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/meeting/(:any)/delete_assignment', 				'Admin\AssignmentsController::delete_assignment', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	'admin/meeting/(:any)/add_case', 						'Admin\CasesController::add_case', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	'admin/meeting/(:any)/delete_case', 					'Admin\CasesController::delete_case', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+
 
 $routes->post(	'admin/assignments/(:any)/entries_save_order', 			'Admin\AssignmentController::entries_save_order/$1', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/assignments/(:any)/update_entry_name', 			'Admin\AssignmentController::update_entry_name', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
@@ -51,6 +50,8 @@ $routes->post(	'admin/assignments/(:any)/update_property', 			'Admin\AssignmentC
 $routes->post(	'admin/assignments/(:any)/add_property', 				'Admin\AssignmentController::add_property', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->get(	'admin/assignments/(:any)/', 							'Admin\AssignmentController::index/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);	
 $routes->post(	'admin/assignments/(:any)/save',						'Admin\AssignmentController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/assignments/(:any)/add_case', 					'Admin\CasesController::add_case', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->post(	'admin/assignments/(:any)/delete_case', 				'Admin\CasesController::delete_case', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/assignments/assignments_save_order', 			'Admin\AssignmentsController::save_order', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
 
 

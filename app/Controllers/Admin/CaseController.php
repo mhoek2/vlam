@@ -7,6 +7,7 @@ use App\Controllers\Admin\BaseController;
 use App\Models\Admin\Header;
 
 use App\Models\Meetings;
+use App\Models\Assignments;
 use App\Models\Cases;
 use App\Models\CaseEntry;
 use App\Models\CaseEntryProperties;
@@ -22,6 +23,7 @@ class CaseController extends BaseController
         $this->header = new Header();
 
         $this->meetings = new Meetings();
+        $this->assignments = new Assignments();
 
         $this->cases = new Cases();
         $this->caseEntry = new CaseEntry();
@@ -52,8 +54,17 @@ class CaseController extends BaseController
 		$data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
 		$data['entry_types'] = $this->caseEntry->type_enum;
 
-		$data['meeting'] = $this->meetings->find($data['case']['meeting_id']);
-
+		
+		$data['assignment'] = $this->assignments->find($data['case']['assignment_id']);
+		if(is_null($data['assignment'])){
+			die('no assignment');
+		}
+		
+		$data['meeting'] = $this->meetings->find($data['assignment']['meeting_id']);
+		if(is_null($data['meeting'])){
+			die('no assignment');
+		}
+		
 		// Check if case exists, otherwise show an error or a message
 		if (!$data['case']) {
 			// Handle the case when the case is not found

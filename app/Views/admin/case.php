@@ -38,6 +38,7 @@
    	<ul>
 		<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
 		<li><a href="<?=base_url('admin/meeting/').$meeting['id']?>"><?=$meeting['info']?></a></li>
+		<li><a href="<?=base_url('admin/assignments/').$assignment['id']?>"><?=$assignment['name']?>: <?=$assignment['info']?></a></li>
 		<li><span><?=$case['name']?>: <?=$case['info']?></span></li>
 	</ul>
 </div>

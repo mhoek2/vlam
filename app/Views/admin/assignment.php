@@ -76,6 +76,14 @@
     </div>
 </section>
 
+
+<section class="main">
+    <div class="content">
+    <h2>Cases</h2>
+    <?=$cases_view?>
+    </div>
+</section>
+
 <script src="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.umd.js"></script>
 <script>
 	$(document).ready(function() {

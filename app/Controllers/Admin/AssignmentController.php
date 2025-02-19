@@ -11,6 +11,8 @@ use App\Models\Assignments;
 use App\Models\AssignmentEntry;
 use App\Models\AssignmentEntryProperties;
 
+use App\Models\Cases;
+
 use Config\CKeditor;
 
 class AssignmentController extends BaseController
@@ -26,6 +28,8 @@ class AssignmentController extends BaseController
         $this->assignments = new Assignments();
         $this->assignmentEntry = new assignmentEntry();
         $this->assignmentEntryProperties = new AssignmentEntryProperties();
+		
+		$this->cases = new Cases();
     }
 
 	public function save( $assignment_id )
@@ -62,6 +66,9 @@ class AssignmentController extends BaseController
 			exit;
 		}
 
+        $data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
+        $data['cases_view'] = view('admin/cases', $data);		
+		
 		$data['CKeditorApiKey'] = (new CKeditor())->apiKey;
 		
         return view('admin/assignment', $data);
