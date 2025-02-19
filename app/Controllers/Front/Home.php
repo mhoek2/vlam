@@ -2,16 +2,12 @@
 
 namespace App\Controllers\Front;
 
-use App\Controllers\BaseController;
-
-use App\Models\Header;
-use App\Models\Meetings;
+use App\Controllers\Front\BaseController;
 
 class Home extends BaseController
 {
     public function __construct() {
-        $this->header = new Header();
-        $this->meetings = new Meetings();
+
     }
 
     public function index(): string

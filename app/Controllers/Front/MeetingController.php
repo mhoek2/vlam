@@ -2,22 +2,12 @@
 
 namespace App\Controllers\Front;
 
-use App\Controllers\BaseController;
-
-use App\Models\Header;
-use App\Models\User;
-use App\Models\Meetings;
-use App\Models\Assignments;
-use App\Models\Cases;
+use App\Controllers\Front\BaseController;
 
 class MeetingController extends BaseController
 {
     public function __construct() {
-        $this->header = new Header();
-        $this->user = new User();
-        $this->meetings = new Meetings();
-        $this->assignments = new Assignments();
-        $this->cases = new Cases();
+		
     }
 
     public function index( $meeting_id ): string

@@ -2,12 +2,8 @@
 
 namespace App\Controllers\Front;
 
-use App\Controllers\BaseController;
+use App\Controllers\Front\BaseController;
 
-use App\Models\Header;
-use App\Models\User;
-use App\Models\Meetings;
-use App\Models\Assignments;
 use App\Models\AssignmentEntry;
 use App\Models\AssignmentEntryProperties;
 
@@ -17,12 +13,6 @@ use App\Models\AssignmentResultEntry;
 class AssignmentController extends BaseController
 {
     public function __construct() {
-        $this->header = new Header();
-        $this->user = new User();
-
-        $this->meetings = new Meetings();
-
-        $this->assignments = new Assignments();
         $this->assignmentEntry = new assignmentEntry();
         $this->assignmentEntryProperties = new AssignmentEntryProperties();
 

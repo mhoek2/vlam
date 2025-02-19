@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Controllers\Admin\BaseController;
 use CodeIgniter\I18n\Time;
 
 use App\Models\Cases;
