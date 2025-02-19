@@ -3,35 +3,7 @@
 <!-- CONTENT -->
 
 <section class="main">
-    <div class="meetings">
-        <ul>
-            <a href="<?= site_url('meeting/'.$meeting['id']) ?>">
-                <li>
-                    <span class="name"> <?=$meeting['name'];?></span>
-                    <span class="info"> <?=$meeting['info'];?></span>
-                </li>
-            </a>
-        <ul>
-        <div class="assignments">
-            <ul>
-                <?php foreach( $assignments as $item ): ?>
-                    <a href="<?= site_url('meeting/'.$meeting['id'].'/assignment/' . $item['id']) ?>">
-                        <li><?=$item['name']?></li>
-                    </a>
-                <?php endforeach ?>
-            </ul>
-        </div>
-        
-        <div class="cases">
-            <ul>
-                <?php foreach( $cases as $item ): ?>
-                    <a href="<?= site_url('meeting/'.$meeting['id'].'/case/' . $item['id']) ?>">
-                        <li><?=$item['name']?></li>
-                    </a>
-                <?php endforeach ?>
-            </ul>
-        </div>    
-    </div>
+	<?=$sidebar?>
 
     <div class="content">
         <h1 class="name"> <?=$meeting['info'];?></h1>

@@ -40,7 +40,7 @@ abstract class BaseController extends Controller
      *
      * @var list<string>
      */
-    protected $helpers = [];
+    protected $helpers = ['front/sidebar', 'front/header'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -66,5 +66,23 @@ abstract class BaseController extends Controller
         $this->meetings = new Meetings();
         $this->cases = new Cases();
         $this->assignments = new Assignments();
+		
+	    $this->data = array();
+
+		// User
+		$this->data['user'] = $this->user->getUserInfo();	
+		
+		// Meeting
+        $this->data['meeting'] = NULL;
+        $this->data["current_meeting"] = NULL;
+
+        // Assignment
+        $this->data['assignments'] = NULL;
+		$this->data['assignment'] = NULL;
+		
+		// Cases
+        $this->data['cases'] = NULL;
+		$this->data['case'] = NULL;				
+
     }
 }

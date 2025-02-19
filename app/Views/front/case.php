@@ -20,25 +20,7 @@
 </style>
 
 <section class="main">
-    <div class="meetings">
-        <ul>
-            <a href="<?= site_url('meeting/'.$meeting['id']) ?>">
-                <li>
-                    <span class="name"> <?=$meeting['name'];?></span>
-                    <span class="info"> <?=$meeting['info'];?></span>
-                </li>
-            </a>
-        <ul>
-        <div class="assignments">
-            <ul>
-                <?php foreach( $assignments as $item ): ?>
-                    <a href="<?= site_url('meeting/'.$meeting['id'].'/assignment/' . $item['id']) ?>">
-                        <li><?=$item['name']?>: <?=$item['info']?></li>
-                    </a>
-                <?php endforeach ?>
-            </ul>
-        </div>
-    </div>
+    <?=$sidebar?>
 
     <div class="content">
         
