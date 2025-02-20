@@ -14,28 +14,49 @@ class CaseController extends BaseController
         $this->caseEntryProperties = new CaseEntryProperties();	
     }
 	
-	public function entry( $meeting_id, $case_id, $entry_num )
+	public function entry( $meeting_id, $assignment_id, $case_id, $entry_num )
 	{		
+		$meeting_id 	= (int) $meeting_id;
+		$assignment_id 	= (int) $assignment_id;
+		$case_id 		= (int) $case_id;
+		$entry_num 		= (int) $entry_num;
+		
         // Meeting
         $this->data['meeting'] = $this->meetings->find( $meeting_id );
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-	
+		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		
         // Cases
-        $this->data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+        $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		
         // Entries
 		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();	// to draw progressbar
 		
-        $this->data['entry'] = $this->caseEntry->where([
+        /*$this->data['entry'] = $this->caseEntry->where([
 			'case_id'		=> $case_id,
 			'sort_order'	=> $entry_num
-		])->first();
+		])->first();*/
+		
+		$this->data['entry'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->offset($entry_num)->limit(1)->first();
+		$this->data['entry_num'] = $entry_num;
 		$this->data['entry_types'] = $this->caseEntry->type_enum;
 		
+		// previous and next urls
+		$current_url = current_url(); 
+		$url_parts = explode('/', $current_url);
+		array_pop($url_parts);
+		$this->data['entry_prev_url'] = $this->data['entry_next_url']  = implode('/', $url_parts);
 		
+		if ($entry_num > 0){
+			$this->data['entry_prev_url'] .= "/" . ($entry_num - 1);
+		}
+		
+		if( ($entry_num + 1) < count($this->data['entries'])){
+			$this->data['entry_next_url'] .= "/" . ($entry_num + 1);
+		}
 		
 		
 		// Entry properties
@@ -89,21 +110,13 @@ class CaseController extends BaseController
 			array_push( $this->data['entry']['properties'], $property );
 		}
 	
-		
-
-		
-		
-		
-		
-		
-		
 		load_header( $this->data );
 		load_sidebar( $this->data );
 		
         return view('front/case_entry', $this->data);		
 	}
 
-    public function index( $meeting_id, $case_id ): string
+    public function index( $meeting_id, $assignment_id, $case_id ): string
     {
         // Meeting
         $this->data['meeting'] = $this->meetings->find( $meeting_id );
@@ -111,9 +124,10 @@ class CaseController extends BaseController
 
         // Assignment
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-	
+		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		
         // Cases
-        $this->data['cases'] = $this->cases->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+        $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		$this->data['case'] = $this->cases->find($case_id);
 
         // Entries

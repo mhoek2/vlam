@@ -79,15 +79,18 @@
 		</div> 
        
         <div class="case-progress">
-        	<button>Previous</button>
+        
+        	<a href="<?=$entry_prev_url?>">Previous</a>
+        	
         	<div class="indicator">
-				<?php foreach ($entries as $item): ?>
+				<?php foreach ($entries as $i => $item): ?>
 					<div class="<?= ($entry['id'] == $item['id']) ? 'selected' : '' ?>">
-						<?=($item['sort_order'] + 1)?>
+						<?=($i + 1)?>
 					</div>
 				<?php endforeach ?>
         	</div>
-         	<button>Next</button>
+        	
+         	<a href="<?=$entry_next_url?>">Next</a>
 		</div>    
         
     </div>

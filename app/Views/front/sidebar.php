@@ -39,7 +39,7 @@
 	<div class="cases">
 		<ul>
 			<?php foreach( $cases as $item ): ?>
-				<a href="<?= site_url('meeting/'.$meeting['id'].'/case/' . $item['id']) ?>">
+				<a href="<?= site_url('meeting/'.$meeting['id'].'/assignment/'.$assignment['id'].'/case/' . $item['id']) ?>">
 					<li><?=$item['name']?></li>
 				</a>
 			<?php endforeach ?>

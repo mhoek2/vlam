@@ -8,9 +8,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Front\Home::index', 			['filter' => \App\Filters\AuthFilterGuest::class]);
 
 $routes->get(	'/home',									'Front\Home::application', 					['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:any)/case/(:any)/(:any)',		'Front\CaseController::entry/$1/$2/$3',		['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:any)/case/(:any)',				'Front\CaseController::index/$1/$2',		['filter' => \App\Filters\AuthFilterSession::class]);
 
+$routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/(:num)',		'Front\CaseController::entry/$1/$2/$3/$4',		['filter' => \App\Filters\AuthFilterSession::class]);
+$routes->get(	'meeting/(:any)/assignment/(:any)/case/(:any)',				'Front\CaseController::index/$1/$2/$3',		['filter' => \App\Filters\AuthFilterSession::class]);
 
 $routes->post(	'meeting/(:any)/assignment/(:any)/save',	'Front\AssignmentController::save/$1/$2',	['filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'meeting/(:any)/assignment/(:any)',			'Front\AssignmentController::index/$1/$2',	['filter' => \App\Filters\AuthFilterSession::class]);
