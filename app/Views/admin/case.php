@@ -54,7 +54,10 @@
 
             <label>Intro<lable>
             <textarea name="intro" id="intro"><?=$case["intro"]?></textarea>
-
+            
+            <label>Outro<lable>
+            <textarea name="outro" id="outro"><?=$case["outro"]?></textarea>
+            
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
             <button type="submit">Opslaan</button>
         </form>
@@ -98,6 +101,7 @@
 	    } = CKEDITOR;
 
 		set_ck_editor("#intro");
+		set_ck_editor("#outro");
 		/* 
 		CASE
 		*/

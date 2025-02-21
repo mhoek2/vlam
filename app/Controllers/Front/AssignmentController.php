@@ -41,23 +41,19 @@ class AssignmentController extends BaseController
         }
 
         // find any previous submitted results
-        //
-        // Note: Could switch db column 'name' to UNIQUE amd use ->replace(), 
-        // wanted to try both methods in codeigniter though..
         $exists = $this->assignmentResult->where([
-            'user_id' => $user['id'],
-            'meeting' => $meeting['name']."_".$meeting['info'],
-            'name' => $assignment['name']
+            'user_id' 		=> $user['id'],
+            'meeting' 		=> $meeting['id']."_".$meeting['name']."_".$meeting['info'],
+            'name' 			=> $assignment['id']."_".$assignment['name']."_".$assignment['info']
         ])->first();
 
         // First time submission, create a new entry for this assignment
         if(is_null($exists)) {
 		    $this->assignmentResult->insert([
-			    'user_id' => $user['id'], 
-			    'meeting' => $meeting['name']."_".$meeting['info'],
-			    'name' => $assignment['name'], 
-			    'info' => $assignment['info'] ]
-		    );
+			    'user_id' 	=> $user['id'], 
+			    'meeting' 	=> $meeting['id']."_".$meeting['name']."_".$meeting['info'],
+			    'name' 		=> $assignment['id']."_".$assignment['name']."_".$assignment['info']
+		    ]);
             
             $result_id = $this->assignmentEntry->insertID();
 		}
@@ -127,7 +123,7 @@ class AssignmentController extends BaseController
         // Saved results
         $this->data['result'] = $this->assignmentResult->where([
             'user_id' 	=> $this->data['user']['id'],
-            'name' 		=> $this->data['assignment']['name']
+            'name' 		=> $this->data['assignment']['id']."_".$this->data['assignment']['name']."_".$this->data['assignment']['info']
         ])->first();
         if(!is_null($this->data['result']))
         {

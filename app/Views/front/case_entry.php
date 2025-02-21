@@ -21,6 +21,11 @@
 		font-weight: bold;
 	}
 	
+	.case-entry .properties > div.selected {
+		background:blue;
+		color:white;
+	}
+	
 	.case-progress {
         display: flex;
         align-items: center;
@@ -68,8 +73,8 @@
 
 				<div class="properties">
 					<?php foreach ($entry['properties'] as $property): ?>
-						<div class="<?= $property['selected'] ? 'selected' : '' ?>">
-							<?= $property['content'] ?>
+						<div class="<?= $property['selected'] ? 'selected' : '' ?>" id="property" data-property-id="<?=$property['id']?>">
+							<?=$property['content']?>
 						</div>
 					<?php endforeach; ?>
 				</div>
@@ -109,6 +114,29 @@
 <script>
 	$(document).ready(function() {
         $(document).ready(function () {
+			
+			$(document).on('click', '#property', function(){
+				const propertyId = $(this).data('property-id');
+				
+                $.ajax({
+                    url: '<?=current_url().'/save'?>',
+                    type: 'POST',
+                    data: {
+						entry_id: <?=$entry['id']?>,
+						property_id: propertyId
+					},
+                    success: function(response) {
+						if (response.status === 'success') {
+							$(this).siblings().removeClass('selected');
+							$(this).addClass('selected');	
+						}
+                    }.bind(this),
+                    error: function(xhr, status, error) {
+
+                    }
+                })
+			});
+			
             $('#assignment_form').submit(function (event) {
                 event.preventDefault();
 
