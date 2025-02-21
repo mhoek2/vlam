@@ -1,11 +1,11 @@
 <style>
-        .grid-container {
+        .assignments-container {
             box-sizing: border-box;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .grid-item {
+        .assignments-item {
             box-sizing: border-box;
             flex-basis: calc(20% - 10px);
             height: 175px;
@@ -15,7 +15,7 @@
             border: 1px solid #ccc;
             cursor: move;
         }
-        .grid-item p {
+        .assignments-item p {
             margin: 0;
         }	
 </style>
@@ -24,9 +24,9 @@
 	<i class="fa-solid fa-circle-plus"></i> Add Assignment
 </button>
             
-<div class="grid-container" id="sortable">
+<div class="assignments-container" id="assignments">
     <?php foreach ($assignments as $item) { ?>
-        <div class="grid-item" data-id="<?= $item['id'] ?>">
+        <div class="assignments-item" data-id="<?= $item['id'] ?>">
             <a href="<?=base_url('admin/assignments/')?><?=$item['id']?>"><?= $item['name'] ?></a>
             <p><?= esc($item['info']) ?></p>
             <div id="delete_assignment" data-assignment-id="<?=$item['id']?>">Delete</div>
@@ -37,12 +37,13 @@
 <script>
 	$(document).ready(function() {
 
-		$("#sortable").sortable({
+		$("#assignments").sortable({
 			update: function(event, ui) {
-				let ids = $("#sortable").sortable("toArray", { attribute: 'data-id' });
+				let ids = $("#assignments").sortable("toArray", { attribute: 'data-id' });
 				saveSortOrder(ids);
-			}
-		});
+			},
+			placeholder: 'assignments-item sortable-placeholder',
+		}).disableSelection();
 		
 		function saveSortOrder(ids) {
 			$.ajax({

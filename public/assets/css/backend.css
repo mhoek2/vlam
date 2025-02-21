@@ -408,3 +408,11 @@ table {
         padding: 0 15px;
     }
 }
+
+/* SORTABLE */
+.sortable-placeholder {
+	cursor: move;
+	background-color: red !important;
+	border: 2px dotted #ccc !important; 
+	opacity: 0.5;
+}

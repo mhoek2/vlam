@@ -41,8 +41,9 @@
 			update: function(event, ui) {
 				let ids = $("#cases").sortable("toArray", { attribute: 'data-id' });
 				saveSortOrder(ids);
-			}
-		});
+			},
+			placeholder: 'case-item sortable-placeholder',
+		}).disableSelection();
 		
 		function saveSortOrder(ids) {
 			$.ajax({

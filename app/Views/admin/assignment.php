@@ -15,6 +15,9 @@
 		border: 1px solid #ccc;
 		cursor: move;
 	}
+	.grid-item.sortable-placeholder {
+		min-height:100px;
+	}
 	.grid-item p {
 		margin: 0;
 	}
@@ -139,8 +142,9 @@
 
 				let ids = $("#sortable").sortable("toArray", { attribute: 'data-id' });
 				saveEntrySortOrder(ids);
-			}
-		});
+			},
+			placeholder: 'entry grid-item sortable-placeholder',
+		}).disableSelection();;
 	
 		function saveEntrySortOrder(ids) {
 			$.ajax({
@@ -350,8 +354,9 @@
 						update: function(event, ui) {
 							let ids = propertyList.sortable("toArray", { attribute: 'data-property-id' });
 							savePropertySortOrder( entryId, ids);
-						}
-					});
+						},
+						placeholder: 'sortable-placeholder',
+					}).disableSelection();
 				}
 			});
 		}
