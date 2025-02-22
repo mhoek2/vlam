@@ -41,51 +41,12 @@
     </div>
 </footer>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.umd.js"></script>
+<?=$text_editor->load_script()?>
 <script {csp-script-nonce}>
     $(document).ready(function () {
-	    const {
-		    ClassicEditor,
-            Essentials,
-            Paragraph,
-            Bold,
-            Italic,
-            Font,
-            Heading,
-            Link,
-            BlockQuote,
-            CodeBlock,
-            List,
-            TodoList,
-	    } = CKEDITOR;
-	    ClassicEditor
-		    .create( document.querySelector( '#intro' ), {
-			    licenseKey: '<?=$CKeditorApiKey?>',
-                plugins: [ Essentials, Paragraph, Bold, Font, Heading, Link, Italic, BlockQuote, CodeBlock, List, TodoList, ],
-                toolbar: {
-                    items: [
-                        'undo', 'redo',
-                        '|',
-                        'heading',
-                        '|',
-                        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
-                        '|',
-                        'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
-                        '|',
-                        'link', 'uploadImage', 'blockQuote', 'codeBlock',
-                        '|',
-                        'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
-                    ],
-                    shouldNotGroupWhenFull: false
-                }
-		    } )
-		    .then( editor => {
-			    window.editor = editor;
-		    } )
-		    .catch( error => {
-			    console.error( error );
-		    } );
-
+	    <?=$text_editor->init_script()?>
+	    <?=$text_editor->assign_editor('"#intro"')?>
+		
         $(document).ready(function () {
             $('#edit_meeting').submit(function (event) {
                 event.preventDefault();

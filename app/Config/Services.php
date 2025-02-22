@@ -4,6 +4,9 @@ namespace Config;
 
 use CodeIgniter\Config\BaseService;
 
+use App\ThirdParty\TextEditorCKEditor as CKEditor;
+use App\ThirdParty\TextEditorSummernote as Summernote;
+	
 /**
  * Services Configuration file.
  *
@@ -29,4 +32,20 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+	public static function text_editor($getShared = true)
+	{
+		if ($getShared) {
+			return static::getSharedInstance('text_editor');
+		}
+		
+		$text_editor = 'summernote';
+		
+		switch ( $text_editor ) {
+			case 'ckeditor':
+				return new CKEditor();
+			case 'summernote':
+				return new Summernote();
+		}
+	}
 }

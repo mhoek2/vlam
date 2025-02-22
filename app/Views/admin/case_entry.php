@@ -1,5 +1,5 @@
 <div class="entry grid-item" data-id="<?= $id ?>" data-entry-id="<?= $id ?>" data-type="<?= $type ?>">
-	<h3 class="entry-name" data-entry-id="<?= $id ?>" contenteditable="true"><?= $name ?></h3>
+	<h3 class="entry-name contenteditable" data-entry-id="<?= $id ?>" contenteditable="true"><?= $name ?></h3>
 					
 	<select class="entry-type-select" data-entry-id="<?= $id ?>">
 		<?php foreach($entry_types as $entry_type): ?>

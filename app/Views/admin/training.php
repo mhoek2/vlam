@@ -3,7 +3,7 @@
 <div class="breadcrumbs">
     <ul>
 	    <li><a href="<?=base_url('admin/trainings')?>">Trainings</a></li>
-	    <li><span><?=$training['id']?></span></li>
+	    <li><span><?=$training['name']?></span></li>
     </ul>
 </div>
 

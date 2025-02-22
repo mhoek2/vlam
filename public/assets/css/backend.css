@@ -6,7 +6,7 @@
     transition: background-color 300ms ease, color 300ms ease;
 }
 
-*:focus {
+.contenteditable:focus {
     background-color: rgba(221, 72, 20, .2);
     outline: none;
 }

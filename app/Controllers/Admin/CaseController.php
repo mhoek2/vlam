@@ -35,11 +35,13 @@ class CaseController extends BaseController
         $name = $this->request->getPost('name');
         $info = $this->request->getPost('info');
         $intro = $this->request->getPost('intro');
+        $outro = $this->request->getPost('outro');
 
 		$this->cases->update($case_id, [
             'name' => $name,
             'info' => $info,
-            'intro' => $intro
+            'intro' => $intro,
+            'outro' => $outro
         ]);
 
 		return $this->response->setJSON(['message' => 'Form submitted successfully!']);
@@ -73,7 +75,7 @@ class CaseController extends BaseController
 			exit;
 		}
 
-		$data['CKeditorApiKey'] = (new CKeditor())->apiKey;
+		$data['text_editor'] = service('text_editor');
 		
         return view('admin/case', $data);
     }

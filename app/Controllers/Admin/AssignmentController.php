@@ -69,7 +69,7 @@ class AssignmentController extends BaseController
         $data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
         $data['cases_view'] = view('admin/cases', $data);		
 		
-		$data['CKeditorApiKey'] = (new CKeditor())->apiKey;
+		$data['text_editor'] = service('text_editor');
 		
         return view('admin/assignment', $data);
     }

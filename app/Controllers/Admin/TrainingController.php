@@ -97,7 +97,7 @@ class TrainingController extends BaseController
 
         $data['members'] = $this->trainingMembers->getMembers( $training_id );
 
-        $data['CKeditorApiKey'] = (new CKeditor())->apiKey;
+        $data['text_editor'] = service('text_editor');
 
         return view('admin/training', $data);
     }

@@ -44,7 +44,7 @@ class MeetingController extends BaseController
         $data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
         $data['assignments_view'] = view('admin/assignments', $data);
 		
-        $data['CKeditorApiKey'] = (new CKeditor())->apiKey;
+		$data['text_editor'] = service('text_editor');
 
         return view('admin/meeting', $data);
     }

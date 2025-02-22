@@ -87,27 +87,12 @@
     </div>
 </section>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.umd.js"></script>
-<script>
-	$(document).ready(function() {
-		let CKEditorArray = [];
+<?=$text_editor->load_script()?>
+<script {csp-script-nonce}>
+    $(document).ready(function () {
+	    <?=$text_editor->init_script()?>
+	    <?=$text_editor->assign_editor('"#intro"')?>
 
-	    const {
-		    ClassicEditor,
-            Essentials,
-            Paragraph,
-            Bold,
-            Italic,
-            Font,
-            Heading,
-            Link,
-            BlockQuote,
-            CodeBlock,
-            List,
-            TodoList,
-	    } = CKEDITOR;
-
-		set_ck_editor("#intro");
 		/* 
 		ASSIGNMENT
 		*/
@@ -144,7 +129,7 @@
 				saveEntrySortOrder(ids);
 			},
 			placeholder: 'entry grid-item sortable-placeholder',
-		}).disableSelection();;
+		});
 	
 		function saveEntrySortOrder(ids) {
 			$.ajax({
@@ -282,36 +267,6 @@
 			}
 		});	
 	
-		function set_ck_editor( textareaId )
-		{
-			ClassicEditor.create( document.querySelector( textareaId ), {
-			    licenseKey: '<?=$CKeditorApiKey?>',
-                plugins: [ Essentials, Paragraph, Bold, Font, Heading, Link, Italic, BlockQuote, CodeBlock, List, TodoList, ],
-                toolbar: {
-                    items: [
-                        'undo', 'redo',
-                        '|',
-                        'heading',
-                        '|',
-                        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
-                        '|',
-                        'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
-                        '|',
-                        'link', 'uploadImage', 'blockQuote', 'codeBlock',
-                        '|',
-                        'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
-                    ],
-                    shouldNotGroupWhenFull: false
-                }
-		    } )
-		    .then( editor => {
-				CKEditorArray[textareaId] = editor;
-		    } )
-		    .catch( error => {
-			    console.error( error );
-		    } );
-		}
-
         function loadProperties( entryId, entryType ) {
 			$.ajax({
 				url: '<?=current_url()?>/get_properties/' + entryId,
@@ -341,7 +296,7 @@
 								</li>
 							`);
 
-							set_ck_editor("#" + textareaId);
+							<?=$text_editor->assign_editor('"#" + textareaId')?>
 						}
 					});
 					
@@ -356,7 +311,7 @@
 							savePropertySortOrder( entryId, ids);
 						},
 						placeholder: 'sortable-placeholder',
-					}).disableSelection();
+					});
 				}
 			});
 		}
@@ -385,7 +340,7 @@
 			// For CKEDITOR
 			if(entryType === "text_separator") {
 				textareaId = "#ckeditor_" + propertyId;
-				newPropertyContent = CKEditorArray[textareaId].getData();
+				newPropertyContent = <?=$text_editor->get('textareaId')?>
 			}
 
 			if (newPropertyContent.trim()) {
