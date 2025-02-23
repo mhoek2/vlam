@@ -26,6 +26,7 @@ $routes->post(	'admin/trainings/add_training',							'Admin\TrainingsController:
 $routes->post(	'admin/trainings/delete_training',						'Admin\TrainingsController::delete_training', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->get(	'admin/trainings',										'Admin\TrainingsController::index', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/training/(:any)/save',							'Admin\TrainingController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
+$routes->get(	'admin/training/(:any)/start',							'Admin\TrainingController::start/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->get(	'admin/training/getUsersForAutocomplete',				'Admin\TrainingController::getUsersForAutocomplete', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/training/(:any)/add_member',						'Admin\TrainingController::add_member/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
 $routes->post(	'admin/training/(:any)/delete_member', 					'Admin\TrainingController::delete_member/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);

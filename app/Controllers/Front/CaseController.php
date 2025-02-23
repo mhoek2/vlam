@@ -4,81 +4,60 @@ namespace App\Controllers\Front;
 
 use App\Controllers\Front\BaseController;
 
-use App\Models\CaseEntry;
-use App\Models\CaseEntryProperties;
-
-use App\Models\CaseResult;
-use App\Models\CaseResultEntry;
 
 class CaseController extends BaseController
 {
-    public function __construct() {
-        $this->caseEntry = new CaseEntry();
-        $this->caseEntryProperties = new CaseEntryProperties();	
-		
-        $this->caseResult = new caseResult();	
-        $this->caseResultEntry = new caseResultEntry();	
-    }
 	
+	public function get_assignment( $assignment_id )
+	{
+		$assignment = $this->assignments->find($assignment_id);
+		
+		if ( is_null($assignment) ){
+			die("Assignment not found.");
+		}
+		
+		return $assignment;
+	}
+	
+	private function get_case( $assignment_id, $case_id )
+	{
+		$case = $this->cases->find($case_id);
+		
+		if ( !$case || (int)$case['assignment_id'] !== $assignment_id) {
+			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
+			die("Case not found.");
+		}
+		
+		return $case;
+	}
+		
 	public function save( $meeting_id, $assignment_id, $case_id, $entry_num )
 	{
-		$result_id = -1;
-		
 		$meeting_id 	= (int) $meeting_id;
 		$assignment_id 	= (int) $assignment_id;
 		$case_id 		= (int) $case_id;
 		$entry_num 		= (int) $entry_num;
-			
+		
+		// check if case if valid
+		$case = $this->get_case( $assignment_id, $case_id );
+		
         $user = $this->user->getUserInfo();
-        $assignment = $this->assignments->find($assignment_id);
 		
         $entry_id = $this->request->getPost('entry_id');
         $property_id = $this->request->getPost('property_id');
 		
-		$case = $this->cases->find($case_id);
-		$entry = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->offset($entry_num)->limit(1)->first();
-		
-	    // find any previous submitted results
-        $exists = $this->caseResult->where([
-            'user_id' 		=> $user['id'],
-            'assignment' 	=> $assignment['id']."_".$assignment['name']."_".$assignment['info'],
-            'name'	 		=> $case['id']."_".$case['name']."_".$case['info']
-        ])->first();
-
-        // First time submission, create a new entry for this assignment
-        if(is_null($exists)) {
-		    $this->caseResult->insert([
-			    'user_id' 	=> $user['id'], 
-				'assignment' 	=> $assignment['id']."_".$assignment['name']."_".$assignment['info'],
-				'name'	 		=> $case['id']."_".$case['name']."_".$case['info']
-		    ]);
-            
-            $result_id = $this->assignmentEntry->insertID();
-		}
-        // A record exists, meaning the entries are being updated
-        else {
-            $result_id = $exists['id'];
-        }
-
-        if( $result_id < 0 ) {
-		    return $this->response->setJSON([
-			    'status' => 'error',
-                'message' => 'Could not insert assignment result'
-		    ]);
-        }	
-		
-		// store the selected property for this case entry
-		$case_property = $this->caseEntryProperties->find($property_id);
-
-		$this->caseResultEntry->replace([ 
-			'result_id' => $result_id, 
-			'name' => $entry['name'],
-			'value' => $case_property['content'],
-			'type' => $entry['type'],
+		$this->caseResult->replace([ 
+			'user_id' 		=> $user['id'], 
+			'assignment_id' => $assignment_id,
+			'case_id' 		=> $case_id,
+			'entry_id' 		=> $entry_id,
+			'property_id' 	=> $property_id,
 			]
 		);
+        	
 		return $this->response->setJSON(['status' => 'success']);
 	}
+	
 	
 	public function outro( $meeting_id, $assignment_id, $case_id )
 	{
@@ -92,11 +71,11 @@ class CaseController extends BaseController
 
         // Assignment
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		$this->data['assignment'] = $this->get_assignment( $assignment_id );
 		
         // Cases
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['case'] = $this->cases->find($case_id);
+		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 		
         // Entries
 		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();	// to draw progressbar
@@ -128,11 +107,11 @@ class CaseController extends BaseController
 
         // Assignment
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		$this->data['assignment'] = $this->get_assignment( $assignment_id );
 		
         // Cases
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['case'] = $this->cases->find($case_id);
+		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 		
         // Entries
 		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();	// to draw progressbar		
@@ -164,23 +143,15 @@ class CaseController extends BaseController
 		// Get case properties and link with saved results
 		$this->data['properties'] = $this->caseEntryProperties->where('entry_id', $this->data['entry']['id'])->orderBy('sort_order', 'ASC')->findAll();
 		
-        // Saved results
-		$this->data['result'] = NULL;
-        $this->data['result'] = $this->caseResult->where([
-            'user_id' => $this->data['user']['id'],
-            'name' => $this->data['case']['id']."_".$this->data['case']['name']."_".$this->data['case']['info']
-        ])->first();
-
-		// Find saved property for this entry
-		$saved_property = NULL;
-		if(!is_null($this->data['result']))
-		 {
-            $saved_property = $this->caseResultEntry->where([
-				'result_id' => $this->data['result']['id'],
-				'name'		=> $this->data['entry']['name']
-			])->first();
-		}
-
+		// Get saved user property ids
+		$selected_properties = array_column(
+			$this->caseResult->where('user_id', $this->data['user']['id'])->where([
+				'assignment_id' => $assignment_id,
+				'case_id' 		=> $case_id,
+			])->select('property_id')->get()->getResultArray(), 
+			'property_id'
+		);
+		
 		$this->data['entry']['properties'] = array();
 		foreach( $this->data['properties'] as $property ){
 			if ( $property['entry_id'] !== $this->data['entry']['id'] )
@@ -190,12 +161,7 @@ class CaseController extends BaseController
 				$this->data['entry']['properties'] = array();
 
 			// Mark a property as selected if matched with saved property
-			$property['selected'] = false;
-
-			if(!is_null($saved_property) && $saved_property['value'] == $property['content'])
-			{
-				$property['selected'] = $saved_property['value'];
-			}
+			$property['selected'] = in_array($property['id'], $selected_properties);
 
 			array_push( $this->data['entry']['properties'], $property );
 		}
@@ -208,27 +174,24 @@ class CaseController extends BaseController
 
     public function index( $meeting_id, $assignment_id, $case_id ): string
     {
+		$meeting_id 	= (int) $meeting_id;
+		$assignment_id 	= (int) $assignment_id;
+		$case_id 		= (int) $case_id;
+		
         // Meeting
         $this->data['meeting'] = $this->meetings->find( $meeting_id );
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		$this->data['assignment'] = $this->get_assignment( $assignment_id );
 		
         // Cases
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['case'] = $this->cases->find($case_id);
+		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 
         // Entries
         $this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
-
-		if (!$this->data['case']) {
-			// Handle the case when the assignment is not found
-			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
-			echo "Assignment not found.";
-			exit;
-		}
 
 		load_header( $this->data );
 		load_sidebar( $this->data );

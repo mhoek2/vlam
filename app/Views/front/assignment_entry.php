@@ -7,7 +7,7 @@
 	<label><?=$name?></label>
 	<select name="entries[<?=$id?>]">
 		<?php foreach ($properties as $property): ?>
-			<option value="<?= $property['content'] ?>" <?= $property['selected'] ? 'selected' : '' ?>><?= $property['content'] ?></option>
+			<option value="<?= $property['id'] ?>" <?= $property['selected'] ? 'selected' : '' ?>><?= $property['content'] ?></option>
 		<?php endforeach; ?>
 	</select>
 

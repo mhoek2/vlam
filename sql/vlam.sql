@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 13, 2025 at 02:55 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Gegenereerd op: 23 feb 2025 om 16:41
+-- Serverversie: 8.0.41-0ubuntu0.20.04.1
+-- PHP-versie: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,77 +19,77 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `vlam`
+-- Database: `hklab69_vlam`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignments`
+-- Tabelstructuur voor tabel `assignments`
 --
 
 CREATE TABLE `assignments` (
-  `id` int(11) NOT NULL,
-  `meeting_id` int(11) NOT NULL,
-  `sort_order` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `meeting_id` int NOT NULL,
+  `sort_order` int NOT NULL,
   `name` text NOT NULL,
   `intro` text NOT NULL,
-  `info` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `info` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `assignments`
+-- Gegevens worden geëxporteerd voor tabel `assignments`
 --
 
-INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `intro`, `info`) VALUES
-(1, 1, 0, 'Opdracht 1', '<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\">ivamu</span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', 'Herken de werkervaring'),
-(2, 1, 5, 'Opdracht 2', 'Opdracht 2', ''),
-(3, 1, 2, 'Opdracht 3', 'Opdracht 3', ''),
-(4, 1, 4, 'Opdracht 4', 'Opdracht 4', ''),
-(5, 1, 3, 'Opdracht 5', 'Opdracht 5', ''),
-(6, 1, 1, 'Opdracht 6', 'Opdracht 6', '');
+INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `intro`, `info`, `created_at`) VALUES
+(1, 1, 0, 'Opdracht 1', '<p><span style=\"color: rgb(0, 0, 0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"color: rgb(255, 255, 255);\">i</span><font color=\"#ffff00\">vamu</font><span style=\"color: rgb(0, 0, 0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', 'Herken de werkervaring', '2025-02-17 19:05:20'),
+(3, 1, 3, 'Opdracht 3', 'Opdracht 3', '', '2025-02-17 19:05:20'),
+(5, 1, 2, 'Opdracht 5', 'Opdracht 5', '', '2025-02-17 19:05:20'),
+(6, 1, 1, 'Opdracht 6', 'Opdracht 6', '', '2025-02-17 19:05:20');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignment_entry`
+-- Tabelstructuur voor tabel `assignment_entry`
 --
 
 CREATE TABLE `assignment_entry` (
-  `id` int(11) NOT NULL,
-  `sort_order` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `sort_order` int NOT NULL,
   `name` text NOT NULL,
   `info` text NOT NULL,
-  `assignment_id` int(11) NOT NULL,
+  `assignment_id` int NOT NULL,
   `type` enum('mcq','text_input','text_separator','') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `assignment_entry`
+-- Gegevens worden geëxporteerd voor tabel `assignment_entry`
 --
 
 INSERT INTO `assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`) VALUES
 (24, 1, 'Vraag 1', '', 1, 'mcq'),
-(25, 2, 'Separator', '', 1, 'text_separator'),
-(28, 0, 'Separator', '', 1, 'text_separator'),
-(29, 3, 'Vraag 2', '', 1, 'mcq'),
-(30, 4, 'Vraag 3', '', 1, 'mcq');
+(25, 0, 'Separator', '', 1, 'text_separator'),
+(28, 2, 'Separator', '', 1, 'text_separator'),
+(29, 4, 'Vraag 2', '', 1, 'mcq'),
+(30, 3, 'Vraag 3', '', 1, 'mcq'),
+(33, 1, 'test', '', 6, 'mcq');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignment_entry_properties`
+-- Tabelstructuur voor tabel `assignment_entry_properties`
 --
 
 CREATE TABLE `assignment_entry_properties` (
-  `id` int(11) NOT NULL,
-  `entry_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `entry_id` int NOT NULL,
   `content` text NOT NULL,
-  `sort_order` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `sort_order` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `assignment_entry_properties`
+-- Gegevens worden geëxporteerd voor tabel `assignment_entry_properties`
 --
 
 INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
@@ -100,68 +101,49 @@ INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_or
 (35, 29, 'Misschien', 1),
 (36, 29, 'Ja', 2),
 (37, 29, 'Zeker weten', 3),
-(38, 30, 'test 1', 0),
-(39, 30, 'test 2', 0);
+(38, 30, 'test 1', 1),
+(39, 30, 'test 2', 0),
+(47, 33, 'ja', 0),
+(48, 33, 'nee', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignment_result`
+-- Tabelstructuur voor tabel `assignment_result`
 --
 
 CREATE TABLE `assignment_result` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `meeting` text NOT NULL,
-  `name` text NOT NULL,
-  `info` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `entry_id` int NOT NULL,
+  `property_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `assignment_result`
+-- Gegevens worden geëxporteerd voor tabel `assignment_result`
 --
 
-INSERT INTO `assignment_result` (`id`, `user_id`, `meeting`, `name`, `info`) VALUES
-(12, 2, '1_Kennismaking en werkvoorwaarden', 'Opdracht 1', 'Herken de werkervaring');
+INSERT INTO `assignment_result` (`id`, `user_id`, `assignment_id`, `entry_id`, `property_id`) VALUES
+(1, 2, 1, 24, 27),
+(2, 2, 1, 30, 39),
+(3, 2, 1, 29, 37);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignment_result_entry`
---
-
-CREATE TABLE `assignment_result_entry` (
-  `id` int(11) NOT NULL,
-  `result_id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `value` text NOT NULL,
-  `type` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `assignment_result_entry`
---
-
-INSERT INTO `assignment_result_entry` (`id`, `result_id`, `name`, `value`, `type`) VALUES
-(67, 12, 'Vraag 1', 'Ja', 'mcq'),
-(68, 12, 'Vraag 2', 'Nee', 'mcq'),
-(69, 12, 'Vraag 3', 'test 2', 'mcq');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `auth_groups_users`
+-- Tabelstructuur voor tabel `auth_groups_users`
 --
 
 CREATE TABLE `auth_groups_users` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
-  `group` varchar(255) NOT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `group` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `auth_groups_users`
+-- Gegevens worden geëxporteerd voor tabel `auth_groups_users`
 --
 
 INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
@@ -175,30 +157,30 @@ INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_identities`
+-- Tabelstructuur voor tabel `auth_identities`
 --
 
 CREATE TABLE `auth_identities` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `secret` varchar(255) NOT NULL,
-  `secret2` varchar(255) DEFAULT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `secret` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `secret2` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `expires` datetime DEFAULT NULL,
-  `extra` text DEFAULT NULL,
-  `force_reset` tinyint(1) NOT NULL DEFAULT 0,
+  `extra` text COLLATE utf8mb4_general_ci,
+  `force_reset` tinyint(1) NOT NULL DEFAULT '0',
   `last_used_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `auth_identities`
+-- Gegevens worden geëxporteerd voor tabel `auth_identities`
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$03WJ08uzWhj7t16adUAhD.lNkR.D1/HIQPwjWOIiAExsemWypgjZG', NULL, NULL, 0, '2025-02-13 11:16:38', '2025-02-05 09:20:35', '2025-02-13 11:16:38'),
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$03WJ08uzWhj7t16adUAhD.lNkR.D1/HIQPwjWOIiAExsemWypgjZG', NULL, NULL, 0, '2025-02-23 10:39:59', '2025-02-05 09:20:35', '2025-02-23 10:39:59'),
 (3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, NULL, '2025-02-13 08:21:52', '2025-02-13 08:21:52'),
 (4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
 (5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
@@ -208,22 +190,22 @@ INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secre
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_logins`
+-- Tabelstructuur voor tabel `auth_logins`
 --
 
 CREATE TABLE `auth_logins` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `ip_address` varchar(255) NOT NULL,
-  `user_agent` varchar(255) DEFAULT NULL,
-  `id_type` varchar(255) NOT NULL,
-  `identifier` varchar(255) NOT NULL,
-  `user_id` int(11) UNSIGNED DEFAULT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `ip_address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_agent` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `identifier` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `auth_logins`
+-- Gegevens worden geëxporteerd voor tabel `auth_logins`
 --
 
 INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identifier`, `user_id`, `date`, `success`) VALUES
@@ -238,32 +220,49 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identif
 (23, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-13 08:07:03', 0),
 (24, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-13 08:07:08', 1),
 (25, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-13 08:23:47', 1),
-(26, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-13 11:16:38', 1);
+(26, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-13 11:16:38', 1),
+(27, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-17 17:12:21', 1),
+(28, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-17 17:58:53', 1),
+(29, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-17 21:53:58', 1),
+(30, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-18 07:00:32', 0),
+(31, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-18 07:00:38', 1),
+(32, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-18 11:55:55', 0),
+(33, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-18 11:56:02', 1),
+(34, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-19 10:40:04', 1),
+(35, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-19 22:20:11', 0),
+(36, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-19 22:20:22', 1),
+(37, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-20 07:36:14', 0),
+(38, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-20 07:36:19', 1),
+(39, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-21 14:23:11', 1),
+(40, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-22 10:04:26', 0),
+(41, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-22 10:04:58', 1),
+(42, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-22 15:34:37', 1),
+(43, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-23 10:39:59', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_permissions_users`
+-- Tabelstructuur voor tabel `auth_permissions_users`
 --
 
 CREATE TABLE `auth_permissions_users` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
-  `permission` varchar(255) NOT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `permission` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_remember_tokens`
+-- Tabelstructuur voor tabel `auth_remember_tokens`
 --
 
 CREATE TABLE `auth_remember_tokens` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `selector` varchar(255) NOT NULL,
-  `hashedValidator` varchar(255) NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `selector` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `hashedValidator` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `expires` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -272,16 +271,16 @@ CREATE TABLE `auth_remember_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth_token_logins`
+-- Tabelstructuur voor tabel `auth_token_logins`
 --
 
 CREATE TABLE `auth_token_logins` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `ip_address` varchar(255) NOT NULL,
-  `user_agent` varchar(255) DEFAULT NULL,
-  `id_type` varchar(255) NOT NULL,
-  `identifier` varchar(255) NOT NULL,
-  `user_id` int(11) UNSIGNED DEFAULT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `ip_address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_agent` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `identifier` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -289,18 +288,128 @@ CREATE TABLE `auth_token_logins` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `meetings`
+-- Tabelstructuur voor tabel `cases`
+--
+
+CREATE TABLE `cases` (
+  `id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `sort_order` int NOT NULL,
+  `name` text NOT NULL,
+  `intro` text NOT NULL,
+  `outro` text NOT NULL,
+  `info` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `cases`
+--
+
+INSERT INTO `cases` (`id`, `assignment_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `created_at`) VALUES
+(9, 1, 0, 'Casus 1: Openheid over autisme op werk', '<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">2Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\">ivamu</span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '<h1>\r\n    Goed Gedaan!\r\n</h1>\r\n<p>\r\n    <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>L3orem ipsum dolor sit amet, consectetur adipiscing elit. V</strong></span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\"><strong>ivamu</strong></span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus.&nbsp;</strong></span>\r\n</p>\r\n<ul>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. </span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n</ul>\r\n<p>\r\n    <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Wat nu?</strong></span>\r\n</p>\r\n<ul>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n</ul>', '', '2025-02-18 08:04:23'),
+(11, 1, 1, 'Casus 2', '', '', '', '2025-02-19 14:47:53'),
+(12, 1, 2, 'Casus 3', '', '', '', '2025-02-19 14:56:35');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `case_entry`
+--
+
+CREATE TABLE `case_entry` (
+  `id` int NOT NULL,
+  `sort_order` int NOT NULL,
+  `name` text NOT NULL,
+  `info` text NOT NULL,
+  `case_id` int NOT NULL,
+  `type` enum('mcq','text_input','text_separator','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `case_entry`
+--
+
+INSERT INTO `case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`) VALUES
+(1, 0, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 9, 'mcq'),
+(2, 3, 'Wanneer zou je openheid geven?', '', 9, 'mcq'),
+(3, 1, 'Welke informatie zou jij delen?', '', 9, 'mcq'),
+(4, 2, 'Aan wie zou je openheid geven', '', 12, 'mcq'),
+(5, 1, 'test', '', 12, 'mcq');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `case_entry_properties`
+--
+
+CREATE TABLE `case_entry_properties` (
+  `id` int NOT NULL,
+  `entry_id` int NOT NULL,
+  `content` text NOT NULL,
+  `sort_order` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `case_entry_properties`
+--
+
+INSERT INTO `case_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
+(42, 1, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
+(43, 1, 'B: Ik geef geen openheid om stigmatisering te vermijden', 0),
+(44, 2, 'A: Tijdens een functioneringsgesprek.', 0),
+(45, 2, 'B: Zodra je merkt dat je klachten krijgt', 0),
+(46, 2, 'C: Ik wacht totdat ik het echt niet meer volhoud.', 0),
+(47, 1, 'C: Ik weet het niet en wil meer informatie', 0),
+(48, 3, 'A: Ik deel alles, inclusief de details van mijn belemmeringen', 0),
+(49, 3, 'B: Ik deel alleen wat relevant is voor mijn werk', 0),
+(50, 3, 'C: Ik deel helemaal niets!', 0),
+(51, 4, 'A: Alleen aan mijn leidinggevende', 0),
+(52, 4, 'B: Aan mijn leidingevende en enkele collegas', 0),
+(53, 4, 'C: Aan niemand', 0),
+(54, 5, 'A', 0),
+(55, 5, 'B', 0),
+(56, 5, 'C', 0),
+(57, 5, 'D', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `case_result`
+--
+
+CREATE TABLE `case_result` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `case_id` int NOT NULL,
+  `entry_id` int NOT NULL,
+  `property_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `case_result`
+--
+
+INSERT INTO `case_result` (`id`, `user_id`, `assignment_id`, `case_id`, `entry_id`, `property_id`) VALUES
+(13, 2, 1, 9, 3, 49),
+(14, 2, 1, 9, 1, 47);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `meetings`
 --
 
 CREATE TABLE `meetings` (
-  `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
-  `info` text NOT NULL,
-  `intro` text NOT NULL
+  `id` int NOT NULL,
+  `name` int NOT NULL,
+  `info` text COLLATE utf8mb4_general_ci NOT NULL,
+  `intro` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `meetings`
+-- Gegevens worden geëxporteerd voor tabel `meetings`
 --
 
 INSERT INTO `meetings` (`id`, `name`, `info`, `intro`) VALUES
@@ -314,21 +423,21 @@ INSERT INTO `meetings` (`id`, `name`, `info`, `intro`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Tabelstructuur voor tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `version` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `group` varchar(255) NOT NULL,
-  `namespace` varchar(255) NOT NULL,
-  `time` int(11) NOT NULL,
-  `batch` int(11) UNSIGNED NOT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `version` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `class` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `group` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `namespace` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `time` int NOT NULL,
+  `batch` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `migrations`
+-- Gegevens worden geëxporteerd voor tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
@@ -339,16 +448,16 @@ INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `settings`
+-- Tabelstructuur voor tabel `settings`
 --
 
 CREATE TABLE `settings` (
-  `id` int(9) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `key` varchar(255) NOT NULL,
-  `value` text DEFAULT NULL,
-  `type` varchar(31) NOT NULL DEFAULT 'string',
-  `context` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL,
+  `class` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `key` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `value` text COLLATE utf8mb4_general_ci,
+  `type` varchar(31) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'string',
+  `context` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -356,58 +465,279 @@ CREATE TABLE `settings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trainings`
+-- Tabelstructuur voor tabel `trainings`
 --
 
 CREATE TABLE `trainings` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
+  `id` int NOT NULL,
+  `name` text COLLATE utf8mb4_general_ci NOT NULL,
   `started` datetime DEFAULT NULL,
   `stopped` datetime DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `trainings`
+-- Gegevens worden geëxporteerd voor tabel `trainings`
 --
 
 INSERT INTO `trainings` (`id`, `name`, `started`, `stopped`, `created_at`) VALUES
-(6, 'Training #3', NULL, NULL, '2025-02-13 14:23:31');
+(6, 'Training #3', '2025-02-23 14:53:02', NULL, '2025-02-13 14:23:31');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `training_users`
+-- Tabelstructuur voor tabel `training_assignments`
+--
+
+CREATE TABLE `training_assignments` (
+  `id` int NOT NULL,
+  `training_id` int NOT NULL,
+  `meeting_id` int NOT NULL,
+  `sort_order` int NOT NULL,
+  `name` text NOT NULL,
+  `intro` text NOT NULL,
+  `info` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_assignments`
+--
+
+INSERT INTO `training_assignments` (`id`, `training_id`, `meeting_id`, `sort_order`, `name`, `intro`, `info`, `created_at`) VALUES
+(161, 6, 1, 0, 'Opdracht 1', '<p><span style=\"color: rgb(0, 0, 0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"color: rgb(255, 255, 255);\">i</span><font color=\"#ffff00\">vamu</font><span style=\"color: rgb(0, 0, 0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', 'Herken de werkervaring', '2025-02-23 15:53:02'),
+(162, 6, 1, 3, 'Opdracht 3', 'Opdracht 3', '', '2025-02-23 15:53:02'),
+(163, 6, 1, 2, 'Opdracht 5', 'Opdracht 5', '', '2025-02-23 15:53:02'),
+(164, 6, 1, 1, 'Opdracht 6', 'Opdracht 6', '', '2025-02-23 15:53:02');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_assignment_entry`
+--
+
+CREATE TABLE `training_assignment_entry` (
+  `id` int NOT NULL,
+  `sort_order` int NOT NULL,
+  `name` text NOT NULL,
+  `info` text NOT NULL,
+  `assignment_id` int NOT NULL,
+  `type` enum('mcq','text_input','text_separator','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_assignment_entry`
+--
+
+INSERT INTO `training_assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`) VALUES
+(199, 1, 'Vraag 1', '', 161, 'mcq'),
+(200, 0, 'Separator', '', 161, 'text_separator'),
+(201, 2, 'Separator', '', 161, 'text_separator'),
+(202, 4, 'Vraag 2', '', 161, 'mcq'),
+(203, 3, 'Vraag 3', '', 161, 'mcq'),
+(204, 1, 'test', '', 164, 'mcq');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_assignment_entry_properties`
+--
+
+CREATE TABLE `training_assignment_entry_properties` (
+  `id` int NOT NULL,
+  `entry_id` int NOT NULL,
+  `content` text NOT NULL,
+  `sort_order` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_assignment_entry_properties`
+--
+
+INSERT INTO `training_assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
+(108, 199, 'Ja', 1),
+(109, 199, 'Nee', 0),
+(110, 201, '<p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry.</span></p>', 0),
+(111, 200, '<p><i>Dit is ook Tekst</i></p>', 0),
+(112, 202, 'Nee', 0),
+(113, 202, 'Misschien', 1),
+(114, 202, 'Ja', 2),
+(115, 202, 'Zeker weten', 3),
+(116, 203, 'test 1', 1),
+(117, 203, 'test 2', 0),
+(118, 204, 'ja', 0),
+(119, 204, 'nee', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_assignment_result`
+--
+
+CREATE TABLE `training_assignment_result` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `entry_id` int NOT NULL,
+  `property_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_assignment_result`
+--
+
+INSERT INTO `training_assignment_result` (`id`, `user_id`, `assignment_id`, `entry_id`, `property_id`) VALUES
+(32, 2, 161, 199, 109),
+(33, 2, 161, 203, 117),
+(34, 2, 161, 202, 115);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_cases`
+--
+
+CREATE TABLE `training_cases` (
+  `id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `sort_order` int NOT NULL,
+  `name` text NOT NULL,
+  `intro` text NOT NULL,
+  `outro` text NOT NULL,
+  `info` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_cases`
+--
+
+INSERT INTO `training_cases` (`id`, `assignment_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `created_at`) VALUES
+(19, 161, 0, 'Casus 1: Openheid over autisme op werk', '<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">2Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\">ivamu</span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '<h1>\r\n    Goed Gedaan!\r\n</h1>\r\n<p>\r\n    <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>L3orem ipsum dolor sit amet, consectetur adipiscing elit. V</strong></span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\"><strong>ivamu</strong></span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus.&nbsp;</strong></span>\r\n</p>\r\n<ul>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. </span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n</ul>\r\n<p>\r\n    <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Wat nu?</strong></span>\r\n</p>\r\n<ul>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n    <li>\r\n        <span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span>\r\n    </li>\r\n</ul>', '', '2025-02-23 15:53:02'),
+(20, 161, 1, 'Casus 2', '', '', '', '2025-02-23 15:53:02'),
+(21, 161, 2, 'Casus 3', '', '', '', '2025-02-23 15:53:02');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_case_entry`
+--
+
+CREATE TABLE `training_case_entry` (
+  `id` int NOT NULL,
+  `sort_order` int NOT NULL,
+  `name` text NOT NULL,
+  `info` text NOT NULL,
+  `case_id` int NOT NULL,
+  `type` enum('mcq','text_input','text_separator','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_case_entry`
+--
+
+INSERT INTO `training_case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`) VALUES
+(31, 0, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 19, 'mcq'),
+(32, 3, 'Wanneer zou je openheid geven?', '', 19, 'mcq'),
+(33, 1, 'Welke informatie zou jij delen?', '', 19, 'mcq'),
+(34, 2, 'Aan wie zou je openheid geven', '', 21, 'mcq'),
+(35, 1, 'test', '', 21, 'mcq');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_case_entry_properties`
+--
+
+CREATE TABLE `training_case_entry_properties` (
+  `id` int NOT NULL,
+  `entry_id` int NOT NULL,
+  `content` text NOT NULL,
+  `sort_order` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_case_entry_properties`
+--
+
+INSERT INTO `training_case_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
+(97, 31, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
+(98, 31, 'B: Ik geef geen openheid om stigmatisering te vermijden', 0),
+(99, 32, 'A: Tijdens een functioneringsgesprek.', 0),
+(100, 32, 'B: Zodra je merkt dat je klachten krijgt', 0),
+(101, 32, 'C: Ik wacht totdat ik het echt niet meer volhoud.', 0),
+(102, 31, 'C: Ik weet het niet en wil meer informatie', 0),
+(103, 33, 'A: Ik deel alles, inclusief de details van mijn belemmeringen', 0),
+(104, 33, 'B: Ik deel alleen wat relevant is voor mijn werk', 0),
+(105, 33, 'C: Ik deel helemaal niets!', 0),
+(106, 34, 'A: Alleen aan mijn leidinggevende', 0),
+(107, 34, 'B: Aan mijn leidingevende en enkele collegas', 0),
+(108, 34, 'C: Aan niemand', 0),
+(109, 35, 'A', 0),
+(110, 35, 'B', 0),
+(111, 35, 'C', 0),
+(112, 35, 'D', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_case_result`
+--
+
+CREATE TABLE `training_case_result` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `case_id` int NOT NULL,
+  `entry_id` int NOT NULL,
+  `property_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `training_case_result`
+--
+
+INSERT INTO `training_case_result` (`id`, `user_id`, `assignment_id`, `case_id`, `entry_id`, `property_id`) VALUES
+(5, 2, 161, 19, 33, 104),
+(7, 2, 161, 19, 31, 97);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `training_users`
 --
 
 CREATE TABLE `training_users` (
-  `id` int(11) NOT NULL,
-  `training_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `id` int NOT NULL,
+  `training_id` int NOT NULL,
+  `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `training_users`
+-- Gegevens worden geëxporteerd voor tabel `training_users`
 --
 
 INSERT INTO `training_users` (`id`, `training_id`, `user_id`) VALUES
-(14, 6, 4);
+(20, 6, 2),
+(19, 6, 3),
+(14, 6, 4),
+(18, 6, 7);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE `users` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `username` varchar(30) DEFAULT NULL,
-  `firstname` text NOT NULL,
-  `middlename` text NOT NULL,
-  `lastname` text NOT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `status_message` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `id` int UNSIGNED NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `firstname` text COLLATE utf8mb4_general_ci NOT NULL,
+  `middlename` text COLLATE utf8mb4_general_ci NOT NULL,
+  `lastname` text COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status_message` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   `last_active` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -415,7 +745,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `firstname`, `middlename`, `lastname`, `status`, `status_message`, `active`, `last_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -427,49 +757,43 @@ INSERT INTO `users` (`id`, `username`, `firstname`, `middlename`, `lastname`, `s
 (7, 'user5', 'User', '', '5', NULL, NULL, 1, NULL, '2025-02-13 08:23:39', '2025-02-13 08:23:40', NULL);
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `assignments`
+-- Indexen voor tabel `assignments`
 --
 ALTER TABLE `assignments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `assignment_entry`
+-- Indexen voor tabel `assignment_entry`
 --
 ALTER TABLE `assignment_entry`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `assignment_entry_properties`
+-- Indexen voor tabel `assignment_entry_properties`
 --
 ALTER TABLE `assignment_entry_properties`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `assignment_result`
+-- Indexen voor tabel `assignment_result`
 --
 ALTER TABLE `assignment_result`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `assignment_result_entry`
---
-ALTER TABLE `assignment_result_entry`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQUE` (`name`(200));
+  ADD UNIQUE KEY `assignment_id` (`user_id`,`assignment_id`,`entry_id`) USING BTREE;
 
 --
--- Indexes for table `auth_groups_users`
+-- Indexen voor tabel `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `auth_groups_users_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `auth_identities`
+-- Indexen voor tabel `auth_identities`
 --
 ALTER TABLE `auth_identities`
   ADD PRIMARY KEY (`id`),
@@ -477,7 +801,7 @@ ALTER TABLE `auth_identities`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `auth_logins`
+-- Indexen voor tabel `auth_logins`
 --
 ALTER TABLE `auth_logins`
   ADD PRIMARY KEY (`id`),
@@ -485,14 +809,14 @@ ALTER TABLE `auth_logins`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `auth_permissions_users`
+-- Indexen voor tabel `auth_permissions_users`
 --
 ALTER TABLE `auth_permissions_users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `auth_permissions_users_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `auth_remember_tokens`
+-- Indexen voor tabel `auth_remember_tokens`
 --
 ALTER TABLE `auth_remember_tokens`
   ADD PRIMARY KEY (`id`),
@@ -500,7 +824,7 @@ ALTER TABLE `auth_remember_tokens`
   ADD KEY `auth_remember_tokens_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `auth_token_logins`
+-- Indexen voor tabel `auth_token_logins`
 --
 ALTER TABLE `auth_token_logins`
   ADD PRIMARY KEY (`id`),
@@ -508,176 +832,367 @@ ALTER TABLE `auth_token_logins`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `meetings`
+-- Indexen voor tabel `cases`
+--
+ALTER TABLE `cases`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `case_entry`
+--
+ALTER TABLE `case_entry`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `case_entry_properties`
+--
+ALTER TABLE `case_entry_properties`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `case_result`
+--
+ALTER TABLE `case_result`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `assignment_id` (`user_id`,`assignment_id`,`case_id`,`entry_id`) USING BTREE;
+
+--
+-- Indexen voor tabel `meetings`
 --
 ALTER TABLE `meetings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `migrations`
+-- Indexen voor tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `settings`
+-- Indexen voor tabel `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `trainings`
+-- Indexen voor tabel `trainings`
 --
 ALTER TABLE `trainings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `training_users`
+-- Indexen voor tabel `training_assignments`
+--
+ALTER TABLE `training_assignments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `training_assignment_entry`
+--
+ALTER TABLE `training_assignment_entry`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `training_assignment_entry_assignment_id_foreign` (`assignment_id`);
+
+--
+-- Indexen voor tabel `training_assignment_entry_properties`
+--
+ALTER TABLE `training_assignment_entry_properties`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `training_assignment_entry_properties_entry_id_foreign` (`entry_id`);
+
+--
+-- Indexen voor tabel `training_assignment_result`
+--
+ALTER TABLE `training_assignment_result`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `assignment_id` (`user_id`,`assignment_id`,`entry_id`) USING BTREE,
+  ADD KEY `training_assignment_result_assignment_id_foreign` (`assignment_id`);
+
+--
+-- Indexen voor tabel `training_cases`
+--
+ALTER TABLE `training_cases`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `training_cases_assignment_id_foreign` (`assignment_id`);
+
+--
+-- Indexen voor tabel `training_case_entry`
+--
+ALTER TABLE `training_case_entry`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `training_cases_entry_case_id_foreign` (`case_id`);
+
+--
+-- Indexen voor tabel `training_case_entry_properties`
+--
+ALTER TABLE `training_case_entry_properties`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `training_cases_entry_properties_entry_id_foreign` (`entry_id`);
+
+--
+-- Indexen voor tabel `training_case_result`
+--
+ALTER TABLE `training_case_result`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `assignment_id` (`user_id`,`assignment_id`,`case_id`,`entry_id`) USING BTREE,
+  ADD KEY `training_case_result_assignment_id_foreign` (`assignment_id`);
+
+--
+-- Indexen voor tabel `training_users`
 --
 ALTER TABLE `training_users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `training_id` (`training_id`,`user_id`);
+  ADD UNIQUE KEY `training_id` (`training_id`,`user_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `users`
+-- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `assignments`
+-- AUTO_INCREMENT voor een tabel `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `assignment_entry`
+-- AUTO_INCREMENT voor een tabel `assignment_entry`
 --
 ALTER TABLE `assignment_entry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `assignment_entry_properties`
+-- AUTO_INCREMENT voor een tabel `assignment_entry_properties`
 --
 ALTER TABLE `assignment_entry_properties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `assignment_result`
+-- AUTO_INCREMENT voor een tabel `assignment_result`
 --
 ALTER TABLE `assignment_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `assignment_result_entry`
---
-ALTER TABLE `assignment_result_entry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
-
---
--- AUTO_INCREMENT for table `auth_groups_users`
+-- AUTO_INCREMENT voor een tabel `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `auth_identities`
+-- AUTO_INCREMENT voor een tabel `auth_identities`
 --
 ALTER TABLE `auth_identities`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `auth_logins`
+-- AUTO_INCREMENT voor een tabel `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT for table `auth_permissions_users`
+-- AUTO_INCREMENT voor een tabel `auth_permissions_users`
 --
 ALTER TABLE `auth_permissions_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `auth_remember_tokens`
+-- AUTO_INCREMENT voor een tabel `auth_remember_tokens`
 --
 ALTER TABLE `auth_remember_tokens`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `auth_token_logins`
+-- AUTO_INCREMENT voor een tabel `auth_token_logins`
 --
 ALTER TABLE `auth_token_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `meetings`
+-- AUTO_INCREMENT voor een tabel `cases`
+--
+ALTER TABLE `cases`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT voor een tabel `case_entry`
+--
+ALTER TABLE `case_entry`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT voor een tabel `case_entry_properties`
+--
+ALTER TABLE `case_entry_properties`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT voor een tabel `case_result`
+--
+ALTER TABLE `case_result`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT voor een tabel `meetings`
 --
 ALTER TABLE `meetings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT voor een tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `settings`
+-- AUTO_INCREMENT voor een tabel `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `trainings`
+-- AUTO_INCREMENT voor een tabel `trainings`
 --
 ALTER TABLE `trainings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `training_users`
+-- AUTO_INCREMENT voor een tabel `training_assignments`
+--
+ALTER TABLE `training_assignments`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_assignment_entry`
+--
+ALTER TABLE `training_assignment_entry`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_assignment_entry_properties`
+--
+ALTER TABLE `training_assignment_entry_properties`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_assignment_result`
+--
+ALTER TABLE `training_assignment_result`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_cases`
+--
+ALTER TABLE `training_cases`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_case_entry`
+--
+ALTER TABLE `training_case_entry`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_case_entry_properties`
+--
+ALTER TABLE `training_case_entry_properties`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_case_result`
+--
+ALTER TABLE `training_case_result`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT voor een tabel `training_users`
 --
 ALTER TABLE `training_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `auth_groups_users`
+-- Beperkingen voor tabel `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
   ADD CONSTRAINT `auth_groups_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `auth_identities`
+-- Beperkingen voor tabel `auth_identities`
 --
 ALTER TABLE `auth_identities`
   ADD CONSTRAINT `auth_identities_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `auth_permissions_users`
+-- Beperkingen voor tabel `auth_permissions_users`
 --
 ALTER TABLE `auth_permissions_users`
   ADD CONSTRAINT `auth_permissions_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `auth_remember_tokens`
+-- Beperkingen voor tabel `auth_remember_tokens`
 --
 ALTER TABLE `auth_remember_tokens`
   ADD CONSTRAINT `auth_remember_tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Beperkingen voor tabel `training_assignment_entry`
+--
+ALTER TABLE `training_assignment_entry`
+  ADD CONSTRAINT `training_assignment_entry_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Beperkingen voor tabel `training_assignment_entry_properties`
+--
+ALTER TABLE `training_assignment_entry_properties`
+  ADD CONSTRAINT `training_assignment_entry_properties_entry_id_foreign` FOREIGN KEY (`entry_id`) REFERENCES `training_assignment_entry` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Beperkingen voor tabel `training_assignment_result`
+--
+ALTER TABLE `training_assignment_result`
+  ADD CONSTRAINT `training_assignment_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Beperkingen voor tabel `training_cases`
+--
+ALTER TABLE `training_cases`
+  ADD CONSTRAINT `training_cases_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Beperkingen voor tabel `training_case_entry`
+--
+ALTER TABLE `training_case_entry`
+  ADD CONSTRAINT `training_cases_entry_case_id_foreign` FOREIGN KEY (`case_id`) REFERENCES `training_cases` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Beperkingen voor tabel `training_case_entry_properties`
+--
+ALTER TABLE `training_case_entry_properties`
+  ADD CONSTRAINT `training_cases_entry_properties_entry_id_foreign` FOREIGN KEY (`entry_id`) REFERENCES `training_case_entry` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Beperkingen voor tabel `training_case_result`
+--
+ALTER TABLE `training_case_result`
+  ADD CONSTRAINT `training_case_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

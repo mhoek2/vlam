@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseController;
+use CodeIgniter\I18n\Time;
 
 use App\Models\Admin\Header;
 
@@ -12,6 +13,21 @@ use App\Models\Users;
 
 use Config\CKeditor;
 
+// used for cloning
+use App\Models\Assignments;
+use App\Models\AssignmentEntry;
+use App\Models\AssignmentEntryProperties;
+use App\Models\Cases;
+use App\Models\CaseEntry;
+use App\Models\CaseEntryProperties;
+
+use App\Models\TrainingAssignments;
+use App\Models\TrainingAssignmentEntry;
+use App\Models\TrainingAssignmentEntryProperties;
+use App\Models\TrainingCases;
+use App\Models\TrainingCaseEntry;
+use App\Models\TrainingCaseEntryProperties;
+
 class TrainingController extends BaseController
 {
     public function __construct() {
@@ -20,6 +36,138 @@ class TrainingController extends BaseController
         $this->trainingMembers = new TrainingUsers();
     }
 
+	private static function cloneAssignmentsAndCases( $training_id )
+	{
+		// Explanation:
+		// 
+		// There can be scenarios, where an admin wants to update 'assignments' or 'cases'.
+		// This cannot happen when a training is in progress, this may result into unreferenced relations between assignments/questions/answers/cases.
+		// ( imagine an assignment, question or answer is removed while a user is interacting with it )
+		// a solution would be to soft-lock the entire assignment structure whenever a 'training' is in progress.
+		// however, IF in the future more admins are assigned with different locations, with overlapping training schemes, there might ALWAYS
+		// be a 'training' in progress, communicating to alter an assignment or case can prove to be challenging.
+		//
+		// Thats why is opted to clone all assignments and case data into a dedicated table structure specific for each training.
+		// This means that once a training is started, there is no way to alter the assignments in case of errors/typos.
+		// but does ensure no errors are raised when an assignment/question/case is removed.
+		// this method also makes storing user data easier and cleaner.
+		// every assignment simply has a clone of the 'at that time' latest assignments and case structure.
+		//
+		// a offline 'handbook' system is no different, pupils do not get new handbooks during a semester.
+
+		$trainingAssignments 				= new TrainingAssignments();
+        $trainingAssignmentEntry 			= new TrainingAssignmentEntry();
+        $trainingAssignmentEntryProperties 	= new TrainingAssignmentEntryProperties();
+        $trainingCases 						= new TrainingCases();
+        $trainingCaseEntry 					= new TrainingCaseEntry();
+        $trainingCaseEntryProperties 		= new TrainingCaseEntryProperties();
+		
+		//
+		// Clear first, just in case. 
+		// Using CASCADED foreign relations to remove entries and properties including linked cases.
+		//
+		$trainingAssignments->where('training_id', $training_id)->delete();	
+		
+		//
+		// Clone assignments
+		//
+		$oldToNewAssignmentIdMap = [];
+		$oldToNewAssignmentEntryIdMap = [];
+		
+		$assignments = (new Assignments())->findAll();
+		foreach ($assignments as $assignment) 
+		{
+			$trainingAssignments->insert([
+				'training_id'	=> $training_id,
+				'meeting_id' 	=> $assignment['meeting_id'],
+				'name' 			=> $assignment['name'],
+				'sort_order' 	=> $assignment['sort_order'],
+				'intro' 		=> $assignment['intro'],
+				'info' 			=> $assignment['info'],
+			]);
+
+			$oldToNewAssignmentIdMap[ $assignment['id'] ] = $trainingAssignments->getInsertID();	// map the cloned assignment id
+		}
+		
+		$assignmentEntries = (new AssignmentEntry())->whereIn('assignment_id', array_column($assignments, 'id'))->findAll();
+		foreach ($assignmentEntries as $entry) 
+		{
+			$trainingAssignmentEntry->insert([
+				'assignment_id' => $oldToNewAssignmentIdMap[ $entry['assignment_id'] ],	// Set the cloned assignment id
+				'sort_order' 	=> $entry['sort_order'],
+				'name' 			=> $entry['name'],
+				'info' 			=> $entry['info'],
+				'type' 			=> $entry['type']
+			]);
+			
+			$oldToNewAssignmentEntryIdMap[ $entry['id'] ] = $trainingAssignmentEntry->getInsertID();	// map the cloned assignment entry id
+		}
+		
+		$entryProperties = (new AssignmentEntryProperties())->whereIn('entry_id', array_column($assignmentEntries, 'id'))->findAll();
+		foreach ($entryProperties as $property) {
+			$trainingAssignmentEntryProperties->insert([
+				'entry_id' 		=> $oldToNewAssignmentEntryIdMap[ $property['entry_id'] ],	// set the cloned assignment entry id
+				'content' 		=> $property['content'],
+				'sort_order' 	=> $property['sort_order'],
+			]);
+		}
+		
+		//
+		// Clone cases
+		//
+		$oldToNewCasesIdMap = [];
+		$oldToNewCasesEntryIdMap = [];
+		
+		var_dump($oldToNewAssignmentIdMap);
+		
+		$cases = (new Cases())->whereIn('assignment_id', array_column($assignments, 'id'))->findAll();
+		foreach ($cases as $case) 
+		{
+			$trainingCases->insert([
+				'assignment_id' => $oldToNewAssignmentIdMap[ $case['assignment_id'] ],	// Set the cloned assignment id
+				'sort_order' 	=> $case['sort_order'],
+				'name' 			=> $case['name'],
+				'intro' 		=> $case['intro'],
+				'outro' 		=> $case['outro'],
+				'info' 			=> $case['info'],
+			]);
+
+			$oldToNewCasesIdMap[ $case['id'] ] = $trainingCases->getInsertID();	// map the cloned case id
+		}
+		
+		$caseEntries = (new CaseEntry())->whereIn('case_id', array_column($cases, 'id'))->findAll();
+		foreach ($caseEntries as $entry) 
+		{
+			$trainingCaseEntry->insert([
+				'case_id' 		=> $oldToNewCasesIdMap[ $entry['case_id'] ],	// Set the cloned case id
+				'sort_order' 	=> $entry['sort_order'],
+				'name' 			=> $entry['name'],
+				'info' 			=> $entry['info'],
+				'type' 			=> $entry['type']
+			]);
+			
+			$oldToNewCasesEntryIdMap[ $entry['id'] ] = $trainingCaseEntry->getInsertID();	// map the cloned case entry id
+		}
+		
+		$caseProperties = (new CaseEntryProperties())->whereIn('entry_id', array_column($caseEntries, 'id'))->findAll();
+		foreach ($caseProperties as $property) {
+			$trainingCaseEntryProperties->insert([
+				'entry_id' 		=> $oldToNewCasesEntryIdMap[ $property['entry_id'] ],	// set the cloned case entry id
+				'content' 		=> $property['content'],
+				'sort_order' 	=> $property['sort_order'],
+			]);
+		}
+	}
+	
+	public function start( $training_id )
+	{
+		$this->trainings->update($training_id, [
+            'started' => Time::now(),
+        ]);
+		
+		$this->cloneAssignmentsAndCases( $training_id );
+	}
+	
     public function save( $training_id )
     {
         $name = $this->request->getPost('name');

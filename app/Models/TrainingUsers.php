@@ -29,5 +29,15 @@ class TrainingUsers extends Model
     {
         return $this->where('training_id', $training_id)->countAllResults();
     }
+	
+	public function findMemberTrainingId( $user_id )
+	{
+		$data = $this->where('user_id', $user_id)->first();
+		
+		if ( !is_null($data) )
+			return (int) $data['training_id'];
+		
+		return NULL;
+	}
 }
 

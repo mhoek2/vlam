@@ -4,26 +4,21 @@ namespace App\Controllers\Front;
 
 use App\Controllers\Front\BaseController;
 
-use App\Models\AssignmentEntry;
-use App\Models\AssignmentEntryProperties;
-
-use App\Models\AssignmentResult;
-use App\Models\AssignmentResultEntry;
-
 class AssignmentController extends BaseController
 {
-    public function __construct() {
-        $this->assignmentEntry = new assignmentEntry();
-        $this->assignmentEntryProperties = new AssignmentEntryProperties();
-
-        $this->assignmentResult = new AssignmentResult();
-        $this->assignmentResultEntry = new AssignmentResultEntry();
-    }
-
+	public function get_assignment( $assignment_id )
+	{
+		$assignment = $this->assignments->find($assignment_id);
+		
+		if ( is_null($assignment) ){
+			die("Assignment not found.");
+		}
+		
+		return $assignment;
+	}
+	
     public function save( $meeting_id, $assignment_id )
     {
-        $result_id = -1;
-
         $user = $this->user->getUserInfo();
         $meeting = $this->meetings->find( $meeting_id );
   
@@ -40,61 +35,15 @@ class AssignmentController extends BaseController
 		    ]);
         }
 
-        // find any previous submitted results
-        $exists = $this->assignmentResult->where([
-            'user_id' 		=> $user['id'],
-            'meeting' 		=> $meeting['id']."_".$meeting['name']."_".$meeting['info'],
-            'name' 			=> $assignment['id']."_".$assignment['name']."_".$assignment['info']
-        ])->first();
-
-        // First time submission, create a new entry for this assignment
-        if(is_null($exists)) {
-		    $this->assignmentResult->insert([
-			    'user_id' 	=> $user['id'], 
-			    'meeting' 	=> $meeting['id']."_".$meeting['name']."_".$meeting['info'],
-			    'name' 		=> $assignment['id']."_".$assignment['name']."_".$assignment['info']
-		    ]);
-            
-            $result_id = $this->assignmentEntry->insertID();
-		}
-        // A record exists, meaning the entries are being updated
-        else {
-            $result_id = $exists['id'];
-        }
-
-        if( $result_id < 0 ) {
-		    return $this->response->setJSON([
-			    'status' => 'error',
-                'message' => 'Could not insert assignment result'
-		    ]);
-        }
-
-        $getDBEntryById = function($entries, $id) {
-            // Use array_filter to find the entry with the matching id
-            $filteredEntries = array_filter($entries, function($entry) use ($id) {
-                return (int)$entry['id'] === $id;
-            });
-
-            // Return the first match or null if no match is found
-            return reset($filteredEntries) ?: null;
-        };
-
-        // Store or update entries
-        // Use replace function with UNIQUE 
-        foreach($post_entries as $entry_id => $property_name )
+        foreach($post_entries as $entry_id => $property_id )
         {
-            $entry = $getDBEntryById($assignment_entries, $entry_id);
-
-            if (!is_null($entry)) 
-            {
-		        $this->assignmentResultEntry->replace([ 
-			        'result_id' => $result_id, 
-			        'name' => $entry['name'],
-			        'value' => $property_name,
-			        'type' => $entry['type'],
-                    ]
-		        );
-            }
+			$this->assignmentResult->replace([ 
+				'user_id' 		=> $user['id'], 
+				'assignment_id' => $assignment_id,
+				'entry_id' 		=> $entry_id,
+				'property_id' 	=> $property_id,
+				]
+			);
         }
 
         return $this->response->setJSON(['status' => 'success', 'message' => 'Assignemnt results stored successfully']);
@@ -108,7 +57,7 @@ class AssignmentController extends BaseController
 
         // Assignment
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		$this->data['assignment'] = $this->get_assignment($assignment_id);
 
         // Cases
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
@@ -120,35 +69,15 @@ class AssignmentController extends BaseController
         // Entry properties
 		$this->data['properties'] = $this->assignmentEntryProperties->orderBy('sort_order', 'ASC')->findAll();
 
-        // Saved results
-        $this->data['result'] = $this->assignmentResult->where([
-            'user_id' 	=> $this->data['user']['id'],
-            'name' 		=> $this->data['assignment']['id']."_".$this->data['assignment']['name']."_".$this->data['assignment']['info']
-        ])->first();
-        if(!is_null($this->data['result']))
-        {
-            $this->data['result']['entries'] = $this->assignmentResultEntry->where('result_id', $this->data['result']['id'])->findAll();
-        }
-
-        $getSavedPropertyByName = function($entries, $name) {
-            // Use array_filter to find the entry with the matching id
-            $filteredEntries = array_filter($entries, function($entry) use ($name) {
-                return $entry['name'] === $name;
-            });
-
-            // Return the first match or null if no match is found
-            return reset($filteredEntries) ?: null;
-        }; 
-
+		// Get saved user property ids
+		$selected_properties = array_column(
+			 $this->assignmentResult->where('user_id', $this->data['user']['id'])->where('assignment_id', $assignment_id)->select('property_id')->get()->getResultArray(), 
+			'property_id'
+		);
+       
         foreach( $this->data['entries'] as $id => $entry )
         {
-            // If assignment has aleady been saved, find the saved property meta for this entry
-            $saved_property = NULL;
-            if(!is_null($this->data['result']))
-            {
-                $saved_property = $getSavedPropertyByName($this->data['result']['entries'], $entry['name']);
-            }
-			
+
 			$this->data['entries'][$id]['properties'] = array();
 			
             foreach( $this->data['properties'] as $property ){
@@ -158,12 +87,7 @@ class AssignmentController extends BaseController
                 if (!isset($this->data['entries'][$id]['properties']))
                     $this->data['entries'][$id]['properties'] = array();
              
-                // Mark a property as selected if matched with saved property
-                $property['selected'] = false;
-                if(!is_null($saved_property) && $saved_property['value'] == $property['content'])
-                {
-                    $property['selected'] = $saved_property['value'];
-                }
+                $property['selected'] = in_array($property['id'], $selected_properties);
 
                 array_push( $this->data['entries'][$id]['properties'], $property );
             }

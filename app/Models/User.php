@@ -4,6 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+use App\Models\TrainingUsers;
+
 class User extends Model
 {
     private static function generateShortName( $user ) {
@@ -23,10 +25,15 @@ class User extends Model
         $data["shortname"] = $this->generateShortName( $data );
 
         $data["is_admin"] = $this->isAdmin();
+		
+		$data["training_id"] = (new TrainingUsers())->findMemberTrainingId( $data['id'] );
 
+		if ( $data["is_admin"] )
+			$data["training_id"] = NULL;	// admins view the 'non cloned' version of assignments and cases
+		
         return($data);
     }
-
+	
     public function isLoggedIn()
     {
         $user = auth()->user();

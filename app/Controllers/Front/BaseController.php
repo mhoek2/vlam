@@ -11,8 +11,25 @@ use Psr\Log\LoggerInterface;
 
 use App\Models\User;
 use App\Models\Meetings;
-use App\Models\Assignments;
-use App\Models\Cases;
+
+use App\Models\Assignments;					// for admin debug
+use App\Models\AssignmentEntry;				// for admin debug
+use App\Models\AssignmentEntryProperties;	// for admin debug
+use App\Models\AssignmentResult;			// for admin debug
+use App\Models\TrainingAssignments;
+use App\Models\TrainingAssignmentEntry;
+use App\Models\TrainingAssignmentEntryProperties;
+use App\Models\TrainingAssignmentResult;
+
+use App\Models\Cases;						// for admin debug
+use App\Models\CaseEntry;					// for admin debug
+use App\Models\CaseEntryProperties;			// for admin debug
+use App\Models\CaseResult;					// for admin debug
+use App\Models\TrainingCases;
+use App\Models\TrainingCaseEntry;
+use App\Models\TrainingCaseEntryProperties;
+use App\Models\TrainingCaseResult;
+
 /**
  * Class BaseController
  *
@@ -60,10 +77,8 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
 		
-        $this->user = new User();
-        $this->meetings = new Meetings();
-        $this->cases = new Cases();
-        $this->assignments = new Assignments();
+        $this->user 		= new User();
+        $this->meetings 	= new Meetings();
 		
 	    $this->data = array();
 
@@ -71,17 +86,31 @@ abstract class BaseController extends Controller
 		$this->data['user'] = $this->user->getUserInfo();	
 		
 		// Meeting
-        $this->data['meetings'] = NULL;
-        $this->data['meeting'] = NULL;
-        $this->data["current_meeting"] = NULL;
+        $this->data['meetings'] 			= NULL;
+        $this->data['meeting'] 				= NULL;
+        $this->data["current_meeting"] 		= NULL;
 
         // Assignment
-        $this->data['assignments'] = NULL;
-		$this->data['assignment'] = NULL;
+		$this->assignments 					= is_null($this->data['user']['training_id']) ? new Assignments() 					: new TrainingAssignments();
+        $this->assignmentEntry 				= is_null($this->data['user']['training_id']) ? new assignmentEntry() 				: new TrainingAssignmentEntry();
+        $this->assignmentEntryProperties 	= is_null($this->data['user']['training_id']) ? new AssignmentEntryProperties() 	: new TrainingAssignmentEntryProperties();
+        $this->assignmentResult 			= is_null($this->data['user']['training_id']) ? new AssignmentResult() 			: new TrainingAssignmentResult();
+		
+		if ( !is_null($this->data['user']['training_id']) ) {
+			$this->assignments->setTrainingId( $this->data['user']['training_id'] );
+		}
+		
+        $this->data['assignments'] 			= NULL;
+		$this->data['assignment'] 			= NULL;
 		
 		// Cases
-        $this->data['cases'] = NULL;
-		$this->data['case'] = NULL;				
+		$this->cases 						= is_null($this->data['user']['training_id']) ? new Cases()						: new TrainingCases();
+		$this->caseEntry 					= is_null($this->data['user']['training_id']) ? new CaseEntry()					: new TrainingCaseEntry();
+		$this->caseEntryProperties			= is_null($this->data['user']['training_id']) ? new CaseEntryProperties()			: new TrainingCaseEntryProperties();
+        $this->caseResult 					= is_null($this->data['user']['training_id']) ? new CaseResult() 					: new TrainingCaseResult();
+
+        $this->data['cases'] 				= NULL;
+		$this->data['case'] 				= NULL;				
 
     }
 }
