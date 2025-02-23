@@ -1,4 +1,16 @@
-/* MEETINGS SIDEBAR */
+/* SIDEBAR */
+:root {
+	--sidebar-meeting-bg: #c5f0ff69;
+	--sidebar-assignment-color: #ffffffcf;
+	--sidebar-assignment-color-hover: #ffffff;
+}
+
+.main .meetings .inner {
+    display: flex;
+    flex-direction: column;
+	height: 100%;
+}
+
 .main .meetings ul,
 .main .meetings ul > li {
     list-style: none;
@@ -13,7 +25,7 @@
     .main .meetings ul > a > li,
     .main .meetings ul > li {
         margin: 10px 20px;
-        background: #dddbdb;
+        background: var(--sidebar-meeting-bg);
         padding: 10px;
         border-radius: 10px;
         display: flex;
@@ -29,6 +41,7 @@
             height: 50px;
             border-radius: 100%;
             border: 1px solid #f1f1f1;
+			color:var(--primary-color);
             background: #fff;
             text-align: center;
             line-height: 50px;
@@ -41,6 +54,7 @@
             padding-left: 10px;
             font-weight: bold;
             font-size: 14px;
+			color:#fff;
             flex-grow: 1
         }
 
@@ -51,9 +65,27 @@
         margin: 0px 20px;
         background: transparent;
         text-align: left;
-        text-decoration: underline;
+        color: var(--sidebar-assignment-color);
         display: block;
     }
+    .main .meetings .assignments ul li:hover {
+        color: var(--sidebar-assignment-color-hover);
+    }
+	.main .meetings .assignments ul li.active {
+		font-weight: bold;
+	}
+
+.main .meetings .cases {
+	margin-top: auto;
+}
+	.main .meetings .cases ul {
+
+	}
+		.main .meetings .cases ul li {
+			background: #fff;
+			font-weight: bold;
+			color: var(--secondary-color);
+		}
 
 /* MEETING CONTENT */
 .main .content .meeting {
