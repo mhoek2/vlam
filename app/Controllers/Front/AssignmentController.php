@@ -49,11 +49,21 @@ class AssignmentController extends BaseController
 
         foreach($post_entries as $entry_id => $property_id )
         {
+			$entry = $this->assignmentEntry->find($entry_id);
+			
+			$value = NULL;	// for dynamic user inputs
+			
+			if ($entry['type'] === "text_input") {
+				$value = $property_id;
+				$property_id = NULL;
+			}
+			
 			$this->assignmentResult->replace([ 
 				'user_id' 		=> $user['id'], 
 				'assignment_id' => $assignment_id,
 				'entry_id' 		=> $entry_id,
 				'property_id' 	=> $property_id,
+				'value'			=> $value
 				]
 			);
         }
@@ -84,17 +94,23 @@ class AssignmentController extends BaseController
         // Entry properties
 		$this->data['properties'] = $this->assignmentEntryProperties->orderBy('sort_order', 'ASC')->findAll();
 
-		// Get saved user property ids
-		$selected_properties = array_column(
-			 $this->assignmentResult->where('user_id', $this->data['user']['id'])->where('assignment_id', $assignment_id)->select('property_id')->get()->getResultArray(), 
-			'property_id'
-		);
-       
+		// Get saved user property ids and values
+		// create array $saved_results with structure:
+		// [entry_id] => property_id !== null ? property_id : value
+		//
+		$saved_properties = $this->assignmentResult->where('user_id', $this->data['user']['id'])->where('assignment_id', $assignment_id)->select(['property_id', 'entry_id', 'value'])->get()->getResultArray();
+        $saved_results = array_reduce($saved_properties, function ($result, $property) {
+			$result[$property['entry_id']] = !is_null($property['property_id']) ? $property['property_id'] : $property['value'];
+			return $result;
+		}, []);
+		
         foreach( $this->data['entries'] as $id => $entry )
         {
-
-			$this->data['entries'][$id]['properties'] = array();
+			// set value stored for this entry, (property_id or the dynamic user input value)
+			$this->data['entries'][$id]['value'] = $saved_results[$entry['id']] ?? '';	
 			
+			$this->data['entries'][$id]['properties'] = array();
+
             foreach( $this->data['properties'] as $property ){
                 if ( $property['entry_id'] !== $entry['id'] )
                     continue;
@@ -102,7 +118,9 @@ class AssignmentController extends BaseController
                 if (!isset($this->data['entries'][$id]['properties']))
                     $this->data['entries'][$id]['properties'] = array();
              
-                $property['selected'] = in_array($property['id'], $selected_properties);
+				// set selected to true if this is the saved property
+				// used for eg: mcq entries
+				$property['selected'] = isset($saved_results[$entry['id']]) && $saved_results[$entry['id']] === $property['id'];
 
                 array_push( $this->data['entries'][$id]['properties'], $property );
             }

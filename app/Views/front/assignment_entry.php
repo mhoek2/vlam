@@ -11,6 +11,11 @@
 		<?php endforeach; ?>
 	</select>
 
+<?php elseif($type == "text_input"): ?>
+	<label><?=$name?></label>
+	<input type="text" name="entries[<?=$id?>]" value="<?=$value?>"/>
+
 <?php else: ?>
 	<h3><?=$name?></h3>
+
 <?php endif ?>

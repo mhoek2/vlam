@@ -9,5 +9,5 @@ class AssignmentResult extends Model
     protected $table      = 'assignment_result';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'user_id', 'assignment_id', 'entry_id', 'property_id'];
+    protected $allowedFields = ['id', 'user_id', 'assignment_id', 'entry_id', 'property_id', 'value'];
 }
