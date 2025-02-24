@@ -62,28 +62,14 @@ class AssignmentsController extends BaseController
 	
 	public function delete_assignment()
 	{
-		$assignment_id = $this->request->getPost('assignment_id');
+		$assignment_id = (int) $this->request->getPost('assignment_id');
 		
 		if ( empty($assignment_id)) {
 			return;
 		}
 
-	    $assignmentEntry = new assignmentEntry();
-        $assignmentEntryProperties = new AssignmentEntryProperties();
-		
-		$entries = $assignmentEntry->where('assignment_id', $assignment_id)->findAll();
-		foreach ( $entries as $entry )
-		{
-			$assignmentEntry->where([
-				'assignment_id' => $assignment_id,
-			])->delete($entry['id']);
-				
-			$assignmentEntryProperties->where([
-				'entry_id' => $entry['id'],
-			])->delete();	
-		}
-
 		$this->assignments->delete( $assignment_id );	
+		// Removal of related tables happens through cascaded foreign relations
 		
 		return $this->response->setJSON(['status' => 'success']);
 	}

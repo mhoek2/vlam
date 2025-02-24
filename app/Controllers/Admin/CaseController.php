@@ -167,10 +167,7 @@ class CaseController extends BaseController
 		$this->caseEntry->where([
             'case_id' => $case_id
         ])->delete($entry_id);
-
-		$this->caseEntryProperties->where([
-            'entry_id' => $entry_id,
-        ])->delete();
+		// Removal of related tables happens through cascaded foreign relations
 
 		return $this->response->setJSON(['status' => 'success']);
 	}

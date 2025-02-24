@@ -161,11 +161,8 @@ class AssignmentController extends BaseController
 		$this->assignmentEntry->where([
             'assignment_id' => $assignment_id
         ])->delete($entry_id);
-
-		$this->assignmentEntryProperties->where([
-            'entry_id' => $entry_id,
-        ])->delete();
-
+		// Removal of related tables happens through cascaded foreign relations
+		
 		return $this->response->setJSON(['status' => 'success']);
 	}
 

@@ -62,29 +62,15 @@ class CasesController extends BaseController
 	
 	public function delete_case()
 	{
-		$case_id = $this->request->getPost('case_id');
+		$case_id = (int) $this->request->getPost('case_id');
 		
 		if ( empty($case_id)) {
 			return;
 		}
 
-	    $casesEntry = new CaseEntry();
-        $casesEntryProperties = new CaseEntryProperties();
-		
-		$entries = $casesEntry->where('case_id', $case_id)->findAll();
-		foreach ( $entries as $entry )
-		{
-			$casesEntry->where([
-				'case_id' => $case_id,
-			])->delete($entry['id']);
-				
-			$casesEntryProperties->where([
-				'entry_id' => $entry['id'],
-			])->delete();	
-		}
-
 		$this->cases->delete( $case_id );	
-		
+		// Removal of related tables happens through cascaded foreign relations
+
 		return $this->response->setJSON(['status' => 'success']);
 	}
 }
