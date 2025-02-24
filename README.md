@@ -20,3 +20,21 @@ Example: Authentication, users roles and permissions, front and backend separati
 Mockup of creating assignments with entries has been implemented:
 
 https://github.com/user-attachments/assets/0ccd585c-d110-45f1-8e9c-39a3aca2bdde
+
+
+# Helpful SQL Queries:
+
+### List Foreign Relations:
+```sql
+SELECT 
+    TABLE_NAME, 
+    COLUMN_NAME, 
+    CONSTRAINT_NAME, 
+    REFERENCED_TABLE_NAME, 
+    REFERENCED_COLUMN_NAME
+FROM 
+    INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE 
+    REFERENCED_TABLE_NAME IS NOT NULL 
+    AND TABLE_SCHEMA = 'hklab69_vlam';
+```
