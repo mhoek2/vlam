@@ -19,6 +19,9 @@ class MeetingController extends BaseController
         // Assignment
         $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
 		
+		// previous and next urls
+		$this->data['prev_url'] = site_url() . "home";
+		
 		load_header( $this->data );
 		load_footer( $this->data );
 		load_sidebar( $this->data );

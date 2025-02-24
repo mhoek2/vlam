@@ -6,6 +6,18 @@ use App\Controllers\Front\BaseController;
 
 class AssignmentController extends BaseController
 {
+	
+	public function get_meeting( $meeting_id )
+	{
+		$meeting = $this->meetings->find( $meeting_id );
+		
+		if ( is_null($meeting) ){
+			die("Meeting not found.");
+		}
+		
+		return $meeting;
+	}
+	
 	public function get_assignment( $assignment_id )
 	{
 		$assignment = $this->assignments->find($assignment_id);
@@ -20,7 +32,7 @@ class AssignmentController extends BaseController
     public function save( $meeting_id, $assignment_id )
     {
         $user = $this->user->getUserInfo();
-        $meeting = $this->meetings->find( $meeting_id );
+        $meeting = $this->get_meeting( $meeting_id );
   
         $assignment = $this->assignments->find($assignment_id);
         $assignment_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
@@ -52,7 +64,9 @@ class AssignmentController extends BaseController
     public function index( $meeting_id, $assignment_id ): string
     {  
         // Meeting
-        $this->data['meeting'] = $this->meetings->find( $meeting_id );
+        $this->data['meeting'] = $this->get_meeting( $meeting_id ); 
+		
+
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment
@@ -100,6 +114,9 @@ class AssignmentController extends BaseController
 			echo "Assignment not found.";
 			exit;
 		}
+		
+		// previous and next urls
+		$this->data['prev_url'] = site_url() . "meeting/" . $this->data['meeting']['id'];
 
 		load_header( $this->data );
 		load_footer( $this->data );

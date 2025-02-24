@@ -33,6 +33,11 @@ html, body {
 	padding:10px 20px;
 }
 
+.button.small {
+	padding:5px 10px;
+	font-size:14px;
+}
+
 label {
     display: block;
     font-size: 14px;
@@ -211,10 +216,17 @@ footer {
     padding:2em;
 }
 
-.main .content h1,
-.main .content h2,
-.main .content h3,
-.main .content h4,
-.main .content h5 {
-	color:var(--secondary-color);
-}
+	.main .content h1,
+	.main .content h2,
+	.main .content h3,
+	.main .content h4,
+	.main .content h5 {
+		color:var(--secondary-color);
+	}
+
+	.main .content .actions {
+
+	}
+		.main .content .actions .button {
+			text-transform: uppercase;
+		}
