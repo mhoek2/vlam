@@ -102,6 +102,7 @@ class AssignmentController extends BaseController
 		}
 
 		load_header( $this->data );
+		load_footer( $this->data );
 		load_sidebar( $this->data );
 		
         return view('front/assignment', $this->data);

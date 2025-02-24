@@ -86,6 +86,7 @@ class CaseController extends BaseController
 		$this->data['case_finish_url'] .= "/finish";
 			
 		load_header( $this->data );
+		load_footer( $this->data );
 		load_sidebar( $this->data );
 		
         return view('front/case_outro', $this->data);		
@@ -164,6 +165,7 @@ class CaseController extends BaseController
 		}
 	
 		load_header( $this->data );
+		load_footer( $this->data );
 		load_sidebar( $this->data );
 		
         return view('front/case_entry', $this->data);		
@@ -188,6 +190,7 @@ class CaseController extends BaseController
 		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 
 		load_header( $this->data );
+		load_footer( $this->data );
 		load_sidebar( $this->data );
 		
         return view('front/case', $this->data);

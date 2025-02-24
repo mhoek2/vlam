@@ -22,6 +22,7 @@ class Home extends BaseController
         $this->data["current_meeting"] = false;
 		
 		load_header( $this->data );
+		load_footer( $this->data );
 		load_sidebar( $this->data );
 		
         return view('front/dashboard', $this->data);
