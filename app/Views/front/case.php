@@ -28,10 +28,6 @@
 
         <?=$case['intro']?>
 
-        <form method="POST" id="assignment_form">
-			TEST
-            <button type="submit">Opslaan</button>
-        </form>
 		<a href="<?=current_url()?>/0">Start</a>
     </div>
 </section>

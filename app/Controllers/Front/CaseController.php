@@ -77,9 +77,6 @@ class CaseController extends BaseController
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 		
-        // Entries
-		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();	// to draw progressbar
-		
 		// previous and next urls
 		$current_url = current_url(); 
 		$url_parts = explode('/', $current_url);
@@ -189,9 +186,6 @@ class CaseController extends BaseController
         // Cases
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
-
-        // Entries
-        $this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
 
 		load_header( $this->data );
 		load_sidebar( $this->data );

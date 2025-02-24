@@ -64,6 +64,7 @@ class AssignmentController extends BaseController
 		
         // Entries
         $this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
+        $this->data['has_entries'] = empty($this->data['entries']);
 		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
 
         // Entry properties

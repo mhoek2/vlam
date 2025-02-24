@@ -67,7 +67,30 @@ abstract class BaseController extends Controller
     /**
      * @return void
      */
-	
+	private function initSessionController(){
+        if (!$this->data['user'])
+            return;
+
+        // Assignment
+		$this->assignments 					= is_null($this->data['user']['training_id']) ? new Assignments() 					: new TrainingAssignments();
+        $this->assignmentEntry 				= is_null($this->data['user']['training_id']) ? new assignmentEntry() 				: new TrainingAssignmentEntry();
+        $this->assignmentEntryProperties 	= is_null($this->data['user']['training_id']) ? new AssignmentEntryProperties() 	: new TrainingAssignmentEntryProperties();
+        $this->assignmentResult 			= is_null($this->data['user']['training_id']) ? new AssignmentResult() 			    : new TrainingAssignmentResult();
+		
+		if ( !is_null($this->data['user']['training_id']) ) {
+			$this->assignments->setTrainingId( $this->data['user']['training_id'] );
+		}
+		
+        $this->data['assignments'] 			= NULL;
+		$this->data['assignment'] 			= NULL;
+		
+		// Cases
+		$this->cases 						= is_null($this->data['user']['training_id']) ? new Cases()						: new TrainingCases();
+		$this->caseEntry 					= is_null($this->data['user']['training_id']) ? new CaseEntry()					: new TrainingCaseEntry();
+		$this->caseEntryProperties			= is_null($this->data['user']['training_id']) ? new CaseEntryProperties()		: new TrainingCaseEntryProperties();
+        $this->caseResult 					= is_null($this->data['user']['training_id']) ? new CaseResult() 				: new TrainingCaseResult();
+    }
+
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
@@ -85,32 +108,19 @@ abstract class BaseController extends Controller
 		// User
 		$this->data['user'] = $this->user->getUserInfo();	
 		
+        $this->initSessionController();
+
 		// Meeting
         $this->data['meetings'] 			= NULL;
         $this->data['meeting'] 				= NULL;
         $this->data["current_meeting"] 		= NULL;
 
         // Assignment
-		$this->assignments 					= is_null($this->data['user']['training_id']) ? new Assignments() 					: new TrainingAssignments();
-        $this->assignmentEntry 				= is_null($this->data['user']['training_id']) ? new assignmentEntry() 				: new TrainingAssignmentEntry();
-        $this->assignmentEntryProperties 	= is_null($this->data['user']['training_id']) ? new AssignmentEntryProperties() 	: new TrainingAssignmentEntryProperties();
-        $this->assignmentResult 			= is_null($this->data['user']['training_id']) ? new AssignmentResult() 			: new TrainingAssignmentResult();
-		
-		if ( !is_null($this->data['user']['training_id']) ) {
-			$this->assignments->setTrainingId( $this->data['user']['training_id'] );
-		}
-		
         $this->data['assignments'] 			= NULL;
 		$this->data['assignment'] 			= NULL;
 		
 		// Cases
-		$this->cases 						= is_null($this->data['user']['training_id']) ? new Cases()						: new TrainingCases();
-		$this->caseEntry 					= is_null($this->data['user']['training_id']) ? new CaseEntry()					: new TrainingCaseEntry();
-		$this->caseEntryProperties			= is_null($this->data['user']['training_id']) ? new CaseEntryProperties()			: new TrainingCaseEntryProperties();
-        $this->caseResult 					= is_null($this->data['user']['training_id']) ? new CaseResult() 					: new TrainingCaseResult();
-
         $this->data['cases'] 				= NULL;
 		$this->data['case'] 				= NULL;				
-
     }
 }
