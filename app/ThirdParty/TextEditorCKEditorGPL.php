@@ -36,6 +36,7 @@ class TextEditorCKEditorGPL extends TextEditor
 				Indent,
 				IndentBlock,
 				Italic,
+				Font,
 				Link,
 				List,
 				ListProperties,
@@ -55,6 +56,8 @@ class TextEditorCKEditorGPL extends TextEditor
 					toolbar: {
 							items: [
 								'heading',
+								'|',
+								'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
 								'|',
 								'bold',
 								'italic',
@@ -84,6 +87,7 @@ class TextEditorCKEditorGPL extends TextEditor
 							Indent,
 							IndentBlock,
 							Italic,
+							Font,
 							Link,
 							List,
 							ListProperties,
