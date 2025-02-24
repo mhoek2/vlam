@@ -5,6 +5,7 @@ namespace Config;
 use CodeIgniter\Config\BaseService;
 
 use App\ThirdParty\TextEditorCKEditor as CKEditor;
+use App\ThirdParty\TextEditorCKEditorGPL as CKEditorGPL;
 use App\ThirdParty\TextEditorSummernote as Summernote;
 	
 /**
@@ -39,11 +40,13 @@ class Services extends BaseService
 			return static::getSharedInstance('text_editor');
 		}
 		
-		$text_editor = 'summernote';
+		$text_editor = 'ckeditorGPL';
 		
 		switch ( $text_editor ) {
 			case 'ckeditor':
 				return new CKEditor();
+			case 'ckeditorGPL':
+				return new CKEditorGPL();	
 			case 'summernote':
 				return new Summernote();
 		}

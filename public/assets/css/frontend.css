@@ -2,7 +2,7 @@
 	--primary-color: #269bc4;		/* blue */
 	--secondary-color: #1d1e57; 	/* dark blue */
 	--accent-color: #c1dbe9; 		/* light blue */
-	--pink-color-: #d37096; 		/* light blue */
+	--pink-color-: #d37096; 		/* pink */
 }
 
 * {
@@ -23,6 +23,14 @@ html, body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+.button {
+	border-radius: 10px;
+	background:var(--secondary-color);
+	color:#fff;
+	text-decoration: none;
+	padding:10px 20px;
 }
 
 label {
@@ -201,4 +209,12 @@ footer {
     /*background: var(--accent-color);*/
 	background: #f1f1f1;
     padding:2em;
+}
+
+.main .content h1,
+.main .content h2,
+.main .content h3,
+.main .content h4,
+.main .content h5 {
+	color:var(--secondary-color);
 }

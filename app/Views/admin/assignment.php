@@ -287,7 +287,7 @@
 						}
 						else if(entryType === "text_separator")
 						{
-							textareaId = "ckeditor_" + property.id;
+							let textareaId = "ckeditor_" + property.id;
 
 							propertyList.append(`
 								<li data-property-id="${property.id}">
@@ -339,7 +339,7 @@
 
 			// For CKEDITOR
 			if(entryType === "text_separator") {
-				textareaId = "#ckeditor_" + propertyId;
+				let textareaId = "#ckeditor_" + propertyId;
 				newPropertyContent = <?=$text_editor->get('textareaId')?>
 			}
 
