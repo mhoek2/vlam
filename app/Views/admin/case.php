@@ -45,6 +45,8 @@
 
 <section class="main">
     <div class="content">
+		<h2>Case</h2>
+		
         <form id="edit_case" method="POST">
             <label>Name<lable>
             <input type="text" name="name" value="<?=$case["name"]?>">
@@ -66,7 +68,8 @@
 
 <section class="main">
     <div class="content">
-
+		<h2>Entries</h2>
+		
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
 				<?=view('admin/case_entry', $item);?>

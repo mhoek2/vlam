@@ -48,6 +48,8 @@
 <section class="main">
     <div class="content">
         <form id="edit_assignment" method="POST">
+			<h2>Assignment</h2>
+			
             <label>Name<label>
             <input type="text" name="name" value="<?=$assignment["name"]?>">
             
@@ -62,7 +64,11 @@
 				<textarea name="outro" id="outro"><?=$assignment["outro"]?></textarea>	
 			</div>
 				
-			<label>Tailor action<label>
+			<label>
+				Post tailor action<br>
+				<small><em>If there are no entries, this will be the landing.</em></small>
+			<label>
+			
 			<select name="sub_assignment" id="sub_assignment">
 				<?php foreach ($sub_assignments as $id => $item): ?>
 					<option value="<?=$item['name'] ?>" <?= $item['selected'] ? 'selected' : '' ?>><?= $item['name'] ?></option>
@@ -77,7 +83,8 @@
 
 <section class="main">
     <div class="content">
-
+		<h2>Entries</h2>
+		
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
 				<?=view('admin/assignment_entry', $item);?>
@@ -94,8 +101,8 @@
 
 <section class="main">
     <div class="content">
-    <h2>Cases</h2>
-    <?=$cases_view?>
+		<h2>Cases</h2>
+		<?=$cases_view?>
     </div>
 </section>
 
