@@ -37,14 +37,35 @@ class AssignmentController extends BaseController
         $name = $this->request->getPost('name');
         $info = $this->request->getPost('info');
         $intro = $this->request->getPost('intro');
+        $sub_assignment = $this->request->getPost('sub_assignment');
 
 		$this->assignments->update($assignment_id, [
-            'name' => $name,
-            'info' => $info,
-            'intro' => $intro
+            'name' 				=> $name,
+            'info' 				=> $info,
+            'intro' 			=> $intro,
+            'sub_assignment' 	=> $sub_assignment
         ]);
 
 		return $this->response->setJSON(['message' => 'Form submitted successfully!']);
+	}
+	
+	private function get_sub_assignments( $assignment )
+	{
+		$controllers = [[
+			"name" 		=> "default",
+			"selected"	=> is_null($assignment["sub_assignment"])
+		]];
+		
+		$dir = APPPATH . 'Controllers/Front/SubAssignments';
+		foreach (glob($dir . '/*Controller.php') as $file) {
+			$name = basename($file, '.php');
+			array_push($controllers, [
+				"name" 		=> $name,
+				"selected"	=> $assignment["sub_assignment"] === $name
+			]);
+		}
+		
+		return $controllers;
 	}
 	
     public function index( $assignment_id ): string
@@ -70,6 +91,8 @@ class AssignmentController extends BaseController
         $data['cases_view'] = view('admin/cases', $data);		
 		
 		$data['text_editor'] = service('text_editor');
+		
+		$data['sub_assignments'] = $this->get_sub_assignments( $data['assignment'] );
 		
         return view('admin/assignment', $data);
     }

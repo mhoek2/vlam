@@ -40,7 +40,7 @@
 			    </div>
 		    <?php }; ?>
 
-            <button type="submit">Opslaan</button>
+            <button type="submit"><?=$sub_assignment ? 'Volgende' : 'Opslaan'?></button>
         </form>
     </div>
 </section>
@@ -59,8 +59,7 @@
                     type: 'POST',
                     data: formData,
                     success: function(response) {
-                        // Handle the response from the server
-                        $('#responseMessage').html('<p>' + response.message + '</p>');
+                        window.location = '<?=$post_url?>';
                     },
                     error: function(xhr, status, error) {
                         // Handle any error

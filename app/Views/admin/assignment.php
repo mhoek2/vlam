@@ -57,6 +57,12 @@
             <label>Intro<lable>
             <textarea name="intro" id="intro"><?=$assignment["intro"]?></textarea>
 
+			<select name="sub_assignment">
+				<?php foreach ($sub_assignments as $id => $item): ?>
+					<option value="<?=$item['name'] ?>" <?= $item['selected'] ? 'selected' : '' ?>><?= $item['name'] ?></option>
+				<?php endforeach; ?>
+			</select>
+				
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
             <button type="submit">Opslaan</button>
         </form>

@@ -71,7 +71,49 @@ class AssignmentController extends BaseController
         return $this->response->setJSON(['status' => 'success', 'message' => 'Assignemnt results stored successfully']);
     }
 
-    public function index( $meeting_id, $assignment_id ): string
+	
+	private function is_sub_assignment( $controller_name )
+	{
+		$controller_class = "App\Controllers\Front\SubAssignments\\" . $controller_name;
+		
+		if (is_null($controller_name) || $controller_name === 'default')
+			return NULL;
+		
+		if (class_exists($controller_class))
+			return $controller_name;
+	}
+	
+	private function has_sub_assignment( $assignment )
+	{
+		if (is_null($assignment))
+			return false;
+		
+		return $this->is_sub_assignment( $assignment['sub_assignment'] ) ? $assignment['sub_assignment'] : false;
+	}
+	
+	private function get_sub_assignment( $controller_name )
+	{
+		$controller_class = "App\Controllers\Front\SubAssignments\\" . $controller_name;
+		
+		// redundant check validity
+		if ( !$this->is_sub_assignment( $controller_name ) )	
+			return NULL;
+		
+		if (class_exists($controller_class)) {
+			$request = \Config\Services::request();
+			$response = \Config\Services::response();
+			$logger = \Config\Services::logger();
+
+			$controller = new $controller_class();
+			$controller->initController( $request, $response, $logger );
+			
+			return $controller;
+		} 
+		
+		die('can not load sub assignment');
+	}
+	
+    public function index( $meeting_id, $assignment_id, $is_sub = false ): string
     {  
         // Meeting
         $this->data['meeting'] = $this->get_meeting( $meeting_id ); 
@@ -133,9 +175,29 @@ class AssignmentController extends BaseController
 			exit;
 		}
 		
+		// Sub assignment
+		$this->data['sub_assignment'] = $this->has_sub_assignment($this->data['assignment']);
+
+		if ( $this->data['sub_assignment'] )
+		{
+			// either load it when sub page is called, or directly when no entries present
+			if ($is_sub || !count($this->data['entries'])) 
+			{
+				$controller = $this->get_sub_assignment( $this->data['sub_assignment'] );
+				
+				if (!is_null($controller))
+					return $controller->index( $meeting_id, $assignment_id );
+			}
+		}
+		
 		// previous and next urls
 		$this->data['prev_url'] = site_url() . "meeting/" . $this->data['meeting']['id'];
-
+		
+		if ($this->data['sub_assignment'])
+			$this->data['post_url'] = current_url() . "/sub";
+		else
+			$this->data['post_url'] = site_url() . "meeting/" . $this->data['meeting']['id'];
+		
 		load_header( $this->data );
 		load_footer( $this->data );
 		load_sidebar( $this->data );

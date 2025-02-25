@@ -9,7 +9,7 @@ class TrainingAssignments extends Model
     protected $table      = 'training_assignments';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'training_id', 'meeting_id', 'name', 'sort_order', 'intro', 'info', 'created_at'];
+    protected $allowedFields = ['id', 'training_id', 'meeting_id', 'name', 'sort_order', 'intro', 'info', 'sub_assignment', 'created_at'];
 	
 	protected $trainingId = NULL;
 	
