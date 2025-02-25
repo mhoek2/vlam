@@ -37,12 +37,14 @@ class AssignmentController extends BaseController
         $name = $this->request->getPost('name');
         $info = $this->request->getPost('info');
         $intro = $this->request->getPost('intro');
+        $outro = $this->request->getPost('outro');
         $sub_assignment = $this->request->getPost('sub_assignment');
 
 		$this->assignments->update($assignment_id, [
             'name' 				=> $name,
             'info' 				=> $info,
             'intro' 			=> $intro,
+            'outro' 			=> $outro,
             'sub_assignment' 	=> $sub_assignment
         ]);
 

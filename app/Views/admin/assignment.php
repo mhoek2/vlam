@@ -48,16 +48,22 @@
 <section class="main">
     <div class="content">
         <form id="edit_assignment" method="POST">
-            <label>Name<lable>
+            <label>Name<label>
             <input type="text" name="name" value="<?=$assignment["name"]?>">
             
-			<label>Info<lable>
+			<label>Info<label>
             <input type="text" name="info" value="<?=$assignment["info"]?>">
 
-            <label>Intro<lable>
+            <label>Intro<label>
             <textarea name="intro" id="intro"><?=$assignment["intro"]?></textarea>
 
-			<select name="sub_assignment">
+			<div id="intro_container">
+				<label>Outro<label>
+				<textarea name="outro" id="outro"><?=$assignment["outro"]?></textarea>	
+			</div>
+				
+			<label>Tailor action<label>
+			<select name="sub_assignment" id="sub_assignment">
 				<?php foreach ($sub_assignments as $id => $item): ?>
 					<option value="<?=$item['name'] ?>" <?= $item['selected'] ? 'selected' : '' ?>><?= $item['name'] ?></option>
 				<?php endforeach; ?>
@@ -96,13 +102,28 @@
 <?=$text_editor->load_script()?>
 <script {csp-script-nonce}>
     $(document).ready(function () {
-	    <?=$text_editor->init_script()?>
-	    <?=$text_editor->assign_editor('"#intro"')?>
+		<?=$text_editor->init_script()?>
+		<?=$text_editor->assign_editor('"#intro"')?>
+		<?=$text_editor->assign_editor('"#outro"')?>
 
+		
 		/* 
 		ASSIGNMENT
 		*/
         $(document).ready(function () {
+			
+	        function checkSubAssignmentType() {
+				const selectedValue = $('#sub_assignment').val();
+
+				$('#intro_container').hide();
+				
+				if (selectedValue === 'OutroController') {
+					$('#intro_container').show();
+				}
+			}
+			
+			checkSubAssignmentType();
+			
             $('#edit_assignment').submit(function (event) {
                 event.preventDefault();
 
@@ -115,6 +136,7 @@
                     success: function(response) {
                         // Handle the response from the server
                         $('#responseMessage').html('<p>' + response.message + '</p>');
+						checkSubAssignmentType();
                     },
                     error: function(xhr, status, error) {
                         // Handle any error
