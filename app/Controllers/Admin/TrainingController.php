@@ -83,7 +83,9 @@ class TrainingController extends BaseController
 				'name' 			=> $assignment['name'],
 				'sort_order' 	=> $assignment['sort_order'],
 				'intro' 		=> $assignment['intro'],
+				'outro' 		=> $assignment['outro'],
 				'info' 			=> $assignment['info'],
+				'sub_assignment'=> $assignment['sub_assignment'],
 			]);
 
 			$oldToNewAssignmentIdMap[ $assignment['id'] ] = $trainingAssignments->getInsertID();	// map the cloned assignment id
