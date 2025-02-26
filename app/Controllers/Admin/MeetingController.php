@@ -4,8 +4,6 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseController;
 
-use App\Models\Admin\Header;
-
 use App\Models\Meetings;
 use App\Models\Assignments;
 
@@ -14,7 +12,6 @@ use Config\CKeditor;
 class MeetingController extends BaseController
 {
     public function __construct() {
-        $this->header = new Header();
         $this->meetings = new Meetings();
         $this->assignments = new Assignments();
     }
@@ -34,18 +31,19 @@ class MeetingController extends BaseController
 
     public function index( $meeting_id ): string
     {
-        $data = array();
-        $this->header->getHeader( $data );
+		// Meeting
+        $this->data['meeting'] = $this->meetings->find( $meeting_id );
+        $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
-        $data['meeting'] = $this->meetings->find( $meeting_id );
-        $data["current_meeting"] = $data["meeting"] != false ? $meeting_id : false;
-
-
-        $data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
-        $data['assignments_view'] = view('admin/assignments', $data);
+		// Assignment
+        $this->data['assignments'] = $this->assignments->where('meeting_id', $meeting_id)->orderBy('sort_order', 'ASC')->findAll();
+        $this->data['assignments_view'] = view('admin/assignments', $this->data);
 		
-		$data['text_editor'] = service('text_editor');
+		$this->data['text_editor'] = service('text_editor');
 
-        return view('admin/meeting', $data);
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/meeting', $this->data);
     }
 }

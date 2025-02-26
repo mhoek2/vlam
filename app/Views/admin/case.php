@@ -373,3 +373,5 @@
 		});		
 	});
 </script>
+				
+<?php echo $footer; ?>

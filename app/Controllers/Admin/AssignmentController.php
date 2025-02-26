@@ -4,8 +4,6 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseController;
 
-use App\Models\Admin\Header;
-
 use App\Models\Meetings;
 use App\Models\Assignments;
 use App\Models\AssignmentEntry;
@@ -21,8 +19,6 @@ class AssignmentController extends BaseController
 
     public function __construct()
     {
-        $this->header = new Header();
-
         $this->meetings = new Meetings();
 
         $this->assignments = new Assignments();
@@ -72,31 +68,31 @@ class AssignmentController extends BaseController
 	
     public function index( $assignment_id ): string
     {
-        $data = array();
-        $this->header->getHeader( $data );
+		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		$this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
+		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
 
-		$data['assignment'] = $this->assignments->find($assignment_id);
-		$data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
-		$data['entry_types'] = $this->assignmentEntry->type_enum;
-
-		$data['meeting'] = $this->meetings->find($data['assignment']['meeting_id']);
+		$this->data['meeting'] = $this->meetings->find($this->data['assignment']['meeting_id']);
 
 		// Check if assignment exists, otherwise show an error or a message
-		if (!$data['assignment']) {
+		if (!$this->data['assignment']) {
 			// Handle the case when the assignment is not found
 			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
 			echo "Assignment not found.";
 			exit;
 		}
 
-        $data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
-        $data['cases_view'] = view('admin/cases', $data);		
+        $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
+        $this->data['cases_view'] = view('admin/cases', $this->data);		
 		
-		$data['text_editor'] = service('text_editor');
+		$this->data['text_editor'] = service('text_editor');
 		
-		$data['sub_assignments'] = $this->get_sub_assignments( $data['assignment'] );
+		$this->data['sub_assignments'] = $this->get_sub_assignments( $this->data['assignment'] );
 		
-        return view('admin/assignment', $data);
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/assignment', $this->data);
     }
 
 	//

@@ -4,24 +4,22 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseController;
 
-use App\Models\Admin\Header;
-
 use App\Models\Meetings;
 
 class MeetingsController extends BaseController
 {
     public function __construct() {
-        $this->header = new Header();
         $this->meetings = new Meetings();
     }
 
     public function index(): string
     {
-        $data = array();
-        $this->header->getHeader( $data );
+		// Meeting
+        $this->data['meetings'] = $this->meetings->findAll();
 
-        $data['meetings'] = $this->meetings->findAll();
-
-        return view('admin/meetings', $data);
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/meetings', $this->data);
     }
 }

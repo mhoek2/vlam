@@ -5,15 +5,12 @@ namespace App\Controllers\Admin;
 use App\Controllers\Admin\BaseController;
 use CodeIgniter\I18n\Time;
 
-use App\Models\Admin\Header;
-
 use App\Models\Trainings;
 use App\Models\TrainingUsers;
 
 class TrainingsController extends BaseController
 {
     public function __construct() {
-        $this->header = new Header();
         $this->trainings = new Trainings();
         $this->trainingMembers = new TrainingUsers();
     }
@@ -54,11 +51,12 @@ class TrainingsController extends BaseController
 
     public function index(): string
     {
-        $data = array();
-        $this->header->getHeader( $data );
+		// Training
+        $this->data['trainings'] = $this->trainings->getTrainingsWithMemberCount();
 
-        $data['trainings'] = $this->trainings->getTrainingsWithMemberCount();
-
-        return view('admin/trainings', $data);
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/trainings', $this->data);
     }
 }

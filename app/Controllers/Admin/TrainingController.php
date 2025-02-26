@@ -5,8 +5,6 @@ namespace App\Controllers\Admin;
 use App\Controllers\Admin\BaseController;
 use CodeIgniter\I18n\Time;
 
-use App\Models\Admin\Header;
-
 use App\Models\Trainings;
 use App\Models\TrainingUsers;
 use App\Models\Users;
@@ -31,7 +29,6 @@ use App\Models\TrainingCaseEntryProperties;
 class TrainingController extends BaseController
 {
     public function __construct() {
-        $this->header = new Header();
         $this->trainings = new Trainings();
         $this->trainingMembers = new TrainingUsers();
     }
@@ -231,24 +228,25 @@ class TrainingController extends BaseController
 
     public function index( $training_id ): string
     {
-        $data = array();
-        $this->header->getHeader( $data );
+		// Training
+        $this->data['training'] = $this->trainings->find( $training_id );
 
-        $data['training'] = $this->trainings->find( $training_id );
-
-        $data["current_training"] = $data["training"] != false ? $training_id : false;
+        $this->data["current_training"] = $this->data["training"] != false ? $training_id : false;
 		
-        if (!$data['training']) {
+        if (!$this->data['training']) {
 			// Handle the case when the assignment is not found
 			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
 			echo "Training not found.";
 			exit;
 		}
 
-        $data['members'] = $this->trainingMembers->getMembers( $training_id );
+        $this->data['members'] = $this->trainingMembers->getMembers( $training_id );
 
-        $data['text_editor'] = service('text_editor');
+        $this->data['text_editor'] = service('text_editor');
 
-        return view('admin/training', $data);
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/training', $this->data);
     }
 }

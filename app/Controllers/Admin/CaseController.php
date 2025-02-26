@@ -4,8 +4,6 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseController;
 
-use App\Models\Admin\Header;
-
 use App\Models\Meetings;
 use App\Models\Assignments;
 use App\Models\Cases;
@@ -20,8 +18,6 @@ class CaseController extends BaseController
 
     public function __construct()
     {
-        $this->header = new Header();
-
         $this->meetings = new Meetings();
         $this->assignments = new Assignments();
 
@@ -49,35 +45,35 @@ class CaseController extends BaseController
 	
     public function index( $case_id ): string
     {
-        $data = array();
-        $this->header->getHeader( $data );
-
-		$data['case'] = $this->cases->find($case_id);
-		$data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
-		$data['entry_types'] = $this->caseEntry->type_enum;
+		$this->data['case'] = $this->cases->find($case_id);
+		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
+		$this->data['entry_types'] = $this->caseEntry->type_enum;
 
 		
-		$data['assignment'] = $this->assignments->find($data['case']['assignment_id']);
-		if(is_null($data['assignment'])){
+		$this->data['assignment'] = $this->assignments->find($this->data['case']['assignment_id']);
+		if(is_null($this->data['assignment'])){
 			die('no assignment');
 		}
 		
-		$data['meeting'] = $this->meetings->find($data['assignment']['meeting_id']);
-		if(is_null($data['meeting'])){
+		$this->data['meeting'] = $this->meetings->find($this->data['assignment']['meeting_id']);
+		if(is_null($this->data['meeting'])){
 			die('no assignment');
 		}
 		
 		// Check if case exists, otherwise show an error or a message
-		if (!$data['case']) {
+		if (!$this->data['case']) {
 			// Handle the case when the case is not found
 			//return redirect()->to('/some-error-page')->with('error', 'Case not found.');
 			echo "Case not found.";
 			exit;
 		}
 
-		$data['text_editor'] = service('text_editor');
+		$this->data['text_editor'] = service('text_editor');
 		
-        return view('admin/case', $data);
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/case', $this->data);
     }
 
 	//

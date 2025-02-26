@@ -4,21 +4,15 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseController;
 
-use App\Models\Admin\Header;
-
 use App\Models\Meetings;
 
 class Home extends BaseController
 {
-    public function __construct() {
-        $this->header = new Header();
-    }
-
     public function dashboard(): string
     {
-        $data = array();
-        $this->header->getHeader( $data );
-
-        return view('admin/dashboard', $data);
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/dashboard', $this->data);
     }
 }
