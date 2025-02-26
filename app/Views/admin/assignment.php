@@ -25,6 +25,9 @@
 	.entry[data-type="text_separator"] .properties-actions {
 		display:none;
 	}
+	.entry[data-type="text_input"] .properties-actions {
+		display:none;
+	}
 	
 	.entry[data-type="text_separator"] {
 		border-left:4px solid orange;
