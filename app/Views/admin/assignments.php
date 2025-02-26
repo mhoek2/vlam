@@ -72,9 +72,9 @@
 		            },
 		            success: function (response) {
 			            if (response.status === 'success') {
-                            //location.reload();
+                            $(this).closest('.assignments-item').remove();
 			            }
-		            }
+		            }.bind(this)
 	            });
             }
         });	
