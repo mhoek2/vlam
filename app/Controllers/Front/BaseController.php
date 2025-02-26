@@ -107,7 +107,7 @@ abstract class BaseController extends Controller
 
 		// User
 		$this->data['user'] = $this->user->getUserInfo();	
-		
+
         $this->initSessionController();
 
 		// Meeting
