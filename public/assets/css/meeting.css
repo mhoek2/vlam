@@ -11,6 +11,14 @@
 	height: 100%;
 }
 
+.main .meetings.locked .inner {
+    opacity: 0.7;
+}
+	.main .meetings.locked .inner a {
+		opacity: 0.5;
+		cursor:default !important;
+	}
+
 .main .meetings ul,
 .main .meetings ul > li {
     list-style: none;

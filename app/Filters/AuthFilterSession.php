@@ -6,6 +6,8 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
+use App\Models\User;
+
 class AuthFilterSession implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
@@ -16,6 +18,12 @@ class AuthFilterSession implements FilterInterface
 		if($user == NULL)
 		{
 			return redirect()->to('/login');
+		}
+		
+		$user_info	= (new User())->getUserInfo();
+		
+		if ( !$user->inGroup('admin') && is_null($user_info['training_id']) && current_url() !== url_to('home')){
+			return redirect()->to(url_to('home'));
 		}
     }
 

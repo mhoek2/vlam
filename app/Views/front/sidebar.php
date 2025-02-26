@@ -1,4 +1,4 @@
-<div class="meetings">
+<div class="meetings <?= !$training_locked ? '' : 'locked'?>">
 	<div class="inner">
 		<?php if (!is_null($meeting)):?>
 		<ul>
@@ -13,7 +13,8 @@
 		   <?php if (!is_null($meetings)):?>
 				<ul>
 					<?php foreach( $meetings as $item ): ?>
-					<a href="<?= site_url('meeting/'.$item['id'].'/') ?>">
+	
+					<a href="<?= !$training_locked ? site_url('meeting/'.$item['id'].'/') : '#' ?>">
 						<li>
 							<span class="name"><?=$item['name'];?></span>
 							<span class="info"><?=$item['info'];?></span>

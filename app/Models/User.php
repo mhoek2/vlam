@@ -31,6 +31,8 @@ class User extends Model
 		if ( $data["is_admin"] )
 			$data["training_id"] = NULL;	// admins view the 'non cloned' version of assignments and cases
 		
+		//$data["training_id"] = NULL;
+		
         return($data);
     }
 	

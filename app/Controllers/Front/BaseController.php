@@ -68,9 +68,17 @@ abstract class BaseController extends Controller
      * @return void
      */
 	private function initSessionController(){
-        if (!$this->data['user'])
-            return;
+		$this->data['training_locked'] = true;
 
+		if (!$this->data['user'])
+			return;
+
+		if ( !$this->data['user']["is_admin"] && !is_null($this->data['user']["training_id"]) )
+			$this->data['training_locked'] = false;
+
+		if ( $this->data['user']["is_admin"] )
+			$this->data['training_locked'] = false;
+		
         // Assignment
 		$this->assignments 					= is_null($this->data['user']['training_id']) ? new Assignments() 					: new TrainingAssignments();
         $this->assignmentEntry 				= is_null($this->data['user']['training_id']) ? new assignmentEntry() 				: new TrainingAssignmentEntry();

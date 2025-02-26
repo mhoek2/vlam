@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get(	'/', 		'Front\Home::index', 			['filter' => \App\Filters\AuthFilterGuest::class]);
-$routes->get(	'/home',	'Front\Home::application', 		['filter' => \App\Filters\AuthFilterSession::class]);
+$routes->get(	'/home',	'Front\Home::application', 		['as' => 'home', 'filter' => \App\Filters\AuthFilterSession::class]);
 
 $routes->post(	'meeting/(:num)/assignment/(:num)/case/(:num)/(:num)/save',	'Front\CaseController::save/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/(:num)',		'Front\CaseController::entry/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
