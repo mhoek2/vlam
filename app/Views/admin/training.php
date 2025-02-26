@@ -55,6 +55,9 @@
                 </tbody>
             </table>
         </div>
+		
+		<label>Test knop om training te clonen:</label>
+		<a class="button" href="<?= site_url('admin/training/'.$training["id"].'/start') ?>"><i class="fa-solid fa-meteor"></i> Start</a>
     </div>
 </section>
 
