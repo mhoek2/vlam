@@ -21,6 +21,22 @@ Mockup of creating assignments with entries has been implemented:
 
 https://github.com/user-attachments/assets/0ccd585c-d110-45f1-8e9c-39a3aca2bdde
 
+## Devlog 002 - week 07-09
+- Parts of the front-end design have been implemented more.
+- Support for modular wysiwyg editors using a service. (CKEditor, Summernote are implemented)
+- Large parts of the core database infrastructure has been implemented for assignments and entries in comination with trainings, including cascaded foreign relations for ON DELETE.
+That helps for a cleaner codebase. 
+- Assignments are now cloned for each training in the database.
+This ensures no edits can be done during a training. and prevents corrupted refences in the database. (eg. removed assignments or entries in the future wont affect a live or completed training)
+- Assignments can have cases, with its own entries. 
+- A option is added for handle tailored assignments, meaning a custom 'Controller' can be selected.
+This will either be the 'post' page, after an assignment is saved. or when no entries are present, a dedicated assignment CAN be built.
+(eg: The assignment where cards can be selected for other users, or the post assignment page where a supposed 'AI' is used to process the selected answers.)
+- Large parts of code have been unified and cleaned up.
+
+https://github.com/user-attachments/assets/28bf56af-63be-42d5-a7f9-4b29f385eba0
+
+
 
 # Helpful SQL Queries:
 
