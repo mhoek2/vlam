@@ -6,22 +6,75 @@
 		flex-wrap: wrap;
 		gap: 10px;
 	}
-	.grid-item {
-		width: 100%;
-		height: auto;
-		background-color: lightgray;
-		padding: 10px;
-		text-align: center;
-		border: 1px solid #ccc;
-		cursor: move;
-	}
-	.grid-item.sortable-placeholder {
-		min-height:100px;
-	}
-	.grid-item p {
-		margin: 0;
-	}
+		.grid-container .entry {
+			position: relative;
+			width: 100%;
+			height: auto;
+			background-color: #ffffff;
+			text-align: center;
+			border: 1px solid #f1f1f1;
+			cursor: move;
+			box-shadow: 0px 2px 8px 1px #f1f1f1;
+		}
+		.grid-container .entry.sortable-placeholder {
+			min-height:100px;
+		}
 	
+			.grid-container .entry .details  {
+				display: flex;
+				flex-direction: row;
+			}
+				.grid-container .entry .details .sortable-handle {
+					all: unset;
+					font-size: 18px;
+					width: 50px;
+					background: #f7f8f9;
+				}
+				.grid-container .entry .details h3 {
+					flex:1;
+					text-align: left;
+					margin-left: 20px;
+				}
+				.grid-container .entry .details .toggle-properties {
+					all:unset;
+					font-size: 18px;
+					width: 50px;
+					cursor:pointer;
+					/*position:absolute;
+					top:10px;
+					right:10px;*/
+				}
+				.grid-container .entry .details .delete-entry {
+					all:unset;
+					font-size: 18px;
+					width: 50px;
+					cursor:pointer;
+					/*position:absolute;
+					top:10px;
+					right:10px;*/
+				}
+				.grid-container .entry .details .delete-entry:hover {
+					color:#EC1C5D;
+				}
+			.grid-container .entry .properties {
+
+			}
+				.grid-container .entry .properties ul[id^="properties-list"] {
+					list-style: none;
+					background: #f7f8f9;
+					padding: 10px 10px 10px 50px;
+					margin: 0;
+				}
+				.grid-container .entry .properties ul[id^="properties-list"] li {
+					display: flex;
+					flex-direction: row;
+					gap: 5px;
+					margin:5px 0;
+				}
+					.grid-container .entry .properties ul[id^="properties-list"] li input {
+
+					}
+
 	.entry[data-type="text_separator"] .properties-actions {
 		display:none;
 	}
@@ -317,7 +370,7 @@
 						{
 							propertyList.append(`
 								<li data-property-id="${property.id}">
-									<input type="text" class="edit-property" data-property-id="${property.id}" value="${property.content}">
+									<input type="text" id="mcq-property" class="edit-property" data-property-id="${property.id}" value="${property.content}">
 									<button class="save-property" data-property-id="${property.id}">Save</button>
 									<button class="delete-property" data-property-id="${property.id}">Delete</button>
 								</li>
@@ -370,6 +423,25 @@
 			});
 		}
 		
+		
+		
+		$(document).off('blur', '#mcq-property').on('blur', '#mcq-property', function () {
+			const entryType = $(this).closest('.entry').data('type');
+			const propertyId = $(this).data('property-id');
+			
+			let newPropertyContent = $(this).val();
+
+			// For CKEDITOR
+			if(entryType === "text_separator") {
+				let textareaId = "#ckeditor_" + propertyId;
+				newPropertyContent = <?=$text_editor->get('textareaId')?>
+			}
+				
+			console.log( 'entryType: ' + entryType);
+			console.log( 'propertyId: ' + propertyId);
+			console.log( 'ewPropertyContent: ' + newPropertyContent);
+		});
+			
 		$(document).on('click', '.save-property', function () {
 			const entryType = $(this).closest('.entry').data('type');
 			const propertyId = $(this).data('property-id');
