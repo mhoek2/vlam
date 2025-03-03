@@ -13,22 +13,24 @@
 			background-color: #ffffff;
 			text-align: center;
 			border: 1px solid #f1f1f1;
-			cursor: move;
 			box-shadow: 0px 2px 8px 1px #f1f1f1;
 		}
-		.grid-container .entry.sortable-placeholder {
-			min-height:100px;
-		}
+			.grid-container .entry.sortable-placeholder {
+				min-height:100px;
+			}
 	
 			.grid-container .entry .details  {
 				display: flex;
 				flex-direction: row;
 			}
 				.grid-container .entry .details .sortable-handle {
-					all: unset;
 					font-size: 18px;
 					width: 50px;
 					background: #f7f8f9;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					cursor: move;
 				}
 				.grid-container .entry .details h3 {
 					flex:1;
@@ -49,9 +51,6 @@
 					font-size: 18px;
 					width: 50px;
 					cursor:pointer;
-					/*position:absolute;
-					top:10px;
-					right:10px;*/
 				}
 				.grid-container .entry .details .delete-entry:hover {
 					color:#EC1C5D;
@@ -61,36 +60,93 @@
 			}
 				.grid-container .entry .properties ul[id^="properties-list"] {
 					list-style: none;
-					background: #f7f8f9;
 					padding: 10px 10px 10px 50px;
 					margin: 0;
+				}
+				.grid-container .entry .properties ul[id^="properties-list"] .sortable-placeholder {
+					min-height:50px;
 				}
 				.grid-container .entry .properties ul[id^="properties-list"] li {
 					display: flex;
 					flex-direction: row;
 					gap: 5px;
 					margin:5px 0;
+					background: #fff;
+					padding: 3px;
+					border: 1px solid #f1f1f1;
 				}
+					.grid-container .entry .properties ul[id^="properties-list"] li .handle {
+						font-size: 18px;
+						width: 50px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						cursor: move;
+					}
+					.grid-container .entry .properties ul[id^="properties-list"] li .delete-property,
+					.grid-container .entry .properties ul[id^="properties-list"] li .save-property {
+						all:unset;
+						font-size: 18px;
+						width: 50px;
+						cursor:pointer;
+					}
+					.grid-container .entry .properties ul[id^="properties-list"] li .delete-property:hover {
+						color:#EC1C5D;
+					}
+					.grid-container .entry .properties ul[id^="properties-list"] li .save-property:hover {
+						color:#1CEC81;
+					}
 					.grid-container .entry .properties ul[id^="properties-list"] li input {
 
 					}
-
-	.entry[data-type="text_separator"] .properties-actions {
-		display:none;
-	}
-	.entry[data-type="text_input"] .properties-actions {
-		display:none;
-	}
 	
-	.entry[data-type="text_separator"] {
-		border-left:4px solid orange;
+			.grid-container .entry .properties-actions {
+				display: flex;
+				flex-direction: row;
+				padding: 1em;
+			}
+				.grid-container .entry .properties-actions .add-property {
+					all:unset;
+					font-size: 18px;
+					width: 50px;
+					cursor:pointer;
+				}
+	
+			.grid-container .entry[data-type="text_separator"] .properties-actions,
+			.grid-container .entry[data-type="text_separator"] .handle {
+				display:none !important;
+			}
+			.grid-container .entry[data-type="text_separator"] li {
+				border:initial !important;
+			}
+	
+			.grid-container .entry[data-type="text_input"] .properties-actions {
+				display:none;
+			}
+
+			.grid-container .entry[data-type="text_separator"] {
+				border-left:4px solid orange;
+			}
+			.grid-container.entry[data-type="text_input"] {
+				border-left:4px solid purple;
+			}
+			.grid-container .entry[data-type="mcq"] {
+				border-left:4px solid cyan;
+			}
+	
+	.entry-actions {
+		display: flex;
+		flex-direction: row;
+		padding: 3px;
+		background:#fff;
 	}
-	.entry[data-type="text_input"] {
-		border-left:4px solid purple;
-	}
-	.entry[data-type="mcq"] {
-		border-left:4px solid cyan;
-	}
+		.entry-actions .add-entry {
+			all:unset;
+			font-size: 18px;
+			width: 50px;
+			cursor:pointer;
+			text-align: center;
+		}	
 </style>
 
 <div class="breadcrumbs">
@@ -147,9 +203,12 @@
 			<?php }; ?>
 		</div>
     
+		<label>Toevoegen</label>
 		<div class="entry-actions">
     		<input type="text" id="new-entry-name" placeholder="option">
-    		<button class="add-entry">Add Entry</button>
+    		<button class="add-entry">
+				<i class="fa-solid fa-plus"></i>
+			</button>
 		</div>
     </div>
 </section>
@@ -213,6 +272,7 @@
 		ENTRIES 
 		*/
 		$("#sortable").sortable({
+			handle: '.sortable-handle',
 			cancel: ':input,button,[contenteditable]',
 			update: function(event, ui) {
 
@@ -370,9 +430,16 @@
 						{
 							propertyList.append(`
 								<li data-property-id="${property.id}">
+									<div class="handle">
+										<i class="fa-solid fa-grip-vertical"></i>
+									</div>
 									<input type="text" id="mcq-property" class="edit-property" data-property-id="${property.id}" value="${property.content}">
-									<button class="save-property" data-property-id="${property.id}">Save</button>
-									<button class="delete-property" data-property-id="${property.id}">Delete</button>
+									<button class="save-property" data-property-id="${property.id}">
+										<i class="fa-regular fa-floppy-disk"></i>
+									</button>
+									<button class="delete-property" data-property-id="${property.id}">
+										<i class="fa-regular fa-trash-can"></i>
+									</button>
 								</li>
 							`);
 						}
@@ -382,8 +449,13 @@
 
 							propertyList.append(`
 								<li data-property-id="${property.id}">
+									<div class="handle">
+										<i class="fa-solid fa-grip-vertical"></i>
+									</div>
 									<textarea id="${textareaId}" class="edit-property" data-property-id="${property.id}">${property.content}</textarea>
-									<button class="save-property" data-property-id="${property.id}">Save</button>
+									<button class="save-property" data-property-id="${property.id}">
+										<i class="fa-regular fa-floppy-disk"></i>
+									</button>
 								</li>
 							`);
 
