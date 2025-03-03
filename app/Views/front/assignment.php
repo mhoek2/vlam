@@ -13,6 +13,25 @@
         width: 150px; /* Adjust the label width */
     }
 
+		.assignment-entry .property-container {
+			display: flex;
+			flex-direction: column;
+			background: #Fff;
+			gap: 1em;
+			padding: 1em;
+		}
+	
+			.assignment-entry .property-container > div {
+				display:flex;
+				flex-direction: row;
+				gap: 1em;
+			}
+	
+			.assignment-entry .property-container > div label {
+				padding:0;
+				margin:0;
+			}
+	
     select {
         padding: 5px;
         width: 200px;
@@ -48,6 +67,15 @@
 <script>
 	$(document).ready(function() {
         $(document).ready(function () {
+			$('.entry-property').on('change', function() {
+                const propertyContainer = $(this).closest('.property-container');
+				const checkedCount = propertyContainer.find('.entry-property:checked').length;
+				
+                if (checkedCount > propertyContainer.data('max-selectable')) {
+                    $(this).prop('checked', false);
+				}
+			});
+			
             $('#assignment_form').submit(function (event) {
                 event.preventDefault();
 

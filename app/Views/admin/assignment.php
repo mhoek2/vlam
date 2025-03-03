@@ -4,7 +4,7 @@
 	.grid-container {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 10px;
+		gap: 15px;
 	}
 		.grid-container .entry {
 			position: relative;
@@ -130,7 +130,7 @@
 			.grid-container.entry[data-type="text_input"] {
 				border-left:4px solid purple;
 			}
-			.grid-container .entry[data-type="mcq"] {
+			.grid-container .entry[data-type^="mcq"] {
 				border-left:4px solid cyan;
 			}
 	
@@ -199,6 +199,7 @@
 		
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
+				<?php $item['entry_type_group_counts'] = $entry_type_group_counts; ?>
 				<?=view('admin/assignment_entry', $item);?>
 			<?php }; ?>
 		</div>
@@ -206,6 +207,13 @@
 		<label>Toevoegen</label>
 		<div class="entry-actions">
     		<input type="text" id="new-entry-name" placeholder="option">
+			<select id="new-entry-type">
+				<?php foreach($entry_types as $entry_type): ?>
+					<option value="<?=$entry_type["type"]?>">
+						<?=$entry_type['name']?>
+					</option>
+				<?php endforeach ?>
+			</select>
     		<button class="add-entry">
 				<i class="fa-solid fa-plus"></i>
 			</button>
@@ -228,6 +236,7 @@
 		<?=$text_editor->assign_editor('"#intro"')?>
 		<?=$text_editor->assign_editor('"#outro"')?>
 
+		const entry_group_to_type = <?=json_encode($entry_type_to_group)?>;
 		
 		/* 
 		ASSIGNMENT
@@ -298,27 +307,24 @@
 		$(document).on('change', '.entry-type-select', function() {
 			const entryId = $(this).data('entry-id');
 			const newType = $(this).val();
-			const confirmation = confirm("Are you sure you want to change the type? This will reset the entry");
 
-			if (confirmation) {
-				$.ajax({
-					url: '<?= current_url() ?>/update_entry_type',
-					method: 'POST',
-					data: {
-						entry_id: entryId,
-						type: newType
-					},
-					success: function(response) {
-						if (response.status === 'success') {
-							 $('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
-							loadProperties( entryId, newType);
-						}
-						else{
-							alert("Er is iets mis gegaan! Vernieuw de pagina.");
-						}
+			$.ajax({
+				url: '<?= current_url() ?>/update_entry_type',
+				method: 'POST',
+				data: {
+					entry_id: entryId,
+					type: newType
+				},
+				success: function(response) {
+					if (response.status === 'success') {
+						 $('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
+						loadProperties( entryId, newType);
 					}
-				});
-			}
+					else{
+						alert("Er is iets mis gegaan! Vernieuw de pagina.");
+					}
+				}
+			});
 		});
 		
 		$(document).off('blur', '.entry-name').on('blur', '.entry-name', function () {
@@ -344,6 +350,7 @@
 		
 		$(document).on('click', '.add-entry', function () {
 			const newEntryName = $(this).siblings('#new-entry-name').val().trim();
+			const newType = $(this).siblings('#new-entry-type').val();
 			
 			if (newEntryName !== "") {
 				$.ajax({
@@ -351,6 +358,7 @@
 					method: 'POST',
 					data: {
 						entry_name: newEntryName,
+						entry_type: newType,
 						assignment_id: <?=$assignment['id']?>,
 					},
 					success: function (response) {
@@ -423,10 +431,13 @@
 				url: '<?=current_url()?>/get_properties/' + entryId,
 				method: 'GET',
 				success: function (response) {
+					const entryTypeGroup = entry_group_to_type[entryType];
 					const propertyList = $(`#properties-list-${entryId}`);
+					
 					propertyList.empty(); 
 					response.forEach(function (property) {
-						if (entryType === "mcq")
+						//if (entryType.startsWith("mcq"))
+						if (entryTypeGroup === "mcq")
 						{
 							propertyList.append(`
 								<li data-property-id="${property.id}">
@@ -463,9 +474,9 @@
 						}
 					});
 					
-					if (entryType !== "mcq"){
+					//if ( !entryType.startsWith("mcq") )
+					if (entryTypeGroup !== "mcq")
 						return;
-					}
 					
 					propertyList.sortable({
 						cancel: ':input,button,[contenteditable]',

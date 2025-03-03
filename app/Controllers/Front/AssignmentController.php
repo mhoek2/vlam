@@ -31,6 +31,8 @@ class AssignmentController extends BaseController
 	
     public function save( $meeting_id, $assignment_id )
     {
+		$warnings = [];
+		
         $user = $this->user->getUserInfo();
         $meeting = $this->get_meeting( $meeting_id );
   
@@ -50,12 +52,44 @@ class AssignmentController extends BaseController
         foreach($post_entries as $entry_id => $property_id )
         {
 			$entry = $this->assignmentEntry->find($entry_id);
+			$entry_type_group = $this->assignmentEntry->find_group($entry['type']);
 			
-			$value = NULL;	// for dynamic user inputs
+			$value = NULL;	// stores list of property ids (integer list), or dynamic user-defined inputs (strings)
+			
+			// check if entry type exists!
+			if (!$this->assignmentEntry->valid_type($entry['type']))
+			{
+				array_push( $warnings, "entry type '".$entry['type']."' does not exist!" );
+				continue;
+			}
 			
 			if ($entry['type'] === "text_input") {
 				$value = $property_id;
 				$property_id = NULL;
+			}
+			
+			if ( $entry_type_group == 'mcq' ){
+				
+				if ( is_array($property_id) )
+				{
+					if ( !preg_match('/^mcq-(\d+)$/', $entry['type'], $matches) ) {
+						array_push( $warnings, "entry type '".$entry['type']."' does not match valid multi-selectable type of 'mcq-(int)'.." );
+						continue;
+					}
+					
+					if ( count($property_id) !== (int)$matches[1] )
+					{
+						array_push( $warnings, "count does not match with entry! .. what are you trying to do mate?" );
+						continue;
+					}
+				
+					// use array_slice as fail-safe, for non matching property-counts
+					$value = json_encode(array_map('intval', array_slice($property_id, 0, (int)$matches[1])));	// store as integers
+				}
+				else
+					$value = json_encode([(int)$property_id]);	// store as integer
+					
+				$property_id = 1; // used to check if value is list of properties or a user-defined value
 			}
 			
 			$this->assignmentResult->replace([ 
@@ -68,7 +102,7 @@ class AssignmentController extends BaseController
 			);
         }
 
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Assignemnt results stored successfully']);
+		return $this->response->setJSON(['status' => 'success', 'message' => 'Assignemnt results stored successfully', 'warnings' => $warnings]);
     }
 
 	
@@ -138,16 +172,23 @@ class AssignmentController extends BaseController
 
 		// Get saved user property ids and values
 		// create array $saved_results with structure:
-		// [entry_id] => property_id !== null ? property_id : value
-		//
+		// [entry_id] => property_id !== null) ? (array)json_decode(property_id) : value<br>
+		// if property_id is set to 1 (mcq), value contains integer list of selected property_id's
 		$saved_properties = $this->assignmentResult->where('user_id', $this->data['user']['id'])->where('assignment_id', $assignment_id)->select(['property_id', 'entry_id', 'value'])->get()->getResultArray();
         $saved_results = array_reduce($saved_properties, function ($result, $property) {
-			$result[$property['entry_id']] = !is_null($property['property_id']) ? $property['property_id'] : $property['value'];
+			$result[$property['entry_id']] = !is_null($property['property_id']) ? json_decode($property['value'], true) : $property['value'];
 			return $result;
 		}, []);
 		
         foreach( $this->data['entries'] as $id => $entry )
         {
+			// should never happen!
+			// this is a fail-safe, assignmentEntry Model has query overrides.
+			if (!$this->assignmentEntry->valid_type($entry['type'])) {
+				unset($this->data['entries'][$id]);
+				continue;
+			}
+			
 			// set value stored for this entry, (property_id or the dynamic user input value)
 			$this->data['entries'][$id]['value'] = $saved_results[$entry['id']] ?? '';	
 			
@@ -160,10 +201,11 @@ class AssignmentController extends BaseController
                 if (!isset($this->data['entries'][$id]['properties']))
                     $this->data['entries'][$id]['properties'] = array();
              
-				// set selected to true if this is the saved property
-				// used for eg: mcq entries
-				$property['selected'] = isset($saved_results[$entry['id']]) && $saved_results[$entry['id']] === $property['id'];
-
+				// set selected to true if this is property is selected
+				// used for eg: mcq entry group
+				$property['selected'] = isset($saved_results[$entry['id']]) && is_array($saved_results[$entry['id']]) && 
+					in_array($property['id'], $saved_results[$entry['id']]);
+				
                 array_push( $this->data['entries'][$id]['properties'], $property );
             }
         }

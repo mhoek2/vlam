@@ -68,20 +68,44 @@ class AssignmentController extends BaseController
 	
     public function index( $assignment_id ): string
     {
+		// Assignment
 		$this->data['assignment'] = $this->assignments->find($assignment_id);
-		$this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
-		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
-
-		$this->data['meeting'] = $this->meetings->find($this->data['assignment']['meeting_id']);
-
-		// Check if assignment exists, otherwise show an error or a message
+		
 		if (!$this->data['assignment']) {
 			// Handle the case when the assignment is not found
 			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
 			echo "Assignment not found.";
 			exit;
 		}
+		
+		// Entrie
+		$this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 
+		// Entry types
+		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
+		$this->data['entry_type_to_group'] = $this->assignmentEntry->type_to_group;
+		$this->data['entry_type_group_counts'] = $this->assignmentEntry->group_counts;
+		
+		foreach( $this->data['entries'] as $id => $entry )
+		{
+			$this->data['entries'][$id]['type_group'] = $this->assignmentEntry->find_group($entry['type']);
+			
+			// should never happen, make sure entry is valid!
+			// this is a fail-safe, assignmentEntry Model has query overrides.
+			if (!$this->assignmentEntry->valid_type($entry['type'])) {
+				unset($this->data['entries'][$id]);
+				
+				// prehaps even remove from DB !?
+				//$this->assignmentEntry->where([
+				//	'assignment_id' => $entry['assignment_id']
+				//])->delete($entry['id']);
+			}
+		}
+		
+		// Meeting
+		$this->data['meeting'] = $this->meetings->find($this->data['assignment']['meeting_id']);
+
+		// Case
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
         $this->data['cases_view'] = view('admin/cases', $this->data);		
 		
@@ -101,6 +125,7 @@ class AssignmentController extends BaseController
 	public function add_entry( $assignment_id )
 	{
 		$new_entry_name = $this->request->getPost('entry_name');
+		$new_entry_type = $this->request->getPost('entry_type');
 
 		$existing_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
 
@@ -112,19 +137,22 @@ class AssignmentController extends BaseController
 		$new_sort_order = $max_sort_order + 1;	
 		
 		$this->assignmentEntry->insert([
-			'assignment_id' => $assignment_id, 
-			'name' => $new_entry_name, 
-			'sort_order' => $new_sort_order ]
+			'assignment_id'	=> $assignment_id, 
+			'name' 			=> $new_entry_name, 
+			'type' 			=> $new_entry_type,
+			'sort_order' 	=> $new_sort_order ]
 		);
 		
 		$insert_id = $this->assignmentEntry->insertID();
 
 		$entry = $this->assignmentEntry->where('assignment_id', $assignment_id)->find( $insert_id );
-		$entry['entry_types'] = $this->assignmentEntry->type_enum;
-
+		$entry['entry_types'] = $this->assignmentEntry->type_enum;	
+		$entry['entry_type_group_counts'] = $this->assignmentEntry->group_counts;
+		$entry['type_group'] = $this->assignmentEntry->find_group($entry['type']);
+		
 		return $this->response->setJSON([
-			'status' => 'success', 
-			'html' => view('admin/assignment_entry', $entry)
+			'status' 	=> 'success', 
+			'html' 		=> view('admin/assignment_entry', $entry)
 		]);
 	}
 	
@@ -155,16 +183,25 @@ class AssignmentController extends BaseController
 		$entry_id = $this->request->getPost('entry_id');
 		$new_type = $this->request->getPost('type');
 
+		$entry = $this->assignmentEntry->find( $entry_id );
+		$type_group = $this->assignmentEntry->find_group($entry['type']);
+		$new_type_group = $this->assignmentEntry->find_group($new_type);
+		
+		if ( $type_group !== $new_type_group )
+			return $this->response->setJSON(['status' => 'error', 'message' => 'entry types do not match!']);
+		
 		// clear properties
-		$this->clear_entry_properties($entry_id);
+		// deprecated (03/03/2025) - type groups are implemented.
+		// can not change to non-matching types, type has to be chosen on 'add_entry'.
+		//$this->clear_entry_properties($entry_id);
 		
 		$this->assignmentEntry->update($entry_id, ['type' => $new_type]);
 
 		// add default property if required for the new type
 		if ($new_type === "text_separator") {
 			$this->assignmentEntryProperties->insert([
-				'entry_id' => $entry_id,
-				'content' => "",
+				'entry_id' 	=> $entry_id,
+				'content' 	=> "",
 			]);
 		}	
 		
