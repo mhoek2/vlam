@@ -17,7 +17,12 @@
             <textarea name="intro" id="intro"><?=$meeting["intro"]?></textarea>
 
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-            <button type="submit">Opslaan</button>
+
+			<div class="actions">
+				<button type="submit" class="button-primary">
+					<i class="fa-regular fa-floppy-disk"></i>Opslaan
+				</button>
+			</div>
         </form>
     </div>
 </section>

@@ -23,11 +23,12 @@
 			.case-item .details {
 				display:flex;
 				flex-direction: column;
-				justify-content: space-around;
+				justify-content: center;
 				height: 100%;
 			}
 				.case-item .details a {
 					font-size: 20px;
+					color: #000;
 					text-decoration: none;
 				}	
 				.case-item .details p {
@@ -50,6 +51,10 @@
 			}
 		.case-item.add_case {
 			background:var(--button-background-color);
+			opacity: 0.5;
+		}
+		.case-item.add_case:hover {
+			opacity: 0.9;
 		}
 			.case-item.add_case button {
 				all:unset;

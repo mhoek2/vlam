@@ -344,6 +344,7 @@ footer {
 		padding:2em;
 	}
 		.main .content .actions {
+			margin-top:2em;
 			display: flex;
 			flex-direction: row;
 			justify-content: flex-end;

@@ -6,38 +6,108 @@
             gap: 10px;
         }
         .assignments-item {
+			position:relative;
             box-sizing: border-box;
             flex-basis: calc(20% - 10px);
             height: 175px;
-            background-color: lightgray;
+            background-color: #fff;
             padding: 10px;
             text-align: center;
-            border: 1px solid #ccc;
-            cursor: move;
+            border: 1px solid #f1f1f1;
+			border-radius: var(--secondary-border-radius);
+            
         }
-        .assignments-item p {
-            margin: 0;
-        }	
+		.assignments-item:not(.disabled) {
+			box-shadow: 0px 2px 8px 1px #f1f1f1;
+		}
+			.assignments-item .details {
+				display:flex;
+				flex-direction: column;
+				justify-content: center;
+				height: 100%;
+			}
+				.assignments-item .details a {
+					font-size: 20px;
+					color:#000;
+					text-decoration: none;
+				}	
+				.assignments-item .details p {
+					margin: 0;
+				}
+			.assignments-item #delete_assignment {
+				position: absolute;
+				right: 10px;
+				bottom: 10px;
+				cursor: pointer;
+			}
+			.assignments-item:not(:hover) #delete_assignment {
+				display: none;
+			}
+			.assignments-item .sortable-handle {
+				position: absolute;
+				left: 10px;
+				top: 10px;
+				cursor: move;
+			}
+		.assignments-item.add_assignment {
+			background:var(--button-background-color);
+			opacity: 0.5;
+		}
+		.assignments-item.add_assignment:hover {
+			opacity: 0.9;
+		}
+			.assignments-item.add_assignment button {
+				all:unset;
+				display: flex;
+				width: 100%;
+				flex-direction: column;
+				align-items: center;
+				justify-content: space-around;
+				gap: 20px;
+				height: 100%;
+				cursor:pointer;
+			}
+				.assignments-item.add_assignment button i {
+					font-size: 38px;
+					width: 75px;
+					height: 75px;
+					text-align: center;
+					line-height: 75px;
+					border-radius: 100%;
+					border: 2px solid var(--button-text-color);
+					color: var(--button-text-color);
+				}	
 </style>
-
-<button id="add_assignment">
-	<i class="fa-solid fa-circle-plus"></i> Add Assignment
-</button>
             
 <div class="assignments-container" id="assignments">
     <?php foreach ($assignments as $item) { ?>
         <div class="assignments-item" data-id="<?= $item['id'] ?>">
-            <a href="<?=base_url('admin/assignments/')?><?=$item['id']?>"><?= $item['name'] ?></a>
-            <p><?= esc($item['info']) ?></p>
-            <div id="delete_assignment" data-assignment-id="<?=$item['id']?>">Delete</div>
+            <div class="sortable-handle">
+				<i class="fa-solid fa-grip-vertical"></i>
+			</div>
+			<div class="details">
+				<a href="<?=base_url('admin/assignments/')?><?=$item['id']?>"><?= $item['name'] ?></a>
+				<p><?= esc($item['info']) ?></p>
+       		</div>
+            <div id="delete_assignment" data-assignment-id="<?=$item['id']?>">
+				<i class="fa-regular fa-trash-can"></i>
+			</div>
         </div>
     <?php }; ?>
+    
+	<div class="assignments-item disabled add_assignment">
+		<button id="add_assignment" >
+			<i class="fa-solid fa-plus"></i>
+		</button>
+	</div>
 </div>
 
 <script>
 	$(document).ready(function() {
 
 		$("#assignments").sortable({
+			handle: '.sortable-handle',
+			cancel: ':input,button,[contenteditable]', // not used.
 			update: function(event, ui) {
 				let ids = $("#assignments").sortable("toArray", { attribute: 'data-id' });
 				saveSortOrder(ids);

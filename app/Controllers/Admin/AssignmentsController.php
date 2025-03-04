@@ -38,9 +38,8 @@ class AssignmentsController extends BaseController
 		$existing_entries = $this->assignments->where('meeting_id', $meeting_id)->findAll();
 
 		$max_sort_order = 0;
-		if ($existing_entries) {
+		if ( $existing_entries )
 			$max_sort_order = max(array_column($existing_entries, 'sort_order'));
-		}
 		
 		// make sure new item is last
 		$new_sort_order = $max_sort_order + 1;		
@@ -62,11 +61,11 @@ class AssignmentsController extends BaseController
 	
 	public function delete_assignment()
 	{
+		
 		$assignment_id = (int) $this->request->getPost('assignment_id');
 		
-		if ( empty($assignment_id)) {
+		if ( empty($assignment_id) )
 			return;
-		}
 
 		$this->assignments->delete( $assignment_id );	
 		// Removal of related tables happens through cascaded foreign relations

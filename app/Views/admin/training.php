@@ -20,7 +20,12 @@
             <input type="text" name="name" value="<?=$training["name"]?>">
 
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-            <button type="submit">Opslaan</button>
+
+			<div class="actions">
+				<button type="submit" class="button-primary">
+					<i class="fa-regular fa-floppy-disk"></i>Opslaan
+				</button>
+			</div>
         </form>
 
         <!-- why a form? -->

@@ -55,6 +55,13 @@
 
 <section class="main">
     <div class="content">
+		<h2>Cases</h2>
+		<?=$cases_view?>
+    </div>
+</section>
+
+<section class="main">
+    <div class="content">
 		<h2>Assignment Entries</h2>
 		
 		<div class="grid-container" id="sortable">
@@ -82,12 +89,7 @@
 </section>
 
 
-<section class="main">
-    <div class="content">
-		<h2>Cases</h2>
-		<?=$cases_view?>
-    </div>
-</section>
+
 
 <?=$text_editor->load_script()?>
 <script {csp-script-nonce}>
