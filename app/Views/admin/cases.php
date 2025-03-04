@@ -1,9 +1,9 @@
 <style>
         .case-container {
             box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
         }
         .case-item {
 			position:relative;
