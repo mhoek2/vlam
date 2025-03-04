@@ -1,37 +1,7 @@
 <?php echo $header; ?>
 
 <style>
-	.grid-container {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-	}
-	.grid-item {
-		width: 100%;
-		height: auto;
-		background-color: lightgray;
-		padding: 10px;
-		text-align: center;
-		border: 1px solid #ccc;
-		cursor: move;
-	}
-	.grid-item p {
-		margin: 0;
-	}
-	
-	.entry[data-type="text_separator"] .properties-actions {
-		display:none;
-	}
-	
-	.entry[data-type="text_separator"] {
-		border-left:4px solid orange;
-	}
-	.entry[data-type="text_input"] {
-		border-left:4px solid purple;
-	}
-	.entry[data-type="mcq"] {
-		border-left:4px solid cyan;
-	}
+
 </style>
 
 <div class="breadcrumbs">
@@ -61,14 +31,19 @@
             <textarea name="outro" id="outro"><?=$case["outro"]?></textarea>
             
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-            <button type="submit">Opslaan</button>
+			
+			<div class="actions">
+				<button type="submit" class="button-primary">
+					<i class="fa-regular fa-floppy-disk"></i>Opslaan
+				</button>
+			</div>
         </form>
     </div>
 </section>
 
 <section class="main">
     <div class="content">
-		<h2>Entries</h2>
+		<h2>Case Entries</h2>
 		
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
@@ -76,9 +51,19 @@
 			<?php }; ?>
 		</div>
     
+		<label>Toevoegen</label>
 		<div class="entry-actions">
     		<input type="text" id="new-entry-name" placeholder="option">
-    		<button class="add-entry">Add Entry</button>
+			<select id="new-entry-type">
+				<?php foreach($entry_types as $entry_type): ?>
+					<option value="<?=$entry_type["type"]?>">
+						<?=$entry_type['name']?>
+					</option>
+				<?php endforeach ?>
+			</select>
+    		<button class="add-entry button-primary">
+				<i class="fa-solid fa-plus"></i> Toevoegen
+			</button>
 		</div>
     </div>
 </section>
@@ -189,6 +174,7 @@
 		
 		$(document).on('click', '.add-entry', function () {
 			const newEntryName = $(this).siblings('#new-entry-name').val().trim();
+			const newType = $(this).siblings('#new-entry-type').val();
 			
 			if (newEntryName !== "") {
 				$.ajax({
@@ -196,6 +182,7 @@
 					method: 'POST',
 					data: {
 						entry_name: newEntryName,
+						entry_type: newType,
 						case_id: <?=$case['id']?>,
 					},
 					success: function (response) {
@@ -275,9 +262,16 @@
 						{
 							propertyList.append(`
 								<li data-property-id="${property.id}">
+									<div class="handle">
+										<i class="fa-solid fa-grip-vertical"></i>
+									</div>
 									<input type="text" class="edit-property" data-property-id="${property.id}" value="${property.content}">
-									<button class="save-property" data-property-id="${property.id}">Save</button>
-									<button class="delete-property" data-property-id="${property.id}">Delete</button>
+									<button class="save-property" data-property-id="${property.id}">
+										<i class="fa-regular fa-floppy-disk"></i>
+									</button>
+									<button class="delete-property" data-property-id="${property.id}">
+										<i class="fa-regular fa-trash-can"></i>
+									</button>
 								</li>
 							`);
 						}

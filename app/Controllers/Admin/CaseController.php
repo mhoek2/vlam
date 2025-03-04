@@ -82,7 +82,8 @@ class CaseController extends BaseController
 	public function add_entry( $case_id )
 	{
 		$new_entry_name = $this->request->getPost('entry_name');
-
+		$new_entry_type = $this->request->getPost('entry_type');
+		
 		$existing_entries = $this->caseEntry->where('case_id', $case_id)->findAll();
 
 		$max_sort_order = 0;
@@ -93,10 +94,11 @@ class CaseController extends BaseController
 		$new_sort_order = $max_sort_order + 1;	
 		
 		$this->caseEntry->insert([
-			'case_id' => $case_id, 
-			'name' => $new_entry_name, 
-			'sort_order' => $new_sort_order ]
-		);
+			'case_id' 		=> $case_id, 
+			'name' 			=> $new_entry_name, 
+			'type' 			=> $new_entry_type,
+			'sort_order'	=> $new_sort_order 
+		]);
 		
 		$insert_id = $this->caseEntry->insertID();
 
@@ -104,8 +106,8 @@ class CaseController extends BaseController
 		$entry['entry_types'] = $this->caseEntry->type_enum;
 
 		return $this->response->setJSON([
-			'status' => 'success', 
-			'html' => view('admin/case_entry', $entry)
+			'status' 	=> 'success', 
+			'html' 		=> view('admin/case_entry', $entry)
 		]);
 	}
 	

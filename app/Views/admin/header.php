@@ -9,6 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico">
     <link rel="stylesheet" href="<?=base_url('assets/css/header.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/backend.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/css/backend_entries.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/meeting.css')?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
