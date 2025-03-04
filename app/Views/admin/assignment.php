@@ -13,7 +13,12 @@
 			background-color: #ffffff;
 			text-align: center;
 			border: 1px solid #f1f1f1;
+			border-radius: var(--secondary-border-radius);
 			box-shadow: 0px 2px 8px 1px #f1f1f1;
+			opacity: 0.7;
+		}
+		.grid-container .entry:hover {
+			opacity: 1.0;
 		}
 			.grid-container .entry.sortable-placeholder {
 				min-height:100px;
@@ -36,6 +41,13 @@
 					flex:1;
 					text-align: left;
 					margin-left: 20px;
+				}
+				.grid-container .entry .details select {
+					border: 0;
+					height: 20px;
+					margin: auto 0;
+					background:#fff;
+					border-color:#fff;
 				}
 				.grid-container .entry .details .toggle-properties {
 					all:unset;
@@ -97,7 +109,7 @@
 						color:#1CEC81;
 					}
 					.grid-container .entry .properties ul[id^="properties-list"] li input {
-
+						border: 0;
 					}
 	
 			.grid-container .entry .properties-actions {
@@ -137,16 +149,24 @@
 	.entry-actions {
 		display: flex;
 		flex-direction: row;
-		padding: 3px;
 		background:#fff;
+		border-radius: var(--secondary-border-radius);
+		overflow: hidden;
 	}
-		.entry-actions .add-entry {
-			all:unset;
-			font-size: 18px;
-			width: 50px;
-			cursor:pointer;
-			text-align: center;
-		}	
+		.entry-actions .add-entry:hover {
+			background: var(--button-hover-color);
+		}
+		.entry-actions #new-entry-name {
+			border-width: 0 1px 0 0;
+			margin-right: 10px;
+		}
+		.entry-actions select {
+			border: 0;
+			height: 20px;
+			margin: auto 0;
+			background:#fff;
+			border-color:#fff;
+		}
 </style>
 
 <div class="breadcrumbs">
@@ -188,7 +208,12 @@
 			</select>
 				
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-            <button type="submit">Opslaan</button>
+			
+			<div class="actions">
+				<button type="submit" class="button-primary">
+					<i class="fa-regular fa-floppy-disk"></i>Opslaan
+				</button>
+			</div>
         </form>
     </div>
 </section>
@@ -214,8 +239,8 @@
 					</option>
 				<?php endforeach ?>
 			</select>
-    		<button class="add-entry">
-				<i class="fa-solid fa-plus"></i>
+    		<button class="add-entry button-primary">
+				<i class="fa-solid fa-plus"></i> Toevoegen
 			</button>
 		</div>
     </div>

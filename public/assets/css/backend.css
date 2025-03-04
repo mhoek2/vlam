@@ -1,5 +1,14 @@
 :root {
     --max-width: 1600px;
+	
+	--button-background-color: rgb(236 238 253);
+	--button-hover-color: rgb(236 238 253);
+	--button-text-color: rgb(82 101 161);
+	
+	--primary-border-radius: 10px;
+	--secondary-border-radius: 3px;
+	
+	
 }
 
 * {
@@ -9,6 +18,21 @@
 .contenteditable:focus {
     background-color: rgba(221, 72, 20, .2);
     outline: none;
+}
+
+.button-primary {
+	all: unset;
+	min-height:45px;
+    cursor: pointer;
+    text-align: center;
+    background: var(--button-background-color);
+    color: var(--button-text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    padding: 0 10px;
+    font-weight: 600;
 }
 
 html, body {
@@ -28,7 +52,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
     padding: 15px;
     font-size: 16px;
     border: 1px solid #e0e0e0;
-    border-radius: 2px;
+    border-radius: var(--secondary-border-radius);
     background-color: #fff;
     color: #333;
     box-sizing: border-box;
@@ -63,7 +87,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
     padding: 15px;*/
     font-size: 16px;
     border: 1px solid #e0e0e0;
-    border-radius: 2px;
+    border-radius: var(--secondary-border-radius);
     background-color: #fff;
     color: #333;
     box-sizing: border-box;
@@ -211,7 +235,7 @@ section {
     section h2 {
         font-size: 120%;
         line-height: 2.5rem;
-        padding-top: 1.5rem;
+        margin: 0 0 1em 0;
     }
 
     section pre {
@@ -309,34 +333,34 @@ footer {
     width: 100%;
     gap: 15px;
 }
+	.main .content {
+		display: flex;
+		flex-direction: column;
+		flex-basis: 100%;
+		flex: 1;
 
-.main .meetings {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
+		border-radius: var(--primary-border-radius);
+		background: #f7f8f9;
+		padding:2em;
+	}
+		.main .content .actions {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-end;
+			gap: 10px;
+		}
+		.main .content form select {
+			height: 50px;
+			border-color: #b3b3b3;
+			border-radius: var(--secondary-border-radius);
+			padding: 0 10px;
+		}
 
-    max-width: 300px;
-    background: #f1f1f1;
-    border-radius: 10px;
-    padding: 10px 0;
-}
-
-.main .content {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
-
-    border-radius: 10px;
-    background: #f7f8f9;
-    padding:2em;
-}
 
 .breadcrumbs {
     margin: 0 auto;
     max-width: var(--max-width);
-    padding: 2.5rem 1.75rem 3.5rem 1.75rem;
+    padding: 1em 0;
 
     font-family: Arial, sans-serif;
     font-size: 14px;
@@ -384,7 +408,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: var(--secondary-border-radius);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }

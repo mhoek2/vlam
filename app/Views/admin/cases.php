@@ -6,42 +6,108 @@
             gap: 10px;
         }
         .case-item {
+			position:relative;
             box-sizing: border-box;
             flex-basis: calc(20% - 10px);
             height: 175px;
-            background-color: lightgray;
+            background-color: #fff;
             padding: 10px;
             text-align: center;
-            border: 1px solid #ccc;
-            cursor: move;
+            border: 1px solid #f1f1f1;
+			border-radius: var(--secondary-border-radius);
+            
         }
-        .case-item p {
-            margin: 0;
-        }	
+		.case-item:not(.disabled) {
+			box-shadow: 0px 2px 8px 1px #f1f1f1;
+		}
+			.case-item .details {
+				display:flex;
+				flex-direction: column;
+				justify-content: space-around;
+				height: 100%;
+			}
+				.case-item .details a {
+					font-size: 20px;
+					text-decoration: none;
+				}	
+				.case-item .details p {
+					margin: 0;
+				}
+			.case-item #delete_case {
+				position: absolute;
+				right: 10px;
+				bottom: 10px;
+				cursor: pointer;
+			}
+			.case-item:not(:hover) #delete_case {
+				display: none;
+			}
+			.case-item .sortable-handle {
+				position: absolute;
+				left: 10px;
+				top: 10px;
+				cursor: move;
+			}
+		.case-item.add_case {
+			background:var(--button-background-color);
+		}
+			.case-item.add_case button {
+				all:unset;
+				display: flex;
+				width: 100%;
+				flex-direction: column;
+				align-items: center;
+				justify-content: space-around;
+				gap: 20px;
+				height: 100%;
+				cursor:pointer;
+			}
+				.case-item.add_case button i {
+					font-size: 38px;
+					width: 75px;
+					height: 75px;
+					text-align: center;
+					line-height: 75px;
+					border-radius: 100%;
+					border: 2px solid var(--button-text-color);
+					color: var(--button-text-color);
+				}
 </style>
 
-<button id="add_case">
-	<i class="fa-solid fa-circle-plus"></i> Add Case
-</button>
-            
 <div class="case-container" id="cases">
     <?php foreach ($cases as $item) { ?>
         <div class="case-item" data-id="<?= $item['id'] ?>">
-            <a href="<?=base_url('admin/cases/')?><?=$item['id']?>"><?= $item['name'] ?></a>
-            <p><?= esc($item['info']) ?></p>
-            <div id="delete_case" data-case-id="<?=$item['id']?>">Delete</div>
+            <div class="sortable-handle">
+				<i class="fa-solid fa-grip-vertical"></i>
+			</div>
+			<div class="details">
+				<a href="<?=base_url('admin/cases/')?><?=$item['id']?>"><?= $item['name'] ?></a>
+				<p><?= esc($item['info']) ?></p>
+			</div>
+            <div id="delete_case" data-case-id="<?=$item['id']?>">
+				<i class="fa-regular fa-trash-can"></i>
+			</div>
         </div>
     <?php }; ?>
+
+	<div class="case-item disabled add_case">
+		<button id="add_case" >
+			<i class="fa-solid fa-plus"></i>
+		</button>
+	</div>
 </div>
 
 <script>
 	$(document).ready(function() {
 
 		$("#cases").sortable({
+			handle: '.sortable-handle',
+			cancel: ':input,button,[contenteditable]', // not used.
 			update: function(event, ui) {
 				let ids = $("#cases").sortable("toArray", { attribute: 'data-id' });
 				saveSortOrder(ids);
 			},
+			items: '.case-item:not(.disabled)',
 			placeholder: 'case-item sortable-placeholder',
 		}).disableSelection();
 		
