@@ -10,6 +10,10 @@ class AssignmentEntry extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = ['id', 'type', 'name', 'sort_order', 'info', 'assignment_id'];
+	
+	// NOTE: 	Do not make change or remove existing type/group identifiers, this can have negative impact on existing training data.<br>
+	//			If required, make sure to update the database enum and stored databse records accordingly!
+	// Adding types is fine, remember to add the 'type' to the enum in the database.
     public $type_enum = [ 
         ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze'],
         ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2'],
@@ -18,8 +22,8 @@ class AssignmentEntry extends Model
         ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator']
     ];
 
-	public $type_to_group;
-	public $group_counts;
+	public $type_to_group;	// reference lookup-table for what group a type is part of
+	public $group_counts;	// reference lookup-table to find number of types in a group
 	
     public function __construct()
     {
@@ -72,6 +76,8 @@ class AssignmentEntry extends Model
 	
 	public function valid_type( $type )
 	{
+		// check validity of an entry type by matching with $this->type_enum
+		
 		foreach ($this->type_enum as $item) {
 			if ($item['type'] === $type) {
 				return true;
@@ -81,6 +87,10 @@ class AssignmentEntry extends Model
 		return false;
 	}
 	
+	//
+	// Query overrides:
+	// provide a fail-safe for when types are removed, and database records are no longer valid
+	//
     public function find($id = null)
     {
         $entry = parent::find($id);
