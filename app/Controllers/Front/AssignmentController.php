@@ -77,7 +77,7 @@ class AssignmentController extends BaseController
 						continue;
 					}
 					
-					if ( count($property_id) !== (int)$matches[1] )
+					if ( count($property_id) > (int)$matches[1] )
 					{
 						array_push( $warnings, "count does not match with entry! .. what are you trying to do mate?" );
 						continue;

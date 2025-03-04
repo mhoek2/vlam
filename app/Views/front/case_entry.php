@@ -95,9 +95,17 @@
 					</div>
 					<div class="properties-aside">
 					</div>
-				</div>	
+				</div>
+			
+			<?php elseif(preg_match('/^mcq-(\d+)$/', $entry['type'], $matches)): ?>
+				<h3><?=$entry['name']?></h3>
+			
+			<?php elseif($entry['type'] == "text_input"): ?>
+				<h3><?=$entry['name']?></h3>
+			
 			<?php else: ?>
 				<h3><?=$entry['name']?></h3>
+
 			<?php endif ?>
 		</div> 
        

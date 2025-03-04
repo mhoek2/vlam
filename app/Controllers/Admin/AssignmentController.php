@@ -70,15 +70,15 @@ class AssignmentController extends BaseController
     {
 		// Assignment
 		$this->data['assignment'] = $this->assignments->find($assignment_id);
+		if (!$this->data['assignment'])
+			die("Assignment invalid.");
 		
-		if (!$this->data['assignment']) {
-			// Handle the case when the assignment is not found
-			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
-			echo "Assignment not found.";
-			exit;
-		}
+		// Meeting
+		$this->data['meeting'] = $this->meetings->find($this->data['assignment']['meeting_id']);
+		if(is_null($this->data['meeting']))
+			die("Meeting invalid");
 		
-		// Entrie
+		// Entry
 		$this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 
 		// Entry types
@@ -102,9 +102,6 @@ class AssignmentController extends BaseController
 			}
 		}
 		
-		// Meeting
-		$this->data['meeting'] = $this->meetings->find($this->data['assignment']['meeting_id']);
-
 		// Case
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
         $this->data['cases_view'] = view('admin/cases', $this->data);		
@@ -149,6 +146,14 @@ class AssignmentController extends BaseController
 		$entry['entry_types'] = $this->assignmentEntry->type_enum;	
 		$entry['entry_type_group_counts'] = $this->assignmentEntry->group_counts;
 		$entry['type_group'] = $this->assignmentEntry->find_group($entry['type']);
+		
+		// add default property if required for the new type
+		if ($new_entry_type === "text_separator") {
+			$this->assignmentEntryProperties->insert([
+				'entry_id' 	=> $insert_id,
+				'content' 	=> "",
+			]);
+		}	
 		
 		return $this->response->setJSON([
 			'status' 	=> 'success', 
@@ -197,14 +202,6 @@ class AssignmentController extends BaseController
 		
 		$this->assignmentEntry->update($entry_id, ['type' => $new_type]);
 
-		// add default property if required for the new type
-		if ($new_type === "text_separator") {
-			$this->assignmentEntryProperties->insert([
-				'entry_id' 	=> $entry_id,
-				'content' 	=> "",
-			]);
-		}	
-		
 		return $this->response->setJSON(['status' => 'success']);
 	}
 

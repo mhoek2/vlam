@@ -47,6 +47,7 @@
 		
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
+				<?php $item['entry_type_group_counts'] = $entry_type_group_counts; ?>
 				<?=view('admin/case_entry', $item);?>
 			<?php }; ?>
 		</div>
@@ -74,6 +75,8 @@
 	    <?=$text_editor->init_script()?>
 	    <?=$text_editor->assign_editor('"#intro"')?>
 	    <?=$text_editor->assign_editor('"#outro"')?>
+
+		const entry_group_to_type = <?=json_encode($entry_type_to_group)?>;
 
 		/* 
 		CASE
@@ -255,10 +258,13 @@
 				url: '<?=current_url()?>/get_properties/' + entryId,
 				method: 'GET',
 				success: function (response) {
+					const entryTypeGroup = entry_group_to_type[entryType];
 					const propertyList = $(`#properties-list-${entryId}`);
+					
 					propertyList.empty(); 
 					response.forEach(function (property) {
-						if (entryType === "mcq")
+						//if (entryType.startsWith("mcq"))
+						if (entryTypeGroup === "mcq")
 						{
 							propertyList.append(`
 								<li data-property-id="${property.id}">
@@ -290,9 +296,9 @@
 						}
 					});
 					
-					if (entryType !== "mcq"){
+					//if ( !entryType.startsWith("mcq") )
+					if (entryTypeGroup !== "mcq")
 						return;
-					}
 					
 					propertyList.sortable({
 						cancel: ':input,button,[contenteditable]',
