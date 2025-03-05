@@ -6,19 +6,16 @@
     .case-entry {
 
     }
-
 		.case-entry .properties-container {
 			display: flex;
 			flex-direction: row;
 		}
-	
 			.case-entry .properties-container .properties 
 			{
 				margin:3em 0;
 				display: flex;
 				flex-direction: column;
 			}
-
 				.case-entry .properties-container .properties > div
 				{
 					margin:1em 0;
@@ -29,12 +26,10 @@
 					font-weight: bold;
 					cursor:pointer;
 				}
-
 				.case-entry .properties-container .properties > div.selected {
 					background:var(--primary-color);
 					color:#fff;
 				}
-	
 			.case-entry .properties-aside {
 
 			}
@@ -48,7 +43,6 @@
 	}
 		.case-progress button {
 		}
-	
 		.case-progress .indicator {
 			display: flex;
 			align-items: center;
@@ -78,12 +72,17 @@
     <div class="content">
            
 		<div class="case-entry">
+			<?php
+				$mcq_multi = preg_match('/^mcq-(\d+)$/', $entry['type'], $matches);
+				$max_selectable = $mcq_multi ? (int)$matches[1] : NULL;
+			?>
+			
 			<?php if($entry['type'] == "text_separator"): ?>
 				<?php foreach ($entry['properties'] as $property): ?>
 					<?=$property['content']?>
 				<?php endforeach ?>
 
-			<?php elseif($entry['type'] == "mcq"): ?>
+			<?php elseif( $entry['type'] == "mcq" || $mcq_multi ): ?>
 				<h2><?=$entry['name']?></h2>
 				<div class="properties-container">
 					<div class="properties">
@@ -96,9 +95,6 @@
 					<div class="properties-aside">
 					</div>
 				</div>
-			
-			<?php elseif(preg_match('/^mcq-(\d+)$/', $entry['type'], $matches)): ?>
-				<h3><?=$entry['name']?></h3>
 			
 			<?php elseif($entry['type'] == "text_input"): ?>
 				<h3><?=$entry['name']?></h3>
@@ -132,7 +128,33 @@
         $(document).ready(function () {
 			
 			$(document).on('click', '#property', function(){
-				const propertyId = $(this).data('property-id');
+				let propertyId = $(this).data('property-id');
+				
+				<?php if ($mcq_multi): ?>
+					// support for multiple selectables
+					let addProperty = false;
+					let selectedProperties = [];
+
+					if ($(this).hasClass('selected'))
+						$(this).removeClass('selected');
+					else
+						addProperty = true;
+
+					$(this).closest('.properties-container').find('.properties .selected').each(function() {
+						selectedProperties.push($(this).data('property-id'));
+					});
+
+					if ( addProperty ) {
+						if ( selectedProperties.length < <?=$max_selectable?> ) {
+							$(this).addClass('selected')
+							selectedProperties.push( propertyId );
+						}
+						else
+							return;
+					} 
+
+					propertyId = selectedProperties;
+				<?php endif?>
 				
                 $.ajax({
                     url: '<?=current_url().'/save'?>',
@@ -143,8 +165,10 @@
 					},
                     success: function(response) {
 						if (response.status === 'success') {
-							$(this).siblings().removeClass('selected');
-							$(this).addClass('selected');	
+							<?php if (!$mcq_multi): ?>
+								$(this).siblings().removeClass('selected');
+								$(this).addClass('selected');
+							<?php endif ?>	
 						}
                     }.bind(this),
                     error: function(xhr, status, error) {
@@ -152,27 +176,6 @@
                     }
                 })
 			});
-			
-            $('#assignment_form').submit(function (event) {
-                event.preventDefault();
-
-                var formData = $(this).serialize();
-
-                console.log(formData);
-                $.ajax({
-                    url: '<?=current_url().'/save'?>',
-                    type: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        // Handle the response from the server
-                        $('#responseMessage').html('<p>' + response.message + '</p>');
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle any error
-                        $('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
-                    }
-                });
-            });
         });
     });
 </script>

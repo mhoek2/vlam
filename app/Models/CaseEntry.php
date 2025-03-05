@@ -16,8 +16,8 @@ class CaseEntry extends Model
 	// Adding types is fine, remember to add the 'type' to the enum in the database.
     public $type_enum = [ 
         ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze'],
-        /*['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2'],
-        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3'],*/
+        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2'],
+        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3'],
         ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input'], 
         ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator']
     ];
