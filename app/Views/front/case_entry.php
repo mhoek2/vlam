@@ -111,7 +111,7 @@
        
         <div class="case-progress">
         
-        	<a class="button" href="<?=$entry_prev_url?>"><i class="fa-solid fa-chevron-left"></i> Previous</a>
+        	<a class="button-primary" href="<?=$entry_prev_url?>"><i class="fa-solid fa-chevron-left"></i> Previous</a>
         	
         	<div class="indicator">
 				<?php foreach ($entries as $i => $item): ?>
@@ -121,7 +121,7 @@
 				<?php endforeach ?>
         	</div>
         	
-         	<a class="button" href="<?=$entry_next_url?>">Next <i class="fa-solid fa-chevron-right"></i></a>
+         	<a class="button-primary" href="<?=$entry_next_url?>">Next <i class="fa-solid fa-chevron-right"></i></a>
 		</div>    
         
     </div>

@@ -235,6 +235,12 @@ class CaseController extends BaseController
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 
+		// previous and next urls
+		$current_url = current_url(); 
+		$url_parts = explode('/', $current_url);
+		array_pop($url_parts);
+		$this->data['prev_url'] = implode('/', array_slice($url_parts, 0, count($url_parts) - 1));		
+		
 		load_header( $this->data );
 		load_footer( $this->data );
 		load_sidebar( $this->data );

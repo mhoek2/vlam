@@ -3,48 +3,55 @@
 <!-- CONTENT -->
 
 <style>
-    .assignment-entry {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .assignment-entry label {
-        width: 150px; /* Adjust the label width */
-    }
-
-		.assignment-entry .property-container {
+	.assignment-container {
+		display:flex;
+		flex-direction: column;
+		gap:15px;
+		margin-bottom: 15px;
+	}
+		.assignment-container .assignment-entry {
 			display: flex;
-			flex-direction: column;
-			background: #Fff;
-			gap: 1em;
-			padding: 1em;
+			flex-direction: row;
+			align-items: center;
+			gap: 15px;
 		}
-	
-			.assignment-entry .property-container > div {
-				display:flex;
-				flex-direction: row;
+			.assignment-container .assignment-entry label {
+				min-width: 250px;
+				width: 250px;
+			}
+
+			.assignment-container .assignment-entry .property-container {
+				display: flex;
+				flex-direction: column;
+				background: #fff;
+				border-radius: var(--secondary-border-radius);
+				border: 1px solid var(--input-border-color-default);
 				gap: 1em;
+				padding: 1em;
 			}
-	
-			.assignment-entry .property-container > div label {
-				padding:0;
-				margin:0;
+			.assignment-container .assignment-entry .property-container:hover {
+				border-color: var(--input-border-color-hover);
 			}
-	
-    select {
-        padding: 5px;
-        width: 200px;
-    }
+
+				.assignment-container .assignment-entry .property-container > div {
+					display:flex;
+					flex-direction: row;
+					gap: 1em;
+				}
+
+				.assignment-container .assignment-entry .property-container > div label {
+					padding:0;
+					margin:0;
+				}
 </style>
 
 <section class="main">
     <?=$sidebar?>
-
+	
     <div class="content">
     	<div class="actions">
     		<?php if ( isset($prev_url) && !is_null($meeting) ): ?>
-				<a class="button small" href="<?=$prev_url?>"><i class="fa-solid fa-chevron-left"></i> Terug naar bijeenkomst <?=$meeting['name']?></a>
+				<a class="button-primary small" href="<?=$prev_url?>"><i class="fa-solid fa-chevron-left"></i> Terug naar bijeenkomst <?=$meeting['name']?></a>
 			<?php endif ?>
 		</div>
        
@@ -53,13 +60,15 @@
         <?=$assignment['intro']?>
 
         <form method="POST" id="assignment_form">
-		    <?php foreach ($entries as $item) { ?>
-		    	<div class="assignment-entry">
-			    	<?=view('front/assignment_entry', $item)?>
-			    </div>
-		    <?php }; ?>
-
-            <button type="submit"><?=$sub_assignment ? 'Volgende' : 'Opslaan'?></button>
+			<div class="assignment-container">
+				<?php foreach ($entries as $item) { ?>
+					<div class="assignment-entry">
+						<?=view('front/assignment_entry', $item)?>
+					</div>
+				<?php }; ?>
+			</div>
+			
+            <button class="button-primary" type="submit"><?=$sub_assignment ? 'Volgende' : 'Opslaan'?></button>
         </form>
     </div>
 </section>

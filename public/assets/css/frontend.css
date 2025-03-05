@@ -3,6 +3,17 @@
 	--secondary-color: #1d1e57; 	/* dark blue */
 	--accent-color: #c1dbe9; 		/* light blue */
 	--pink-color-: #d37096; 		/* pink */
+	
+	--button-background-color: #1d1e57;
+	--button-hover-color: #fff;
+	--button-text-color: #fff;	
+	
+	--primary-border-radius: 10px;
+	--secondary-border-radius: 3px;
+	
+	--input-border-color-default: #e0e0e0;
+	--input-border-color-hover: #007bff;
+	--input-border-color-focus: #e0e0e0;
 }
 
 * {
@@ -25,17 +36,25 @@ html, body {
     text-rendering: optimizeLegibility;
 }
 
-.button {
-	border-radius: 10px;
-	background:var(--secondary-color);
-	color:#fff;
-	text-decoration: none;
-	padding:10px 20px;
+.button-primary {
+	all: unset;
+	width:max-content;
+    cursor: pointer;
+    text-align: center;
+    background: var(--button-background-color);
+    color: var(--button-text-color);
+    display: flex;
+	flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    padding:10px 20px;
+    font-weight: 600;
+	border-radius: var(--secondary-border-radius);
 }
 
-.button.small {
+.button-primary.small {
 	padding:5px 10px;
-	font-size:14px;
 }
 
 label {
@@ -47,26 +66,26 @@ label {
     font-weight: 600;
 }
 
-input[type="text"], input[type="email"], input[type="password"], textarea {
+select, input[type="text"], input[type="email"], input[type="password"], textarea {
     width: 100%;
     padding: 15px;
     font-size: 16px;
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
+    border: 1px solid var(--input-border-color-default);
+    border-radius: var(--secondary-border-radius);
     background-color: #fff;
     color: #333;
     box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
-    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
-        border-color: #007bff;
+    select:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+        border-color: var(--input-border-color-focus);
         outline: none;
         box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
     }
 
-    input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover, textarea:hover {
-        border-color: #b3b3b3;
+    select:hover, input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover, textarea:hover {
+        border-color: var(--input-border-color-hover);
     }
 
     input::placeholder, textarea::placeholder {
@@ -76,6 +95,11 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
 
 textarea {
     resize: vertical;
+}
+
+select {
+	width:max-content;
+	min-width: 200px;
 }
 
 
@@ -201,7 +225,7 @@ footer {
     min-width: 300px;
     max-width: 400px;
     background: var(--primary-color);
-    border-radius: 10px;
+    border-radius: var(--primary-border-radius);
     padding: 10px 0;
 }
 
@@ -211,7 +235,7 @@ footer {
     flex-basis: 100%;
     flex: 3;
 
-    border-radius: 10px;
+    border-radius: var(--primary-border-radius);
     /*background: var(--accent-color);*/
 	background: #f1f1f1;
     padding:2em;

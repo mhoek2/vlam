@@ -23,12 +23,19 @@
     <?=$sidebar?>
 
     <div class="content">
-        
+    	<div class="actions">
+    		<?php if ( isset($prev_url) && !is_null($assignment) ): ?>
+				<a class="button-primary small" href="<?=$prev_url?>">
+					<i class="fa-solid fa-chevron-left"></i><?=$assignment['name']?>: <?=$assignment['info']?>
+				</a>
+			<?php endif ?>
+		</div>
+		
         <h2><?=$case['name']?>: <?=$case['info']?></h2>
 
         <?=$case['intro']?>
 
-		<a href="<?=current_url()?>/0">Start</a>
+		<a class="button-primary" href="<?=current_url()?>/0">Start</a>
     </div>
 </section>
 
