@@ -11,12 +11,12 @@ $routes->get(	'/home',	'Front\Home::application', 		['as' => 'home', 'filter' =>
 $routes->post(	'meeting/(:num)/assignment/(:num)/case/(:num)/(:num)/save',	'Front\CaseController::save/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/(:num)',		'Front\CaseController::entry/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/end',			'Front\CaseController::outro/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/complete',	'Front\CaseController::complete/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
+$routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/complete',	'Front\CaseController::complete/$1/$2/$3/$4',			['filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)',				'Front\CaseController::index/$1/$2/$3',					['filter' => \App\Filters\AuthFilterSession::class]);
 
 $routes->post(	'meeting/(:num)/assignment/(:num)/save',					'Front\AssignmentController::save/$1/$2',				['filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'meeting/(:num)/assignment/(:num)/sub',						'Front\AssignmentController::index/$1/$2/true',			['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)',							'Front\AssignmentController::index/$1/$2',				['filter' => \App\Filters\AuthFilterSession::class]);
+$routes->get(	'meeting/(:num)/assignment/(:num)',							'Front\AssignmentController::index/$1/$2',				['as' => 'assignment.landing', 'filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'meeting/(:num)',											'Front\MeetingController::index/$1',					['filter' => \App\Filters\AuthFilterSession::class]);
 
 /**

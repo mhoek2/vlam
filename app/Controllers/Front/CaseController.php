@@ -144,10 +144,6 @@ class CaseController extends BaseController
 	
 	public function complete( $meeting_id, $assignment_id, $case_id )
 	{
-		print_r($meeting_id);
-		print_r($assignment_id);
-		print_r($case_id);
-		
 		$assignment = $this->get_assignment( $assignment_id );
 		$case = $this->get_case( $assignment_id, $case_id );
 		
@@ -159,8 +155,10 @@ class CaseController extends BaseController
 			$controller = $this->get_complete_action( $complete_action );
 
 			if (!is_null($controller))
-				return $controller->index( $meeting_id, $assignment_id, $case_id );
+				$controller->index( $meeting_id, $assignment_id, $case_id );
 		}
+		
+		return redirect()->to(route_to('assignment.landing', $meeting_id, $assignment_id));
 	}
 	
 	public function outro( $meeting_id, $assignment_id, $case_id )
