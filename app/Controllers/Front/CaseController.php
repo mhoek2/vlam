@@ -162,7 +162,7 @@ class CaseController extends BaseController
 		$this->data['entry_types'] = $this->caseEntry->type_enum;
 		
 		if (is_null($this->data['entry'])){
-			return redirect()->to( $this->data['entry_next_url'] );
+			die("Invalid case entry!");
 		}
 		
 		// Entry properties
@@ -235,11 +235,16 @@ class CaseController extends BaseController
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 
+		// Entry
+		$entries = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
+
 		// previous and next urls
 		$current_url = current_url(); 
 		$url_parts = explode('/', $current_url);
 		array_pop($url_parts);
-		$this->data['prev_url'] = implode('/', array_slice($url_parts, 0, count($url_parts) - 1));		
+		$this->data['prev_url'] = implode('/', array_slice($url_parts, 0, count($url_parts) - 1));
+		
+		$this->data['start_url'] = count($entries) > 0 ? $current_url . "/0" : NULL;
 		
 		load_header( $this->data );
 		load_footer( $this->data );

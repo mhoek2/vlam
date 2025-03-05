@@ -35,7 +35,9 @@
 
         <?=$case['intro']?>
 
-		<a class="button-primary" href="<?=current_url()?>/0">Start</a>
+		<?php if (!is_null($start_url)):?>
+			<a class="button-primary" href="<?=$start_url?>">Start</a>
+		<?php endif ?>
     </div>
 </section>
 
