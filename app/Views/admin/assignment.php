@@ -32,9 +32,9 @@
 			</div>
 				
 			<label>
-				Post tailor action<br>
-				<small><em>If there are no entries, this will be the landing.</em></small>
-			<label>
+				Custom Action<br>
+				<small><em>Optional: If questions are blank, this will serve as the landing page. Otherwise, it will run after completion.</em></small>
+			</label>
 			
 			<select name="sub_assignment" id="sub_assignment">
 				<?php foreach ($sub_assignments as $id => $item): ?>

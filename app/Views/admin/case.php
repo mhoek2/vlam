@@ -31,10 +31,9 @@
             <textarea name="outro" id="outro"><?=$case["outro"]?></textarea>
             
 			<label>
-				Post complete action<br>
-				<small><em>If there are no entries, this will be the landing.</em></small>
-			<label>
-			
+				Custom Action<br>
+				<small><em>Optional: Choose an additional action to run after the case is completed.</em></small>
+			</label>
 			<select name="complete_action" id="complete_action">
 				<?php foreach ($complete_actions as $id => $item): ?>
 					<option value="<?=$item['name'] ?>" <?= $item['selected'] ? 'selected' : '' ?>><?= $item['name'] ?></option>
