@@ -25,28 +25,46 @@ class TextEditorCKEditorGPL extends TextEditor
 
 			import {
 				ClassicEditor,
+				Autoformat,
+				AutoImage,
 				Autosave,
 				BlockQuote,
 				Bold,
+				Emoji,
 				Essentials,
+				FindAndReplace,
+				GeneralHtmlSupport,
 				Heading,
+				HtmlComment,
+				HtmlEmbed,
 				ImageBlock,
+				ImageCaption,
 				ImageInline,
+				ImageInsertViaUrl,
+				ImageResize,
+				ImageStyle,
+				ImageTextAlternative,
 				ImageToolbar,
 				Indent,
 				IndentBlock,
 				Italic,
-				Font,
 				Link,
+				LinkImage,
 				List,
 				ListProperties,
+				MediaEmbed,
+				Mention,
 				Paragraph,
+				PasteFromOffice,
+				ShowBlocks,
+				SourceEditing,
 				Table,
 				TableCaption,
 				TableCellProperties,
 				TableColumnResize,
 				TableProperties,
 				TableToolbar,
+				TextTransformation,
 				TodoList,
 				Underline
 			} from '" . site_url() . "assets/ckeditor/ckeditor5.js';
@@ -55,17 +73,23 @@ class TextEditorCKEditorGPL extends TextEditor
 				ClassicEditor.create( document.querySelector( elementID ), {
 					toolbar: {
 							items: [
-								'heading',
+								'sourceEditing',
+								'showBlocks',
+								'findAndReplace',
 								'|',
-								'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+								'heading',
 								'|',
 								'bold',
 								'italic',
 								'underline',
 								'|',
+								'emoji',
 								'link',
+								'insertImageViaUrl',
+								'mediaEmbed',
 								'insertTable',
 								'blockQuote',
+								'htmlEmbed',
 								'|',
 								'bulletedList',
 								'numberedList',
@@ -76,28 +100,46 @@ class TextEditorCKEditorGPL extends TextEditor
 							shouldNotGroupWhenFull: false
 						},
 						plugins: [
+							Autoformat,
+							AutoImage,
 							Autosave,
 							BlockQuote,
 							Bold,
+							Emoji,
 							Essentials,
+							FindAndReplace,
+							GeneralHtmlSupport,
 							Heading,
+							HtmlComment,
+							HtmlEmbed,
 							ImageBlock,
+							ImageCaption,
 							ImageInline,
+							ImageInsertViaUrl,
+							ImageResize,
+							ImageStyle,
+							ImageTextAlternative,
 							ImageToolbar,
 							Indent,
 							IndentBlock,
 							Italic,
-							Font,
 							Link,
+							LinkImage,
 							List,
 							ListProperties,
+							MediaEmbed,
+							Mention,
 							Paragraph,
+							PasteFromOffice,
+							ShowBlocks,
+							SourceEditing,
 							Table,
 							TableCaption,
 							TableCellProperties,
 							TableColumnResize,
 							TableProperties,
 							TableToolbar,
+							TextTransformation,
 							TodoList,
 							Underline
 						],
@@ -146,8 +188,32 @@ class TextEditorCKEditorGPL extends TextEditor
 								}
 							]
 						},
+						htmlSupport: {
+							allow: [
+								{
+									name: /^.*$/,
+									styles: true,
+									attributes: true,
+									classes: true
+								}
+							]
+						},
+						htmlEmbed: {
+							allowedContent: {
+								iframe: true
+							}
+						},
 						image: {
-							toolbar: ['imageTextAlternative']
+							toolbar: [
+								'toggleImageCaption',
+								'imageTextAlternative',
+								'|',
+								'imageStyle:inline',
+								'imageStyle:wrapText',
+								'imageStyle:breakText',
+								'|',
+								'resizeImage'
+							]
 						},
 						licenseKey: '{$this->apiKey}',
 						link: {
@@ -169,6 +235,16 @@ class TextEditorCKEditorGPL extends TextEditor
 								startIndex: true,
 								reversed: true
 							}
+						},
+						mention: {
+							feeds: [
+								{
+									marker: '@',
+									feed: [
+										/* See: https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html */
+									]
+								}
+							]
 						},
 						placeholder: 'Type or paste your content here!',
 						table: {
