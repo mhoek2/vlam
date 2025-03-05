@@ -26,8 +26,14 @@
         
         <?=$case['outro']?>
 
-		<a href="<?=$case_reset_url?>">Opnieuw proberen</a>
-		<a href="<?=$case_finish_url?>">Afronden</a>
+		<div class="actions">
+			<a class="button-primary small" href="<?=$case_reset_url?>">
+				Opnieuw proberen
+			</a>
+			<a class="button-primary small" href="<?=$case_complete_url?>">
+				Afronden
+			</a>
+		</div>
     </div>
 </section>
 

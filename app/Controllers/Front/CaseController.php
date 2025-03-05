@@ -22,15 +22,55 @@ class CaseController extends BaseController
 	private function get_case( $assignment_id, $case_id )
 	{
 		$case = $this->cases->find($case_id);
-		
-		if ( !$case || (int)$case['assignment_id'] !== $assignment_id) {
-			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
+
+		if ( !$case || (int)$case['assignment_id'] !== (int)$assignment_id) {
 			die("Case not found.");
 		}
 		
 		return $case;
 	}
 		
+	private function is_complete_action( $controller_name )
+	{
+		$controller_class = "App\Controllers\Front\CompleteCaseActions\\" . $controller_name;
+		
+		if (is_null($controller_name) || $controller_name === 'default')
+			return NULL;
+		
+		if (class_exists($controller_class))
+			return $controller_name;
+	}
+	
+	private function has_complete_action( $case )
+	{
+		if (is_null($case))
+			return false;
+
+		return $this->is_complete_action( $case['complete_action'] ) ? $case['complete_action'] : false;
+	}
+	
+	private function get_complete_action( $controller_name )
+	{
+		$controller_class = "App\Controllers\Front\CompleteCaseActions\\" . $controller_name;
+		
+		// redundant check validity
+		if ( !$this->is_complete_action( $controller_name ) )	
+			return NULL;
+		
+		if (class_exists($controller_class)) {
+			$request = \Config\Services::request();
+			$response = \Config\Services::response();
+			$logger = \Config\Services::logger();
+
+			$controller = new $controller_class();
+			$controller->initController( $request, $response, $logger );
+			
+			return $controller;
+		} 
+		
+		die('can not load sub assignment');
+	}
+	
 	public function save( $meeting_id, $assignment_id, $case_id, $entry_num )
 	{
 		$warnings = [];
@@ -102,6 +142,26 @@ class CaseController extends BaseController
 		return $this->response->setJSON(['status' => 'success']);
 	}
 	
+	public function complete( $meeting_id, $assignment_id, $case_id )
+	{
+		print_r($meeting_id);
+		print_r($assignment_id);
+		print_r($case_id);
+		
+		$assignment = $this->get_assignment( $assignment_id );
+		$case = $this->get_case( $assignment_id, $case_id );
+		
+		// Post complete action
+		$complete_action = $this->has_complete_action($case);
+
+		if ( $complete_action )
+		{
+			$controller = $this->get_complete_action( $complete_action );
+
+			if (!is_null($controller))
+				return $controller->index( $meeting_id, $assignment_id, $case_id );
+		}
+	}
 	
 	public function outro( $meeting_id, $assignment_id, $case_id )
 	{
@@ -125,9 +185,9 @@ class CaseController extends BaseController
 		$current_url = current_url(); 
 		$url_parts = explode('/', $current_url);
 		array_pop($url_parts);
-		$this->data['case_reset_url'] = $this->data['case_finish_url']  = implode('/', $url_parts);
+		$this->data['case_reset_url'] = $this->data['case_complete_url']  = implode('/', $url_parts);
 		$this->data['case_reset_url'] .= "/0";
-		$this->data['case_finish_url'] .= "/finish";
+		$this->data['case_complete_url'] .= "/complete";
 			
 		load_header( $this->data );
 		load_footer( $this->data );

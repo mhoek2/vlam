@@ -30,6 +30,17 @@
             <label>Outro<lable>
             <textarea name="outro" id="outro"><?=$case["outro"]?></textarea>
             
+			<label>
+				Post complete action<br>
+				<small><em>If there are no entries, this will be the landing.</em></small>
+			<label>
+			
+			<select name="complete_action" id="complete_action">
+				<?php foreach ($complete_actions as $id => $item): ?>
+					<option value="<?=$item['name'] ?>" <?= $item['selected'] ? 'selected' : '' ?>><?= $item['name'] ?></option>
+				<?php endforeach; ?>
+			</select>	
+				
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
 			
 			<div class="actions">

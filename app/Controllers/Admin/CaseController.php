@@ -32,16 +32,37 @@ class CaseController extends BaseController
         $info = $this->request->getPost('info');
         $intro = $this->request->getPost('intro');
         $outro = $this->request->getPost('outro');
+        $complete_action = $this->request->getPost('complete_action');
 
 		$this->cases->update($case_id, [
-            'name' => $name,
-            'info' => $info,
-            'intro' => $intro,
-            'outro' => $outro
+            'name' 				=> $name,
+            'info' 				=> $info,
+            'intro' 			=> $intro,
+            'outro' 			=> $outro,
+            'complete_action' 	=> $complete_action
         ]);
 
 		return $this->response->setJSON(['message' => 'Form submitted successfully!']);
 	}
+	
+	private function get_complete_actions( $case )
+	{
+		$controllers = [[
+			"name" 		=> "default",
+			"selected"	=> is_null($case["complete_action"])
+		]];
+		
+		$dir = APPPATH . 'Controllers/Front/CompleteCaseActions';
+		foreach (glob($dir . '/*Controller.php') as $file) {
+			$name = basename($file, '.php');
+			array_push($controllers, [
+				"name" 		=> $name,
+				"selected"	=> $case["complete_action"] === $name
+			]);
+		}
+		
+		return $controllers;
+	}	
 	
     public function index( $case_id ): string
     {
@@ -83,6 +104,8 @@ class CaseController extends BaseController
 		$this->data['entry_types'] = $this->caseEntry->type_enum;
 		$this->data['entry_type_to_group'] = $this->caseEntry->type_to_group;
 		$this->data['entry_type_group_counts'] = $this->caseEntry->group_counts;
+		
+		$this->data['complete_actions'] = $this->get_complete_actions( $this->data['case'] );
 		
 		$this->data['text_editor'] = service('text_editor');
 		

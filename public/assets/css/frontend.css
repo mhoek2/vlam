@@ -250,7 +250,10 @@ footer {
 	}
 
 	.main .content .actions {
-
+		display:flex;
+		flex-direction: row;
+		gap:15px;
+		margin-top:2em;
 	}
 		.main .content .actions .button {
 			text-transform: uppercase;
