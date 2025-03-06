@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\Cases;
 
-class TrainingCases extends Model
+class TrainingCases extends Cases
 {
     protected $table      = 'training_cases';
-    protected $primaryKey = 'id';
-
-    protected $allowedFields = ['id', 'assignment_id', 'name', 'sort_order', 'intro', 'outro', 'info', 'created_at'];
 }

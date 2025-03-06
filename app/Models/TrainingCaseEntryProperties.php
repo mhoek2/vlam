@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\CaseEntryProperties;
 
-class TrainingCaseEntryProperties extends Model
+class TrainingCaseEntryProperties extends CaseEntryProperties
 {
     protected $table      = 'training_case_entry_properties';
-    protected $primaryKey = 'id';
-
-    protected $allowedFields = ['id', 'entry_id', 'content', 'sort_order'];
 }

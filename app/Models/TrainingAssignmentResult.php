@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\AssignmentResult;
 
-class TrainingAssignmentResult extends Model
+class TrainingAssignmentResult extends AssignmentResult
 {
     protected $table      = 'training_assignment_result';
-    protected $primaryKey = 'id';
-
-    protected $allowedFields = ['id', 'user_id', 'assignment_id', 'entry_id', 'property_id', 'value'];
 }

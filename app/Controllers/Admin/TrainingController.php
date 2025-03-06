@@ -123,12 +123,13 @@ class TrainingController extends BaseController
 		foreach ($cases as $case) 
 		{
 			$trainingCases->insert([
-				'assignment_id' => $oldToNewAssignmentIdMap[ $case['assignment_id'] ],	// Set the cloned assignment id
-				'sort_order' 	=> $case['sort_order'],
-				'name' 			=> $case['name'],
-				'intro' 		=> $case['intro'],
-				'outro' 		=> $case['outro'],
-				'info' 			=> $case['info'],
+				'assignment_id' 	=> $oldToNewAssignmentIdMap[ $case['assignment_id'] ],	// Set the cloned assignment id
+				'sort_order' 		=> $case['sort_order'],
+				'name' 				=> $case['name'],
+				'intro' 			=> $case['intro'],
+				'outro'	 			=> $case['outro'],
+				'info' 				=> $case['info'],
+				'complete_action' 	=> $case['complete_action'],
 			]);
 
 			$oldToNewCasesIdMap[ $case['id'] ] = $trainingCases->getInsertID();	// map the cloned case id

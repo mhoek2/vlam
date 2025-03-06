@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\AssignmentEntryProperties;
 
-class TrainingAssignmentEntryProperties extends Model
+class TrainingAssignmentEntryProperties extends AssignmentEntryProperties
 {
     protected $table      = 'training_assignment_entry_properties';
-    protected $primaryKey = 'id';
-
-    protected $allowedFields = ['id', 'entry_id', 'content', 'sort_order'];
 }
