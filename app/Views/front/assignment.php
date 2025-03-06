@@ -23,7 +23,7 @@
 			.assignment-container .assignment-entry .property-container {
 				display: flex;
 				flex-direction: column;
-				background: #fff;
+				background: var(--input-background-color-default);
 				border-radius: var(--secondary-border-radius);
 				border: 1px solid var(--input-border-color-default);
 				gap: 1em;

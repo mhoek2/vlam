@@ -8,9 +8,6 @@
 
 <section class="main">
     <div class="content">
-            <button id="add_training">
-                <i class="fa-solid fa-circle-plus"></i> Nieuwe training
-            </button>
         <table>
             <thead>
                 <tr>
@@ -37,6 +34,12 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+		
+		<div class="actions left">
+            <button class="button-primary" id="add_training">
+                <i class="fa-solid fa-circle-plus"></i> Nieuwe training
+            </button>
+		</div>
     </div>
 </section>
 

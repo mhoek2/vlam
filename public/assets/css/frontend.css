@@ -2,7 +2,8 @@
 	--primary-color: #269bc4;		/* blue */
 	--secondary-color: #1d1e57; 	/* dark blue */
 	--accent-color: #c1dbe9; 		/* light blue */
-	--pink-color-: #d37096; 		/* pink */
+	--pink-color: #e078a1; 			/* pink */
+	--pink-light-color: #eaccda; 	/* light pink */
 	
 	--button-background-color: #1d1e57;
 	--button-hover-color: #fff;
@@ -14,6 +15,8 @@
 	--input-border-color-default: #e0e0e0;
 	--input-border-color-hover: #007bff;
 	--input-border-color-focus: #e0e0e0;
+	
+	--input-background-color-default: #fff;
 }
 
 * {
@@ -72,7 +75,7 @@ select, input[type="text"], input[type="email"], input[type="password"], textare
     font-size: 16px;
     border: 1px solid var(--input-border-color-default);
     border-radius: var(--secondary-border-radius);
-    background-color: #fff;
+    background-color: var(--input-background-color-default);
     color: #333;
     box-sizing: border-box;
     transition: all 0.3s ease;
@@ -213,6 +216,7 @@ footer {
     flex-wrap: wrap;
     width: 100%;
     gap: 15px;
+	padding: 0;
 }
 
 .main .meetings {

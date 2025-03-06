@@ -1,13 +1,19 @@
 :root {
-
+	--header-background: var(--secondary-color);
+	--header-link-color: #f1f1f1;
+	--header-link-color-hover: #fff;
+	--header-user-dropdown-button-background: var(--pink-color);
+	--header-user-dropdown-button-border: var(--pink-color);
+	--header-user-dropdown-button-color: #fff;
+	--header-user-dropdown-background: var(--pink-light-color);
 }
 
 header {
-    background-color: rgba(247, 248, 249, 1);
+    background-color: var(--header-background);
     padding: .4rem 0 0;
-    margin: 2rem auto;
+    margin: 2rem auto 15px auto;
     max-width: 1600px;
-    border-radius: 20px;
+    border-radius: var(--primary-border-radius);
     position: relative;
 }
 
@@ -20,6 +26,9 @@ header ul {
 }
 
     header ul:nth-child(2) {
+		display: flex;
+		align-items: center;
+		gap:1em;
         list-style-type: none;
         margin: 0;
         overflow: visible;
@@ -35,7 +44,7 @@ header li {
 }
 
     header li a {
-        border-radius: 5px;
+        border-radius: var(--secondary-border-radius);
         color: rgba(0, 0, 0, .5);
         display: block;
         height: 44px;
@@ -43,18 +52,19 @@ header li {
     }
 
     header li.menu-item a {
-        border-radius: 5px;
+        border-radius: var(--secondary-border-radius);
         margin: 5px 0;
         height: 38px;
         line-height: 36px;
         padding: .4rem .65rem;
         text-align: center;
+		color: var(--header-link-color)
     }
 
         header li.menu-item a:hover,
         header li.menu-item a:focus {
-            background-color: rgba(221, 72, 20, .2);
-            color: rgba(221, 72, 20, 1);
+           /*background-color: rgba(221, 72, 20, .2);*/
+           color: var(--header-link-color-hover)
         }
 
 header .logo {
@@ -75,7 +85,7 @@ header .menu-toggle {
     header .menu-toggle button {
         background-color: rgba(221, 72, 20, .6);
         border: none;
-        border-radius: 3px;
+        border-radius: var(--secondary-border-radius);
         color: rgba(255, 255, 255, 1);
         cursor: pointer;
         font: inherit;
@@ -124,8 +134,10 @@ header .heroe {
     width: 40px;
     height: 40px;
     border-radius: 100%;
-    border: 1px solid #f1f1f1;
-    background: #fff;
+    border: 1px solid #fff;
+	border-color:var(--header-user-dropdown-button-border);
+    background: var(--header-user-dropdown-button-background);
+    color: var(--header-user-dropdown-button-color);
     overflow: hidden;
     padding: 0;
     text-align: center;
@@ -145,10 +157,10 @@ header .heroe {
     position: absolute;
     right: -15px;
     top: 3.76rem;
-    background: #eaccda;
+    background: var(--header-user-dropdown-background);
     padding: 10px;
     min-width: 250px;
-    border-radius: 15px;
+    border-radius: var(--primary-border-radius);
 }
 
     .menu ul.user_dropdown > li {
@@ -196,9 +208,10 @@ header .heroe {
             max-width: 40px;
             height: 40px;
             border-radius: 100%;
-            border: 1px solid #e078a1;
-            background: #e078a1;
-            color: #FFF;
+            border: 1px solid #fff;
+			border-color:var(--header-user-dropdown-button-border);
+			background: var(--header-user-dropdown-button-background);
+			color: var(--header-user-dropdown-button-color);
             overflow: hidden;
             padding: 0;
             text-align: center;

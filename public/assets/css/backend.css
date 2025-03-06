@@ -348,6 +348,12 @@ footer {
 			justify-content: flex-end;
 			gap: 10px;
 		}
+		.main .content .actions.left {
+			justify-content: flex-start;
+		}
+		.main .content .actions.right {
+			justify-content: flex-end;
+		}
 		.main .content form select {
 			height: 50px;
 			border-color: #b3b3b3;
@@ -419,9 +425,9 @@ table {
     }
 
     table th {
-        background-color: #de6849;
-        color: white;
-        font-size: 16px;
+		background-color: var(--button-background-color);
+		color: var(--button-text-color);
+		font-size: 16px;
     }
 
     table td {

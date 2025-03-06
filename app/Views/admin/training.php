@@ -34,7 +34,7 @@
 
             <label for="user">Search for User:</label>
             <input type="text" id="search_member" name="user" placeholder="Search users...">
-            <input type="submit" value="Assign">
+
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
         </form>
 

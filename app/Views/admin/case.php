@@ -141,27 +141,24 @@
 		$(document).on('change', '.entry-type-select', function() {
 			const entryId = $(this).data('entry-id');
 			const newType = $(this).val();
-			const confirmation = confirm("Are you sure you want to change the type? This will reset the entry");
 
-			if (confirmation) {
-				$.ajax({
-					url: '<?= current_url() ?>/update_entry_type',
-					method: 'POST',
-					data: {
-						entry_id: entryId,
-						type: newType
-					},
-					success: function(response) {
-						if (response.status === 'success') {
-							 $('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
-							loadProperties( entryId, newType);
-						}
-						else{
-							alert("Er is iets mis gegaan! Vernieuw de pagina.");
-						}
+			$.ajax({
+				url: '<?= current_url() ?>/update_entry_type',
+				method: 'POST',
+				data: {
+					entry_id: entryId,
+					type: newType
+				},
+				success: function(response) {
+					if (response.status === 'success') {
+						 $('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
+						loadProperties( entryId, newType);
 					}
-				});
-			}
+					else{
+						alert("Er is iets mis gegaan! Vernieuw de pagina.");
+					}
+				}
+			});
 		});
 		
 		$(document).off('blur', '.entry-name').on('blur', '.entry-name', function () {
