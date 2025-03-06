@@ -15,12 +15,12 @@ $routes->get(	'/home',	'Front\Home::application', 		['as' => 'home', 'filter' =>
 // Meeting
 $routes->group('meeting/(:num)', ['namespace' => 'App\Controllers\Front', 'filter' => \App\Filters\AuthFilterSession::class], function ($routes) 
 {
-	$routes->get(	'',	'MeetingController::index/$1', ['as' => 'front.meeting']);
+	$routes->get(	'',	'MeetingController::index/$1', 													['as' => 'front.meeting']);
 	
 	// Assignment
 	$routes->group('assignment/(:num)', function ($routes)
 	{
-		$routes->get(	'',		'AssignmentController::index/$1/$2',			['as' => 'front.assignment']);
+		$routes->get(	'',		'AssignmentController::index/$1/$2',									['as' => 'front.assignment']);
 		
 		$routes->post(	'save',	'AssignmentController::save/$1/$2');
 		$routes->get(	'sub',	'AssignmentController::index/$1/$2/true');
@@ -29,10 +29,10 @@ $routes->group('meeting/(:num)', ['namespace' => 'App\Controllers\Front', 'filte
 		$routes->group('case/(:num)', function ($routes)
 		{
 			$routes->post(	'(:num)/save',	'CaseController::save/$1/$2/$3/$4');
-			$routes->get(	'(:num)',		'CaseController::entry/$1/$2/$3/$4', ['as' => 'front.case.entry']);
-			$routes->get(	'end',			'CaseController::outro/$1/$2/$3/$4', ['as' => 'front.case.end']);
-			$routes->get(	'complete',		'CaseController::complete/$1/$2/$3', 	['as' => 'front.case.complete']);
-			$routes->get(	'',				'CaseController::index/$1/$2/$3', 	['as' => 'front.case']);	
+			$routes->get(	'(:num)',		'CaseController::entry/$1/$2/$3/$4', 						['as' => 'front.case.entry']);
+			$routes->get(	'end',			'CaseController::outro/$1/$2/$3/$4', 						['as' => 'front.case.end']);
+			$routes->get(	'complete',		'CaseController::complete/$1/$2/$3', 						['as' => 'front.case.complete']);
+			$routes->get(	'',				'CaseController::index/$1/$2/$3', 							['as' => 'front.case']);	
 		});
 	});
 });
@@ -42,36 +42,36 @@ $routes->group('meeting/(:num)', ['namespace' => 'App\Controllers\Front', 'filte
  */
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \App\Filters\AuthFilterAdmin::class], function ($routes) 
 {
-	$routes->get(	'',	'Home::dashboard', ['as' => 'admin']);
+	$routes->get(	'',								'Home::dashboard', 									['as' => 'admin']);
 	
 	// Training
 	$routes->post(	'trainings/add_training',		'TrainingsController::add_training');
 	$routes->post(	'trainings/delete_training',	'TrainingsController::delete_training');
-	$routes->get(	'trainings',					'TrainingsController::index', 			['as' => 'admin.trainings']);
+	$routes->get(	'trainings',					'TrainingsController::index', 						['as' => 'admin.trainings']);
 	
 	$routes->group('training/(:num)', function ($routes)
 	{
-		$routes->get(	'',					'TrainingController::index/$1', 				['as' => 'admin.training']);
-		$routes->post(	'save',				'TrainingController::save/$1',					['as' => 'admin.training.save']);
-		$routes->get(	'start',			'TrainingController::start/$1');
-		$routes->post(	'add_member',		'TrainingController::add_member/$1');
-		$routes->post(	'delete_member', 	'TrainingController::delete_member/$1');
+		$routes->get(	'',							'TrainingController::index/$1', 					['as' => 'admin.training']);
+		$routes->post(	'save',						'TrainingController::save/$1',						['as' => 'admin.training.save']);
+		$routes->get(	'start',					'TrainingController::start/$1');
+		$routes->post(	'add_member',				'TrainingController::add_member/$1');
+		$routes->post(	'delete_member', 			'TrainingController::delete_member/$1');
 	});
-	$routes->get(	'training/getUsersForAutocomplete',	'TrainingController::getUsersForAutocomplete', ['as' => 'admin.find_user_autocomplete']);
+	$routes->get(	'training/getUsersForAutocomplete',	'TrainingController::getUsersForAutocomplete', 	['as' => 'admin.find_user_autocomplete']);
 	
 	// Meeting
-	$routes->get(	'meetings',				'MeetingsController::index', 					['as' => 'admin.meetings']);
+	$routes->get(	'meetings',						'MeetingsController::index', 						['as' => 'admin.meetings']);
 	
 	$routes->group('meeting/(:num)', function ($routes)
 	{
-		$routes->get(	'',						'MeetingController::index/$1', 				['as' => 'admin.meeting']);
-		$routes->post(	'save',					'MeetingController::save/$1', 				['as' => 'admin.meeting.save']);
-		$routes->post(	'add_assignment', 		'AssignmentsController::add_assignment');
-		$routes->post(	'delete_assignment', 	'AssignmentsController::delete_assignment');
+		$routes->get(	'',							'MeetingController::index/$1', 						['as' => 'admin.meeting']);
+		$routes->post(	'save',						'MeetingController::save/$1', 						['as' => 'admin.meeting.save']);
+		$routes->post(	'add_assignment', 			'AssignmentsController::add_assignment');
+		$routes->post(	'delete_assignment', 		'AssignmentsController::delete_assignment');
 	});
 	
 	// Assignment
-	$routes->post(	'assignments/assignments_save_order', 'AssignmentsController::save_order', ['as' => 'admin.assignments.save_order']);
+	$routes->post(	'assignments/assignments_save_order', 'AssignmentsController::save_order', 			['as' => 'admin.assignments.save_order']);
 	
 	$routes->group('assignments/(:num)', function ($routes)
 	{
@@ -85,14 +85,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 		$routes->post(	'properties_save_order', 	'AssignmentController::properties_save_order/$1');
 		$routes->post(	'update_property', 			'AssignmentController::update_property/$1');
 		$routes->post(	'add_property', 			'AssignmentController::add_property');
-		$routes->post(	'save',						'AssignmentController::save/$1', 			['as' => 'admin.assignment.save']);
+		$routes->post(	'save',						'AssignmentController::save/$1', 					['as' => 'admin.assignment.save']);
 		$routes->post(	'add_case', 				'CasesController::add_case');
 		$routes->post(	'delete_case', 				'CasesController::delete_case');
-		$routes->get(	'', 						'AssignmentController::index/$1', 			['as' => 'admin.assignment']);	
+		$routes->get(	'', 						'AssignmentController::index/$1', 					['as' => 'admin.assignment']);	
 	});
 	
 	// Case
-	$routes->post(	'cases/cases_save_order',  'CasesController::save_order', 					['as' => 'admin.cases.save_order']);
+	$routes->post(	'cases/cases_save_order',  'CasesController::save_order', 							['as' => 'admin.cases.save_order']);
 	
 	$routes->group('cases/(:num)', function ($routes)
 	{
@@ -106,8 +106,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 		$routes->post(	'properties_save_order', 	'CaseController::properties_save_order/$1');
 		$routes->post(	'update_property', 			'CaseController::update_property/$1');
 		$routes->post(	'add_property', 			'CaseController::add_property');
-		$routes->post(	'save',						'CaseController::save/$1', 					['as' => 'admin.case.save']);
-		$routes->get(	'', 						'CaseController::index/$1', 				['as' => 'admin.case']);	
+		$routes->post(	'save',						'CaseController::save/$1', 							['as' => 'admin.case.save']);
+		$routes->get(	'', 						'CaseController::index/$1', 						['as' => 'admin.case']);	
 	});
 });
 
