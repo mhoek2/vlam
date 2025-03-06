@@ -66,7 +66,7 @@
         <ul class="meetings">
         <?php foreach( $meetings as $item):?>
             <li>
-            	<a href="<?=site_url()."admin/meeting/".$item['id']?>">
+            	<a href="<?=base_url(route_to('admin.meeting', $item['id'] ))?>">
             		<div class="name"><?=$item["name"]?></div>
             		<div class="info"><?=$item["info"]?></div>
             	</a>

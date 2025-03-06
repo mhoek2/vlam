@@ -37,9 +37,9 @@
             <li class="menu-toggle">
                 <button id="menuToggle">&#9776;</button>
             </li>
-            <li class="menu-item hidden"><a href="<?=site_url()."admin"?>">Home</a></li>
-            <li class="menu-item hidden"><a href="<?=site_url()."admin/meetings"?>">Meetings</a></li>
-            <li class="menu-item hidden"><a href="<?=site_url()."admin/trainings"?>">Trainings</a></li>
+            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin'))?>">Home</a></li>
+            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.meetings'))?>">Meetings</a></li>
+            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.trainings'))?>">Trainings</a></li>
         </ul>
         <ul>
         <?php if ($user): ?>
@@ -59,7 +59,7 @@
                 </div>
                 <ul>
                     <?php if($user["is_admin"]): ?>
-                        <li><a href="<?=site_url()."admin"?>">Beheerpaneel</a></li>
+                        <li><a href="<?=base_url(route_to('admin'))?>">Beheerpaneel</a></li>
                     <?php endif ?>
                 </ul>
             </ul>

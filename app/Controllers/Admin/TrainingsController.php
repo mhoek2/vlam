@@ -45,6 +45,7 @@ class TrainingsController extends BaseController
 
 		return $this->response->setJSON([
 			'status' => 'success', 
+			'redirect_url'	=> base_url(route_to('admin.training', $insert_id)),
 			'training_id' => $insert_id
 		]);
     }

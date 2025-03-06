@@ -233,12 +233,12 @@ class AssignmentController extends BaseController
 		}
 		
 		// previous and next urls
-		$this->data['prev_url'] = site_url() . "meeting/" . $this->data['meeting']['id'];
+		$this->data['prev_url'] = base_url(route_to('front.meeting', $this->data['meeting']['id']));
 		
 		if ($this->data['sub_assignment'])
 			$this->data['post_url'] = current_url() . "/sub";
 		else
-			$this->data['post_url'] = site_url() . "meeting/" . $this->data['meeting']['id'];
+			$this->data['post_url'] = base_url(route_to('front.meeting', $this->data['meeting']['id']));
 		
 		load_header( $this->data );
 		load_footer( $this->data );

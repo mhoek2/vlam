@@ -2,7 +2,7 @@
 	<div class="inner">
 		<?php if (!is_null($meeting)):?>
 		<ul>
-			<a href="<?= site_url('meeting/'.$meeting['id']) ?>">
+			<a href="<?= base_url(route_to('front.meeting', $meeting['id'])) ?>">
 				<li>
 					<span class="name"><?=$meeting['name'];?></span>
 					<span class="info"><?=$meeting['info'];?></span>
@@ -14,7 +14,7 @@
 				<ul>
 					<?php foreach( $meetings as $item ): ?>
 	
-					<a href="<?= !$training_locked ? site_url('meeting/'.$item['id'].'/') : '#' ?>">
+					<a href="<?= !$training_locked ? base_url(route_to('front.meeting', $item['id'])) : '#' ?>">
 						<li>
 							<span class="name"><?=$item['name'];?></span>
 							<span class="info"><?=$item['info'];?></span>
@@ -29,7 +29,7 @@
 		<div class="assignments">
 			<ul>
 				<?php foreach( $assignments as $item ): ?>
-					<a href="<?= site_url('meeting/'.$meeting['id'].'/assignment/' . $item['id']) ?>">
+					<a href="<?= base_url(route_to('front.assignment', $meeting['id'], $item['id'])) ?>">
 						<li class="<?=(!is_null($assignment) && $assignment['id'] === $item['id']) ? 'active' : ''?>">
 							<?=$item['name']?>: <?=$item['info']?>
 						</li>
@@ -43,7 +43,7 @@
 		<div class="cases">
 			<ul>
 				<?php foreach( $cases as $item ): ?>
-					<a href="<?= site_url('meeting/'.$meeting['id'].'/assignment/'.$assignment['id'].'/case/' . $item['id']) ?>">
+					<a href="<?= base_url(route_to('front.case', $meeting['id'], $assignment['id'], $item['id'])) ?>">
 						<li><?=$item['name']?></li>
 					</a>
 				<?php endforeach ?>

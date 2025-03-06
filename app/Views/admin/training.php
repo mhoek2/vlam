@@ -2,7 +2,7 @@
 
 <div class="breadcrumbs">
     <ul>
-	    <li><a href="<?=base_url('admin/trainings')?>">Trainings</a></li>
+		<li><a href="<?=base_url(route_to('admin.trainings'))?>">Trainings</a></li>
 	    <li><span><?=$training['name']?></span></li>
     </ul>
 </div>
@@ -62,7 +62,7 @@
         </div>
 		
 		<label>Test knop om training te clonen:</label>
-		<a class="button" href="<?= site_url('admin/training/'.$training["id"].'/start') ?>"><i class="fa-solid fa-meteor"></i> Start</a>
+		<a class="button" href="<?=current_url()?>/start"><i class="fa-solid fa-meteor"></i> Start</a>
     </div>
 </section>
 
@@ -114,7 +114,7 @@
         $('#search_member').autocomplete({
             source: function(request, response) {
                 $.ajax({
-                    url: '<?= site_url('admin/training/getUsersForAutocomplete'); ?>',
+                    url: '<?= base_url(route_to('admin.find_user_autocomplete')); ?>',
                     method: 'GET',
                     data: {
                         query: request.term // Send the typed query term
@@ -145,7 +145,7 @@
             var formData = $(this).serialize();
 
             $.ajax({
-                url: '<?= site_url('admin/training/'.$training["id"].'/save') ?>',
+                url: '<?=base_url(route_to('admin.training.save', $training["id"]))?>',
                 type: 'POST',
                 data: formData,
                 success: function(response) {

@@ -87,7 +87,7 @@
 				<i class="fa-solid fa-grip-vertical"></i>
 			</div>
 			<div class="details">
-				<a href="<?=base_url('admin/assignments/')?><?=$item['id']?>"><?= $item['name'] ?></a>
+				<a href="<?=base_url(route_to('admin.assignment', $item['id']))?>"><?= $item['name'] ?></a>
 				<p><?= esc($item['info']) ?></p>
        		</div>
             <div id="delete_assignment" data-assignment-id="<?=$item['id']?>">
@@ -118,7 +118,7 @@
 		
 		function saveSortOrder(ids) {
 			$.ajax({
-				url: '<?= base_url('admin/assignments/assignments_save_order') ?>',
+				url: '<?= base_url(route_to('admin.assignments.save_order')) ?>',
 				method: 'POST',
 				data: { sort_order: ids },
 				success: function(response) {
@@ -161,7 +161,7 @@
 		        },
 		        success: function (response) {
 			        if (response.status === 'success') {
-                        window.location = '<?=site_url()?>/admin/assignments/' + response.assignment_id;
+                        window.location = response.redirect_url;
 			        }
 		        }
 	        });

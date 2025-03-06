@@ -6,8 +6,8 @@
 
 <div class="breadcrumbs">
    	<ul>
-		<li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
-		<li><a href="<?=base_url('admin/meeting/').$meeting['id']?>"><?=$meeting['info']?></a></li>
+		<li><a href="<?=base_url(route_to('admin.meetings'))?>">Meetings</a></li>
+		<li><a href="<?=base_url(route_to('admin.meeting', $meeting['id']))?>"><?=$meeting['info']?></a></li>
 		<li><span><?=$assignment['name']?>: <?=$assignment['info']?></span></li>
 	</ul>
 </div>
@@ -123,7 +123,7 @@
                 var formData = $(this).serialize();
 
                 $.ajax({
-                    url: '<?= site_url('admin/assignments/'.$assignment["id"].'/save') ?>',
+					url: '<?= base_url(route_to('admin.assignment.save', $assignment["id"])) ?>',
                     type: 'POST',
                     data: formData,
                     success: function(response) {

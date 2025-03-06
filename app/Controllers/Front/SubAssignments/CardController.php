@@ -35,7 +35,7 @@ class CardController extends BaseController
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 
 		// previous and next urls
-		$this->data['prev_url'] = site_url() . "meeting/" . $this->data['meeting']['id'];
+		$this->data['prev_url'] = base_url(route_to('front.meeting', $this->data['meeting']['id']));
 		
 		load_header( $this->data );
 		load_footer( $this->data );

@@ -56,6 +56,7 @@ class CasesController extends BaseController
 
 		return $this->response->setJSON([
 			'status' => 'success', 
+			'redirect_url'	=> base_url(route_to('admin.case', $insert_id)),
 			'case_id' => $insert_id
 		]);
     }

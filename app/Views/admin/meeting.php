@@ -2,7 +2,7 @@
 
 <div class="breadcrumbs">
     <ul>
-	    <li><a href="<?=base_url('admin/meetings')?>">Meetings</a></li>
+	    <li><a href="<?=base_url(route_to('admin.meetings'))?>">Meetings</a></li>
 	    <li><span><?=$meeting['info']?></span></li>
     </ul>
 </div>
@@ -47,7 +47,7 @@
                 var formData = $(this).serialize();
 
                 $.ajax({
-                    url: '<?= site_url('admin/meeting/'.$current_meeting.'/save') ?>', // The URL of the controller method
+                    url: '<?= base_url(route_to('admin.meeting.save', $current_meeting)) ?>',
                     type: 'POST', // Send POST request
                     data: formData,
                     success: function(response) {

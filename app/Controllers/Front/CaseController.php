@@ -158,7 +158,7 @@ class CaseController extends BaseController
 				$controller->index( $meeting_id, $assignment_id, $case_id );
 		}
 		
-		return redirect()->to(route_to('assignment.landing', $meeting_id, $assignment_id));
+		return redirect()->to(route_to('front.assignment', $meeting_id, $assignment_id));
 	}
 	
 	public function outro( $meeting_id, $assignment_id, $case_id )
@@ -180,12 +180,8 @@ class CaseController extends BaseController
 		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 		
 		// previous and next urls
-		$current_url = current_url(); 
-		$url_parts = explode('/', $current_url);
-		array_pop($url_parts);
-		$this->data['case_reset_url'] = $this->data['case_complete_url']  = implode('/', $url_parts);
-		$this->data['case_reset_url'] .= "/0";
-		$this->data['case_complete_url'] .= "/complete";
+		$this->data['case_reset_url'] = base_url(route_to('front.case.entry', $meeting_id, $assignment_id, $case_id, 0));
+		$this->data['case_complete_url'] = base_url(route_to('front.case.complete', $meeting_id, $assignment_id, $case_id));
 			
 		load_header( $this->data );
 		load_footer( $this->data );
@@ -255,18 +251,15 @@ class CaseController extends BaseController
 		}
 	
 		// previous and next urls
-		$current_url = current_url(); 
-		$url_parts = explode('/', $current_url);
-		array_pop($url_parts);
-		$this->data['entry_prev_url'] = $this->data['entry_next_url']  = implode('/', $url_parts);
-		
 		if ($entry_num > 0)
-			$this->data['entry_prev_url'] .= "/" . ($entry_num - 1);
+			$this->data['entry_prev_url'] = base_url(route_to('front.case.entry', $meeting_id, $assignment_id, $case_id, ($entry_num - 1)));
+		else
+			$this->data['entry_prev_url'] = base_url(route_to('front.case', $meeting_id, $assignment_id, $case_id));
 		
 		if( ($entry_num + 1) < count($this->data['entries']))
-			$this->data['entry_next_url'] .= "/" . ($entry_num + 1);
+			$this->data['entry_next_url'] = base_url(route_to('front.case.entry', $meeting_id, $assignment_id, $case_id, ($entry_num + 1)));
 		else
-			$this->data['entry_next_url'] .= "/end";
+			$this->data['entry_next_url'] = base_url(route_to('front.case.end', $meeting_id, $assignment_id, $case_id));
 
 		load_header( $this->data );
 		load_footer( $this->data );
@@ -297,12 +290,9 @@ class CaseController extends BaseController
 		$entries = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
 
 		// previous and next urls
-		$current_url = current_url(); 
-		$url_parts = explode('/', $current_url);
-		array_pop($url_parts);
-		$this->data['prev_url'] = implode('/', array_slice($url_parts, 0, count($url_parts) - 1));
+		$this->data['prev_url'] = base_url(route_to('front.assignment', $meeting_id, $assignment_id));
 		
-		$this->data['start_url'] = count($entries) > 0 ? $current_url . "/0" : NULL;
+		$this->data['start_url'] = count($entries) > 0 ? base_url(route_to('front.case.entry', $meeting_id, $assignment_id, $case_id, 0)) : NULL;
 		
 		load_header( $this->data );
 		load_footer( $this->data );

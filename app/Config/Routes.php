@@ -5,73 +5,110 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+/**
+ * front
+ */
 $routes->get(	'/', 		'Front\Home::index', 			['filter' => \App\Filters\AuthFilterGuest::class]);
 $routes->get(	'/home',	'Front\Home::application', 		['as' => 'home', 'filter' => \App\Filters\AuthFilterSession::class]);
 
-$routes->post(	'meeting/(:num)/assignment/(:num)/case/(:num)/(:num)/save',	'Front\CaseController::save/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/(:num)',		'Front\CaseController::entry/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/end',			'Front\CaseController::outro/$1/$2/$3/$4',				['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)/complete',	'Front\CaseController::complete/$1/$2/$3/$4',			['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)/case/(:num)',				'Front\CaseController::index/$1/$2/$3',					['filter' => \App\Filters\AuthFilterSession::class]);
-
-$routes->post(	'meeting/(:num)/assignment/(:num)/save',					'Front\AssignmentController::save/$1/$2',				['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)/sub',						'Front\AssignmentController::index/$1/$2/true',			['filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)/assignment/(:num)',							'Front\AssignmentController::index/$1/$2',				['as' => 'assignment.landing', 'filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'meeting/(:num)',											'Front\MeetingController::index/$1',					['filter' => \App\Filters\AuthFilterSession::class]);
+// Meeting
+$routes->group('meeting/(:num)', ['namespace' => 'App\Controllers\Front', 'filter' => \App\Filters\AuthFilterSession::class], function ($routes) 
+{
+	$routes->get(	'',	'MeetingController::index/$1', ['as' => 'front.meeting']);
+	
+	// Assignment
+	$routes->group('assignment/(:num)', function ($routes)
+	{
+		$routes->get(	'',		'AssignmentController::index/$1/$2',			['as' => 'front.assignment']);
+		
+		$routes->post(	'save',	'AssignmentController::save/$1/$2');
+		$routes->get(	'sub',	'AssignmentController::index/$1/$2/true');
+		
+		// Case
+		$routes->group('case/(:num)', function ($routes)
+		{
+			$routes->post(	'(:num)/save',	'CaseController::save/$1/$2/$3/$4');
+			$routes->get(	'(:num)',		'CaseController::entry/$1/$2/$3/$4', ['as' => 'front.case.entry']);
+			$routes->get(	'end',			'CaseController::outro/$1/$2/$3/$4', ['as' => 'front.case.end']);
+			$routes->get(	'complete',		'CaseController::complete/$1/$2/$3', 	['as' => 'front.case.complete']);
+			$routes->get(	'',				'CaseController::index/$1/$2/$3', 	['as' => 'front.case']);	
+		});
+	});
+});
 
 /**
  * admin
  */
-$routes->get(	'admin',									'Admin\Home::dashboard', 									['filter' => \App\Filters\AuthFilterAdmin::class]);
-
-$_admin_training = 'admin/training/(:num)/';
-$routes->post(	'admin/trainings/add_training',				'Admin\TrainingsController::add_training', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	'admin/trainings/delete_training',			'Admin\TrainingsController::delete_training', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	'admin/trainings',							'Admin\TrainingsController::index', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_training . 'save',					'Admin\TrainingController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_training . 'start',					'Admin\TrainingController::start/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_training . 'add_member',			'Admin\TrainingController::add_member/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_training . 'delete_member', 		'Admin\TrainingController::delete_member/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	'admin/training/(:num)',					'Admin\TrainingController::index/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	'admin/training/getUsersForAutocomplete',	'Admin\TrainingController::getUsersForAutocomplete', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
-
-$_admin_meeting = 'admin/meeting/(:num)/';
-$routes->get(	'admin/meetings',							'Admin\MeetingsController::index', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_meeting . 'save',					'Admin\MeetingController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_meeting . 'add_assignment', 		'Admin\AssignmentsController::add_assignment', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_meeting . 'delete_assignment', 		'Admin\AssignmentsController::delete_assignment', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_meeting,							'Admin\MeetingController::index/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-
-$_admin_assignment = 'admin/assignments/(:num)/';
-$routes->post(	$_admin_assignment . 'entries_save_order', 		'Admin\AssignmentController::entries_save_order/$1', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'update_entry_name', 		'Admin\AssignmentController::update_entry_name', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'update_entry_type', 		'Admin\AssignmentController::update_entry_type', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'add_entry', 				'Admin\AssignmentController::add_entry/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'delete_entry', 			'Admin\AssignmentController::delete_entry/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_assignment . 'delete_property/(:num)', 	'Admin\AssignmentController::delete_property/$1/$2', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_assignment . 'get_properties/(:num)', 	'Admin\AssignmentController::get_properties/$1/$2', 		['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'properties_save_order', 	'Admin\AssignmentController::properties_save_order/$1', 	['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'update_property', 		'Admin\AssignmentController::update_property/$1', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'add_property', 			'Admin\AssignmentController::add_property', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'save',					'Admin\AssignmentController::save/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'add_case', 				'Admin\CasesController::add_case', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_assignment . 'delete_case', 			'Admin\CasesController::delete_case', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_assignment, 							'Admin\AssignmentController::index/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);	
-$routes->post(	'admin/assignments/assignments_save_order', 	'Admin\AssignmentsController::save_order', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
-
-$_admin_case = 'admin/cases/(:num)/';
-$routes->post(	$_admin_case . 'entries_save_order', 		'Admin\CaseController::entries_save_order/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'update_entry_name', 		'Admin\CaseController::update_entry_name', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'update_entry_type', 		'Admin\CaseController::update_entry_type', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'add_entry', 				'Admin\CaseController::add_entry/$1', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'delete_entry', 				'Admin\CaseController::delete_entry/$1', 					['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_case . 'delete_property/(:num)', 	'Admin\CaseController::delete_property/$1/$2', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_case . 'get_properties/(:num)', 	'Admin\CaseController::get_properties/$1/$2', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'properties_save_order', 	'Admin\CaseController::properties_save_order/$1', 			['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'update_property', 			'Admin\CaseController::update_property/$1', 				['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'add_property', 				'Admin\CaseController::add_property', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	$_admin_case . 'save',						'Admin\CaseController::save/$1', 							['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->post(	'admin/cases/cases_save_order', 			'Admin\CasesController::save_order', 						['filter' => \App\Filters\AuthFilterAdmin::class]);
-$routes->get(	$_admin_case . '', 							'Admin\CaseController::index/$1', 							['filter' => \App\Filters\AuthFilterAdmin::class]);	
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \App\Filters\AuthFilterAdmin::class], function ($routes) 
+{
+	$routes->get(	'',	'Home::dashboard', ['as' => 'admin']);
+	
+	// Training
+	$routes->post(	'trainings/add_training',		'TrainingsController::add_training');
+	$routes->post(	'trainings/delete_training',	'TrainingsController::delete_training');
+	$routes->get(	'trainings',					'TrainingsController::index', 			['as' => 'admin.trainings']);
+	
+	$routes->group('training/(:num)', function ($routes)
+	{
+		$routes->get(	'',					'TrainingController::index/$1', 				['as' => 'admin.training']);
+		$routes->post(	'save',				'TrainingController::save/$1',					['as' => 'admin.training.save']);
+		$routes->get(	'start',			'TrainingController::start/$1');
+		$routes->post(	'add_member',		'TrainingController::add_member/$1');
+		$routes->post(	'delete_member', 	'TrainingController::delete_member/$1');
+	});
+	$routes->get(	'training/getUsersForAutocomplete',	'TrainingController::getUsersForAutocomplete', ['as' => 'admin.find_user_autocomplete']);
+	
+	// Meeting
+	$routes->get(	'meetings',				'MeetingsController::index', 					['as' => 'admin.meetings']);
+	
+	$routes->group('meeting/(:num)', function ($routes)
+	{
+		$routes->get(	'',						'MeetingController::index/$1', 				['as' => 'admin.meeting']);
+		$routes->post(	'save',					'MeetingController::save/$1', 				['as' => 'admin.meeting.save']);
+		$routes->post(	'add_assignment', 		'AssignmentsController::add_assignment');
+		$routes->post(	'delete_assignment', 	'AssignmentsController::delete_assignment');
+	});
+	
+	// Assignment
+	$routes->post(	'assignments/assignments_save_order', 'AssignmentsController::save_order', ['as' => 'admin.assignments.save_order']);
+	
+	$routes->group('assignments/(:num)', function ($routes)
+	{
+		$routes->post(	'entries_save_order', 		'AssignmentController::entries_save_order/$1');
+		$routes->post(	'update_entry_name', 		'AssignmentController::update_entry_name');
+		$routes->post(	'update_entry_type', 		'AssignmentController::update_entry_type');
+		$routes->post(	'add_entry', 				'AssignmentController::add_entry/$1');
+		$routes->post(	'delete_entry', 			'AssignmentController::delete_entry/$1');
+		$routes->get(	'delete_property/(:num)', 	'AssignmentController::delete_property/$1/$2');
+		$routes->get(	'get_properties/(:num)', 	'AssignmentController::get_properties/$1/$2');
+		$routes->post(	'properties_save_order', 	'AssignmentController::properties_save_order/$1');
+		$routes->post(	'update_property', 			'AssignmentController::update_property/$1');
+		$routes->post(	'add_property', 			'AssignmentController::add_property');
+		$routes->post(	'save',						'AssignmentController::save/$1', 			['as' => 'admin.assignment.save']);
+		$routes->post(	'add_case', 				'CasesController::add_case');
+		$routes->post(	'delete_case', 				'CasesController::delete_case');
+		$routes->get(	'', 						'AssignmentController::index/$1', 			['as' => 'admin.assignment']);	
+	});
+	
+	// Case
+	$routes->post(	'cases/cases_save_order',  'CasesController::save_order', 					['as' => 'admin.cases.save_order']);
+	
+	$routes->group('cases/(:num)', function ($routes)
+	{
+		$routes->post(	'entries_save_order', 		'CaseController::entries_save_order/$1');
+		$routes->post(	'update_entry_name', 		'CaseController::update_entry_name');
+		$routes->post(	'update_entry_type', 		'CaseController::update_entry_type');
+		$routes->post(	'add_entry', 				'CaseController::add_entry/$1');
+		$routes->post(	'delete_entry', 			'CaseController::delete_entry/$1');
+		$routes->get(	'delete_property/(:num)', 	'CaseController::delete_property/$1/$2');
+		$routes->get(	'get_properties/(:num)', 	'CaseController::get_properties/$1/$2');
+		$routes->post(	'properties_save_order', 	'CaseController::properties_save_order/$1');
+		$routes->post(	'update_property', 			'CaseController::update_property/$1');
+		$routes->post(	'add_property', 			'CaseController::add_property');
+		$routes->post(	'save',						'CaseController::save/$1', 					['as' => 'admin.case.save']);
+		$routes->get(	'', 						'CaseController::index/$1', 				['as' => 'admin.case']);	
+	});
+});
 
 service('auth')->routes($routes);

@@ -24,7 +24,7 @@
             <tbody>
                 <?php foreach( $trainings as $id => $item):?>
                     <tr>
-                        <td><a href="<?=site_url()."admin/training/".$item['id']?>">Training #<?=($id+1)?></a></td>
+                        <td><a href="<?=base_url(route_to('admin.training', $item['id']))?>">Training #<?=($id+1)?></a></td>
                         <td><?=$item['member_count']?></td>
                         <td><?=$item['started']?></td>
                         <td><?=$item['stopped']?></td>
@@ -72,7 +72,7 @@
 		        },
 		        success: function (response) {
 			        if (response.status === 'success') {
-                        window.location = '<?=site_url()?>/admin/training/' + response.training_id;
+						window.location = response.redirect_url;
 			        }
 		        }
 	        });

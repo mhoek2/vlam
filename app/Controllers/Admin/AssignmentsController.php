@@ -54,7 +54,8 @@ class AssignmentsController extends BaseController
 		$insert_id = $this->assignments->insertID();
 
 		return $this->response->setJSON([
-			'status' => 'success', 
+			'status' 		=> 'success', 
+			'redirect_url'	=> base_url(route_to('admin.assignment', $insert_id)),
 			'assignment_id' => $insert_id
 		]);
     }
