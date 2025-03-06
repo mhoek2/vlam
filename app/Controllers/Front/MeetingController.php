@@ -6,14 +6,12 @@ use App\Controllers\Front\BaseController;
 
 class MeetingController extends BaseController
 {
-    public function __construct() {
-		
-    }
-
     public function index( $meeting_id ): string
     {
+		$meeting_id 	= (int) $meeting_id;
+
 		// Meeting
-        $this->data['meeting'] = $this->meetings->find( $meeting_id );
+        $this->data['meeting'] = $this->get_meeting( $meeting_id );
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment

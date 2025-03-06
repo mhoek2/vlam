@@ -6,37 +6,17 @@ use App\Controllers\Front\BaseController;
 
 class AssignmentController extends BaseController
 {
-	
-	public function get_meeting( $meeting_id )
-	{
-		$meeting = $this->meetings->find( $meeting_id );
-		
-		if ( is_null($meeting) ){
-			die("Meeting not found.");
-		}
-		
-		return $meeting;
-	}
-	
-	public function get_assignment( $assignment_id )
-	{
-		$assignment = $this->assignments->find($assignment_id);
-		
-		if ( is_null($assignment) ){
-			die("Assignment not found.");
-		}
-		
-		return $assignment;
-	}
-	
     public function save( $meeting_id, $assignment_id )
     {
+		$meeting_id 	= (int) $meeting_id;
+		$assignment_id 	= (int) $assignment_id;
+		
 		$warnings = [];
 		
         $user = $this->user->getUserInfo();
         $meeting = $this->get_meeting( $meeting_id );
   
-        $assignment = $this->assignments->find($assignment_id);
+        $assignment = $this->get_assignment($assignment_id);
         $assignment_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
 
         $post_entries = $this->request->getPost('entries');
@@ -104,7 +84,6 @@ class AssignmentController extends BaseController
 
 		return $this->response->setJSON(['status' => 'success', 'message' => 'Assignemnt results stored successfully', 'warnings' => $warnings]);
     }
-
 	
 	private function is_sub_assignment( $controller_name )
 	{
@@ -149,10 +128,11 @@ class AssignmentController extends BaseController
 	
     public function index( $meeting_id, $assignment_id, $is_sub = false ): string
     {  
+		$meeting_id 	= (int) $meeting_id;
+		$assignment_id 	= (int) $assignment_id;
+		
         // Meeting
         $this->data['meeting'] = $this->get_meeting( $meeting_id ); 
-		
-
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment

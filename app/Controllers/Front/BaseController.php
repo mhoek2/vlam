@@ -131,4 +131,37 @@ abstract class BaseController extends Controller
         $this->data['cases'] 				= NULL;
 		$this->data['case'] 				= NULL;				
     }
+	
+	public function get_meeting( $meeting_id )
+	{
+		$item = $this->meetings->find( $meeting_id );
+		
+		if ( is_null($item) ){
+			die("Meeting not found.");
+		}
+		
+		return $item;
+	}
+	
+	public function get_assignment( $assignment_id )
+	{
+		$item = $this->assignments->find($assignment_id);
+		
+		if ( is_null($item) ){
+			die("Assignment not found.");
+		}
+		
+		return $item;
+	}	
+	
+	public function get_case( $assignment_id, $case_id )
+	{
+		$item = $this->cases->find($case_id);
+
+		if ( !$item || (int)$item['assignment_id'] !== (int)$assignment_id) {
+			die("Case not found.");
+		}
+		
+		return $item;
+	}	
 }

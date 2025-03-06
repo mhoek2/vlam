@@ -7,29 +7,6 @@ use App\Controllers\Front\BaseController;
 
 class CaseController extends BaseController
 {
-	
-	public function get_assignment( $assignment_id )
-	{
-		$assignment = $this->assignments->find($assignment_id);
-		
-		if ( is_null($assignment) ){
-			die("Assignment not found.");
-		}
-		
-		return $assignment;
-	}
-	
-	private function get_case( $assignment_id, $case_id )
-	{
-		$case = $this->cases->find($case_id);
-
-		if ( !$case || (int)$case['assignment_id'] !== (int)$assignment_id) {
-			die("Case not found.");
-		}
-		
-		return $case;
-	}
-		
 	private function is_complete_action( $controller_name )
 	{
 		$controller_class = "App\Controllers\Front\CompleteCaseActions\\" . $controller_name;
@@ -85,7 +62,7 @@ class CaseController extends BaseController
 		
         $user = $this->user->getUserInfo();
 		
-        $entry_id = $this->request->getPost('entry_id');
+        $entry_id = (int) $this->request->getPost('entry_id');
         $property_id = $this->request->getPost('property_id');
 		
 		$entry = $this->caseEntry->find($entry_id);
@@ -144,6 +121,10 @@ class CaseController extends BaseController
 	
 	public function complete( $meeting_id, $assignment_id, $case_id )
 	{
+		$meeting_id 	= (int) $meeting_id;
+		$assignment_id 	= (int) $assignment_id;
+		$case_id 		= (int) $case_id;
+		
 		$assignment = $this->get_assignment( $assignment_id );
 		$case = $this->get_case( $assignment_id, $case_id );
 		
@@ -168,7 +149,7 @@ class CaseController extends BaseController
 		$case_id 		= (int) $case_id;
 		
         // Meeting
-        $this->data['meeting'] = $this->meetings->find( $meeting_id );
+        $this->data['meeting'] = $this->get_meeting($meeting_id);
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment
@@ -198,7 +179,7 @@ class CaseController extends BaseController
 		$entry_num 		= (int) $entry_num;
 		
         // Meeting
-        $this->data['meeting'] = $this->meetings->find( $meeting_id );
+        $this->data['meeting'] = $this->get_meeting($meeting_id);
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment
@@ -275,7 +256,7 @@ class CaseController extends BaseController
 		$case_id 		= (int) $case_id;
 		
         // Meeting
-        $this->data['meeting'] = $this->meetings->find( $meeting_id );
+        $this->data['meeting'] = $this->get_meeting($meeting_id);
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
 
         // Assignment
