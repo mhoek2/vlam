@@ -21,7 +21,7 @@
             <tbody>
                 <?php foreach( $trainings as $id => $item):?>
                     <tr>
-                        <td><a href="<?=base_url(route_to('admin.training', $item['id']))?>">Training #<?=($id+1)?></a></td>
+                        <td><a href="<?=base_url(route_to('admin.training', $item['id']))?>"><?=!empty($item['name']) ? $item['name'] : '-'?></a></td>
                         <td><?=$item['member_count']?></td>
                         <td><?=$item['started']?></td>
                         <td><?=$item['stopped']?></td>

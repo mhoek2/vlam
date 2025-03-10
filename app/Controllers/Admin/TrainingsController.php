@@ -38,7 +38,8 @@ class TrainingsController extends BaseController
     public function add_training()
     {
 		$this->trainings->insert([
-            'created_at' => Time::now()
+			'name' 			=> 'Nieuwe training',
+            'created_at' 	=> Time::now()
         ]);
 
 		$insert_id = $this->trainings->insertID();
