@@ -2,7 +2,7 @@
 
 <div class="breadcrumbs">
     <ul>
-		<li><a href="<?=base_url(route_to('admin.trainings'))?>">Trainings</a></li>
+		<li><a href="<?=base_url(route_to('admin.trainings'))?>">Trainingen</a></li>
 	    <li><span><?=$training['name']?></span></li>
     </ul>
 </div>
@@ -49,7 +49,7 @@
                 <tbody>
                     <?php foreach ($members as $item): ?>
                         <tr>
-                            <td><?= $item['firstname'] . ' ' . $item['middlename'] . ' ' . $item['lastname']; ?></td>
+                            <td><?=$item['fullname']?></td>
                             <td>
                                 <button id="delete_member" data-member-id="<?=$item['id']?>">
                                     <i class="fa-solid fa-trash-can"></i>

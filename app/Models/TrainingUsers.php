@@ -14,10 +14,17 @@ class TrainingUsers extends Model
     public function getMembers( $training_id )
     {
         //return $this->where('training_id', $training_id)->findAll();
-        return $this->select('training_users.id, training_users.training_id, training_users.user_id, users.firstname, users.middlename, users.lastname')
+        $items = $this->select('training_users.id, training_users.training_id, training_users.user_id, users.firstname, users.middlename, users.lastname')
                     ->join('users', 'users.id = training_users.user_id', 'left')  // LEFT JOIN to include users even if no match is found
                     ->where('training_users.training_id', $training_id)
                     ->findAll();
+		
+		foreach( $items as $id => $item ) {
+			$items[$id]['shortname'] = generateUserShortName( $item );
+			$items[$id]['fullname'] = generateUserFullName( $item );
+		}
+		
+		return $items;
     }
 
     public function hasMembers( $training_id )

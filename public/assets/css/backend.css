@@ -5,6 +5,10 @@
 	--button-hover-color: rgb(236 238 253);
 	--button-text-color: rgb(82 101 161);
 	
+	--button-alert-background-color: rgb(253 236 241);
+	--button-alert-hover-color: rgb(253 236 241);
+	--button-alert-text-color: rgb(161 82 82);	
+	
 	--primary-border-radius: 10px;
 	--secondary-border-radius: 3px;
 }
@@ -18,13 +22,33 @@
     outline: none;
 }
 
+/* 
+ * Needs a base button class.. 
+ */
 .button-primary {
 	all: unset;
 	min-height:45px;
+	width: max-content;
     cursor: pointer;
     text-align: center;
     background: var(--button-background-color);
     color: var(--button-text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    padding: 0 10px;
+    font-weight: 600;
+}
+
+.button-alert {
+	all: unset;
+	min-height:45px;
+	width: max-content;
+    cursor: pointer;
+    text-align: center;
+    background: var(--button-alert-background-color);
+    color: var(--button-alert-text-color);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -160,6 +184,7 @@ header li {
         line-height: 36px;
         padding: .4rem .65rem;
         text-align: center;
+		color: #000;
     }
 
         header li.menu-item a:hover,
@@ -341,18 +366,28 @@ footer {
 		background: #f7f8f9;
 		padding:2em;
 	}
-		.main .content .actions {
+		.main .content .actions,
+		.main .content .alert-actions {
 			margin-top:2em;
 			display: flex;
 			flex-direction: row;
 			justify-content: flex-end;
 			gap: 10px;
 		}
-		.main .content .actions.left {
+		.main .content .alert-actions {
+			flex-direction: column;
+		}
+		.main .content .actions.left,
+		.main .content .alert-actions.left {
 			justify-content: flex-start;
 		}
-		.main .content .actions.right {
+		.main .content .actions.right,
+		.main .content .alert-actions.right {
 			justify-content: flex-end;
+		}
+		.main .content .alert-actions p {
+			color:var(--button-alert-text-color);
+			font-weight: 600;
 		}
 		.main .content form select {
 			height: 50px;

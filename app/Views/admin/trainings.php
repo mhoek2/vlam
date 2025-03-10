@@ -2,7 +2,7 @@
 
 <div class="breadcrumbs">
    	<ul>
-		<li><span>Trainings</span></li>
+		<li><span>Trainingen</span></li>
     </ul>
 </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2025 at 03:00 PM
+-- Generation Time: Mar 10, 2025 at 02:01 PM
 -- Server version: 8.0.41-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -46,9 +46,9 @@ CREATE TABLE `assignments` (
 
 INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `sub_assignment`, `created_at`) VALUES
 (1, 1, 0, 'Opdracht 1', '<p><span style=\"color:rgb(0,0,0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"color:rgb(255,255,255);\">i</span><span style=\"color:#ffff00;\">vamu</span><span style=\"color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '', 'Herken de werkervaring', 'default', '2025-02-17 19:05:20'),
-(3, 1, 2, 'Opdracht 3', '<p>Opdracht 3</p>', '', 'Kwaliteit Kaarten', 'CardController', '2025-02-17 19:05:20'),
+(3, 1, 3, 'Opdracht 3', '<p>Opdracht 3</p>', '', 'Kwaliteit Kaarten', 'CardController', '2025-02-17 19:05:20'),
 (5, 1, 1, 'Opdracht 2', '<p>Opdracht 5</p>', '', 'Podcast', 'PodcastController', '2025-02-17 19:05:20'),
-(11, 1, 3, 'Opdracht 4: Maatwerk na een opdracht', '<p>Deze tekst komt in beeld <strong>VOOR </strong>het opslaan van een opdracht</p>', '<p>Deze tekst komt in beeld <strong>NA </strong>het opslaan van een opdracht</p>', '', 'OutroController', '2025-02-25 10:35:54');
+(11, 1, 2, 'Opdracht 4: Maatwerk na een opdracht', '<p>Deze tekst komt in beeld <strong>VOOR </strong>het opslaan van een opdracht</p>', '<p>Deze tekst komt in beeld <strong>NA </strong>het opslaan van een opdracht</p>', '', 'OutroController', '2025-02-25 10:35:54');
 
 -- --------------------------------------------------------
 
@@ -102,11 +102,11 @@ INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_or
 (37, 29, 'Zeker weten', 3),
 (62, 43, '<p>Of een tussenvoegsel.</p>', 0),
 (67, 48, '<p>Dit is tekst tussen de vragen</p>', 0),
-(72, 55, 'Rood', 1),
+(72, 55, 'Rood', 0),
 (73, 55, 'Groen', 2),
 (74, 55, 'Blauw', 3),
 (75, 55, 'Zwart', 4),
-(76, 55, 'Oranje', 0);
+(76, 55, 'Oranje', 1);
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_or
 
 CREATE TABLE `assignment_result` (
   `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `assignment_id` int NOT NULL,
   `entry_id` int NOT NULL,
   `property_id` int DEFAULT NULL COMMENT '	if set to ''1'', this entry relies on stored property ids in value field	',
@@ -128,10 +128,10 @@ CREATE TABLE `assignment_result` (
 --
 
 INSERT INTO `assignment_result` (`id`, `user_id`, `assignment_id`, `entry_id`, `property_id`, `value`) VALUES
-(224, 2, 1, 55, 1, '[76,73]'),
-(225, 2, 1, 29, 1, '[37]'),
-(226, 2, 1, 36, NULL, '1'),
-(227, 2, 1, 38, NULL, '2');
+(283, 2, 1, 55, 1, '[72,76]'),
+(284, 2, 1, 29, 1, '[37]'),
+(285, 2, 1, 36, NULL, '2'),
+(286, 2, 1, 38, NULL, '3');
 
 -- --------------------------------------------------------
 
@@ -184,8 +184,8 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$03WJ08uzWhj7t16adUAhD.lNkR.D1/HIQPwjWOIiAExsemWypgjZG', NULL, NULL, 0, '2025-03-04 07:56:51', '2025-02-05 09:20:35', '2025-03-04 07:56:51'),
-(3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-02-26 10:34:14', '2025-02-13 08:21:52', '2025-02-26 10:34:14'),
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$03WJ08uzWhj7t16adUAhD.lNkR.D1/HIQPwjWOIiAExsemWypgjZG', NULL, NULL, 0, '2025-03-10 07:43:51', '2025-02-05 09:20:35', '2025-03-10 07:43:51'),
+(3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-06 07:54:57', '2025-02-13 08:21:52', '2025-03-06 07:54:57'),
 (4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
 (5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
 (6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14'),
@@ -263,7 +263,18 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identif
 (62, '157.97.51.172', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-27 15:25:05', 1),
 (63, '31.21.96.98', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-01 07:24:07', 1),
 (64, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-03 07:57:41', 1),
-(65, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-04 07:56:51', 1);
+(65, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-04 07:56:51', 1),
+(66, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-04 17:20:12', 1),
+(67, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-04 17:34:57', 1),
+(68, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-05 07:55:29', 1),
+(69, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-05 16:57:25', 1),
+(70, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-03-06 07:54:43', 0),
+(71, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-06 07:54:47', 1),
+(72, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', 'email_password', 'user1@vlam.nl', 3, '2025-03-06 07:54:57', 1),
+(73, '157.97.51.172', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-06 16:47:49', 1),
+(74, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-10 07:43:51', 1),
+(75, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user6@vlam.nl', 11, '2025-03-10 11:21:37', 1),
+(76, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user6@vlam.nl', 13, '2025-03-10 12:49:55', 1);
 
 -- --------------------------------------------------------
 
@@ -325,6 +336,7 @@ CREATE TABLE `cases` (
   `intro` text NOT NULL,
   `outro` text NOT NULL,
   `info` text NOT NULL,
+  `complete_action` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -332,9 +344,9 @@ CREATE TABLE `cases` (
 -- Dumping data for table `cases`
 --
 
-INSERT INTO `cases` (`id`, `assignment_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `created_at`) VALUES
-(9, 1, 0, 'Casus 1: Openheid over autisme op werk', '<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">2Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\">ivamu</span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '<h1>Goed Gedaan!</h1><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>L3orem ipsum dolor sit amet, consectetur adipiscing elit. V</strong></span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\"><strong>ivamu</strong></span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus.&nbsp;</strong></span></p><ul><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li></ul><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Wat nu?</strong></span></p><ul><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li></ul>', 'Extra informatie', '2025-02-18 08:04:23'),
-(20, 1, 1, 'Casus', '', '', '', '2025-03-04 09:57:49');
+INSERT INTO `cases` (`id`, `assignment_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `complete_action`, `created_at`) VALUES
+(9, 1, 0, 'Casus 1: Openheid over autisme op werk', '<p>2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</p><p>&nbsp;</p><p>asas</p><p>&nbsp;</p>', '<h1>Goed Gedaan!</h1><p><strong>L3orem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus.&nbsp;</strong></p><ul><li><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li></ul><p><strong>Wat nu?</strong></p><ul><li><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li></ul>', 'Extra informatie', 'default', '2025-02-18 08:04:23'),
+(20, 1, 1, 'Casus', '', '', '', '', '2025-03-04 09:57:49');
 
 -- --------------------------------------------------------
 
@@ -357,10 +369,9 @@ CREATE TABLE `case_entry` (
 
 INSERT INTO `case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`) VALUES
 (1, 2, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 9, 'mcq'),
-(2, 0, 'Wanneer zou je openheid geven?', '', 9, 'mcq'),
+(2, 0, 'Wanneer zou je openheid geven?', '', 9, 'mcq-2'),
 (3, 3, 'Welke informatie zou jij delen?', '', 9, 'mcq'),
-(9, 1, 'Handmatige invoer', '', 9, 'text_input'),
-(13, 4, 'test', '', 9, 'text_separator');
+(9, 1, 'Handmatige invoer', '', 9, 'text_input');
 
 -- --------------------------------------------------------
 
@@ -387,9 +398,8 @@ INSERT INTO `case_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) 
 (49, 3, 'B: Ik deel alleen wat relevant is voor mijn werk', 0),
 (50, 3, 'C: Ik deel helemaal niets!', 0),
 (65, 2, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
-(66, 2, 'B: Ik geef geen openheid om stigmatisering te vermijden', 0),
-(67, 2, 'C: Ik weet het niet en wil meer informatie', 0),
-(68, 13, '<p>asdsadasd</p>', 0);
+(66, 2, 'B: Ik geef geen openheid om stigmatisering te vermijden', 1),
+(67, 2, 'C: Ik weet het niet en wil meer informatie', 2);
 
 -- --------------------------------------------------------
 
@@ -399,7 +409,7 @@ INSERT INTO `case_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) 
 
 CREATE TABLE `case_result` (
   `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `assignment_id` int NOT NULL,
   `case_id` int NOT NULL,
   `entry_id` int NOT NULL,
@@ -412,9 +422,9 @@ CREATE TABLE `case_result` (
 --
 
 INSERT INTO `case_result` (`id`, `user_id`, `assignment_id`, `case_id`, `entry_id`, `property_id`, `value`) VALUES
-(38, 2, 1, 9, 3, 1, '[48]'),
-(39, 2, 1, 9, 1, 1, '[43]'),
-(40, 2, 1, 9, 2, 1, '[66]');
+(144, 2, 1, 9, 1, 1, '[42]'),
+(145, 2, 1, 9, 3, 1, '[50]'),
+(147, 2, 1, 9, 2, 1, '[65,67]');
 
 -- --------------------------------------------------------
 
@@ -434,7 +444,7 @@ CREATE TABLE `meetings` (
 --
 
 INSERT INTO `meetings` (`id`, `name`, `info`, `intro`) VALUES
-(1, 1, 'Kennismaking en werkvoorwaarden', '<h2><span style=\"color:hsl(270,75%,60%);\">Lorem Ipsum2</span></h2><h4><i>\"Neque </i><span style=\"background-color:hsl(30,75%,60%);\"><i>porro quisquam </i></span><i>est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"</i></h4><p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>'),
+(1, 1, 'Kennismaking en werkvoorwaarden', '<h2><span style=\"color:hsl(270,75%,60%);\">Lorem Ipsum2</span></h2><h4><i>\"Neque <span style=\"background-color:hsl(30,75%,60%);\">porro quisquam </span>est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"</i></h4><p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>'),
 (2, 2, 'Kwaliteiten en persoonlijk profiel', ''),
 (3, 3, 'Het belang van een sterk CV', ''),
 (4, 4, 'Openheid geven', ''),
@@ -502,7 +512,7 @@ CREATE TABLE `trainings` (
 --
 
 INSERT INTO `trainings` (`id`, `name`, `started`, `stopped`, `created_at`) VALUES
-(6, 'Training #3', '2025-03-04 13:31:45', NULL, '2025-02-13 14:23:31');
+(6, 'Training #3', '2025-03-10 12:59:33', NULL, '2025-02-13 14:23:31');
 
 -- --------------------------------------------------------
 
@@ -528,10 +538,10 @@ CREATE TABLE `training_assignments` (
 --
 
 INSERT INTO `training_assignments` (`id`, `training_id`, `meeting_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `sub_assignment`, `created_at`) VALUES
-(210, 6, 1, 0, 'Opdracht 1', '<p><span style=\"color:rgb(0,0,0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"color:rgb(255,255,255);\">i</span><span style=\"color:#ffff00;\">vamu</span><span style=\"color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '', 'Herken de werkervaring', 'default', '2025-03-04 14:31:45'),
-(211, 6, 1, 2, 'Opdracht 3', '<p>Opdracht 3</p>', '', 'Kwaliteit Kaarten', 'CardController', '2025-03-04 14:31:45'),
-(212, 6, 1, 1, 'Opdracht 2', '<p>Opdracht 5</p>', '', 'Podcast', 'PodcastController', '2025-03-04 14:31:45'),
-(213, 6, 1, 3, 'Opdracht 4: Maatwerk na een opdracht', '<p>Deze tekst komt in beeld <strong>VOOR </strong>het opslaan van een opdracht</p>', '<p>Deze tekst komt in beeld <strong>NA </strong>het opslaan van een opdracht</p>', '', 'OutroController', '2025-03-04 14:31:45');
+(242, 6, 1, 0, 'Opdracht 1', '<p><span style=\"color:rgb(0,0,0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"color:rgb(255,255,255);\">i</span><span style=\"color:#ffff00;\">vamu</span><span style=\"color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '', 'Herken de werkervaring', 'default', '2025-03-10 13:59:33'),
+(243, 6, 1, 3, 'Opdracht 3', '<p>Opdracht 3</p>', '', 'Kwaliteit Kaarten', 'CardController', '2025-03-10 13:59:33'),
+(244, 6, 1, 1, 'Opdracht 2', '<p>Opdracht 5</p>', '', 'Podcast', 'PodcastController', '2025-03-10 13:59:33'),
+(245, 6, 1, 2, 'Opdracht 4: Maatwerk na een opdracht', '<p>Deze tekst komt in beeld <strong>VOOR </strong>het opslaan van een opdracht</p>', '<p>Deze tekst komt in beeld <strong>NA </strong>het opslaan van een opdracht</p>', '', 'OutroController', '2025-03-10 13:59:33');
 
 -- --------------------------------------------------------
 
@@ -553,13 +563,13 @@ CREATE TABLE `training_assignment_entry` (
 --
 
 INSERT INTO `training_assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`) VALUES
-(302, 1, 'Ben je tevreden', '', 210, 'mcq'),
-(303, 3, 'Toevoeging 1', '', 210, 'text_input'),
-(304, 4, 'Toevoeging 2', '', 210, 'text_input'),
-(305, 1, 'Of een tussenvoegsel', '', 213, 'text_separator'),
-(306, 0, 'Er moet wel een vraag zijn', '', 213, 'mcq'),
-(307, 2, 'Tekstkop 1', '', 210, 'text_separator'),
-(308, 0, 'Rustgevende kleur', '', 210, 'mcq-2');
+(351, 1, 'Ben je tevreden', '', 242, 'mcq'),
+(352, 3, 'Toevoeging 1', '', 242, 'text_input'),
+(353, 4, 'Toevoeging 2', '', 242, 'text_input'),
+(354, 1, 'Of een tussenvoegsel', '', 245, 'text_separator'),
+(355, 0, 'Er moet wel een vraag zijn', '', 245, 'mcq'),
+(356, 2, 'Tekstkop 1', '', 242, 'text_separator'),
+(357, 0, 'Rustgevende kleur', '', 242, 'mcq-2');
 
 -- --------------------------------------------------------
 
@@ -579,17 +589,17 @@ CREATE TABLE `training_assignment_entry_properties` (
 --
 
 INSERT INTO `training_assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
-(251, 302, 'Nee', 0),
-(252, 302, 'Misschien', 1),
-(253, 302, 'Ja', 2),
-(254, 302, 'Zeker weten', 3),
-(255, 305, '<p>Of een tussenvoegsel.</p>', 0),
-(256, 307, '<p>Dit is tekst tussen de vragen</p>', 0),
-(257, 308, 'Rood', 1),
-(258, 308, 'Groen', 2),
-(259, 308, 'Blauw', 3),
-(260, 308, 'Zwart', 4),
-(261, 308, 'Oranje', 0);
+(328, 351, 'Nee', 0),
+(329, 351, 'Misschien', 1),
+(330, 351, 'Ja', 2),
+(331, 351, 'Zeker weten', 3),
+(332, 354, '<p>Of een tussenvoegsel.</p>', 0),
+(333, 356, '<p>Dit is tekst tussen de vragen</p>', 0),
+(334, 357, 'Rood', 0),
+(335, 357, 'Groen', 2),
+(336, 357, 'Blauw', 3),
+(337, 357, 'Zwart', 4),
+(338, 357, 'Oranje', 1);
 
 -- --------------------------------------------------------
 
@@ -599,22 +609,12 @@ INSERT INTO `training_assignment_entry_properties` (`id`, `entry_id`, `content`,
 
 CREATE TABLE `training_assignment_result` (
   `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `assignment_id` int NOT NULL,
   `entry_id` int NOT NULL,
   `property_id` int DEFAULT NULL COMMENT 'if set to ''1'', this entry relies on stored property ids in value field',
   `value` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Dumping data for table `training_assignment_result`
---
-
-INSERT INTO `training_assignment_result` (`id`, `user_id`, `assignment_id`, `entry_id`, `property_id`, `value`) VALUES
-(202, 2, 210, 308, 1, '[261,257]'),
-(203, 2, 210, 302, 1, '[252]'),
-(204, 2, 210, 303, NULL, 'asa'),
-(205, 2, 210, 304, NULL, 'sasas');
 
 -- --------------------------------------------------------
 
@@ -630,6 +630,7 @@ CREATE TABLE `training_cases` (
   `intro` text NOT NULL,
   `outro` text NOT NULL,
   `info` text NOT NULL,
+  `complete_action` text,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -637,9 +638,9 @@ CREATE TABLE `training_cases` (
 -- Dumping data for table `training_cases`
 --
 
-INSERT INTO `training_cases` (`id`, `assignment_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `created_at`) VALUES
-(45, 210, 0, 'Casus 1: Openheid over autisme op werk', '<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">2Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\">ivamu</span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '<h1>Goed Gedaan!</h1><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>L3orem ipsum dolor sit amet, consectetur adipiscing elit. V</strong></span><span style=\"background-color:hsl(210,75%,60%);color:hsl(0,0%,100%);\"><strong>ivamu</strong></span><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus.&nbsp;</strong></span></p><ul><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li></ul><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Wat nu?</strong></span></p><ul><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li><li><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></li></ul>', 'Extra informatie', '2025-03-04 14:31:45'),
-(46, 210, 1, 'Casus', '', '', '', '2025-03-04 14:31:45');
+INSERT INTO `training_cases` (`id`, `assignment_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `complete_action`, `created_at`) VALUES
+(59, 242, 0, 'Casus 1: Openheid over autisme op werk', '<p>2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</p><p>&nbsp;</p><p>asas</p><p>&nbsp;</p>', '<h1>Goed Gedaan!</h1><p><strong>L3orem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus.&nbsp;</strong></p><ul><li><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li></ul><p><strong>Wat nu?</strong></p><ul><li><strong>Morbi sed:</strong> dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li><li><strong>Maecenas bibendum:</strong> magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</li></ul>', 'Extra informatie', 'default', '2025-03-10 13:59:33'),
+(60, 242, 1, 'Casus', '', '', '', '', '2025-03-10 13:59:33');
 
 -- --------------------------------------------------------
 
@@ -661,11 +662,10 @@ CREATE TABLE `training_case_entry` (
 --
 
 INSERT INTO `training_case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`) VALUES
-(85, 2, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 45, 'mcq'),
-(86, 0, 'Wanneer zou je openheid geven?', '', 45, 'mcq'),
-(87, 3, 'Welke informatie zou jij delen?', '', 45, 'mcq'),
-(88, 1, 'Handmatige invoer', '', 45, 'text_input'),
-(89, 4, 'test', '', 45, 'text_separator');
+(114, 2, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 59, 'mcq'),
+(115, 0, 'Wanneer zou je openheid geven?', '', 59, 'mcq-2'),
+(116, 3, 'Welke informatie zou jij delen?', '', 59, 'mcq'),
+(117, 1, 'Handmatige invoer', '', 59, 'text_input');
 
 -- --------------------------------------------------------
 
@@ -685,16 +685,15 @@ CREATE TABLE `training_case_entry_properties` (
 --
 
 INSERT INTO `training_case_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
-(242, 85, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
-(243, 85, 'B: Ik geef geen openheid om stigmatisering te vermijden', 0),
-(244, 85, 'C: Ik weet het niet en wil meer informatie', 0),
-(245, 87, 'A: Ik deel alles, inclusief de details van mijn belemmeringen', 0),
-(246, 87, 'B: Ik deel alleen wat relevant is voor mijn werk', 0),
-(247, 87, 'C: Ik deel helemaal niets!', 0),
-(248, 86, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
-(249, 86, 'B: Ik geef geen openheid om stigmatisering te vermijden', 0),
-(250, 86, 'C: Ik weet het niet en wil meer informatie', 0),
-(251, 89, '<p>asdsadasd</p>', 0);
+(306, 114, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
+(307, 114, 'B: Ik geef geen openheid om stigmatisering te vermijden', 0),
+(308, 114, 'C: Ik weet het niet en wil meer informatie', 0),
+(309, 116, 'A: Ik deel alles, inclusief de details van mijn belemmeringen', 0),
+(310, 116, 'B: Ik deel alleen wat relevant is voor mijn werk', 0),
+(311, 116, 'C: Ik deel helemaal niets!', 0),
+(312, 115, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
+(313, 115, 'B: Ik geef geen openheid om stigmatisering te vermijden', 1),
+(314, 115, 'C: Ik weet het niet en wil meer informatie', 2);
 
 -- --------------------------------------------------------
 
@@ -704,21 +703,13 @@ INSERT INTO `training_case_entry_properties` (`id`, `entry_id`, `content`, `sort
 
 CREATE TABLE `training_case_result` (
   `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `assignment_id` int NOT NULL,
   `case_id` int NOT NULL,
   `entry_id` int NOT NULL,
   `property_id` int DEFAULT NULL COMMENT 'if set to ''1'', this entry relies on stored property ids in value field	',
   `value` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Dumping data for table `training_case_result`
---
-
-INSERT INTO `training_case_result` (`id`, `user_id`, `assignment_id`, `case_id`, `entry_id`, `property_id`, `value`) VALUES
-(16, 2, 210, 45, 86, 1, '[248]'),
-(17, 2, 210, 45, 87, 1, '[247]');
 
 -- --------------------------------------------------------
 
@@ -729,15 +720,8 @@ INSERT INTO `training_case_result` (`id`, `user_id`, `assignment_id`, `case_id`,
 CREATE TABLE `training_users` (
   `id` int NOT NULL,
   `training_id` int NOT NULL,
-  `user_id` int NOT NULL
+  `user_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `training_users`
---
-
-INSERT INTO `training_users` (`id`, `training_id`, `user_id`) VALUES
-(20, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -987,43 +971,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry`
 --
 ALTER TABLE `assignment_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry_properties`
 --
 ALTER TABLE `assignment_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `assignment_result`
 --
 ALTER TABLE `assignment_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
 
 --
 -- AUTO_INCREMENT for table `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `auth_identities`
 --
 ALTER TABLE `auth_identities`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions_users`
@@ -1047,25 +1031,25 @@ ALTER TABLE `auth_token_logins`
 -- AUTO_INCREMENT for table `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `case_entry`
 --
 ALTER TABLE `case_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `case_entry_properties`
 --
 ALTER TABLE `case_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `case_result`
 --
 ALTER TABLE `case_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `meetings`
@@ -1089,67 +1073,67 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `trainings`
 --
 ALTER TABLE `trainings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `training_assignments`
 --
 ALTER TABLE `training_assignments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT for table `training_assignment_entry`
 --
 ALTER TABLE `training_assignment_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=358;
 
 --
 -- AUTO_INCREMENT for table `training_assignment_entry_properties`
 --
 ALTER TABLE `training_assignment_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=339;
 
 --
 -- AUTO_INCREMENT for table `training_assignment_result`
 --
 ALTER TABLE `training_assignment_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
 
 --
 -- AUTO_INCREMENT for table `training_cases`
 --
 ALTER TABLE `training_cases`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `training_case_entry`
 --
 ALTER TABLE `training_case_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `training_case_entry_properties`
 --
 ALTER TABLE `training_case_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=315;
 
 --
 -- AUTO_INCREMENT for table `training_case_result`
 --
 ALTER TABLE `training_case_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `training_users`
 --
 ALTER TABLE `training_users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -1172,7 +1156,8 @@ ALTER TABLE `assignment_entry_properties`
 --
 ALTER TABLE `assignment_result`
   ADD CONSTRAINT `assignment_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `assignment_result_entry_id_foreign` FOREIGN KEY (`entry_id`) REFERENCES `assignment_entry` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `assignment_result_entry_id_foreign` FOREIGN KEY (`entry_id`) REFERENCES `assignment_entry` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `assignment_result_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `auth_groups_users`
@@ -1222,7 +1207,8 @@ ALTER TABLE `case_entry_properties`
 ALTER TABLE `case_result`
   ADD CONSTRAINT `case_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `case_result_case_id_foreign` FOREIGN KEY (`case_id`) REFERENCES `cases` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `case_result_entry_id_foreign` FOREIGN KEY (`entry_id`) REFERENCES `case_entry` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `case_result_entry_id_foreign` FOREIGN KEY (`entry_id`) REFERENCES `case_entry` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `case_result_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `training_assignments`
@@ -1246,7 +1232,8 @@ ALTER TABLE `training_assignment_entry_properties`
 -- Constraints for table `training_assignment_result`
 --
 ALTER TABLE `training_assignment_result`
-  ADD CONSTRAINT `training_assignment_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `training_assignment_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `training_assignment_result_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `training_cases`
@@ -1270,13 +1257,15 @@ ALTER TABLE `training_case_entry_properties`
 -- Constraints for table `training_case_result`
 --
 ALTER TABLE `training_case_result`
-  ADD CONSTRAINT `training_case_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `training_case_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `training_case_result_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `training_users`
 --
 ALTER TABLE `training_users`
-  ADD CONSTRAINT `training_users_trainings_id_foreign` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `training_users_trainings_id_foreign` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `training_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

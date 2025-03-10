@@ -8,13 +8,6 @@ use App\Models\TrainingUsers;
 
 class User extends Model
 {
-    private static function generateShortName( $user ) {
-        $first_name = $user['firstname'] ?? '';
-        $last_name = $user['lastname'] ?? '';
-
-        return strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-    }
-
     public function getUserInfo() {
         $user = auth()->user();
 
@@ -22,7 +15,8 @@ class User extends Model
             return false;
 
         $data = $user->toRawArray();
-        $data["shortname"] = $this->generateShortName( $data );
+        $data["shortname"] = generateUserShortName( $data );
+        $data["fullname"] = generateUserFullName( $data );
 
         $data["is_admin"] = $this->isAdmin();
 		

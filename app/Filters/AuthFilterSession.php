@@ -12,6 +12,8 @@ class AuthFilterSession implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
+		helper(['user']);
+		
 		// https://shield.codeigniter.com/quick_start_guide/using_authorization/
 		$user = auth()->user();
 

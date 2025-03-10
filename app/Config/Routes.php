@@ -109,6 +109,19 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 		$routes->post(	'save',						'CaseController::save/$1', 							['as' => 'admin.case.save']);
 		$routes->get(	'', 						'CaseController::index/$1', 						['as' => 'admin.case']);	
 	});
+	
+	// User
+	$routes->get(	'users/new', 					'UserController::new_user', 						['as' => 'admin.user.new']);
+	$routes->post(	'users/new', 					'UserController::new_user_create');
+	$routes->get(	'users',						'UsersController::index', 							['as' => 'admin.users']);
+	
+	$routes->group('users/(:num)', function ($routes)
+	{
+		$routes->get(	'', 						'UserController::index/$1', 						['as' => 'admin.user']);
+		$routes->post(	'', 						'UserController::update/$1', 						['as' => 'admin.user.update']);
+		$routes->post(	'delete', 					'UserController::delete/$1', 						['as' => 'admin.user.delete']);
+		
+	});
 });
 
 service('auth')->routes($routes);

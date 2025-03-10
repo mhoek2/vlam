@@ -38,8 +38,9 @@
                 <button id="menuToggle">&#9776;</button>
             </li>
             <li class="menu-item hidden"><a href="<?=base_url(route_to('admin'))?>">Home</a></li>
-            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.meetings'))?>">Meetings</a></li>
-            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.trainings'))?>">Trainings</a></li>
+            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.meetings'))?>">Bijeenkomsten</a></li>
+            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.trainings'))?>">Trainingen</a></li>
+            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.users'))?>">Gebruikers</a></li>
         </ul>
         <ul>
         <?php if ($user): ?>
