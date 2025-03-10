@@ -1,4 +1,10 @@
 :root {
+	--primary-color: #269bc4;		/* blue */
+	--secondary-color: #1d1e57; 	/* dark blue */
+	--accent-color: #c1dbe9; 		/* light blue */
+	--pink-color: #e078a1; 			/* pink */
+	--pink-light-color: #eaccda; 	/* light pink */
+	
     --max-width: 1600px;
 	
 	--button-background-color: rgb(236 238 253);

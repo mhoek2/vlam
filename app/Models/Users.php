@@ -21,10 +21,11 @@ class Users extends Model
 	
     public function getUsers( $user_id = NULL )
     {
-		$builder = $this->select('users.id, users.firstname, users.middlename, users.lastname, training_users.training_id, trainings.name as training_name, auth_groups_users.group')
-					->join('training_users', 'training_users.user_id = users.id', 'left')  // LEFT JOIN for training info
-					->join('trainings', 'trainings.id = training_users.training_id', 'left')  // LEFT JOIN for training info
-					->join('auth_groups_users', 'auth_groups_users.user_id = users.id', 'left');  // LEFT JOIN for user group info
+		$builder = $this->select('users.id, users.username, users.firstname, users.middlename, users.lastname, training_users.training_id, trainings.name as training_name, auth_groups_users.group, auth_identities.secret as email')
+					->join('auth_identities', 'auth_identities.user_id = users.id', 'left')
+					->join('training_users', 'training_users.user_id = users.id', 'left')
+					->join('trainings', 'trainings.id = training_users.training_id', 'left')
+					->join('auth_groups_users', 'auth_groups_users.user_id = users.id', 'left');
 					
 		if ( !empty($user_id) && is_int($user_id ) )
 			$builder->where('users.id', $user_id);

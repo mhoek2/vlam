@@ -1,28 +1,86 @@
 <?php echo $header; ?>
 
+<?php
+$action = '';
+$action_button = '';
+$breadcrumb_title = '';
+
+if (!empty($selected_user)){
+	$action_button = 'Opslaan';
+	$action = base_url(route_to('admin.user.update', $selected_user['id']));
+	$breadcrumb_title = $selected_user['fullname'];	
+}
+else {
+	$action_button = 'Nieuwe gebruiker aanmaken';
+	$action = base_url(route_to('admin.user.new'));
+	$breadcrumb_title = 'Nieuwe Gebruiker';
+}
+?>
+
+<style>
+	form {
+		max-width:600px
+	}
+	
+	<?php if(! empty($selected_user) ): ?>
+		.edit-user-info {
+			display: flex;
+			align-items: center;
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			padding: 10px 15px;
+			margin: 10px 0 50px 0;
+			margin: 10px auto 50px auto;
+			width: 100%;
+			max-width: 500px;
+			font-family: 'Arial', sans-serif;
+		}
+
+			.edit-user-info .profile {
+				width: 150px;
+				height: 150px;
+				border-radius: 50%;
+				background-color: var(--header-user-dropdown-button-background);
+				color: white;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 4em;
+				font-weight: bold;
+				margin-right: 15px;
+			}
+
+		.edit-user-info .meta {
+			display: flex;
+			flex-direction: column;
+		}
+
+			.edit-user-info .meta span {
+				color: #333;
+				font-size: 14px;
+				margin-bottom: 5px;
+			}
+			.edit-user-info .meta span.name {
+				font-weight:600;
+			}
+			.edit-user-info .meta span.email {
+				font-size: 13px;
+				color: #555;
+			}
+	<?php endif ?>
+</style>
+
 <div class="breadcrumbs">
    	<ul>
-		<li><span>Gebruikers</span></li>
+		<li><a href="<?=base_url(route_to('admin.users'))?>">Gebruikers</a></li>
+		<li><span><?=$breadcrumb_title?></span></li>
     </ul>
 </div>
 
 <section class="main">
     <div class="content">
 
-		<?php
-		$action = '';
-		$action_button = '';
-
-		if (!empty($selected_user)){
-			$action_button = 'Opslaan';
-			$action = base_url(route_to('admin.user.update', $selected_user['id']));
-		}
-		else {
-			$action_button = 'Nieuwe gebruiker aanmaken';
-			$action = base_url(route_to('admin.user.new'));
-		}
-		?>
-		
 		<form action="<?=$action?>" method="post">
 			<?= csrf_field() ?>
 			
@@ -55,6 +113,17 @@
 					<label for="floatingPasswordConfirmInput"><?= lang('Auth.passwordConfirm') ?></label>
 					<input type="password" class="form-control" id="floatingPasswordConfirmInput" name="password_confirm" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.passwordConfirm') ?>" required>
 				</div>
+			
+			<?php else: ?>
+				<div class="edit-user-info">
+					<div class="profile"><?=$selected_user['shortname']?></div>
+					<div class="meta">
+						<span class="name"><?=$selected_user['fullname']?></span>
+						<span><?=$selected_user['username']?></span>
+						<span class="email"><?=$selected_user['email']?></span>
+					</div>
+				</div>
+			
 			<?php endif ?>
 			
 			<?php 
@@ -100,7 +169,7 @@
 			<p>Speciale handelingen:</p>
 			
 			<a id="change_password" class="button-alert">
-				<i class="fa-solid fa-ban"></i> Wachtwoord wijzigen
+				<i class="fa-solid fa-key"></i> Wachtwoord wijzigen
 			</a>
 			
 			<?php if ($selected_user['id'] !== $user['id']): ?>
@@ -142,8 +211,8 @@
 
 					var csrfFieldToken = document.createElement('input');
 					csrfFieldToken.type = 'hidden';
-					csrfFieldToken.name = '<?= csrf_token() ?>'; ;
-					csrfFieldToken.value = '<?= csrf_hash() ?>';;
+					csrfFieldToken.name = '<?= csrf_token() ?>';
+					csrfFieldToken.value = '<?= csrf_hash() ?>';
 
 					form.appendChild(csrfFieldToken);
 					document.body.appendChild(form);

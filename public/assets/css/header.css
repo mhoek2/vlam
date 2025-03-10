@@ -128,7 +128,7 @@ header .heroe {
 }
 
 .menu label[for="user_dropdown"] {
-    display: inline-block;
+    display: flex;
     position: relative;
     cursor: pointer;
     width: 40px;
@@ -140,8 +140,8 @@ header .heroe {
     color: var(--header-user-dropdown-button-color);
     overflow: hidden;
     padding: 0;
-    text-align: center;
-    line-height: 40px;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -214,8 +214,8 @@ header .heroe {
 			color: var(--header-user-dropdown-button-color);
             overflow: hidden;
             padding: 0;
-            text-align: center;
-            line-height: 40px;
+			justify-content: center;
+			align-items: center;
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;

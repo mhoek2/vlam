@@ -1,5 +1,29 @@
 <?php echo $header; ?>
 
+<style>
+	.users-table .user-meta {
+		display:flex;
+		flex-direction: row;
+	}
+	.user-meta .profile {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background-color: var(--header-user-dropdown-button-background);
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1em;
+		font-weight: bold;
+		margin-right: 15px;
+	}
+	.user-meta a {
+		display:flex;
+		align-items: center;
+	}
+</style>
+
 <div class="breadcrumbs">
    	<ul>
 		<li><span>Gebruikers</span></li>
@@ -8,18 +32,29 @@
 
 <section class="main">
     <div class="content">
-        <table>
+        <table class="users-table">
             <thead>
                 <tr>
-                    <th>Gebruiker</th>
-                    <th width="150">Gebruikersgroep</th>
+                    <th width="150">Gebruikersnaam</th>
+                    <th>Naam</th>
+                    <th width="150">Email</th>
+                    <th width="150">Rol</th>
                     <th width="150">Training</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach( $users as $id => $item):?>
                     <tr>
-                        <td><a href="<?=base_url(route_to('admin.user', $item['id']))?>"><?=$item['fullname']?></a></td>
+                        <td class="user-meta">
+							<div class="profile">
+								<?=$item['shortname']?>
+							</div>
+							<a href="<?=base_url(route_to('admin.user', $item['id']))?>">
+								<?=$item['username']?>
+							</a>
+						</td>
+                        <td><?=$item['fullname']?></td>
+                        <td><?=$item['email']?></td>
                         <td><?=$item['group']?></td>
                         <td>
 							<?php if ( !is_null($item['training_id'])): ?>
@@ -33,7 +68,7 @@
 		
 		<div class="actions left">
             <a class="button-primary" href="<?=base_url(route_to('admin.user.new'))?>">
-                <i class="fa-solid fa-circle-plus"></i> Nieuwe gebruiker
+                <i class="fa-solid fa-circle-plus"></i> Gebruiker Aanmaken
             </a>
 		</div>
     </div>
