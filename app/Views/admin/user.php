@@ -18,25 +18,33 @@ else {
 ?>
 
 <style>
-	form {
-		max-width:600px
+	.container {
+		display:flex;
+		flex-direction: row;
+		gap:20px;
 	}
 	
+	.container .user-data-container {
+		background-color: #fff;
+		border-radius: var(--secondary-border-radius);
+		padding: 10px 15px;
+		width: 100%;
+		max-width:450px;
+	    height: max-content;
+	}
+	
+	.container > section:nth-child(2) {
+		flex:2
+	}
+
 	<?php if(! empty($selected_user) ): ?>
 		.edit-user-info {
 			display: flex;
 			align-items: center;
-			background-color: #fff;
-			border-radius: var(--secondary-border-radius);
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 			padding: 10px 15px;
-			margin: 10px 0 50px 0;
-			margin: 10px auto 50px auto;
+			margin: 10px 0;
 			width: 100%;
-			max-width: 500px;
-			font-family: 'Arial', sans-serif;
 		}
-
 			.edit-user-info .profile {
 				width: 150px;
 				height: 150px;
@@ -51,23 +59,23 @@ else {
 				margin-right: 15px;
 			}
 
-		.edit-user-info .meta {
-			display: flex;
-			flex-direction: column;
-		}
+			.edit-user-info .meta {
+				display: flex;
+				flex-direction: column;
+			}
 
-			.edit-user-info .meta span {
-				color: #333;
-				font-size: 14px;
-				margin-bottom: 5px;
-			}
-			.edit-user-info .meta span.name {
-				font-weight:600;
-			}
-			.edit-user-info .meta span.email {
-				font-size: 13px;
-				color: #555;
-			}
+				.edit-user-info .meta span {
+					color: #333;
+					font-size: 14px;
+					margin-bottom: 5px;
+				}
+				.edit-user-info .meta span.name {
+					font-weight:600;
+				}
+				.edit-user-info .meta span.email {
+					font-size: 13px;
+					color: #555;
+				}
 	
 		/*
 		#change_password_form {
@@ -91,65 +99,74 @@ else {
     <div class="content">
 
 		<form action="<?=$action?>" method="post">
-			<?php if( empty($selected_user) ): ?>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" value="<?= old('username') ?>">
-					<div class="text-danger">
-						<?= \Config\Services::validation()->getError('username') ?>
-					</div>
-				</div>
-			
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" class="form-control" value="<?= old('email') ?>">
-					<div class="text-danger">
-						<?= \Config\Services::validation()->getError('email') ?>
-					</div>
-				</div>
-			
+			<div class="container">
+				<section class="user-data-container">
+					<?php if( empty($selected_user) ): ?>
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" id="username" name="username" class="form-control" value="<?= old('username') ?>">
+							<div class="text-danger">
+								<?= \Config\Services::validation()->getError('username') ?>
+							</div>
+						</div>
 
-				<!-- Password -->
-				<div class="form-group">
-					<label for="floatingPasswordInput"><?= lang('Auth.password') ?></label>
-					<input type="password" class="form-control" id="floatingPasswordInput" name="password" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.password') ?>" required>
-				</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" id="email" name="email" class="form-control" value="<?= old('email') ?>">
+							<div class="text-danger">
+								<?= \Config\Services::validation()->getError('email') ?>
+							</div>
+						</div>
 
-				<!-- Password (Again) -->
-				<div class="form-group">
-					<label for="floatingPasswordConfirmInput"><?= lang('Auth.passwordConfirm') ?></label>
-					<input type="password" class="form-control" id="floatingPasswordConfirmInput" name="password_confirm" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.passwordConfirm') ?>" required>
-				</div>
-			
-			<?php else: ?>
-				<div class="edit-user-info">
-					<div class="profile"><?=$selected_user['shortname']?></div>
-					<div class="meta">
-						<span class="name"><?=$selected_user['fullname']?></span>
-						<span><?=$selected_user['username']?></span>
-						<span class="email"><?=$selected_user['email']?></span>
-					</div>
-				</div>
-			
-			<?php endif ?>
-			
-			<?php 
-			$additional_fields = [
-				['field' => 'firstname', 	'name' => "First name"],
-				['field' => 'middlename', 	'name' => "Middle name"],
-				['field' => 'lastname', 	'name' => "Last name"],
-			];
-	
-			foreach( $additional_fields as $item ):
-			?>
-				<div class="form-group">
-					<label for="name"><?=$item['name']?></label>
-					<input type="text" id="<?=$item['field']?>" name="<?=$item['field']?>" class="form-control" value="<?= !empty($selected_user) ? $selected_user[$item['field']] : old($item['field']) ?>">
-					<div class="text-danger">
-						<?= \Config\Services::validation()->getError($item['field']) ?>
-					</div>
-				</div>
-			<?php endforeach ?>
+
+						<h3>Wachtwoord</h3>
+
+						<!-- Password -->
+						<div class="form-group">
+							<label for="floatingPasswordInput"><?= lang('Auth.password') ?></label>
+							<input type="password" class="form-control" id="floatingPasswordInput" name="password" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.password') ?>" required>
+						</div>
+
+						<!-- Password (Again) -->
+						<div class="form-group">
+							<label for="floatingPasswordConfirmInput"><?= lang('Auth.passwordConfirm') ?></label>
+							<input type="password" class="form-control" id="floatingPasswordConfirmInput" name="password_confirm" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.passwordConfirm') ?>" required>
+						</div>
+
+					<?php else: ?>
+						<div class="edit-user-info">
+							<div class="profile"><?=$selected_user['shortname']?></div>
+							<div class="meta">
+								<span class="name"><?=$selected_user['fullname']?></span>
+								<span><?=$selected_user['username']?></span>
+								<span class="email"><?=$selected_user['email']?></span>
+							</div>
+						</div>
+					<?php endif ?>
+
+					<?php 
+					$additional_fields = [
+						['field' => 'firstname', 	'name' => "First name"],
+						['field' => 'middlename', 	'name' => "Middle name"],
+						['field' => 'lastname', 	'name' => "Last name"],
+					];
+					?>
+
+				</section>
+				<section>
+					<h3>Persoonsgegevens</h3>
+
+					<?php foreach( $additional_fields as $item ): ?>
+						<div class="form-group">
+							<label for="name"><?=$item['name']?></label>
+							<input type="text" id="<?=$item['field']?>" name="<?=$item['field']?>" class="form-control" value="<?= !empty($selected_user) ? $selected_user[$item['field']] : old($item['field']) ?>">
+							<div class="text-danger">
+								<?= \Config\Services::validation()->getError($item['field']) ?>
+							</div>
+						</div>
+					<?php endforeach ?>
+				</section>
+			</div>
 			
 			<div class="request-response">
 				<?php if (session('error') !== null) : ?>
