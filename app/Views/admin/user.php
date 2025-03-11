@@ -82,8 +82,6 @@ else {
     <div class="content">
 
 		<form action="<?=$action?>" method="post">
-			<?= csrf_field() ?>
-			
 			<?php if( empty($selected_user) ): ?>
 				<div class="form-group">
 					<label for="username">Username</label>
@@ -159,6 +157,8 @@ else {
 				</div>
 			<?php endif ?>
 			
+			<?= csrf_field() ?>
+
 			<div class="actions">
 				<button type="submit" class="button-primary"><?=$action_button?></button>
 			</div>

@@ -19,7 +19,7 @@
             <label>Name<lable>
             <input type="text" name="name" value="<?=$training["name"]?>">
 
-            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+            <?= csrf_field() ?>
 
 			<div class="actions">
 				<button type="submit" class="button-primary">
@@ -35,7 +35,7 @@
             <label for="user">Search for User:</label>
             <input type="text" id="search_member" name="user" placeholder="Search users...">
 
-            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+            <?= csrf_field() ?>
         </form>
 
         <div class="members">

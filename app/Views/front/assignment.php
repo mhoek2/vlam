@@ -68,7 +68,7 @@
 				<?php }; ?>
 			</div>
 			
-			<input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+			<?= csrf_field() ?>
 			
             <button class="button-primary" type="submit"><?=$sub_assignment ? 'Volgende' : 'Opslaan'?></button>
         </form>

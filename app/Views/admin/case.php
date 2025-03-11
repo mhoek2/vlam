@@ -40,7 +40,7 @@
 				<?php endforeach; ?>
 			</select>	
 				
-            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+			<?= csrf_field() ?>
 			
 			<div class="actions">
 				<button type="submit" class="button-primary">
