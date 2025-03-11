@@ -26,7 +26,10 @@ class MeetingController extends BaseController
             'intro' => $meeting_intro
         ]);
 
-        return $this->response->setJSON(['message' => 'Form submitted successfully!']);
+        return $this->response->setJSON([
+			'message' 			=> 'Form submitted successfully!',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
     }
 
     public function index( $meeting_id ): string

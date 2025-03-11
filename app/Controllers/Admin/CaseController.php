@@ -42,7 +42,10 @@ class CaseController extends BaseController
             'complete_action' 	=> $complete_action
         ]);
 
-		return $this->response->setJSON(['message' => 'Form submitted successfully!']);
+		return $this->response->setJSON([
+			'message' 			=> 'Form submitted successfully!',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 	
 	private function get_complete_actions( $case )
@@ -155,8 +158,9 @@ class CaseController extends BaseController
 		}	
 		
 		return $this->response->setJSON([
-			'status' 	=> 'success', 
-			'html' 		=> view('admin/case_entry', $entry)
+			'status' 			=> 'success', 
+			'html' 				=> view('admin/case_entry', $entry),
+			'new_csrf_token'	=> csrf_hash(),
 		]);
 	}
 	
@@ -169,7 +173,10 @@ class CaseController extends BaseController
                                        ->update($id, ['sort_order' => $order]);
         }
 
-        return $this->response->setJSON(['status' => 'success']);
+        return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 	
 	public function update_entry_name()
@@ -179,7 +186,10 @@ class CaseController extends BaseController
 
 		$this->caseEntry->update($entry_id, ['name' => $new_entry_name]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 	
 	public function update_entry_type()
@@ -201,7 +211,10 @@ class CaseController extends BaseController
 		
 		$this->caseEntry->update($entry_id, ['type' => $new_type]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 
 	public function delete_entry( $case_id )
@@ -217,7 +230,10 @@ class CaseController extends BaseController
         ])->delete($entry_id);
 		// Removal of related tables happens through cascaded foreign relations
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 
 	
@@ -240,7 +256,10 @@ class CaseController extends BaseController
 			'content' => $property_content,
 		]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 
 	public function update_property( $case_id )
@@ -250,14 +269,20 @@ class CaseController extends BaseController
 
 		$this->caseEntryProperties->update($property_id, ['content' => $property_content]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 	
 	public function delete_property( $case_id, $property_id )
 	{
 		$this->caseEntryProperties->delete($property_id);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 	
 	public function clear_entry_properties( $entry_id )
@@ -277,6 +302,9 @@ class CaseController extends BaseController
                                        ->update($id, ['sort_order' => $order]);
         }
 		
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 }

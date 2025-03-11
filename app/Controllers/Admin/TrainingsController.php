@@ -20,19 +20,19 @@ class TrainingsController extends BaseController
 		$training_id = $this->request->getPost('training_id');
 
 		if (empty($training_id)) {
-            return $this->response->setJSON(['status' => 'error']);
+            return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
         }
 
         $members =  $this->trainingMembers->hasMembers($training_id);
 
         if ($members)
-            return $this->response->setJSON(['status' => 'error']);
+            return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
 
         // check if training is in progress still?
 
 		$this->trainings->delete($training_id);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON(['status' => 'success', 'new_csrf_token'=> csrf_hash()]);
     }
 
     public function add_training()
@@ -47,7 +47,8 @@ class TrainingsController extends BaseController
 		return $this->response->setJSON([
 			'status' => 'success', 
 			'redirect_url'	=> base_url(route_to('admin.training', $insert_id)),
-			'training_id' => $insert_id
+			'training_id' => $insert_id,
+			'new_csrf_token'=> csrf_hash(),
 		]);
     }
 

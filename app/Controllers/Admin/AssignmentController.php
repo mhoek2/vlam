@@ -44,7 +44,10 @@ class AssignmentController extends BaseController
             'sub_assignment' 	=> $sub_assignment
         ]);
 
-		return $this->response->setJSON(['message' => 'Form submitted successfully!']);
+		return $this->response->setJSON([
+			'message' 			=> 'Form submitted successfully!',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	private function get_sub_assignments( $assignment )
@@ -70,6 +73,7 @@ class AssignmentController extends BaseController
     {
 		// Assignment
 		$this->data['assignment'] = $this->assignments->find($assignment_id);
+
 		if (!$this->data['assignment'])
 			die("Assignment invalid.");
 		
@@ -156,8 +160,9 @@ class AssignmentController extends BaseController
 		}	
 		
 		return $this->response->setJSON([
-			'status' 	=> 'success', 
-			'html' 		=> view('admin/assignment_entry', $entry)
+			'status' 			=> 'success', 
+			'html' 				=> view('admin/assignment_entry', $entry),
+			'new_csrf_token' 	=> csrf_hash(),
 		]);
 	}
 	
@@ -170,7 +175,10 @@ class AssignmentController extends BaseController
                                        ->update($id, ['sort_order' => $order]);
         }
 
-        return $this->response->setJSON(['status' => 'success']);
+        return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	public function update_entry_name()
@@ -180,7 +188,10 @@ class AssignmentController extends BaseController
 
 		$this->assignmentEntry->update($entry_id, ['name' => $new_entry_name]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	public function update_entry_type()
@@ -202,7 +213,10 @@ class AssignmentController extends BaseController
 		
 		$this->assignmentEntry->update($entry_id, ['type' => $new_type]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 
 	public function delete_entry( $assignment_id )
@@ -218,7 +232,10 @@ class AssignmentController extends BaseController
         ])->delete($entry_id);
 		// Removal of related tables happens through cascaded foreign relations
 		
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' => 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 
 	
@@ -241,7 +258,10 @@ class AssignmentController extends BaseController
 			'content' => $property_content,
 		]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 
 	public function update_property( $assignment_id )
@@ -251,14 +271,20 @@ class AssignmentController extends BaseController
 
 		$this->assignmentEntryProperties->update($property_id, ['content' => $property_content]);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	public function delete_property( $assignment_id, $property_id )
 	{
 		$this->assignmentEntryProperties->delete($property_id);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	public function clear_entry_properties( $entry_id )
@@ -277,7 +303,10 @@ class AssignmentController extends BaseController
 			$result = $this->assignmentEntryProperties->where('entry_id', $entry_id)
                                        ->update($id, ['sort_order' => $order]);
         }
-		
-		return $this->response->setJSON(['status' => 'success']);
+
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 }

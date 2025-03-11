@@ -26,7 +26,10 @@ class CasesController extends BaseController
            $this->cases->update($id, ['sort_order' => $order]);
         }
 
-        return $this->response->setJSON(['status' => 'success']);
+        return $this->response->setJSON([
+			'status' => 'success',
+			'new_csrf_token'=> csrf_hash(),
+		]);
 	}
 	
     public function add_case()
@@ -55,9 +58,10 @@ class CasesController extends BaseController
 		$insert_id = $this->cases->insertID();
 
 		return $this->response->setJSON([
-			'status' => 'success', 
+			'status' 		=> 'success', 
 			'redirect_url'	=> base_url(route_to('admin.case', $insert_id)),
-			'case_id' => $insert_id
+			'case_id'		=> $insert_id,
+			'new_csrf_token'=> csrf_hash(),
 		]);
     }
 	
@@ -72,6 +76,9 @@ class CasesController extends BaseController
 		$this->cases->delete( $case_id );	
 		// Removal of related tables happens through cascaded foreign relations
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token'=> csrf_hash(),
+		]);
 	}
 }

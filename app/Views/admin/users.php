@@ -32,6 +32,13 @@
 
 <section class="main">
     <div class="content">
+		
+		<div class="actions left" style="margin-bottom:25px;">
+            <a class="button-primary" href="<?=base_url(route_to('admin.user.new'))?>">
+                <i class="fa-solid fa-circle-plus"></i> Gebruiker Aanmaken
+            </a>
+		</div>
+		
         <table class="users-table">
             <thead>
                 <tr>
@@ -65,12 +72,6 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-		
-		<div class="actions left">
-            <a class="button-primary" href="<?=base_url(route_to('admin.user.new'))?>">
-                <i class="fa-solid fa-circle-plus"></i> Gebruiker Aanmaken
-            </a>
-		</div>
     </div>
 </section>
 

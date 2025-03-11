@@ -104,7 +104,8 @@
 
 <script>
 	$(document).ready(function() {
-
+		<?=updateCSRFMeta() // csrf helper ?>
+		
 		$("#cases").sortable({
 			handle: '.sortable-handle',
 			cancel: ':input,button,[contenteditable]', // not used.
@@ -120,8 +121,13 @@
 			$.ajax({
 				url: '<?= base_url(route_to('admin.cases.save_order')) ?>',
 				method: 'POST',
-				data: { sort_order: ids },
+				data: { 
+					sort_order: ids,
+					<?=setCSRFPostData()?>
+				},
 				success: function(response) {
+					updateCSRFMeta(response);	
+					
 					/*if (response.status === 'success') {
 						alert('Sort order saved successfully!');
 					}*/
@@ -140,8 +146,11 @@
 		            method: 'POST',
 		            data: {
 			            case_id: case_id,
+						<?=setCSRFPostData()?>
 		            },
 		            success: function (response) {
+						updateCSRFMeta(response);
+						
 			            if (response.status === 'success') {
                             $(this).closest('.case-item').remove();
 			            }
@@ -157,9 +166,12 @@
 		        method: 'POST',
 		        data: {
 					name: 'Casus',
-					assignment_id: <?=$assignment['id']?>
+					assignment_id: <?=$assignment['id']?>,
+					<?=setCSRFPostData()?>
 		        },
 		        success: function (response) {
+					updateCSRFMeta(response);
+					
 			        if (response.status === 'success') {
                         window.location = response.redirect_url;
 			        }

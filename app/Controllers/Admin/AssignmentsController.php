@@ -26,7 +26,10 @@ class AssignmentsController extends BaseController
            $this->assignments->update($id, ['sort_order' => $order]);
         }
 
-        return $this->response->setJSON(['status' => 'success']);
+        return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
     public function add_assignment()
@@ -56,7 +59,8 @@ class AssignmentsController extends BaseController
 		return $this->response->setJSON([
 			'status' 		=> 'success', 
 			'redirect_url'	=> base_url(route_to('admin.assignment', $insert_id)),
-			'assignment_id' => $insert_id
+			'assignment_id' => $insert_id,
+			'new_csrf_token'=> csrf_hash(),
 		]);
     }
 	
@@ -71,6 +75,9 @@ class AssignmentsController extends BaseController
 		$this->assignments->delete( $assignment_id );	
 		// Removal of related tables happens through cascaded foreign relations
 		
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 }

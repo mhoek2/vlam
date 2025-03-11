@@ -105,7 +105,8 @@
 
 <script>
 	$(document).ready(function() {
-
+		<?=updateCSRFMeta() // csrf helper ?>
+		
 		$("#assignments").sortable({
 			handle: '.sortable-handle',
 			cancel: ':input,button,[contenteditable]', // not used.
@@ -120,8 +121,13 @@
 			$.ajax({
 				url: '<?= base_url(route_to('admin.assignments.save_order')) ?>',
 				method: 'POST',
-				data: { sort_order: ids },
+				data: { 
+					sort_order: ids,
+					<?=setCSRFPostData()?>
+				},
 				success: function(response) {
+					updateCSRFMeta(response);
+					
 					/*if (response.status === 'success') {
 						alert('Sort order saved successfully!');
 					}*/
@@ -140,8 +146,11 @@
 		            method: 'POST',
 		            data: {
 			            assignment_id: assignment_id,
+						<?=setCSRFPostData()?>
 		            },
 		            success: function (response) {
+						updateCSRFMeta(response);
+						
 			            if (response.status === 'success') {
                             $(this).closest('.assignments-item').remove();
 			            }
@@ -157,9 +166,12 @@
 		        method: 'POST',
 		        data: {
 					name: 'Opdracht',
-					meeting_id: <?=$current_meeting?>
+					meeting_id: <?=$current_meeting?>,
+					<?=setCSRFPostData()?>
 		        },
 		        success: function (response) {
+					updateCSRFMeta(response);
+					
 			        if (response.status === 'success') {
                         window.location = response.redirect_url;
 			        }

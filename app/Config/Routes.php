@@ -80,7 +80,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 		$routes->post(	'update_entry_type', 		'AssignmentController::update_entry_type');
 		$routes->post(	'add_entry', 				'AssignmentController::add_entry/$1');
 		$routes->post(	'delete_entry', 			'AssignmentController::delete_entry/$1');
-		$routes->get(	'delete_property/(:num)', 	'AssignmentController::delete_property/$1/$2');
+		$routes->post(	'delete_property/(:num)', 	'AssignmentController::delete_property/$1/$2');
 		$routes->get(	'get_properties/(:num)', 	'AssignmentController::get_properties/$1/$2');
 		$routes->post(	'properties_save_order', 	'AssignmentController::properties_save_order/$1');
 		$routes->post(	'update_property', 			'AssignmentController::update_property/$1');
@@ -101,7 +101,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 		$routes->post(	'update_entry_type', 		'CaseController::update_entry_type');
 		$routes->post(	'add_entry', 				'CaseController::add_entry/$1');
 		$routes->post(	'delete_entry', 			'CaseController::delete_entry/$1');
-		$routes->get(	'delete_property/(:num)', 	'CaseController::delete_property/$1/$2');
+		$routes->post(	'delete_property/(:num)', 	'CaseController::delete_property/$1/$2');
 		$routes->get(	'get_properties/(:num)', 	'CaseController::get_properties/$1/$2');
 		$routes->post(	'properties_save_order', 	'CaseController::properties_save_order/$1');
 		$routes->post(	'update_property', 			'CaseController::update_property/$1');

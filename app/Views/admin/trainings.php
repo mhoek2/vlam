@@ -45,6 +45,8 @@
 
 <script {csp-script-nonce}>
     $(document).ready(function () {
+		<?=updateCSRFMeta() // csrf helper ?>
+		
         $(document).on('click', '#delete_training', function () 
         {
             const training_id = $(this).data('training-id');
@@ -56,8 +58,11 @@
 		            method: 'POST',
 		            data: {
 			            training_id: training_id,
+						<?=setCSRFPostData()?>
 		            },
 		            success: function (response) {
+						updateCSRFMeta(response);
+						
 			            if (response.status === 'success') {
                             location.reload();
 			            }
@@ -72,8 +77,11 @@
 		        url: '<?=current_url()?>/add_training',
 		        method: 'POST',
 		        data: {
+					<?=setCSRFPostData()?>
 		        },
 		        success: function (response) {
+					updateCSRFMeta(response);
+					
 			        if (response.status === 'success') {
 						window.location = response.redirect_url;
 			        }

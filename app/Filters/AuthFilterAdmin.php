@@ -8,6 +8,10 @@ use CodeIgniter\Filters\FilterInterface;
 
 class AuthFilterAdmin implements FilterInterface
 {
+    public $methods = [
+        'POST' => ['csrf'],
+    ];
+	
     public function before(RequestInterface $request, $arguments = null)
     {
 		// https://shield.codeigniter.com/quick_start_guide/using_authorization/

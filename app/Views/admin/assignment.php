@@ -100,6 +100,8 @@
 
 		const entry_group_to_type = <?=json_encode($entry_type_to_group)?>;
 		
+		<?=updateCSRFMeta() // csrf helper ?>
+		
 		/* 
 		ASSIGNMENT
 		*/
@@ -119,14 +121,17 @@
 			
             $('#edit_assignment').submit(function (event) {
                 event.preventDefault();
-
+				
                 var formData = $(this).serialize();
-
+				//formData += '&<?= csrf_token() ?>=' + $('meta[name="csrf-token"]').attr('content');
+				
                 $.ajax({
 					url: '<?= base_url(route_to('admin.assignment.save', $assignment["id"])) ?>',
                     type: 'POST',
                     data: formData,
                     success: function(response) {
+						updateCSRFMeta(response);
+						
                         // Handle the response from the server
                         $('#responseMessage').html('<p>' + response.message + '</p>');
 						checkSubAssignmentType();
@@ -153,14 +158,19 @@
 			placeholder: 'entry grid-item sortable-placeholder',
 		});
 	
-		function saveEntrySortOrder(ids) {
+		function saveEntrySortOrder(ids) {	
 			$.ajax({
 				url: '<?=current_url()?>/entries_save_order',
 				method: 'POST',
-				data: { sort_order: ids },
+				data: { 
+					sort_order: ids, 
+					<?=setCSRFPostData()?>
+				},
 				success: function(response) {
+					updateCSRFMeta(response);
+					
 					if (response.status === 'success') {
-		
+				
 					}
 				}
 			});
@@ -175,9 +185,12 @@
 				method: 'POST',
 				data: {
 					entry_id: entryId,
-					type: newType
+					type: newType,
+					<?=setCSRFPostData()?>
 				},
 				success: function(response) {
+					updateCSRFMeta(response);
+					
 					if (response.status === 'success') {
 						 $('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
 						loadProperties( entryId, newType);
@@ -199,9 +212,12 @@
 					method: 'POST',
 					data: {
 						entry_id: entryId,
-						entry_name: newEntryName
+						entry_name: newEntryName,
+						<?=setCSRFPostData()?>
 					},
 					success: function (response) {
+						updateCSRFMeta(response);
+						
 						if (response.status === 'success') {
 							
 						}
@@ -222,8 +238,11 @@
 						entry_name: newEntryName,
 						entry_type: newType,
 						assignment_id: <?=$assignment['id']?>,
+						<?=setCSRFPostData()?>
 					},
 					success: function (response) {
+						updateCSRFMeta(response);
+						
 						if (response.status === 'success') {
 							$('.grid-container').append(response.html);
 						}
@@ -242,8 +261,11 @@
 					method: 'POST',
 					data: {
 						entry_id: entryId,
+						<?=setCSRFPostData()?>
 					},
 					success: function (response) {
+						updateCSRFMeta(response);
+						
 						if (response.status === 'success') {
 							$(this).closest('.entry').remove();
 						}
@@ -276,9 +298,12 @@
 					method: 'POST',
 					data: {
 						entry_id: entryId,
-						property_content: propertyContent
+						property_content: propertyContent,
+						<?=setCSRFPostData()?>
 					},
 					success: function (response) {
+						updateCSRFMeta(response);
+						
 						if (response.status === 'success') {
 							loadProperties( entryId, entryType );
 							$(`#new-property-${entryId}`).val('');
@@ -358,9 +383,12 @@
 				method: 'POST',
 				data: { 
 					entry_id: entryId, 
-					sort_order: ids 
+					sort_order: ids,
+					<?=setCSRFPostData()?>
 				},
 				success: function(response) {
+					updateCSRFMeta(response);
+					
 					/*if (response.status === 'success') {
 						alert('Sort order saved successfully!');
 					}*/
@@ -404,9 +432,12 @@
 					method: 'POST',
 					data: {
 						property_id: propertyId,
-						property_content: newPropertyContent
+						property_content: newPropertyContent,
+						<?=setCSRFPostData()?>
 					},
 					success: function (response) {
+						updateCSRFMeta(response);
+						
 						if (response.status === 'success') {
 							alert('Property updated successfully!');
 						}
@@ -422,8 +453,13 @@
 			if (confirmation) {
 				$.ajax({
 					url: '<?=current_url()?>/delete_property/' + propertyId,
-					method: 'GET',
+					method: 'POST',
+					data: {
+						<?=setCSRFPostData()?>
+					},
 					success: function (response) {
+						updateCSRFMeta(response);
+						
 						if (response.status === 'success') {
 							$(this).closest('li').remove(); 
 						}

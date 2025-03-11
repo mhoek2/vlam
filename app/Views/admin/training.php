@@ -70,6 +70,8 @@
 <script {csp-script-nonce}>
     $(document).ready(function () {
 
+		<?=updateCSRFMeta() // csrf helper ?>
+		
         function add_member( user_id )
         {
 	        $.ajax({
@@ -77,10 +79,12 @@
 		        method: 'POST',
 		        data: {
 			        user_id: user_id,
+					<?=setCSRFPostData()?>
 		        },
 		        success: function (response) {
+					updateCSRFMeta(response);
+					
 			        if (response.status === 'success') {
-				        //loadProperties( entryId, entryType );
 				        $(`#search_member`).val('');
                         location.reload();
 			        }
@@ -90,6 +94,8 @@
 
         $(document).on('click', '#delete_member', function () 
         {
+			event.preventDefault();
+			
             const member_id = $(this).data('member-id');
 			const confirmation = confirm("Are you sure you want to delete this member?");
 
@@ -99,11 +105,12 @@
 		            method: 'POST',
 		            data: {
 			            member_id: member_id,
+						<?=setCSRFPostData()?>
 		            },
 		            success: function (response) {
+						updateCSRFMeta(response);
+						
 			            if (response.status === 'success') {
-				            //loadProperties( entryId, entryType );
-				            $(`#search_member`).val('');
                             location.reload();
 			            }
 		            }
@@ -149,6 +156,8 @@
                 type: 'POST',
                 data: formData,
                 success: function(response) {
+					updateCSRFMeta(response);
+					
                     // Handle the response from the server
                     $('#responseMessage').html('<p>' + response.message + '</p>');
                 },

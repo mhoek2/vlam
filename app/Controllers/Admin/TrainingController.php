@@ -176,7 +176,10 @@ class TrainingController extends BaseController
             'name' => $name,
         ]);
 
-		return $this->response->setJSON(['message' => 'Form submitted successfully!']);
+		return $this->response->setJSON([
+			'message' 		=> 'Form submitted successfully!',
+			'new_csrf_token'=> csrf_hash(),
+		]);
     }
 
     public function add_member( $training_id )
@@ -184,12 +187,16 @@ class TrainingController extends BaseController
         $user_id = $this->request->getPost('user_id');
 
 		$this->trainingMembers->replace([ 
-			'training_id' => $training_id, 
-			'user_id' => $user_id
+			'training_id' 	=> $training_id, 
+			'user_id' 		=> $user_id
             ]
 		);
 
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Form submitted successfully!']);
+        return $this->response->setJSON([
+			'status' 		=> 'success', 
+			'message' 		=> 'Form submitted successfully!',
+			'new_csrf_token'=> csrf_hash(),
+		]);
     }
 
     public function delete_member( $training_id )
@@ -201,10 +208,13 @@ class TrainingController extends BaseController
 		}
 
 		$this->trainingMembers->where([
-            'training_id' => $training_id
+            'training_id' 	=> $training_id
         ])->delete($member_id);
 
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 		=> 'success',
+			'new_csrf_token'=> csrf_hash(),
+		]);
     }
 
     public function getUsersForAutocomplete()

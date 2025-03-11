@@ -40,6 +40,8 @@
 	    <?=$text_editor->init_script()?>
 	    <?=$text_editor->assign_editor('"#intro"')?>
 		
+		<?=updateCSRFMeta() // csrf helper ?>
+		
         $(document).ready(function () {
             $('#edit_meeting').submit(function (event) {
                 event.preventDefault();
@@ -51,6 +53,8 @@
                     type: 'POST', // Send POST request
                     data: formData,
                     success: function(response) {
+						updateCSRFMeta(response);
+						
                         // Handle the response from the server
                         $('#responseMessage').html('<p>' + response.message + '</p>');
                     },
