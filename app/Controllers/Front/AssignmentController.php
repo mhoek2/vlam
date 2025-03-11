@@ -24,8 +24,9 @@ class AssignmentController extends BaseController
         if(is_null($post_entries))
         {
 		    return $this->response->setJSON([
-			    'status' => 'error',
-                'message' => 'No entries in this assignment to save'
+			    'status' 			=> 'error',
+                'message' 			=> 'No entries in this assignment to save',
+				'new_csrf_token' 	=> csrf_hash(),
 		    ]);
         }
 
@@ -82,7 +83,12 @@ class AssignmentController extends BaseController
 			);
         }
 
-		return $this->response->setJSON(['status' => 'success', 'message' => 'Assignemnt results stored successfully', 'warnings' => $warnings]);
+		return $this->response->setJSON([
+			'status' 			=> 'success', 
+			'message' 			=> 'Assignemnt results stored successfully', 
+			'warnings'			=> $warnings,
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
     }
 	
 	private function is_sub_assignment( $controller_name )

@@ -68,6 +68,8 @@
 				<?php }; ?>
 			</div>
 			
+			<input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+			
             <button class="button-primary" type="submit"><?=$sub_assignment ? 'Volgende' : 'Opslaan'?></button>
         </form>
     </div>
@@ -75,36 +77,37 @@
 
 <script>
 	$(document).ready(function() {
-        $(document).ready(function () {
-			$('.entry-property').on('change', function() {
-                const propertyContainer = $(this).closest('.property-container');
-				const checkedCount = propertyContainer.find('.entry-property:checked').length;
-				
-                if (checkedCount > propertyContainer.data('max-selectable')) {
-                    $(this).prop('checked', false);
+		<?=updateCSRFMeta() // csrf helper ?>
+		
+		$('.entry-property').on('change', function() {
+			const propertyContainer = $(this).closest('.property-container');
+			const checkedCount = propertyContainer.find('.entry-property:checked').length;
+
+			if (checkedCount > propertyContainer.data('max-selectable')) {
+				$(this).prop('checked', false);
+			}
+		});
+
+		$('#assignment_form').submit(function (event) {
+			event.preventDefault();
+
+			var formData = $(this).serialize();
+
+			$.ajax({
+				url: '<?=current_url().'/save'?>',
+				type: 'POST',
+				data: formData,
+				success: function(response) {
+					updateCSRFMeta(response);	
+
+					window.location = '<?=$post_url?>';
+				},
+				error: function(xhr, status, error) {
+					// Handle any error
+					$('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
 				}
 			});
-			
-            $('#assignment_form').submit(function (event) {
-                event.preventDefault();
-
-                var formData = $(this).serialize();
-
-                console.log(formData);
-                $.ajax({
-                    url: '<?=current_url().'/save'?>',
-                    type: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        window.location = '<?=$post_url?>';
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle any error
-                        $('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
-                    }
-                });
-            });
-        });
+		});
     });
 </script>
 

@@ -129,58 +129,60 @@
 
 <script>
 	$(document).ready(function() {
-        $(document).ready(function () {
-			
-			$(document).on('click', '#property', function(){
-				let propertyId = $(this).data('property-id');
-				
-				<?php if ($mcq_multi): ?>
-					// support for multiple selectables
-					let addProperty = false;
-					let selectedProperties = [];
+		<?=updateCSRFMeta() // csrf helper ?>
+		
+		$(document).on('click', '#property', function(){
+			let propertyId = $(this).data('property-id');
 
-					if ($(this).hasClass('selected'))
-						$(this).removeClass('selected');
+			<?php if ($mcq_multi): ?>
+				// support for multiple selectables
+				let addProperty = false;
+				let selectedProperties = [];
+
+				if ($(this).hasClass('selected'))
+					$(this).removeClass('selected');
+				else
+					addProperty = true;
+
+				$(this).closest('.properties-container').find('.properties .selected').each(function() {
+					selectedProperties.push($(this).data('property-id'));
+				});
+
+				if ( addProperty ) {
+					if ( selectedProperties.length < <?=$max_selectable?> ) {
+						$(this).addClass('selected')
+						selectedProperties.push( propertyId );
+					}
 					else
-						addProperty = true;
+						return;
+				} 
 
-					$(this).closest('.properties-container').find('.properties .selected').each(function() {
-						selectedProperties.push($(this).data('property-id'));
-					});
+				propertyId = selectedProperties;
+			<?php endif?>
 
-					if ( addProperty ) {
-						if ( selectedProperties.length < <?=$max_selectable?> ) {
-							$(this).addClass('selected')
-							selectedProperties.push( propertyId );
-						}
-						else
-							return;
-					} 
+			$.ajax({
+				url: '<?=current_url().'/save'?>',
+				type: 'POST',
+				data: {
+					entry_id: <?=$entry['id']?>,
+					property_id: propertyId,
+					<?=setCSRFPostData()?>
+				},
+				success: function(response) {
+					updateCSRFMeta(response);	
+			
+					if (response.status === 'success') {
+						<?php if (!$mcq_multi): ?>
+							$(this).siblings().removeClass('selected');
+							$(this).addClass('selected');
+						<?php endif ?>	
+					}
+				}.bind(this),
+				error: function(xhr, status, error) {
 
-					propertyId = selectedProperties;
-				<?php endif?>
-				
-                $.ajax({
-                    url: '<?=current_url().'/save'?>',
-                    type: 'POST',
-                    data: {
-						entry_id: <?=$entry['id']?>,
-						property_id: propertyId
-					},
-                    success: function(response) {
-						if (response.status === 'success') {
-							<?php if (!$mcq_multi): ?>
-								$(this).siblings().removeClass('selected');
-								$(this).addClass('selected');
-							<?php endif ?>	
-						}
-                    }.bind(this),
-                    error: function(xhr, status, error) {
-
-                    }
-                })
-			});
-        });
+				}
+			})
+		});
     });
 </script>
 

@@ -72,7 +72,11 @@ class CaseController extends BaseController
 		if (!$this->caseEntry->valid_type($entry['type']))
 		{
 			array_push( $warnings, "entry type '".$entry['type']."' does not exist!" );
-			return $this->response->setJSON(['status' => 'error', 'warnings' => $warnings]);
+			return $this->response->setJSON([
+				'status' 			=> 'error', 
+				'warnings' 			=> $warnings,
+				'new_csrf_token' 	=> csrf_hash(),
+			]);
 		}
 		
 		$value = NULL;	// stores list of property ids (integer list), or dynamic user-defined inputs (strings)
@@ -88,13 +92,21 @@ class CaseController extends BaseController
 			{
 				if ( !preg_match('/^mcq-(\d+)$/', $entry['type'], $matches) ) {
 					array_push( $warnings, "entry type '".$entry['type']."' does not match valid multi-selectable type of 'mcq-(int)'.." );
-					return $this->response->setJSON(['status' => 'error', 'warnings' => $warnings]);
+					return $this->response->setJSON([
+						'status' 			=> 'error', 
+						'warnings' 			=> $warnings,
+						'new_csrf_token' 	=> csrf_hash(),
+					]);
 				}
 
 				if ( count($property_id) > (int)$matches[1] )
 				{
 					array_push( $warnings, "count does not match with entry! .. what are you trying to do mate?" );
-					return $this->response->setJSON(['status' => 'error', 'warnings' => $warnings]);
+					return $this->response->setJSON([
+						'status' 			=> 'error', 
+						'warnings' 			=> $warnings,
+						'new_csrf_token' 	=> csrf_hash(),
+					]);
 				}
 
 				// use array_slice as fail-safe, for non matching property-counts
@@ -116,7 +128,10 @@ class CaseController extends BaseController
 			]
 		);
         	
-		return $this->response->setJSON(['status' => 'success']);
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	public function complete( $meeting_id, $assignment_id, $case_id )

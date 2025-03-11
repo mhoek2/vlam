@@ -35,6 +35,6 @@ if (! function_exists('updateCSRFMeta')) {
 
 if (! function_exists('setCSRFPostData')) {
     function setCSRFPostData() {
-        return "'". csrf_token() ."': $('meta[name=\"csrf-token\"]').attr('content')";
+        return "'". csrf_token() ."': $('meta[name=\"csrf-token\"]').attr('content')\n";
 	}
 }
