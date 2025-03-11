@@ -11,6 +11,14 @@
 	--button-hover-color: rgb(236 238 253);
 	--button-text-color: rgb(82 101 161);
 	
+	--button-success-background-color: rgb(206, 255, 204);
+	--button-success-hover-color: rgb(167, 227, 167);
+	--button-success-text-color: rgb(47, 128, 47);
+
+	--button-warning-background-color: rgb(255, 239, 180);
+	--button-warning-hover-color: rgb(255, 221, 116);
+	--button-warning-text-color: rgb(186, 119, 0);
+	
 	--button-alert-background-color: rgb(253 236 241);
 	--button-alert-hover-color: rgb(253 236 241);
 	--button-alert-text-color: rgb(161 82 82);	
@@ -39,6 +47,7 @@
     text-align: center;
     background: var(--button-background-color);
     color: var(--button-text-color);
+	border-radius: var(--secondary-border-radius);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -55,6 +64,7 @@
     text-align: center;
     background: var(--button-alert-background-color);
     color: var(--button-alert-text-color);
+	border-radius: var(--secondary-border-radius);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -493,6 +503,31 @@ table {
         font-size: 24px;
         color: #333;
     }
+
+.request-response {
+
+}
+
+.request-response p  {
+	width: max-content;
+	background: #f1f1f1;
+	border-radius: var(--secondary-border-radius);
+	padding: 0.5em 1em;
+	font-size: 14px;
+	font-weight: initial !important;
+}
+	.request-response p.alert {
+		background: var(--button-alert-background-color) !important;
+		color: var(--button-alert-text-color) !important;
+	}
+	.request-response p.warning {
+		background: var(--button-warning-background-color) !important;
+		color: var(--button-warning-text-color) !important;
+	}
+	.request-response p.success {
+		background: var(--button-success-background-color) !important;
+		color: var(--button-success-text-color) !important;
+	}
 
 /* Responsive table */
 @media (max-width: 768px) {

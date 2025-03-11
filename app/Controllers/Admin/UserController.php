@@ -43,9 +43,8 @@ class UserController extends BaseController
 		$rules = $this->getValidationRules();
 		
         $additionalRules = [
-            'firstname' => 'required|min_length[3]',
-            'middlename' => 'required|min_length[3]',
-            'lastname' => 'required|min_length[3]',
+            'firstname' => 'required|min_length[2]',
+            'lastname' => 'required|min_length[2]',
         ];
 		
         $additionalData = [
@@ -106,9 +105,8 @@ class UserController extends BaseController
         ];
 		
         $rules = [
-            'firstname' => 'required|min_length[3]',
-            'middlename' => 'required|min_length[3]',
-            'lastname' => 'required|min_length[3]',
+            'firstname' => 'required|min_length[2]',
+            'lastname' => 'required|min_length[2]',
         ];
 
 		// Validation failed
@@ -137,6 +135,41 @@ class UserController extends BaseController
 			return redirect()->to(route_to('admin.users'));
 		else
 			return redirect()->back()->with('error', 'Something went wrong deleting this account!.');
+	}
+	
+	public function change_password( int $user_id )
+	{
+		helper(['form']);
+		$passwords = service('passwords');
+		
+		$users = $this->getUserProvider();
+		$allRules = $this->getValidationRules();
+		
+		$rules = [
+			"password" 			=> $allRules['password'],
+			"password_confirm" 	=> $allRules['password_confirm']
+		];
+
+		
+	    if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
+			return $this->response->setJSON([
+				'status' 			=> 'error',
+				'errors'			=> $this->validator->getErrors(),
+				'new_csrf_token' 	=> csrf_hash(),
+			]);
+        }
+		
+		$user = $users->findById($user_id);
+		$user->fill([
+			'password' => $this->request->getPost('password')
+		]);
+		$users->save($user);	
+		
+		return $this->response->setJSON([
+			'status' 			=> 'success', 
+			'message'			=> 'Wachtwoord is gewijzigd!', 
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
     public function index( int $user_id ): string
