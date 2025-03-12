@@ -278,14 +278,16 @@ class TrainingController extends BaseController
 
         $userModel = new Users();
 
-        $users = $userModel
-            ->groupStart()
+		$users = $userModel->select('users.*')
+			->groupStart()
                 ->like('firstname', $searchTerm)
                 ->orLike('middlename', $searchTerm)
                 ->orLike('lastname', $searchTerm)
             ->groupEnd()
-            ->findAll(10); // Limit to 10 results
-
+			->join('training_users', 'training_users.user_id = users.id', 'left') // Left join with training_users
+			->where('training_users.user_id IS NULL')
+			->findAll(10);
+		
         return $this->response->setJSON( $users );
     }
 
