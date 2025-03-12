@@ -14,10 +14,13 @@ class TrainingUsers extends Model
     public function getMembers( $training_id )
     {
         //return $this->where('training_id', $training_id)->findAll();
-        $items = $this->select('training_users.id, training_users.training_id, training_users.user_id, users.firstname, users.middlename, users.lastname')
-                    ->join('users', 'users.id = training_users.user_id', 'left')  // LEFT JOIN to include users even if no match is found
-                    ->where('training_users.training_id', $training_id)
-                    ->findAll();
+        $builder = $this->select('training_users.id, training_users.training_id, training_users.user_id, users.username, users.firstname, users.middlename, users.lastname, auth_groups_users.group, auth_identities.secret as email')
+                    ->join('users', 'users.id = training_users.user_id', 'left')
+					->join('auth_identities', 'auth_identities.user_id = training_users.user_id', 'left')
+					->join('auth_groups_users', 'auth_groups_users.user_id = training_users.user_id', 'left')
+                    ->where('training_users.training_id', $training_id);
+
+		$items = $builder->findAll();
 		
 		foreach( $items as $id => $item ) {
 			$items[$id]['shortname'] = generateUserShortName( $item );

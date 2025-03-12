@@ -27,9 +27,31 @@
 			flex:2
 		}
 	
-	.members {
+	.users-table {
 		margin-top:2em;
 	}
+	
+	.users-table .user-meta {
+		display:flex;
+		flex-direction: row;
+	}
+		.users-table .user-meta .profile {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background-color: var(--header-user-dropdown-button-background);
+			color: white;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 1em;
+			font-weight: bold;
+			margin-right: 15px;
+		}
+		.users-table .user-meta a {
+			display:flex;
+			align-items: center;
+		}
 
 	.meeting-schedule {
 		display: flex;
@@ -103,48 +125,60 @@
 					
 					<label>Name<label>
 					<input type="text" name="name" value="<?=$training["name"]?>">
-						
-
-					<?= csrf_field() ?>
-
-					<div class="actions">
-						<button type="submit" class="button-primary">
-							<i class="fa-regular fa-floppy-disk"></i>Opslaan
-						</button>
-					</div>
-					
-					<h3>Deelnemers</h3>
-						
-					<label for="user">Deelnemer toevoegen:</label>
-					<input type="text" id="search_member" placeholder="Search users...">	
-						
-					<div class="members">
-						<table>
-							<thead>
-								<tr>
-									<th>Naam</th>
-									<th width="150">Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach ($members as $item): ?>
-									<tr>
-										<td><?=$item['fullname']?></td>
-										<td>
-											<button id="delete_member" data-member-id="<?=$item['id']?>">
-												<i class="fa-solid fa-trash-can"></i>
-											</button>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
-					</div>
 				</section>
 			</div>
 			
+			<?= csrf_field() ?>
 
+			<div class="actions">
+				<button type="submit" class="button-primary">
+					<i class="fa-regular fa-floppy-disk"></i>Opslaan
+				</button>
+			</div>
         </form>
+   </div>
+</section>
+		
+<section class="main">
+	<div class="content">		
+		<h3>Deelnemers</h3>
+						
+		<label for="user">Deelnemer toevoegen:</label>
+		<input type="text" id="search_member" placeholder="Search users...">	
+
+		<table class="users-table">
+			<thead>
+				<tr>
+                    <th width="150">Gebruikersnaam</th>
+                    <th>Naam</th>
+                    <th width="150">Email</th>
+                    <th width="150">Rol</th>
+					<th width="150">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($members as $item): ?>
+					<tr>
+                        <td class="user-meta">
+							<div class="profile">
+								<?=$item['shortname']?>
+							</div>
+							<a href="<?=base_url(route_to('admin.user', $item['id']))?>">
+								<?=$item['username']?>
+							</a>
+						</td>
+                        <td><?=$item['fullname']?></td>
+                        <td><?=$item['email']?></td>
+                        <td><?=$item['group']?></td>
+						<td>
+							<button id="delete_member" data-member-id="<?=$item['id']?>">
+								<i class="fa-solid fa-trash-can"></i>
+							</button>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
    </div>
 </section>
 		
@@ -186,13 +220,6 @@
 			<?php endif ?>
 		</div>
    </div>
-</section>
-		
-<section class="main">
-	<div class="content">			
-
-
-    </div>
 </section>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.umd.js"></script>

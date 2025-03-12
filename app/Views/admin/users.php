@@ -5,23 +5,23 @@
 		display:flex;
 		flex-direction: row;
 	}
-	.user-meta .profile {
-		width: 40px;
-		height: 40px;
-		border-radius: 50%;
-		background-color: var(--header-user-dropdown-button-background);
-		color: white;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 1em;
-		font-weight: bold;
-		margin-right: 15px;
-	}
-	.user-meta a {
-		display:flex;
-		align-items: center;
-	}
+		.users-table .user-meta .profile {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background-color: var(--header-user-dropdown-button-background);
+			color: white;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 1em;
+			font-weight: bold;
+			margin-right: 15px;
+		}
+		.users-table .user-meta a {
+			display:flex;
+			align-items: center;
+		}
 </style>
 
 <div class="breadcrumbs">
