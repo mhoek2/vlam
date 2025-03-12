@@ -11,7 +11,7 @@ class Trainings extends Model
     protected $table      = 'trainings';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'name', 'started', 'stoppped', 'created_at'];
+    protected $allowedFields = ['id', 'name', 'started', 'stopped', 'created_at'];
 
     public function getTrainingsWithMemberCount()
     {

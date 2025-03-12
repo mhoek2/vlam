@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 
 use App\Models\User;
 use App\Models\Meetings;
+use App\Models\Trainings;
 
 use App\Models\Assignments;					// for admin debug
 use App\Models\AssignmentEntry;				// for admin debug
@@ -58,6 +59,28 @@ abstract class BaseController extends Controller
      */
     protected $helpers = ['csrf', 'user', 'front/sidebar', 'front/header', 'front/footer'];
 
+	private function validTrainingForUser( $user )
+	{
+		if ( !$user )
+			return true;
+
+		// Admin can always view a training (either a 'specific' training, or the Leading Training )
+		// Simulate end-user role for an admin; continue reading in Models\User::getUserInfo()
+		if ( $user["is_admin"] )
+			return false;
+		
+		// End-user handling
+		if ( !is_null($user["training_id"] ) )
+		{
+			$training = $this->get_training( $user["training_id"] );
+
+			// Validate training state ( started, and not stopped )
+			if ( $training && !is_null($training['started']) && is_null($training['stopped']))
+				return false;
+		}
+
+		return true;
+	}
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -67,17 +90,21 @@ abstract class BaseController extends Controller
     /**
      * @return void
      */
-	private function initSessionController(){
-		$this->data['training_locked'] = true;
-
-		if (!$this->data['user'])
+	private function initSessionController()
+	{
+		if ( !$this->data['user'] )
 			return;
 
-		if ( !$this->data['user']["is_admin"] && !is_null($this->data['user']["training_id"]) )
-			$this->data['training_locked'] = false;
-
-		if ( $this->data['user']["is_admin"] )
-			$this->data['training_locked'] = false;
+		// Validate what training a user or admin is in, and if it is in what state.<br>
+		// Perform redirects to home if the training has ended.
+		$this->data['training_locked'] = $this->validTrainingForUser( $this->data['user'] );
+		
+		if ( $this->data['training_locked'] ) {
+			if ( current_url() !== url_to('home') )
+				$this->response->redirect( base_url(route_to('home')) );
+			else
+				return;
+		}
 		
         // Assignment
 		$this->assignments 					= is_null($this->data['user']['training_id']) ? new Assignments() 					: new TrainingAssignments();
@@ -132,7 +159,18 @@ abstract class BaseController extends Controller
 		$this->data['case'] 				= NULL;				
     }
 	
-	public function get_meeting( $meeting_id )
+	public function get_training( int $training_id )
+	{
+		$item = (new Trainings())->find($training_id);
+		
+		if ( is_null($item) ){
+			die("Meeting not found.");
+		}
+		
+		return $item;
+	}
+	
+	public function get_meeting( int $meeting_id )
 	{
 		$item = $this->meetings->find( $meeting_id );
 		
@@ -143,7 +181,7 @@ abstract class BaseController extends Controller
 		return $item;
 	}
 	
-	public function get_assignment( $assignment_id )
+	public function get_assignment( int $assignment_id )
 	{
 		$item = $this->assignments->find($assignment_id);
 		
@@ -154,7 +192,7 @@ abstract class BaseController extends Controller
 		return $item;
 	}	
 	
-	public function get_case( $assignment_id, $case_id )
+	public function get_case( int $assignment_id, int $case_id )
 	{
 		$item = $this->cases->find($case_id);
 

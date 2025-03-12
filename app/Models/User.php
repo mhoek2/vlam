@@ -22,10 +22,10 @@ class User extends Model
 		
 		$data["training_id"] = (new TrainingUsers())->findMemberTrainingId( $data['id'] );
 
+        // Admins always view the Leading Training.
+        // Commenting next statement will assign admin to the training it is assigned to. (simulating a end-user role)
 		if ( $data["is_admin"] )
-			$data["training_id"] = NULL;	// admins view the 'non cloned' version of assignments and cases
-		
-		//$data["training_id"] = NULL;
+			$data["training_id"] = NULL;
 		
         return($data);
     }

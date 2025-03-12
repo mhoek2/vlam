@@ -37,7 +37,13 @@ class TrainingController extends BaseController
         $this->TrainingSchedule = new TrainingSchedule();
     }
 
-	private static function cloneAssignmentsAndCases( $training_id )
+	private function clearTraining( int $training_id )
+	{
+		$trainingAssignments = new TrainingAssignments();
+		$trainingAssignments->where('training_id', $training_id)->delete();	
+	}
+		
+	private function cloneAssignmentsAndCases( int $training_id )
 	{
 		// Explanation:
 		// 
@@ -67,7 +73,7 @@ class TrainingController extends BaseController
 		// Clear first, just in case. 
 		// Using CASCADED foreign relations to remove entries and properties including linked cases.
 		//
-		$trainingAssignments->where('training_id', $training_id)->delete();	
+		$this->clearTraining( $training_id );
 		
 		//
 		// Clone assignments
@@ -121,8 +127,6 @@ class TrainingController extends BaseController
 		$oldToNewCasesIdMap = [];
 		$oldToNewCasesEntryIdMap = [];
 		
-		var_dump($oldToNewAssignmentIdMap);
-		
 		$cases = (new Cases())->whereIn('assignment_id', array_column($assignments, 'id'))->findAll();
 		foreach ($cases as $case) 
 		{
@@ -163,13 +167,36 @@ class TrainingController extends BaseController
 		}
 	}
 	
-	public function start( $training_id )
+	public function start( int $training_id )
 	{
 		$this->trainings->update($training_id, [
             'started' => Time::now(),
         ]);
 		
 		$this->cloneAssignmentsAndCases( $training_id );
+		
+		return redirect()->back();
+	}
+	
+	public function stop( int $training_id )
+	{
+		$this->trainings->update($training_id, [
+            'stopped' => Time::now(),
+        ]);
+		
+		return redirect()->back();
+	}
+	
+	public function force_reset( int $training_id )
+	{
+		$this->clearTraining( $training_id );	// redundant, happens in start() as well
+
+		$this->trainings->update($training_id, [
+            'started' => NULL,
+            'stopped' => NULL,
+        ]);
+		
+		return redirect()->back();
 	}
 	
     public function save( $training_id )
@@ -263,6 +290,9 @@ class TrainingController extends BaseController
 		// Training
         $this->data['training'] = $this->trainings->find( $training_id );
 
+		$this->data['training_started'] = !is_null($this->data['training']['started']);
+		$this->data['training_stopped'] = !is_null($this->data['training']['stopped']);
+		
         $this->data["current_training"] = $this->data["training"] != false ? $training_id : false;
 		
         if (!$this->data['training']) {

@@ -23,7 +23,7 @@
 			height: max-content;
 		}
 
-		.container > section:nth-child(1) {
+		.container > section:nth-child(2) {
 			flex:2
 		}
 	
@@ -67,6 +67,10 @@
 					color: var(--button-text-color);
 
 				}
+	#search_member {
+		max-width:300px;
+	}
+	
 	@media (max-width: 1199px) {
 		.container {
 			display:block;
@@ -78,14 +82,6 @@
     <div class="content">
         <form id="edit_training" method="POST">
 			<div class="container">
-				
-				<section>
-					<h2>Training</h2>
-					
-					<label>Name<label>
-					<input type="text" name="name" value="<?=$training["name"]?>">
-				</section>
-
 				<section class="block">	
 					<div class="meeting-schedule">
 						<h3>Agenda</h3>
@@ -101,57 +97,101 @@
 						<?php endforeach; ?>
 					</div>
 				</section>
+				
+				<section>
+					<h2>Training</h2>
+					
+					<label>Name<label>
+					<input type="text" name="name" value="<?=$training["name"]?>">
+						
+
+					<?= csrf_field() ?>
+
+					<div class="actions">
+						<button type="submit" class="button-primary">
+							<i class="fa-regular fa-floppy-disk"></i>Opslaan
+						</button>
+					</div>
+					
+					<h3>Deelnemers</h3>
+						
+					<label for="user">Deelnemer toevoegen:</label>
+					<input type="text" id="search_member" placeholder="Search users...">	
+						
+					<div class="members">
+						<table>
+							<thead>
+								<tr>
+									<th>Naam</th>
+									<th width="150">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($members as $item): ?>
+									<tr>
+										<td><?=$item['fullname']?></td>
+										<td>
+											<button id="delete_member" data-member-id="<?=$item['id']?>">
+												<i class="fa-solid fa-trash-can"></i>
+											</button>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
+					</div>
+				</section>
 			</div>
 			
-			<?= csrf_field() ?>
-					
-			<div class="actions">
-				<button type="submit" class="button-primary">
-					<i class="fa-regular fa-floppy-disk"></i>Opslaan
-				</button>
-			</div>
+
         </form>
    </div>
 </section>
 		
 <section class="main">
-	<div class="content">			
-				
-        <!-- why a form? -->
-        <form id="member_adding" method="POST"> 
-            <h3>Assign Users to Training</h3>
+	<div class="content">
 
-            <label for="user">Search for User:</label>
-            <input type="text" id="search_member" name="user" placeholder="Search users...">
+		<div class="alert-actions">
+			<p>Speciale handelingen:</p>
 
-            <?= csrf_field() ?>
-        </form>
+			<label>
+				Info:<br>
+				<?php if ( !$training_started ): ?>
+					<ul>
+						<li><em>Starten: De laatste versie van het online lesprogramma wordt voor deze training vastgelegd.</em></li>
+					</ul>
+				<?php elseif ( !$training_stopped ): ?>
+					<ul>
+						<li><em>Stoppen: De deelnemers kunnen geen opdrachten meer wijzigen. Alles wordt vast gezet.</em></li>
+						<li><em>Reset: Alle deelnemers-data worden gewist! De training kan daarna worden herstart</em></li>
+					</ul>
+				<?php else:?>
+					<em>De training is afgerond.</em>
+				<?php endif ?>
+			</label>
 
-        <div class="members">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th width="150">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($members as $item): ?>
-                        <tr>
-                            <td><?=$item['fullname']?></td>
-                            <td>
-                                <button id="delete_member" data-member-id="<?=$item['id']?>">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+			<?php if ( !$training_started ): ?>
+				<a class="button-primary" href="<?=base_url(route_to('admin.training.start', $current_training))?>">
+					<i class="fa-solid fa-circle-play"></i> Starten
+				</a>
+
+			<?php elseif ( !$training_stopped ): ?>
+				<a class="button-alert" href="<?=base_url(route_to('admin.training.stop', $current_training))?>">
+					<i class="fa-solid fa-circle-stop"></i> Stoppen
+				</a>
+
+				<a class="button-alert" href="<?=base_url(route_to('admin.training.force_reset', $current_training))?>">
+					<i class="fa-solid fa-plug-circle-exclamation"></i> Geforceerd RESET
+				</a>
+			<?php endif ?>
+		</div>
+   </div>
+</section>
 		
-		<label>Test knop om training te clonen:</label>
-		<a class="button" href="<?=current_url()?>/start"><i class="fa-solid fa-meteor"></i> Start</a>
+<section class="main">
+	<div class="content">			
+
+
     </div>
 </section>
 

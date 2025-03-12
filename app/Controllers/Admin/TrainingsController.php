@@ -26,7 +26,7 @@ class TrainingsController extends BaseController
         $members =  $this->trainingMembers->hasMembers($training_id);
 
         if ($members)
-            return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
+            return $this->response->setJSON(['status' => 'error', 'training has members!', 'new_csrf_token'=> csrf_hash()]);
 
         // check if training is in progress still?
 

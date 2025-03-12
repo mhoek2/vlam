@@ -53,7 +53,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 	{
 		$routes->get(	'',							'TrainingController::index/$1', 					['as' => 'admin.training']);
 		$routes->post(	'save',						'TrainingController::save/$1',						['as' => 'admin.training.save']);
-		$routes->get(	'start',					'TrainingController::start/$1');
+		$routes->get(	'start',					'TrainingController::start/$1',						['as' => 'admin.training.start']);
+		$routes->get(	'stop',						'TrainingController::stop/$1',						['as' => 'admin.training.stop']);
+		$routes->get(	'force_reset',				'TrainingController::force_reset/$1',				['as' => 'admin.training.force_reset']);
 		$routes->post(	'add_member',				'TrainingController::add_member/$1');
 		$routes->post(	'delete_member', 			'TrainingController::delete_member/$1');
 	});
