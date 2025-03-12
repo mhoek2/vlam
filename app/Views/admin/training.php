@@ -163,7 +163,7 @@
 				<?php elseif ( !$training_stopped ): ?>
 					<ul>
 						<li><em>Stoppen: De deelnemers kunnen geen opdrachten meer wijzigen. Alles wordt vast gezet.</em></li>
-						<li><em>Reset: Alle deelnemers-data worden gewist! De training kan daarna worden herstart</em></li>
+						<li><em>Reset: Alle deelnemersgegevens worden gewist! De training kan daarna worden herstart</em></li>
 					</ul>
 				<?php else:?>
 					<em>De training is afgerond.</em>
@@ -171,16 +171,16 @@
 			</label>
 
 			<?php if ( !$training_started ): ?>
-				<a class="button-primary" href="<?=base_url(route_to('admin.training.start', $current_training))?>">
+				<a class="button-primary" id="start_training">
 					<i class="fa-solid fa-circle-play"></i> Starten
 				</a>
 
 			<?php elseif ( !$training_stopped ): ?>
-				<a class="button-alert" href="<?=base_url(route_to('admin.training.stop', $current_training))?>">
+				<a class="button-alert" id="stop_training">
 					<i class="fa-solid fa-circle-stop"></i> Stoppen
 				</a>
 
-				<a class="button-alert" href="<?=base_url(route_to('admin.training.force_reset', $current_training))?>">
+				<a class="button-alert" id="force_reset_training">
 					<i class="fa-solid fa-plug-circle-exclamation"></i> Geforceerd RESET
 				</a>
 			<?php endif ?>
@@ -304,6 +304,92 @@
             });
         });
 
+		function training_post_action( post_url )
+		{
+	        $.ajax({
+		        url: post_url,
+		        method: 'POST',
+		        data: {
+					<?=setCSRFPostData()?>
+		        },
+		        success: function (response) {
+					updateCSRFMeta(response);
+					
+			        if (response.status === 'success') {
+                        location.reload();
+			        }
+		        }
+	        });
+		}
+		
+		$(document).on('click', '#start_training', function ()
+		{
+			const confirmation = confirm("Weet je zeker dat je de training wilt starten");
+			
+			if ( !confirmation )
+				return;
+			
+			$.ajax({
+				url: '<?=base_url(route_to('admin.training.start', $current_training))?>',
+				method: 'POST',
+				data: {
+					<?=setCSRFPostData()?>
+				},
+				success: function (response) {
+					updateCSRFMeta(response);
+
+					if (response.status === 'success') {
+						location.reload();
+					}
+				}
+			});
+		});
+		
+		$(document).on('click', '#stop_training', function () 
+					   {
+			const confirmation = confirm("Weet je zeker dat je de training wilt stoppen");
+			
+			if ( !confirmation )
+				return;
+			
+			$.ajax({
+				url: '<?=base_url(route_to('admin.training.stop', $current_training))?>',
+				method: 'POST',
+				data: {
+					<?=setCSRFPostData()?>
+				},
+				success: function (response) {
+					updateCSRFMeta(response);
+
+					if (response.status === 'success') {
+						location.reload();
+					}
+				}
+			});
+		});
+		
+		$(document).on('click', '#force_reset_training', function () 
+					   {
+			const confirmation = confirm("Weet je het zeker? Alle deelnemersgegevens worden gewist");
+			
+			if ( !confirmation )
+				return;
+			
+			$.ajax({
+				url: '<?=base_url(route_to('admin.training.force_reset', $current_training))?>',
+				method: 'POST',
+				data: {
+					<?=setCSRFPostData()?>
+				},
+				success: function (response) {
+					updateCSRFMeta(response);
+
+					if (response.status === 'success') {
+						location.reload();
+					}
+				}
+			});
+		});
     });
 </script>
 

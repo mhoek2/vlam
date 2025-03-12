@@ -175,7 +175,10 @@ class TrainingController extends BaseController
 		
 		$this->cloneAssignmentsAndCases( $training_id );
 		
-		return redirect()->back();
+		return $this->response->setJSON([
+			'status' 			=> 'success', 
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	public function stop( int $training_id )
@@ -184,7 +187,10 @@ class TrainingController extends BaseController
             'stopped' => Time::now(),
         ]);
 		
-		return redirect()->back();
+		return $this->response->setJSON([
+			'status' 			=> 'success', 
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
 	public function force_reset( int $training_id )
@@ -196,7 +202,10 @@ class TrainingController extends BaseController
             'stopped' => NULL,
         ]);
 		
-		return redirect()->back();
+		return $this->response->setJSON([
+			'status' 			=> 'success', 
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
 	}
 	
     public function save( $training_id )
