@@ -12,9 +12,7 @@
     <link rel="stylesheet" href="<?=base_url('assets/css/backend_entries.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/meeting.css')?>">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     
     <?=service('text_editor')->load_style()?>
 
