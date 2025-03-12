@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2025 at 02:01 PM
+-- Generation Time: Mar 12, 2025 at 10:24 AM
 -- Server version: 8.0.41-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -46,9 +46,9 @@ CREATE TABLE `assignments` (
 
 INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `sub_assignment`, `created_at`) VALUES
 (1, 1, 0, 'Opdracht 1', '<p><span style=\"color:rgb(0,0,0);\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. V</span><span style=\"color:rgb(255,255,255);\">i</span><span style=\"color:#ffff00;\">vamu</span><span style=\"color:rgb(0,0,0);\">s nulla mauris, mattis vel pulvinar sit amet, efficitur a purus. Donec sit amet accumsan diam, a euismod felis. Duis dolor orci, lobortis maximus convallis nec, venenatis at neque. Morbi a pretium risus. Morbi sed dolor eleifend, ultricies urna at, tempor risus. Maecenas sed posuere augue. Quisque mollis ac odio sed molestie. Maecenas bibendum, magna vitae fringilla elementum, arcu velit tristique mauris, bibendum lobortis sem sem ut quam.</span></p>', '', 'Herken de werkervaring', 'default', '2025-02-17 19:05:20'),
-(3, 1, 3, 'Opdracht 3', '<p>Opdracht 3</p>', '', 'Kwaliteit Kaarten', 'CardController', '2025-02-17 19:05:20'),
+(3, 1, 2, 'Opdracht 3', '<p>Opdracht 3</p>', '', 'Kwaliteit Kaarten', 'CardController', '2025-02-17 19:05:20'),
 (5, 1, 1, 'Opdracht 2', '<p>Opdracht 5</p>', '', 'Podcast', 'PodcastController', '2025-02-17 19:05:20'),
-(11, 1, 2, 'Opdracht 4: Maatwerk na een opdracht', '<p>Deze tekst komt in beeld <strong>VOOR </strong>het opslaan van een opdracht</p>', '<p>Deze tekst komt in beeld <strong>NA </strong>het opslaan van een opdracht</p>', '', 'OutroController', '2025-02-25 10:35:54');
+(11, 1, 3, 'Opdracht 4: Maatwerk na een opdracht', '<p>Deze tekst komt in beeld <strong>VOOR </strong>het opslaan van een opdracht</p>', '<p>Deze tekst komt in beeld <strong>NA </strong>het opslaan van een opdracht</p>', '', 'OutroController', '2025-02-25 10:35:54');
 
 -- --------------------------------------------------------
 
@@ -128,10 +128,10 @@ CREATE TABLE `assignment_result` (
 --
 
 INSERT INTO `assignment_result` (`id`, `user_id`, `assignment_id`, `entry_id`, `property_id`, `value`) VALUES
-(283, 2, 1, 55, 1, '[72,76]'),
-(284, 2, 1, 29, 1, '[37]'),
-(285, 2, 1, 36, NULL, '2'),
-(286, 2, 1, 38, NULL, '3');
+(303, 2, 1, 29, 1, '[37]'),
+(304, 2, 1, 55, 1, '[72,73]'),
+(305, 2, 1, 36, NULL, '4'),
+(306, 2, 1, 38, NULL, '5');
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,8 @@ INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
 (4, 4, 'user', '2025-02-13 08:22:31'),
 (5, 5, 'user', '2025-02-13 08:22:57'),
 (6, 6, 'user', '2025-02-13 08:23:14'),
-(7, 7, 'user', '2025-02-13 08:23:40');
+(7, 7, 'user', '2025-02-13 08:23:40'),
+(15, 15, 'user', '2025-03-11 13:30:22');
 
 -- --------------------------------------------------------
 
@@ -184,12 +185,13 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$03WJ08uzWhj7t16adUAhD.lNkR.D1/HIQPwjWOIiAExsemWypgjZG', NULL, NULL, 0, '2025-03-10 07:43:51', '2025-02-05 09:20:35', '2025-03-10 07:43:51'),
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-03-12 07:29:57', '2025-02-05 09:20:35', '2025-03-12 07:29:57'),
 (3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-06 07:54:57', '2025-02-13 08:21:52', '2025-03-06 07:54:57'),
 (4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
 (5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
 (6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14'),
-(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$GRu651L2VS4KPJ06uMsT.eWd8CX.wL36oheZJejTgbhpIjuJKBfOi', NULL, NULL, 0, NULL, '2025-02-13 08:23:40', '2025-02-13 08:23:40');
+(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$oHNz7PkSRW5Bcgja7iAtiu5/NBEGh1i4fB.C6J/sPdvYMva0VQNBG', NULL, NULL, 0, '2025-03-11 12:35:45', '2025-02-13 08:23:40', '2025-03-11 13:21:52'),
+(15, 15, 'email_password', NULL, 'user6@vlam.nl', '$2y$12$y91iuFAsF4LxeHRND0zQ3ek1vUovbQTk.CHOk3EGVbatUJgh3YP8a', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:22');
 
 -- --------------------------------------------------------
 
@@ -274,7 +276,38 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identif
 (73, '157.97.51.172', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-06 16:47:49', 1),
 (74, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-10 07:43:51', 1),
 (75, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user6@vlam.nl', 11, '2025-03-10 11:21:37', 1),
-(76, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user6@vlam.nl', 13, '2025-03-10 12:49:55', 1);
+(76, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user6@vlam.nl', 13, '2025-03-10 12:49:55', 1),
+(77, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-10 15:03:33', 1),
+(78, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 07:42:38', 0),
+(79, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 07:42:43', 1),
+(80, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 11:02:55', 1),
+(81, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:28:25', 0),
+(82, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:28:29', 0),
+(83, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-11 12:28:33', 1),
+(84, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:28:59', 0),
+(85, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:02', 0),
+(86, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:11', 0),
+(87, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:16', 0),
+(88, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:19', 0),
+(89, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 12:30:23', 1),
+(90, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 12:30:30', 1),
+(91, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:41', 0),
+(92, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:44', 0),
+(93, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:48', 0),
+(94, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:53', 0),
+(95, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-11 12:34:08', 1),
+(96, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-11 12:35:45', 1),
+(97, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:15:11', 0),
+(98, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:15:15', 0),
+(99, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:15:20', 0),
+(100, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:16:25', 0),
+(101, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:16:30', 0),
+(102, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:17:05', 0),
+(103, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 13:18:25', 1),
+(104, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 13:19:01', 1),
+(105, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 13:19:17', 1),
+(106, '87.210.51.192', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 21:43:20', 1),
+(107, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-12 07:29:57', 1);
 
 -- --------------------------------------------------------
 
@@ -368,10 +401,10 @@ CREATE TABLE `case_entry` (
 --
 
 INSERT INTO `case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`) VALUES
-(1, 2, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 9, 'mcq'),
-(2, 0, 'Wanneer zou je openheid geven?', '', 9, 'mcq-2'),
+(1, 0, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 9, 'mcq-2'),
+(2, 1, 'Wanneer zou je openheid geven?', '', 9, 'mcq'),
 (3, 3, 'Welke informatie zou jij delen?', '', 9, 'mcq'),
-(9, 1, 'Handmatige invoer', '', 9, 'text_input');
+(9, 2, 'Handmatige invoer', '', 9, 'text_input');
 
 -- --------------------------------------------------------
 
@@ -392,8 +425,8 @@ CREATE TABLE `case_entry_properties` (
 
 INSERT INTO `case_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
 (42, 1, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
-(43, 1, 'B: Ik geef geen openheid om stigmatisering te vermijden', 0),
-(47, 1, 'C: Ik weet het niet en wil meer informatie', 0),
+(43, 1, 'B: Ik geef geen openheid om stigmatisering te vermijden', 3),
+(47, 1, 'C: Ik weet het niet en wil meer informatie', 1),
 (48, 3, 'A: Ik deel alles, inclusief de details van mijn belemmeringen', 0),
 (49, 3, 'B: Ik deel alleen wat relevant is voor mijn werk', 0),
 (50, 3, 'C: Ik deel helemaal niets!', 0),
@@ -422,9 +455,9 @@ CREATE TABLE `case_result` (
 --
 
 INSERT INTO `case_result` (`id`, `user_id`, `assignment_id`, `case_id`, `entry_id`, `property_id`, `value`) VALUES
-(144, 2, 1, 9, 1, 1, '[42]'),
-(145, 2, 1, 9, 3, 1, '[50]'),
-(147, 2, 1, 9, 2, 1, '[65,67]');
+(166, 2, 1, 9, 3, 1, '[48]'),
+(211, 2, 1, 9, 1, 1, '[42,47]'),
+(214, 2, 1, 9, 2, 1, '[67]');
 
 -- --------------------------------------------------------
 
@@ -714,6 +747,31 @@ CREATE TABLE `training_case_result` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `training_schedule`
+--
+
+CREATE TABLE `training_schedule` (
+  `id` int NOT NULL,
+  `training_id` int NOT NULL,
+  `meeting_id` int NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `training_schedule`
+--
+
+INSERT INTO `training_schedule` (`id`, `training_id`, `meeting_id`, `date`) VALUES
+(19, 6, 1, '2025-03-12 10:30:00'),
+(20, 6, 2, '2025-03-12 10:45:00'),
+(21, 6, 3, '2025-03-12 11:00:00'),
+(22, 6, 4, '2025-03-12 10:45:00'),
+(23, 6, 5, '2025-03-12 11:15:00'),
+(24, 6, 6, '2025-03-12 11:45:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `training_users`
 --
 
@@ -722,6 +780,13 @@ CREATE TABLE `training_users` (
   `training_id` int NOT NULL,
   `user_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `training_users`
+--
+
+INSERT INTO `training_users` (`id`, `training_id`, `user_id`) VALUES
+(30, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -754,7 +819,8 @@ INSERT INTO `users` (`id`, `username`, `firstname`, `middlename`, `lastname`, `s
 (4, 'user2', 'User', '', '2', NULL, NULL, 1, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31', NULL),
 (5, 'user3', 'User', '', '3', NULL, NULL, 1, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57', NULL),
 (6, 'user4', 'User', '', '4', NULL, NULL, 1, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14', NULL),
-(7, 'user5', 'User', '', '5', NULL, NULL, 1, NULL, '2025-02-13 08:23:39', '2025-02-13 08:23:40', NULL);
+(7, 'user5', 'User', '', '5', NULL, NULL, 1, NULL, '2025-02-13 08:23:39', '2025-02-13 08:23:40', NULL),
+(15, 'user6', 'User', '', 'a.', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:21', NULL);
 
 --
 -- Indexes for dumped tables
@@ -949,6 +1015,13 @@ ALTER TABLE `training_case_result`
   ADD KEY `training_case_result_assignment_id_foreign` (`assignment_id`);
 
 --
+-- Indexes for table `training_schedule`
+--
+ALTER TABLE `training_schedule`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `training_id` (`training_id`,`meeting_id`);
+
+--
 -- Indexes for table `training_users`
 --
 ALTER TABLE `training_users`
@@ -971,43 +1044,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry`
 --
 ALTER TABLE `assignment_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry_properties`
 --
 ALTER TABLE `assignment_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `assignment_result`
 --
 ALTER TABLE `assignment_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
 
 --
 -- AUTO_INCREMENT for table `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `auth_identities`
 --
 ALTER TABLE `auth_identities`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions_users`
@@ -1037,19 +1110,19 @@ ALTER TABLE `cases`
 -- AUTO_INCREMENT for table `case_entry`
 --
 ALTER TABLE `case_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `case_entry_properties`
 --
 ALTER TABLE `case_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `case_result`
 --
 ALTER TABLE `case_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT for table `meetings`
@@ -1073,7 +1146,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `trainings`
 --
 ALTER TABLE `trainings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `training_assignments`
@@ -1124,16 +1197,22 @@ ALTER TABLE `training_case_result`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
+-- AUTO_INCREMENT for table `training_schedule`
+--
+ALTER TABLE `training_schedule`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT for table `training_users`
 --
 ALTER TABLE `training_users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -1259,6 +1338,12 @@ ALTER TABLE `training_case_entry_properties`
 ALTER TABLE `training_case_result`
   ADD CONSTRAINT `training_case_result_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `training_assignments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `training_case_result_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `training_schedule`
+--
+ALTER TABLE `training_schedule`
+  ADD CONSTRAINT `training_schedule_training_id_foreign` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `training_users`

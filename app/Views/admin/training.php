@@ -8,26 +8,115 @@
 </div>
 
 <style>
-.members {
-    margin-top:2em;
-}
+	.container {
+		display:flex;
+		flex-direction: row;
+		gap:20px;
+	}
+	
+		.container .block {
+			background-color: #fff;
+			border-radius: var(--secondary-border-radius);
+			padding: 10px 15px;
+			width: 100%;
+			max-width:450px;
+			height: max-content;
+		}
+
+		.container > section:nth-child(1) {
+			flex:2
+		}
+	
+	.members {
+		margin-top:2em;
+	}
+
+	.meeting-schedule {
+		display: flex;
+		flex-direction: column;
+		gap:10px;
+		max-width:450px;
+		margin: 1em 0;
+	}
+		.meeting-schedule > div {
+			display: flex;
+			flex-direction: row;
+			gap:15px;
+		}	
+			.meeting-schedule > div input {
+				flex: 1;
+			}
+			.meeting-schedule > div label {
+				flex: 2;
+				display:flex;
+				flex-direction: row;
+				gap:20px;
+			}
+				.meeting-schedule > div label span {
+					display: flex;
+					align-items: center;
+				}
+				.meeting-schedule > div label span:nth-child(1) {
+					justify-content: center;
+					min-width: 40px;
+					height: 40px;
+					border-radius: 100%;
+					border: 1px solid #fff;
+					border-color: var(--button-background-color);
+					background: var(--button-background-color);
+					color: var(--button-text-color);
+
+				}
+	@media (max-width: 1199px) {
+		.container {
+			display:block;
+		}
+	}
 </style>
 
 <section class="main">
     <div class="content">
         <form id="edit_training" method="POST">
-            <label>Name<lable>
-            <input type="text" name="name" value="<?=$training["name"]?>">
+			<div class="container">
+				
+				<section>
+					<h2>Training</h2>
+					
+					<label>Name<label>
+					<input type="text" name="name" value="<?=$training["name"]?>">
+				</section>
 
-            <?= csrf_field() ?>
-
+				<section class="block">	
+					<div class="meeting-schedule">
+						<h3>Agenda</h3>
+						<?php foreach( $meetings as $item): ?>
+							<div>
+								<label for="meeting-<?= $item['id'] ?>">
+									<span><?= $item['name'] ?></span>
+									<span><?= $item['info'] ?></span>
+								</label>
+								<input type="hidden" name="meeting_ids[]" value="<?= $item['id'] ?>" />
+								<input type="text" name="meeting_dates[<?= $item['id'] ?>]" id="meeting-<?= $item['id'] ?>" class="datetime-picker" placeholder="Select a date", value="<?= isset($meeting_schedule[$item['id']]) ? $meeting_schedule[$item['id']] : '' ?>"  />
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</section>
+			</div>
+			
+			<?= csrf_field() ?>
+					
 			<div class="actions">
 				<button type="submit" class="button-primary">
 					<i class="fa-regular fa-floppy-disk"></i>Opslaan
 				</button>
 			</div>
         </form>
-
+   </div>
+</section>
+		
+<section class="main">
+	<div class="content">			
+				
         <!-- why a form? -->
         <form id="member_adding" method="POST"> 
             <h3>Assign Users to Training</h3>
@@ -71,6 +160,13 @@
     $(document).ready(function () {
 
 		<?=updateCSRFMeta() // csrf helper ?>
+		
+		$(".datetime-picker").datetimepicker({
+			format: 'Y-m-d H:i', // Format (YYYY-MM-DD HH:mm)
+			step: 15,            // Step in minutes (15-minute intervals)
+			minDate: 0,          // Prevent selecting past dates
+			closeOnDateSelect: true, // Close the picker after date selection
+		});
 		
         function add_member( user_id )
         {

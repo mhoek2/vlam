@@ -23,19 +23,17 @@ else {
 		flex-direction: row;
 		gap:20px;
 	}
-	
-	.container .user-data-container {
-		background-color: #fff;
-		border-radius: var(--secondary-border-radius);
-		padding: 10px 15px;
-		width: 100%;
-		max-width:450px;
-	    height: max-content;
-	}
-	
-	.container > section:nth-child(2) {
-		flex:2
-	}
+		.container .block {
+			background-color: #fff;
+			border-radius: var(--secondary-border-radius);
+			padding: 10px 15px;
+			width: 100%;
+			max-width:450px;
+			height: max-content;
+		}
+		.container > section:nth-child(2) {
+			flex:2
+		}
 
 	<?php if(! empty($selected_user) ): ?>
 		.edit-user-info {
@@ -58,12 +56,10 @@ else {
 				font-weight: bold;
 				margin-right: 15px;
 			}
-
 			.edit-user-info .meta {
 				display: flex;
 				flex-direction: column;
 			}
-
 				.edit-user-info .meta span {
 					color: #333;
 					font-size: 14px;
@@ -84,7 +80,11 @@ else {
 			border-radius: 3px;
 			box-shadow: 0 2px 8px var(--button-alert-background-color);
 		}*/
-	
+	@media (max-width: 1199px) {
+		.container {
+			display:block;
+		}
+	}
 	<?php endif ?>
 </style>
 
@@ -100,7 +100,7 @@ else {
 
 		<form action="<?=$action?>" method="post">
 			<div class="container">
-				<section class="user-data-container">
+				<section class="block">
 					<?php if( empty($selected_user) ): ?>
 						<div class="form-group">
 							<label for="username">Username</label>

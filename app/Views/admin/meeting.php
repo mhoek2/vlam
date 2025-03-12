@@ -10,10 +10,12 @@
 <section class="main">
     <div class="content">
         <form id="edit_meeting" method="POST">
-            <label>Info<lable>
+			<h2>Bijeenkomst</h2>
+			
+            <label>Info<label>
             <input type="text" name="info" value="<?=$meeting["info"]?>">
 
-            <label>Intro<lable>
+            <label>Intro<label>
             <textarea name="intro" id="intro"><?=$meeting["intro"]?></textarea>
 
             <?= csrf_field() ?>

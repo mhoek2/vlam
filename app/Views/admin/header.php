@@ -23,6 +23,10 @@
             integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	
+	<link rel="stylesheet" href="<?=base_url('assets/datetimepicker/jquery.datetimepicker.min.css')?>">
+	<script src="<?=base_url('assets/datetimepicker/jquery.datetimepicker.full.js')?>"></script>
+	
 </head>
 <body>
 

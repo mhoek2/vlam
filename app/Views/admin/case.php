@@ -18,16 +18,16 @@
 		<h2>Case</h2>
 		
         <form id="edit_case" method="POST">
-            <label>Name<lable>
+            <label>Name<label>
             <input type="text" name="name" value="<?=$case["name"]?>">
             
-			<label>Info<lable>
+			<label>Info<label>
             <input type="text" name="info" value="<?=$case["info"]?>">
 
-            <label>Intro<lable>
+            <label>Intro<label>
             <textarea name="intro" id="intro"><?=$case["intro"]?></textarea>
             
-            <label>Outro<lable>
+            <label>Outro<label>
             <textarea name="outro" id="outro"><?=$case["outro"]?></textarea>
             
 			<label>

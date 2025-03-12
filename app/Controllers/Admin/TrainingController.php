@@ -5,8 +5,10 @@ namespace App\Controllers\Admin;
 use App\Controllers\Admin\BaseController;
 use CodeIgniter\I18n\Time;
 
+use App\Models\Meetings;
 use App\Models\Trainings;
 use App\Models\TrainingUsers;
+use App\Models\TrainingSchedule;
 use App\Models\Users;
 
 use Config\CKeditor;
@@ -29,8 +31,10 @@ use App\Models\TrainingCaseEntryProperties;
 class TrainingController extends BaseController
 {
     public function __construct() {
-        $this->trainings = new Trainings();
-        $this->trainingMembers = new TrainingUsers();
+		$this->meetings 		= new Meetings();
+        $this->trainings 		= new Trainings();
+        $this->trainingMembers 	= new TrainingUsers();
+        $this->TrainingSchedule = new TrainingSchedule();
     }
 
 	private static function cloneAssignmentsAndCases( $training_id )
@@ -175,6 +179,18 @@ class TrainingController extends BaseController
 		$this->trainings->update($training_id, [
             'name' => $name,
         ]);
+		
+		$meeting_ids = $this->request->getPost('meeting_ids');
+        $meeting_dates = $this->request->getPost('meeting_dates');
+
+		foreach ( $meeting_ids as $meeting_id )
+		{
+			$this->TrainingSchedule->replace([ 
+				'training_id' 	=> $training_id, 
+				'meeting_id' 	=> $meeting_id,
+				'date' 			=> $meeting_dates[$meeting_id]
+            ]);
+		}
 
 		return $this->response->setJSON([
 			'message' 		=> 'Form submitted successfully!',
@@ -239,6 +255,11 @@ class TrainingController extends BaseController
 
     public function index( $training_id ): string
     {
+		// Meeting
+		$this->data['meetings'] = $this->meetings->findAll();
+
+		$this->data['meeting_schedule'] = $schedule = $this->TrainingSchedule->getSchedule( $training_id );
+
 		// Training
         $this->data['training'] = $this->trainings->find( $training_id );
 
