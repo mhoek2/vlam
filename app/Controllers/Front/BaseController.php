@@ -202,4 +202,58 @@ abstract class BaseController extends Controller
 		
 		return $item;
 	}	
+	
+	public function get_entry_properties_result( $id, $id_key, &$result_object, &$entry_object, &$property_object )
+	{
+		$results = $result_object->select(
+				$result_object->table . '.value, ' .
+				$result_object->table . '.property_id, ' .
+				$result_object->table . '.entry_id, ' .
+				$entry_object->table . '.name as entry_name'
+			)
+			->join($entry_object->table, $result_object->table . '.entry_id = '.$entry_object->table . '.id', 'left')
+			->where([
+				$result_object->table . '.user_id'		=> $this->data['user']['id'],
+				$result_object->table . '.' .$id_key 	=> $id
+			])
+			->orderBy($entry_object->table . '.sort_order', 'ASC')->findAll();
+
+		foreach ( $results as $id => $item )
+		{
+			$properties = json_decode($item['value'], true);
+			
+			if ( !is_array($properties) || is_null($item['property_id']) )
+				continue;
+			
+			$results[$id]['value'] = [];
+			
+			foreach ( $properties as $property_id )
+				$results[$id]['value'][$property_id] = $property_object->find($property_id)['content'];
+		}
+		
+		return $results;
+	}
+	
+	public function get_assignment_results( int $assignment_id )
+	{
+		return $this->get_entry_properties_result( 
+			$assignment_id, 
+			'assignment_id', 
+			$this->assignmentResult, 
+			$this->assignmentEntry, 
+			$this->assignmentEntryProperties
+		);
+	}
+	
+	public function get_case_results( int $case_id )
+	{
+		return $this->get_entry_properties_result( 
+			$case_id, 
+			'case_id', 
+			$this->caseResult, 
+			$this->caseEntry, 
+			$this->caseEntryProperties
+		);
+	}
+
 }
