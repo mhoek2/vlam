@@ -3,9 +3,15 @@
 <section class="main">
     <?=$sidebar?>
 
-    <div class="content">
-        The content of the page
-    </div>
+	<div class="content" style="background:transparent; padding:0;">
+		<div class="dashboard_modules">
+			<?php foreach( $dashboard_modules as $module ): ?>
+				<article>
+					<?=$module?>
+				</article>
+			<?php endforeach ?>
+		</div>
+	</div>
 </section>
 
 <?php echo $footer; ?>

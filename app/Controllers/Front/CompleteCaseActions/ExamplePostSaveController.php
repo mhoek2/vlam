@@ -22,9 +22,10 @@ class ExamplePostSaveController extends BaseController
 		$case_id 		= (int) $case_id;
 
 		$case = $this->get_case( $assignment_id, $case_id );
-
+		$result = $this->get_case_results( $case_id );
+		
 		$training_meta = service('user_meta');
-		$training_meta->save( 'case_meta', 'value' );
+		$training_meta->save( 'case_meta', json_encode($result) );
 		
 		// redirect, this is just a post action
 		$this->response->redirect( base_url(route_to('front.meeting', $meeting_id )) );

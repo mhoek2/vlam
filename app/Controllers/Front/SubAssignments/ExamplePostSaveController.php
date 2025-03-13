@@ -25,9 +25,11 @@ class ExamplePostSaveController extends BaseController
 		$assignment_id 	= (int) $assignment_id;
 
 		$assignment = $this->get_assignment($assignment_id);
+		$result = $this->get_assignment_results($assignment_id);
+	
 		
 		$training_meta = service('user_meta');
-		$training_meta->save( 'assignment_meta', 'value' );
+		$training_meta->save( 'assignment_meta', json_encode($result) );
 		
 		// redirect, this is just a post action
 		$this->response->redirect( base_url(route_to('front.meeting', $meeting_id)) );

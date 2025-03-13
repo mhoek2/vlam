@@ -237,7 +237,7 @@ footer {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
-    flex: 3;
+    flex: 1;
 
     border-radius: var(--primary-border-radius);
     /*background: var(--accent-color);*/
