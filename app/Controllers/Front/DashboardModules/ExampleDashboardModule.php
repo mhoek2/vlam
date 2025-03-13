@@ -4,6 +4,8 @@ namespace App\Controllers\Front\DashboardModules;
 
 class ExampleDashboardModule
 {
+	public $sort = 10;
+	
     public function index(  ) : string
     {
 		$this->data = [];

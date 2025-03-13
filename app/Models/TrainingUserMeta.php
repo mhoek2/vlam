@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\UserMeta;
 
-class TrainingUserMeta extends Model
+class TrainingUserMeta extends UserMeta
 {
     protected $table      = 'training_user_meta';
-    protected $primaryKey = 'id';
-
-    protected $allowedFields = ['id', 'user_id', 'key', 'value', 'created_at'];
 }
 

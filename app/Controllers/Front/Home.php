@@ -29,14 +29,24 @@ class Home extends BaseController
 				$controller = new $controller_class();
 				
 				if (method_exists($controller, 'index'))
-					array_push( $modules, $controller->index() );
+					$modules[] = [
+						'module' => $controller->index(),
+						'sort' => $controller->sort ?? 100,
+					];
 				
 				else
-					array_push( $modules, sprintf( "index not found for: %s", $controller_class ) );
+					$modules[] = [
+						'module' => sprintf("index not found for: %s", $controller_class),
+						'sort' => 100,
+					];
 			}
 		}
 		
-		return $modules;
+		usort($modules, function($a, $b) {
+			return $a['sort'] <=> $b['sort']; // Compare based on the 'sort' value
+		});
+		
+		return array_column($modules, 'module');
 	}
 	
     public function application(): string
