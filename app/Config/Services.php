@@ -7,6 +7,8 @@ use CodeIgniter\Config\BaseService;
 use App\ThirdParty\TextEditorCKEditor as CKEditor;
 use App\ThirdParty\TextEditorCKEditorGPL as CKEditorGPL;
 use App\ThirdParty\TextEditorSummernote as Summernote;
+
+use App\Services\UserMetaService;
 	
 /**
  * Services Configuration file.
@@ -34,6 +36,15 @@ class Services extends BaseService
      * }
      */
 
+	public static function user_meta($getShared = true)
+	{
+		if ($getShared) {
+			return static::getSharedInstance('user_meta');
+		}
+
+		return new UserMetaService();
+	}
+	
 	public static function text_editor($getShared = true)
 	{
 		if ($getShared) {

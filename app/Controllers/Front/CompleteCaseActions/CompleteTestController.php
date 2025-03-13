@@ -18,6 +18,22 @@ class CompleteTestController extends BaseController
 		if ( is_null($case) )
 			die("Case complete action failed!");
 		
+		
+		// This is the post-save logic for storing custom data 
+		// using service('user_meta') after a case is completed. 
+		// For certain cases or questions, custom logic might be needed to store additional information 
+		// for the user
+		
 		// Completion action logic below
+		
+		// example:
+		// $training_meta = service('user_meta');
+		// $training_meta->save( 'key', 'value', /*(Optional) user_id*/ );
+		
+		$training_meta = service('user_meta');
+		$training_meta->save( 'key', 'value' );
+		
+		echo "debug";
+		exit;
     }
 }

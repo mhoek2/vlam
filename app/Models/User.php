@@ -11,7 +11,7 @@ class User extends Model
     public function getUserInfo() {
         $user = auth()->user();
 
-        if($user == NULL)
+        if (!$this->isLoggedIn())
             return false;
 
         $data = $user->toRawArray();
@@ -34,7 +34,7 @@ class User extends Model
     {
         $user = auth()->user();
 
-        if($user == NULL)
+        if (is_null($user))
             return false;
 
         // Check if user is logged in by verifying session data

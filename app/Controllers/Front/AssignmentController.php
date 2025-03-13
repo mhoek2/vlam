@@ -208,7 +208,7 @@ class AssignmentController extends BaseController
 
 		if ( $this->data['sub_assignment'] )
 		{
-			// either load it when sub page is called, or directly when no entries present
+			// either load it when sub page is requested, or directly when no entries exist
 			if ($is_sub || !count($this->data['entries'])) 
 			{
 				$controller = $this->get_sub_assignment( $this->data['sub_assignment'] );
@@ -219,12 +219,12 @@ class AssignmentController extends BaseController
 		}
 		
 		// previous and next urls
-		$this->data['prev_url'] = base_url(route_to('front.meeting', $this->data['meeting']['id']));
+		$this->data['prev_url'] = base_url(route_to('front.meeting', $meeting_id));
 		
 		if ($this->data['sub_assignment'])
 			$this->data['post_url'] = current_url() . "/sub";
 		else
-			$this->data['post_url'] = base_url(route_to('front.meeting', $this->data['meeting']['id']));
+			$this->data['post_url'] = base_url(route_to('front.meeting', $meeting_id));
 		
 		load_header( $this->data );
 		load_footer( $this->data );
