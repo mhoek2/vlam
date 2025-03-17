@@ -1,5 +1,23 @@
 <?php echo $header; ?>
 
+<style>
+	.dashboard_modules {
+		  display: grid;
+		  grid-template-columns: repeat(4, 1fr);
+		  gap: 16px;
+	}
+		.dashboard_modules article {
+			background:#f1f1f1;
+			border-radius: 10px;
+			overflow: hidden;
+			word-wrap: break-word;
+			padding: 10px;
+		}
+		.dashboard_modules article.wide {
+			grid-column: span 2;
+		}
+</style>
+
 <section class="main">
     <?=$sidebar?>
 

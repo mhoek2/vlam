@@ -19,7 +19,7 @@ class ExampleDashboardModule extends DashboardModule
 		if ( is_null($this->data['meta']) )
 			return "";
 		
-		return view('front/dashboard_modules/example_dashboard_module', $this->data);
+		return view('front/dashboard_modules/example', $this->data);
 	}
 }
 	 
