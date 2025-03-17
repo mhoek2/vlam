@@ -57,7 +57,7 @@ abstract class BaseController extends Controller
      *
      * @var list<string>
      */
-    protected $helpers = ['csrf', 'user', 'front/sidebar', 'front/header', 'front/footer'];
+    protected $helpers = ['csrf', 'user', 'front/dashboard', 'front/sidebar', 'front/header', 'front/footer'];
 
 	private function validTrainingForUser( $user )
 	{
