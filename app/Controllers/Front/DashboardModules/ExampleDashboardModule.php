@@ -2,9 +2,11 @@
 
 namespace App\Controllers\Front\DashboardModules;
 
-class ExampleDashboardModule
+use App\Controllers\Front\DashboardModules\DashboardModule;
+
+class ExampleDashboardModule extends DashboardModule
 {
-	public $sort = 10;
+	protected $sort = 10;
 	
     public function index(  ) : string
     {

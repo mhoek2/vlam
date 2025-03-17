@@ -19,10 +19,14 @@ class Home extends BaseController
 		$modules = [];
 		
 		$dir = APPPATH . 'Controllers/Front/DashboardModules';
-
-		foreach (glob($dir . '/*DashboardModule.php') as $file) {
+		$postfix = 'DashboardModule.php';
+		
+		foreach (glob($dir . '/*'. $postfix) as $file) {
 			$controller_name = basename($file, '.php');
 			$controller_class = "App\Controllers\Front\DashboardModules\\" . $controller_name;
+			
+			if (basename($file) === $postfix)
+				continue;
 			
 			if (class_exists($controller_class)) 
 			{
@@ -31,7 +35,7 @@ class Home extends BaseController
 				if (method_exists($controller, 'index'))
 					$modules[] = [
 						'module' => $controller->index(),
-						'sort' => $controller->sort ?? 100,
+						'sort' => $controller->getSort(),
 					];
 				
 				else
