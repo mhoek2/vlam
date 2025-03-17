@@ -21,7 +21,7 @@ if (! function_exists('get_dashboard_modules')) {
 				
 				if (method_exists($controller, 'index'))
 					$modules[] = [
-						'module' => $controller->index(),
+						'module' => $controller,
 						'sort' => $controller->getSort(),
 					];
 				

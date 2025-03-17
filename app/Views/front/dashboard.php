@@ -24,8 +24,8 @@
 	<div class="content" style="background:transparent; padding:0;">
 		<div class="dashboard_modules">
 			<?php foreach( $dashboard_modules as $module ): ?>
-				<article>
-					<?=$module?>
+				<article class="<?=$module->getCssClass()?>">
+					<?=$module->index()?>
 				</article>
 			<?php endforeach ?>
 		</div>
