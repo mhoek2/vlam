@@ -126,20 +126,13 @@ class CaseController extends BaseController
 		$new_entry_name = $this->request->getPost('entry_name');
 		$new_entry_type = $this->request->getPost('entry_type');
 		
-		$existing_entries = $this->caseEntry->where('case_id', $case_id)->findAll();
+		$entries = $this->caseEntry->where('case_id', $case_id)->findAll();
 
-		$max_sort_order = 0;
-		if ($existing_entries) {
-			$max_sort_order = max(array_column($existing_entries, 'sort_order'));
-		}
-
-		$new_sort_order = $max_sort_order + 1;	
-		
 		$this->caseEntry->insert([
 			'case_id' 		=> $case_id, 
 			'name' 			=> $new_entry_name, 
 			'type' 			=> $new_entry_type,
-			'sort_order'	=> $new_sort_order 
+			'sort_order'	=> $entries ? max(array_column($entries, 'sort_order')) + 1 : 0,
 		]);
 		
 		$insert_id = $this->caseEntry->insertID();
@@ -250,10 +243,13 @@ class CaseController extends BaseController
 	{
 		$entry_id = $this->request->getPost('entry_id');
 		$property_content = $this->request->getPost('property_content');
-		
+			
+		$properties = $this->caseEntryProperties->where('entry_id', $entry_id)->findAll();
+
 		$this->caseEntryProperties->insert([
-			'entry_id' => $entry_id,
-			'content' => $property_content,
+			'entry_id' 		=> $entry_id,
+			'content' 		=> $property_content,
+			'sort_order' 	=> $properties ? max(array_column($properties, 'sort_order')) + 1 : 0,
 		]);
 
 		return $this->response->setJSON([

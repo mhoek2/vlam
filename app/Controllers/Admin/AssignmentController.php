@@ -128,21 +128,14 @@ class AssignmentController extends BaseController
 		$new_entry_name = $this->request->getPost('entry_name');
 		$new_entry_type = $this->request->getPost('entry_type');
 
-		$existing_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
+		$entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
 
-		$max_sort_order = 0;
-		if ($existing_entries) {
-			$max_sort_order = max(array_column($existing_entries, 'sort_order'));
-		}
-
-		$new_sort_order = $max_sort_order + 1;	
-		
 		$this->assignmentEntry->insert([
 			'assignment_id'	=> $assignment_id, 
 			'name' 			=> $new_entry_name, 
 			'type' 			=> $new_entry_type,
-			'sort_order' 	=> $new_sort_order ]
-		);
+			'sort_order' 	=> $entries ? max(array_column($entries, 'sort_order')) + 1 : 0,
+		]);
 		
 		$insert_id = $this->assignmentEntry->insertID();
 
@@ -253,9 +246,12 @@ class AssignmentController extends BaseController
 		$entry_id = $this->request->getPost('entry_id');
 		$property_content = $this->request->getPost('property_content');
 		
+		$properties = $this->assignmentEntryProperties->where('entry_id', $entry_id)->findAll();
+
 		$this->assignmentEntryProperties->insert([
-			'entry_id' => $entry_id,
-			'content' => $property_content,
+			'entry_id' 		=> $entry_id,
+			'content' 		=> $property_content,
+			'sort_order'	=> $properties ? max(array_column($properties, 'sort_order')) + 1 : 0,
 		]);
 
 		return $this->response->setJSON([

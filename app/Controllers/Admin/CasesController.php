@@ -38,20 +38,12 @@ class CasesController extends BaseController
 		$name = $this->request->getPost('name');
 		
 		// find sort order 
-		$existing_entries = $this->cases->where('assignment_id', $assignment_id)->findAll();
-
-		$max_sort_order = 0;
-		if ($existing_entries) {
-			$max_sort_order = max(array_column($existing_entries, 'sort_order'));
-		}
-		
-		// make sure new item is last
-		$new_sort_order = $max_sort_order + 1;		
+		$entries = $this->cases->where('assignment_id', $assignment_id)->findAll();		
 		
 		$this->cases->insert([
 			'assignment_id' 	=> $assignment_id,
 			'name'				=> $name,
-			'sort_order'		=> $new_sort_order,
+			'sort_order'		=> $entries ? max(array_column($entries, 'sort_order')) + 1 : 0,
             'created_at'		=> Time::now()
         ]);
 

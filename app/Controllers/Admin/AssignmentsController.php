@@ -38,19 +38,12 @@ class AssignmentsController extends BaseController
 		$name = $this->request->getPost('name');
 		
 		// find sort order 
-		$existing_entries = $this->assignments->where('meeting_id', $meeting_id)->findAll();
-
-		$max_sort_order = 0;
-		if ( $existing_entries )
-			$max_sort_order = max(array_column($existing_entries, 'sort_order'));
-		
-		// make sure new item is last
-		$new_sort_order = $max_sort_order + 1;		
+		$entries = $this->assignments->where('meeting_id', $meeting_id)->findAll();		
 		
 		$this->assignments->insert([
 			'meeting_id' 	=> $meeting_id,
 			'name'			=> $name,
-			'sort_order'	=> $new_sort_order,
+			'sort_order'	=> $entries ? max(array_column($entries, 'sort_order')) + 1 : 0,
             'created_at'	=> Time::now()
         ]);
 
