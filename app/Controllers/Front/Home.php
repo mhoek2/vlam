@@ -23,7 +23,7 @@ class Home extends BaseController
 		load_footer( $this->data );
 		load_sidebar( $this->data );
 		
-		$this->data['dashboard_modules'] = get_dashboard_modules();	// helper
+		$this->data['dashboard_modules'] = get_dashboard_modules( $this->data );	// helper
 
         return view('front/dashboard', $this->data);
     }

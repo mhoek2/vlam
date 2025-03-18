@@ -9,9 +9,9 @@ class AgendaDashboardModule extends DashboardModule
 	protected $sort = 10;
 	protected $css_class = 'wide';
 	
-    public function index(  ) : string
+    public function index( &$data ) : string
     {
-		$this->data = [];
+		$this->data = $data;
 
 		return view('front/dashboard_modules/agenda', $this->data);
 	}

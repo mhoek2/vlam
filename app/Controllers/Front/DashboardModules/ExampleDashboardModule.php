@@ -8,9 +8,9 @@ class ExampleDashboardModule extends DashboardModule
 {
 	protected $sort = 10;
 	
-    public function index(  ) : string
+    public function index( &$data ) : string
     {
-		$this->data = [];
+		$this->data = $data;
 		
 		$training_meta = service('user_meta');
 

@@ -1,7 +1,7 @@
 <?php
 
 if (! function_exists('get_dashboard_modules')) {
-	function get_dashboard_modules()
+	function get_dashboard_modules( &$data )
 	{
 		$modules = [];
 		
@@ -18,18 +18,13 @@ if (! function_exists('get_dashboard_modules')) {
 			if (class_exists($controller_class)) 
 			{
 				$controller = new $controller_class();
+				$exists = method_exists($controller, 'index');
 				
-				if (method_exists($controller, 'index'))
-					$modules[] = [
-						'module' => $controller,
-						'sort' => $controller->getSort(),
-					];
-				
-				else
-					$modules[] = [
-						'module' => sprintf("index not found for: %s", $controller_class),
-						'sort' => 100,
-					];
+				$modules[] = [
+					'view' 		=> $exists ? $controller->index($data) 		: sprintf("index not found for: %s", $controller_class),
+					'sort' 		=> $exists ? $controller->getSort()			: 100,
+					'css_class' => $exists ? $controller->getCssClass()		: ''
+				];
 			}
 		}
 		
@@ -37,6 +32,6 @@ if (! function_exists('get_dashboard_modules')) {
 			return $a['sort'] <=> $b['sort']; // Compare based on the 'sort' value
 		});
 		
-		return array_column($modules, 'module');
+		return $modules;
 	}
 }

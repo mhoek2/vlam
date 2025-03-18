@@ -138,7 +138,7 @@ abstract class BaseController extends Controller
         $this->user 		= new User();
         $this->meetings 	= new Meetings();
 		
-	    $this->data = array();
+	    $this->data = [];
 
 		// User
 		$this->data['user'] = $this->user->getUserInfo();	
