@@ -1,11 +1,11 @@
 :root {
-	--primary-color: #269bc4;		/* blue */
-	--secondary-color: #1d1e57; 	/* dark blue */
-	--accent-color: #c1dbe9; 		/* light blue */
-	--pink-color: #e078a1; 			/* pink */
+	--primary-color: #3aa6ca;		/* blue */
+	--secondary-color: #2e3180; 	/* dark blue */
+	--accent-color: #cae0ed; 		/* light blue */
+	--pink-color: #e385aa; 			/* pink */
 	--pink-light-color: #eaccda; 	/* light pink */
 	
-	--button-background-color: #1d1e57;
+	--button-background-color: #2e3180;
 	--button-hover-color: #fff;
 	--button-text-color: #fff;	
 	
@@ -17,6 +17,11 @@
 	--input-border-color-focus: #e0e0e0;
 	
 	--input-background-color-default: #fff;
+	
+	--logo-image: url(../images/logo.png);
+	
+	--sidebar-background-image: url(../images/sidebar_bg.png);
+	--sidebar-background: linear-gradient(rgb(58 166 202 / 80%), rgb(58 166 202 / 25%)), var(--sidebar-background-image) var(--primary-color) bottom / 100% no-repeat
 }
 
 * {
@@ -108,7 +113,7 @@ select {
 
 section {
     margin: 0 auto;
-    max-width: 1600px;
+    max-width: 1700px;
     padding: 2.5rem 1.75rem 3.5rem 1.75rem;
 }
 
@@ -228,8 +233,9 @@ footer {
 	min-height: 500px;
     min-width: 300px;
     max-width: 400px;
-    background: var(--primary-color);
-    border-radius: var(--primary-border-radius);
+    background-color: var(--primary-color);
+	background: var(--sidebar-background);
+	border-radius: var(--primary-border-radius);
     padding: 10px 0;
 }
 

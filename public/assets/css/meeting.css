@@ -55,8 +55,10 @@
             background: #fff;
             text-align: center;
             
-            font-size: 22px;
-            font-weight: bold;
+			font-family: "Saira Stencil One", sans-serif;
+			font-weight: 800;
+			font-style: normal;
+            font-size: 26px;
         }
 
         .main .meetings ul > a > li .info,
