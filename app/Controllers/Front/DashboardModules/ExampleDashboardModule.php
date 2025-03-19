@@ -6,7 +6,8 @@ use App\Controllers\Front\DashboardModules\DashboardModule;
 
 class ExampleDashboardModule extends DashboardModule
 {
-	protected $sort = 10;
+	protected $sort = 5;
+	protected $css_class = 'wide';
 	
     public function index( &$data ) : string
     {

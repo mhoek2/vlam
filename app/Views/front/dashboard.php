@@ -24,6 +24,8 @@
 	<div class="content" style="background:transparent; padding:0;">
 		<div class="dashboard_modules">
 			<?php foreach( $dashboard_modules as $module ): ?>
+				<?php if(!$module['visible']) continue ?>
+
 				<article class="<?=$module['css_class']?>">
 					<?=$module['view']?>
 				</article>

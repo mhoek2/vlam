@@ -7,8 +7,7 @@ use App\Controllers\Front\DashboardModules\DashboardModule;
 class AgendaDashboardModule extends DashboardModule
 {
 	protected $sort = 10;
-	protected $css_class = 'wide';
-	
+
     public function index( &$data ) : string
     {
 		$this->data = $data;

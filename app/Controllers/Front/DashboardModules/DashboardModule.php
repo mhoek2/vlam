@@ -6,6 +6,7 @@ class DashboardModule
 {
 	protected $sort = 100;
 	protected $css_class = '';
+	protected $visible = true;
 	
 	function getSort(){
 		return $this->sort;
@@ -14,5 +15,9 @@ class DashboardModule
 	function getCssClass(){
 		return $this->css_class;
 	}
+	
+	function getVisibility(){
+		return $this->visible;
+	}	
 }
 	 
