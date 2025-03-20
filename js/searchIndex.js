@@ -628,7 +628,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\AgendaDashboardModule",
             "name": "AgendaDashboardModule",
-            "summary": "",
+            "summary": "Dashboard\u0020Module",
             "url": "classes/App-Controllers-Front-DashboardModules-AgendaDashboardModule.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\AgendaDashboardModule\u003A\u003Aindex\u0028\u0029",
@@ -638,47 +638,47 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\AgendaDashboardModule\u003A\u003A\u0024sort",
             "name": "sort",
-            "summary": "",
+            "summary": "Sort\u0020order",
             "url": "classes/App-Controllers-Front-DashboardModules-AgendaDashboardModule.html#property_sort"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule",
             "name": "DashboardModule",
-            "summary": "",
+            "summary": "Provides\u0020base\u0020class\u0020for\u0020modular\u0020dashboard\u0020modules",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003AgetSort\u0028\u0029",
             "name": "getSort",
-            "summary": "",
+            "summary": "Returns\u0020sort\u0020order",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#method_getSort"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003AgetCssClass\u0028\u0029",
             "name": "getCssClass",
-            "summary": "",
+            "summary": "Returns\u0020custom\u0020css\u0020class",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#method_getCssClass"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003AgetVisibility\u0028\u0029",
             "name": "getVisibility",
-            "summary": "",
+            "summary": "Returns\u0020true\u0020if\u0020module\u0020is\u0020visible,\u0020false\u0020if\u0020not",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#method_getVisibility"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003A\u0024sort",
             "name": "sort",
-            "summary": "",
+            "summary": "Sort\u0020order",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#property_sort"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003A\u0024css_class",
             "name": "css_class",
-            "summary": "",
+            "summary": "Custom\u0020css\u0020class",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#property_css_class"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003A\u0024visible",
             "name": "visible",
-            "summary": "",
+            "summary": "Visiblity\u0020state,\u0020default\u0020is\u0020true",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#property_visible"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\ExampleDashboardModule",
             "name": "ExampleDashboardModule",
-            "summary": "",
+            "summary": "Dashboard\u0020Module",
             "url": "classes/App-Controllers-Front-DashboardModules-ExampleDashboardModule.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\ExampleDashboardModule\u003A\u003Aindex\u0028\u0029",
@@ -688,12 +688,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\ExampleDashboardModule\u003A\u003A\u0024sort",
             "name": "sort",
-            "summary": "",
+            "summary": "Sort\u0020order",
             "url": "classes/App-Controllers-Front-DashboardModules-ExampleDashboardModule.html#property_sort"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\ExampleDashboardModule\u003A\u003A\u0024css_class",
             "name": "css_class",
-            "summary": "",
+            "summary": "Custom\u0020css\u0020class",
             "url": "classes/App-Controllers-Front-DashboardModules-ExampleDashboardModule.html#property_css_class"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\Home",
@@ -888,37 +888,37 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Afind_group\u0028\u0029",
             "name": "find_group",
-            "summary": "",
+            "summary": "Return\u0020the\u0020group\u0020identifier\u0020of\u0020a\u0020type",
             "url": "classes/App-Models-AssignmentEntry.html#method_find_group"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Afind_group_counts\u0028\u0029",
             "name": "find_group_counts",
-            "summary": "",
+            "summary": "returns\u0020an\u0020array\u0020with\u0020number\u0020of\u0020types\u0020per\u0020group",
             "url": "classes/App-Models-AssignmentEntry.html#method_find_group_counts"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Atype_to_group_table\u0028\u0029",
             "name": "type_to_group_table",
-            "summary": "",
+            "summary": "return\u0020an\u0020array\u0020where\u0020key\u0020represents\u0020the\u0020type,\u0020and\u0020the\u0020value\u0020the\u0020group\u0020of\u0020the\u0020type",
             "url": "classes/App-Models-AssignmentEntry.html#method_type_to_group_table"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Avalid_type\u0028\u0029",
             "name": "valid_type",
-            "summary": "",
+            "summary": "check\u0020validity\u0020of\u0020an\u0020entry\u0020type\u0020by\u0020matching\u0020with\u0020\u0024this\u002D\u003Etype_enum",
             "url": "classes/App-Models-AssignmentEntry.html#method_valid_type"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Afind\u0028\u0029",
             "name": "find",
-            "summary": "",
+            "summary": "Override\u003A\u0020Returns\u0020null\u0020if\u0020type\u0020is\u0020invalid",
             "url": "classes/App-Models-AssignmentEntry.html#method_find"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003AfindAll\u0028\u0029",
             "name": "findAll",
-            "summary": "",
+            "summary": "Override\u003A\u0020Do\u0020not\u0020inclide\u0020invalid\u0020types",
             "url": "classes/App-Models-AssignmentEntry.html#method_findAll"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Afirst\u0028\u0029",
             "name": "first",
-            "summary": "",
+            "summary": "Override\u003A\u0020Returns\u0020null\u0020if\u0020type\u0020is\u0020invalid",
             "url": "classes/App-Models-AssignmentEntry.html#method_first"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003A\u0024table",
@@ -938,7 +938,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003A\u0024type_enum",
             "name": "type_enum",
-            "summary": "",
+            "summary": "This\u0020is\u0020how\u0020question\/entry\u0020types\u0020are\u0020defined.",
             "url": "classes/App-Models-AssignmentEntry.html#property_type_enum"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003A\u0024type_to_group",
@@ -1023,37 +1023,37 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Afind_group\u0028\u0029",
             "name": "find_group",
-            "summary": "",
+            "summary": "Return\u0020the\u0020group\u0020identifier\u0020of\u0020a\u0020type",
             "url": "classes/App-Models-CaseEntry.html#method_find_group"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Afind_group_counts\u0028\u0029",
             "name": "find_group_counts",
-            "summary": "",
+            "summary": "returns\u0020an\u0020array\u0020with\u0020number\u0020of\u0020types\u0020per\u0020group",
             "url": "classes/App-Models-CaseEntry.html#method_find_group_counts"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Atype_to_group_table\u0028\u0029",
             "name": "type_to_group_table",
-            "summary": "",
+            "summary": "return\u0020an\u0020array\u0020where\u0020key\u0020represents\u0020the\u0020type,\u0020and\u0020the\u0020value\u0020the\u0020group\u0020of\u0020the\u0020type",
             "url": "classes/App-Models-CaseEntry.html#method_type_to_group_table"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Avalid_type\u0028\u0029",
             "name": "valid_type",
-            "summary": "",
+            "summary": "check\u0020validity\u0020of\u0020an\u0020entry\u0020type\u0020by\u0020matching\u0020with\u0020\u0024this\u002D\u003Etype_enum",
             "url": "classes/App-Models-CaseEntry.html#method_valid_type"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Afind\u0028\u0029",
             "name": "find",
-            "summary": "",
+            "summary": "Override\u003A\u0020Returns\u0020null\u0020if\u0020type\u0020is\u0020invalid",
             "url": "classes/App-Models-CaseEntry.html#method_find"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003AfindAll\u0028\u0029",
             "name": "findAll",
-            "summary": "",
+            "summary": "Override\u003A\u0020Do\u0020not\u0020inclide\u0020invalid\u0020types",
             "url": "classes/App-Models-CaseEntry.html#method_findAll"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Afirst\u0028\u0029",
             "name": "first",
-            "summary": "",
+            "summary": "Override\u003A\u0020Returns\u0020null\u0020if\u0020type\u0020is\u0020invalid",
             "url": "classes/App-Models-CaseEntry.html#method_first"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003A\u0024table",
@@ -1073,7 +1073,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003A\u0024type_enum",
             "name": "type_enum",
-            "summary": "",
+            "summary": "This\u0020is\u0020how\u0020question\/entry\u0020types\u0020are\u0020defined.",
             "url": "classes/App-Models-CaseEntry.html#property_type_enum"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003A\u0024type_to_group",
@@ -1458,7 +1458,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Services\\UserMetaService",
             "name": "UserMetaService",
-            "summary": "",
+            "summary": "Provides\u0020service\u0020to\u0020store\u0020user\u0020meta",
             "url": "classes/App-Services-UserMetaService.html"
         },                {
             "fqsen": "\\App\\Services\\UserMetaService\u003A\u003A__construct\u0028\u0029",

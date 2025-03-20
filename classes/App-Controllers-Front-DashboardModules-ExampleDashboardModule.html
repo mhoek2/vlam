@@ -94,6 +94,14 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="packages/App-Controllers.html" class="">Controllers</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Services.html" class="">Services</a>
+                
+            </li>
+                    <li>
                 <a href="packages/App-ThirdParty.html" class="">ThirdParty</a>
                 
             </li>
@@ -134,7 +142,10 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Controllers.html">Controllers</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Controllers-Front.html">Front</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Controllers-Front-DashboardModules.html">DashboardModules</a></li>
                             </ul>
         </div>
     
@@ -149,11 +160,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-exampledashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php">ExampleDashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">7</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Dashboard Module</p>
+
 
 
 
@@ -185,20 +197,23 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Controllers-Front-DashboardModules-ExampleDashboardModule.html#property_css_class">$css_class</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: string            </span>
 </dt>
+<dd>Custom css class</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Controllers-Front-DashboardModules-ExampleDashboardModule.html#property_sort">$sort</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: int            </span>
 </dt>
+<dd>Sort order</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/App-Controllers-Front-DashboardModules-DashboardModule.html#property_visible">$visible</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: bool            </span>
 </dt>
+<dd>Visiblity state, default is true</dd>
 
     </dl>
 
@@ -211,20 +226,23 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Controllers-Front-DashboardModules-DashboardModule.html#method_getCssClass">getCssClass()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: string    </span>
 </dt>
+<dd>Returns custom css class</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Controllers-Front-DashboardModules-DashboardModule.html#method_getSort">getSort()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: int    </span>
 </dt>
+<dd>Returns sort order</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Controllers-Front-DashboardModules-DashboardModule.html#method_getVisibility">getVisibility()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: bool    </span>
 </dt>
+<dd>Returns true if module is visible, false if not</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Controllers-Front-DashboardModules-ExampleDashboardModule.html#method_index">index()</a>
@@ -262,15 +280,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-exampledashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php">ExampleDashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Custom css class</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$css_class</span>
      = <span class="phpdocumentor-signature__default-value">&#039;wide&#039;</span></code>
 
@@ -298,15 +317,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-exampledashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php">ExampleDashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Sort order</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">int</span>
     <span class="phpdocumentor-signature__name">$sort</span>
      = <span class="phpdocumentor-signature__default-value">5</span></code>
 
@@ -334,15 +354,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/DashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-dashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/DashboardModule.php">DashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Visiblity state, default is true</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">bool</span>
     <span class="phpdocumentor-signature__name">$visible</span>
      = <span class="phpdocumentor-signature__default-value">true</span></code>
 
@@ -375,14 +396,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/DashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-dashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/DashboardModule.php">DashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns custom css class</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCssClass</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">getCssClass</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -393,7 +415,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -409,14 +435,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/DashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-dashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/DashboardModule.php">DashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns sort order</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getSort</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">getSort</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -427,7 +454,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -443,14 +474,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/DashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-dashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/DashboardModule.php">DashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns true if module is visible, false if not</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getVisibility</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">getVisibility</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -461,7 +493,11 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -477,7 +513,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php"><a href="files/app-controllers-front-dashboardmodules-exampledashboardmodule.html"><abbr title="app/Controllers/Front/DashboardModules/ExampleDashboardModule.php">ExampleDashboardModule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 

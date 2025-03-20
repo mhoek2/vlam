@@ -94,6 +94,14 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="packages/App-Controllers.html" class="">Controllers</a>
+                
+            </li>
+                    <li>
+                <a href="packages/App-Services.html" class="">Services</a>
+                
+            </li>
+                    <li>
                 <a href="packages/App-ThirdParty.html" class="">ThirdParty</a>
                 
             </li>
@@ -129,7 +137,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Services.html">Services</a></li>
                             </ul>
         </div>
     
@@ -144,14 +153,40 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Services/UserMetaService.php"><a href="files/app-services-usermetaservice.html"><abbr title="app/Services/UserMetaService.php">UserMetaService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Provides service to store user meta</p>
 
 
+    <section class="phpdocumentor-description"><p>The user meta is split into two identical database tables</p>
+<ul>
+<li><b>'user_meta'</b> table for admin users, allowing them to run the training is if they are a participant. But with the feature that the training data is in real-time</li>
+<li><b>'training_user_meta'</b> table for participants, where the training data is static, and cloned when the training session is started.</li>
+</ul>
+</section>
 
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-Services-UserMetaService.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="prettyprint">$meta = service('user_meta');
+$meta-&gt;save( 'key', 'string/json' );
+$value = $meta-&gt;find( 'key' );
+</code></pre>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 
 
@@ -227,7 +262,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Services/UserMetaService.php"><a href="files/app-services-usermetaservice.html"><abbr title="app/Services/UserMetaService.php">UserMetaService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -283,7 +318,7 @@ Allowing admins to switch between either a 'specific' training, or the Leading T
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Services/UserMetaService.php"><a href="files/app-services-usermetaservice.html"><abbr title="app/Services/UserMetaService.php">UserMetaService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -350,7 +385,7 @@ If no user ID is provided, it defaults to the current user session.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Services/UserMetaService.php"><a href="files/app-services-usermetaservice.html"><abbr title="app/Services/UserMetaService.php">UserMetaService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
