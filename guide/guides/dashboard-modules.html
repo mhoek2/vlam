@@ -66,21 +66,37 @@
                 
             </li>
                     <li>
-                <a href="guide/getting-started/deploy.html#deploy" class="">Deploy</a>
+                <a href="guide/getting-started/deploy.html#deploy-backup" class="">Deploy backup</a>
                 
             </li>
                     <li>
-                <a href="guide/getting-started/configure.html#configuration" class="">Configuration</a>
+                <a href="guide/getting-started/configure.html#configure" class="">Configure</a>
                 
             </li>
             </ul>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="guide/guides/index.html#guides" class="">Guides</a>
+    <a href="guide/guides/index.html#quick-guides" class="">Quick-Guides</a>
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="guide/guides/dashboard-modules.html#dashboard-modules" class="">Dashboard Modules</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/complete-case-actions.html#complete-case-actions" class="">Complete Case Actions</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/sub-assignments.html#sub-assignments" class="">Sub Assignments</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/user-meta-service.html#user-meta-service" class="">User Meta Service</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/entry-types.html#entry-types" class="">Entry types</a>
                 
             </li>
             </ul>
@@ -160,6 +176,49 @@
 
             
     <p>Quick overview on how modular dashboard is set up.</p>
+
+            <section class="section " id="create-a-new-module">
+            <h2>Create a new module</h2>
+
+            
+    
+<ol type="1">
+    <li>Create a php file in app/Controllers/Front/DashboardModules</li>
+
+    <li>use the &#039;DashbordModule&#039; suffix.</li>
+
+    <li>Make sure the class and filename are the same</li>
+
+</ol>
+
+            
+    <p>The dashboard_helper handles the rest</p>
+
+    </section>
+
+            <section class="section " id="example-module">
+            <h2>Example module</h2>
+
+            <pre><code class="language-php">namespace App\Controllers\Front\DashboardModules;
+
+use App\Controllers\Front\DashboardModules\DashboardModule;
+
+class ExampleDashboardModule extends DashboardModule
+{
+	protected $sort = 5;
+	protected $css_class = &#039;wide&#039;;
+	//protected $visible = fakse;
+
+	public function index( &amp;$data ) : string
+	{
+		// example usage of user meta:
+		$training_meta = service(&#039;user_meta&#039;);
+		$this-&gt;data[&#039;meta_data&#039;] = $training_meta-&gt;find( &#039;key&#039; );&lt;br&gt;
+		return view(&#039;front/dashboard_modules/example_view&#039;, $this-&gt;data);	
+	}
+}</code></pre>
+
+    </section>
 
     </section>
 

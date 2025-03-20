@@ -66,21 +66,37 @@
                 
             </li>
                     <li>
-                <a href="guide/getting-started/deploy.html#deploy" class="">Deploy</a>
+                <a href="guide/getting-started/deploy.html#deploy-backup" class="">Deploy backup</a>
                 
             </li>
                     <li>
-                <a href="guide/getting-started/configure.html#configuration" class="">Configuration</a>
+                <a href="guide/getting-started/configure.html#configure" class="">Configure</a>
                 
             </li>
             </ul>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="guide/guides/index.html#guides" class="">Guides</a>
+    <a href="guide/guides/index.html#quick-guides" class="">Quick-Guides</a>
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="guide/guides/dashboard-modules.html#dashboard-modules" class="">Dashboard Modules</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/complete-case-actions.html#complete-case-actions" class="">Complete Case Actions</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/sub-assignments.html#sub-assignments" class="">Sub Assignments</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/user-meta-service.html#user-meta-service" class="">User Meta Service</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/entry-types.html#entry-types" class="">Entry types</a>
                 
             </li>
             </ul>
@@ -155,19 +171,144 @@
 </aside>
 
             <div class="phpdocumentor-column -nine phpdocumentor-content">
-                                        <section class="section " id="guides">
-            <h1>Guides</h1>
+                                        <section class="section " id="quick-guides">
+            <h1>Quick-Guides</h1>
 
             <div class="toc">
     <ul class="phpdocumentor-list">
     <li class="toc-item">
     <a href="guide/guides/dashboard-modules.html#dashboard-modules">Dashboard Modules</a>
 
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/dashboard-modules.html#create-a-new-module">Create a new module</a>
 
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/dashboard-modules.html#example-module">Example module</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    <li class="toc-item">
+    <a href="guide/guides/complete-case-actions.html#complete-case-actions">Complete Case Actions</a>
+
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/complete-case-actions.html#use-case">Use-case</a>
+
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/complete-case-actions.html#workflow">Workflow</a>
+
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/complete-case-actions.html#example-module">Example module</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    <li class="toc-item">
+    <a href="guide/guides/sub-assignments.html#sub-assignments">Sub Assignments</a>
+
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/sub-assignments.html#use-case">Use-case</a>
+
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/sub-assignments.html#differences-from-case-actions">Differences from: Case Actions</a>
+
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/sub-assignments.html#workflow">Workflow</a>
+
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/sub-assignments.html#example-module">Example module</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    <li class="toc-item">
+    <a href="guide/guides/user-meta-service.html#user-meta-service">User Meta Service</a>
+
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/user-meta-service.html#use-case">Use-case</a>
+
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/user-meta-service.html#example-usage">Example usage</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    <li class="toc-item">
+    <a href="guide/guides/entry-types.html#entry-types">Entry types</a>
+
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/entry-types.html#reference">Reference</a>
+
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/entry-types.html#note">Note</a>
+
+
+</li>
+
+                    </ul>
 </li>
 
     </ul>
 </div>
+
+    </section>
+
+<section class="section " id="introduction">
+            <h1>Introduction</h1>
+
+            
+    <p>One of the requirements of the application is to allow both beginner or more advanced developers to work on this project simultaneously.</p>
+
+            
+    <p>To do that, OOP modularity has to be kept in mind.
+Also, keep the codebase simple. 
+And even keep some code that could be refactored and cleaned up to be smaller.</p>
+
+            
+    <p>For example, for javascript, the ajax calls are repetitive jQuery code.
+This could be unified in a single function. 
+But keeping it separated allows for new developers quickly understand the core concepts</p>
 
     </section>
 

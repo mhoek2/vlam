@@ -66,21 +66,37 @@
                 
             </li>
                     <li>
-                <a href="guide/getting-started/deploy.html#deploy" class="">Deploy</a>
+                <a href="guide/getting-started/deploy.html#deploy-backup" class="">Deploy backup</a>
                 
             </li>
                     <li>
-                <a href="guide/getting-started/configure.html#configuration" class="">Configuration</a>
+                <a href="guide/getting-started/configure.html#configure" class="">Configure</a>
                 
             </li>
             </ul>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="guide/guides/index.html#guides" class="">Guides</a>
+    <a href="guide/guides/index.html#quick-guides" class="">Quick-Guides</a>
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="guide/guides/dashboard-modules.html#dashboard-modules" class="">Dashboard Modules</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/complete-case-actions.html#complete-case-actions" class="">Complete Case Actions</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/sub-assignments.html#sub-assignments" class="">Sub Assignments</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/user-meta-service.html#user-meta-service" class="">User Meta Service</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/entry-types.html#entry-types" class="">Entry types</a>
                 
             </li>
             </ul>
@@ -177,8 +193,8 @@
 
     </section>
 
-            <section class="section " id="installation">
-            <h2>Installation</h2>
+            <section class="section " id="setup">
+            <h2>Setup</h2>
 
             
     
@@ -187,32 +203,32 @@
 
     <li>From the downloaded .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.</li>
 
-    <li>
-    <p>composer.json
-.. code-block:: bash</p>
-<blockquote>
-    <p>composer install</p>
-</blockquote>
+    <li><dl>
+                        <dt>composer.json</dt>
+        
+        <dd><pre><code class="language-bash">composer install</code></pre>
+</dd>
+            </dl>
 </li>
 
-    <li>
-    <p>Or, manually
-.. code-block:: bash</p>
-<blockquote>
-    <p>composer create-project codeigniter4/appstarter vlam</p>
+    <li><dl>
+                        <dt>Or, manually</dt>
+        
+        <dd><pre><code class="language-bash">composer create-project codeigniter4/appstarter vlam
+composer require phpdocumentor/shim
+composer require codeigniter4/shield:dev-develop
+php spark shield:setup</code></pre>
+</dd>
+            </dl>
+</li>
 
-    <p>composer require phpdocumentor/shim</p>
-
-    <p>composer require codeigniter4/shield:dev-develop</p>
-
-    <p>php spark shield:setup</p>
-</blockquote>
+    <li>Create a Mysql database with PhpMyAdmin and import <code>sql/vlam.sql</code>
 </li>
 
 </ol>
 
             
-    <p>Proceed to Configuration</p>
+    <p><a href="guide/getting-started/configure.html">Proceed to: Configure</a></p>
 
     </section>
 
