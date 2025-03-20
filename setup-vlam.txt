@@ -6,9 +6,3 @@ php spark shield:setup
 
 fromEmail: vlam@reacollege.nl // fake
 name: VLAM
-
-app\Config\auth.php:255
-public int $minimumPasswordLength = 6;
-jksunny71@hotmail.com
-sunny
-R123456

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+    configVersion="3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.phpdoc.org"
+    xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
+>
+    <title>VLAM Documentation</title>
+
+    <paths>
+        <output>docs/</output>
+    </paths>
+
+    <version number="0.1.0">
+        <api format="php">
+            <source dsn=".">
+                <path>app</path> <!-- Include the whole "app" directory -->
+            </source>
+            <output>api</output>
+
+            <ignore hidden="true" symlinks="true">
+                <!-- Exclude all files in app/Config except Services.php -->
+                <path>app/Config/*</path>
+            </ignore>
+        </api>
+    </version>
+
+    <template name="default" />
+</phpdocumentor>

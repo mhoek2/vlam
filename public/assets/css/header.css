@@ -67,10 +67,6 @@ header {
 			} 
 
 header .logo {
-    float: left;
-    height: 44px;
-    padding: .4rem .5rem;
-    overflow: hidden;
 }
 	header .logo a {
 		display: flex;

@@ -129,3 +129,5 @@ nb-configuration.xml
 _notes
 
 app/Config/Database.php
+
+docs/
