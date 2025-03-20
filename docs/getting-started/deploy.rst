@@ -1,5 +1,5 @@
-Deploy
-===============
+Deploy backup
+=============
 
 Assuming you received a copy of a production ready version.
 
@@ -16,4 +16,4 @@ Setup
 #. From the received .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.
 #. Create a `Mysql` database with `PhpMyAdmin` and import the recevied .sql
 
-Proceed to Configuration
+`Proceed to: Configure <configure.rst>`_

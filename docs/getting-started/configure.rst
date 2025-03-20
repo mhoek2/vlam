@@ -1,5 +1,5 @@
-Configuration
-=============
+Configure
+=========
 
 #. Set variable ``$baseURL`` in ``app/Config/App.php`` to the proper root url. eg: http://example.com/
 #. Ensure database connection variables are correctly set in ``app/Config/Database.php``

@@ -4,7 +4,6 @@ namespace App\Controllers\Front\SubAssignments;
 
 use App\Controllers\Front\BaseController;
 
-
 class ExamplePostSaveController extends BaseController
 {
     public function index( int $meeting_id, int $assignment_id )

@@ -4,7 +4,6 @@ namespace App\Controllers\Front\CompleteCaseActions;
 
 use App\Controllers\Front\BaseController;
 
-
 class ExamplePostSaveController extends BaseController
 {
     public function index( int $meeting_id, int $assignment_id, int $case_id )
