@@ -89,6 +89,16 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/App.html" class="">App</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/App-ThirdParty.html" class="">ThirdParty</a>
+                
+            </li>
+            </ul>
+
                         </section>
             
     <section class="phpdocumentor-sidebar__category -reports">
@@ -113,7 +123,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    TextEditorCKEditor
+    TextEditorCKEditorCDN
 
         <span class="phpdocumentor-element__extends">
         extends <abbr title="\App\ThirdParty\TextEditor">TextEditor</abbr>
@@ -122,7 +132,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-ThirdParty.html">ThirdParty</a></li>
                             </ul>
         </div>
     
@@ -135,16 +146,49 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditor.php"><a href="files/app-thirdparty-texteditorckeditor.html"><abbr title="app/ThirdParty/TextEditorCKEditor.php">TextEditorCKEditor.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditorCDN.php"><a href="files/app-thirdparty-texteditorckeditorcdn.html"><abbr title="app/ThirdParty/TextEditorCKEditorCDN.php">TextEditorCKEditorCDN.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">7</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Implements the CKEditor CDN version using a apiKey.</p>
 
 
 
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">example</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="prettyprint">// Controller:
+$this-&gt;data['text_editor'] = service('text_editor');
+
+// View:
+// header:
+&lt;?=service('text_editor')-&gt;load_style()?&gt;
+
+// footer:
+&lt;?=$text_editor-&gt;load_script()?&gt;
+&lt;script {csp-script-nonce}&gt;
+	$(document).ready(function () {
+		&lt;?=$text_editor-&gt;init_script()?&gt;
+		&lt;?=$text_editor-&gt;assign_editor('&quot;#id_of_textarea&quot;')?&gt;
+let value = &lt;?=$text_editor-&gt;get('#id_of_textarea&quot;')?&gt;
+	});
+&lt;/script&gt;
+</code></pre>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 
 
@@ -152,7 +196,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -164,48 +208,60 @@
 
 
 
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#property_apiKey">$apiKey</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+    </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditor.html#method___construct">__construct()</a>
+    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_assign_editor">assign_editor()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: string    </span>
 </dt>
+<dd>Use this wrapper in the view template to create a new textarea instance</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_assign_editor">assign_editor()</a>
+    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_get">get()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: string    </span>
 </dt>
+<dd>Use this wrapper in the view template to get the value of a textarea</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_get">get()</a>
+    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_init_script">init_script()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: string    </span>
 </dt>
+<dd>Sets up the functions required to create a new instance of a textarea</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_init_script">init_script()</a>
+    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_script">load_script()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: string    </span>
 </dt>
+<dd>Loads or imports the external javascript libaries.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_script">load_script()</a>
+    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_style">load_style()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: string    </span>
 </dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_style">load_style()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
+<dd>Loads the stylesheet.</dd>
 
     </dl>
 
@@ -214,11 +270,54 @@
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_apiKey">
+        $apiKey
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#property_apiKey" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditorCDN.php"><a href="files/app-thirdparty-texteditorckeditorcdn.html"><abbr title="app/ThirdParty/TextEditorCKEditorCDN.php">TextEditorCKEditorCDN.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$apiKey</span>
+     = <span class="phpdocumentor-signature__default-value">&quot;eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzA0MjIzOTksImp0aSI6IjdiNzA0MzZhLWE2MDMtNGI2Yi1hOGQxLTJmYzk3MWEzYmIxYyIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIiwibG9jYWxob3N0IiwiMTkyLjE2OC4qLioiLCIxMC4qLiouKiIsIjE3Mi4qLiouKiIsIioudGVzdCIsIioubG9jYWxob3N0IiwiKi5sb2NhbCJdLCJ1c2FnZUVuZHBvaW50IjoiaHR0cHM6Ly9wcm94eS1ldmVudC5ja2VkaXRvci5jb20iLCJkaXN0cmlidXRpb25DaGFubmVsIjpbImNsb3VkIiwiZHJ1cGFsIl0sImxpY2Vuc2VUeXBlIjoiZGV2ZWxvcG1lbnQiLCJmZWF0dXJlcyI6WyJEUlVQIiwiQk9YIl0sInZjIjoiZDYwZjUzMDUifQ.z2QBK-JsDzcivBdrBMos8JHYhKbS4nUDXdFJkRtnmpyThmyA9JEfG5mFfGjIN8pZCdtrTYrirVWdxKcm5Ptkhw&quot;</span></code>
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -227,56 +326,23 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditor.php"><a href="files/app-thirdparty-texteditorckeditor.html"><abbr title="app/ThirdParty/TextEditorCKEditor.php">TextEditorCKEditor.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">9</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_assign_editor">
         assign_editor()
-        <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_assign_editor" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_assign_editor" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditor.php"><a href="files/app-thirdparty-texteditorckeditor.html"><abbr title="app/ThirdParty/TextEditorCKEditor.php">TextEditorCKEditor.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditorCDN.php"><a href="files/app-thirdparty-texteditorckeditorcdn.html"><abbr title="app/ThirdParty/TextEditorCKEditorCDN.php">TextEditorCKEditorCDN.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Use this wrapper in the view template to create a new textarea instance</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">assign_editor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dom_id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">assign_editor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dom_id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -286,7 +352,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$dom_id</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -297,7 +363,15 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The javascript syntax</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -307,20 +381,21 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_get">
         get()
-        <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditor.php"><a href="files/app-thirdparty-texteditorckeditor.html"><abbr title="app/ThirdParty/TextEditorCKEditor.php">TextEditorCKEditor.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditorCDN.php"><a href="files/app-thirdparty-texteditorckeditorcdn.html"><abbr title="app/ThirdParty/TextEditorCKEditorCDN.php">TextEditorCKEditorCDN.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Use this wrapper in the view template to get the value of a textarea</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dom_id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dom_id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -330,7 +405,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$dom_id</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -341,7 +416,15 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The javascript syntax</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -351,20 +434,21 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_init_script">
         init_script()
-        <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_init_script" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_init_script" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditor.php"><a href="files/app-thirdparty-texteditorckeditor.html"><abbr title="app/ThirdParty/TextEditorCKEditor.php">TextEditorCKEditor.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditorCDN.php"><a href="files/app-thirdparty-texteditorckeditorcdn.html"><abbr title="app/ThirdParty/TextEditorCKEditorCDN.php">TextEditorCKEditorCDN.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Sets up the functions required to create a new instance of a textarea</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">init_script</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">init_script</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -375,7 +459,15 @@
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The javascript functions and arrays.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -385,31 +477,42 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_load_script">
         load_script()
-        <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_script" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_script" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditor.php"><a href="files/app-thirdparty-texteditorckeditor.html"><abbr title="app/ThirdParty/TextEditorCKEditor.php">TextEditorCKEditor.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditorCDN.php"><a href="files/app-thirdparty-texteditorckeditorcdn.html"><abbr title="app/ThirdParty/TextEditorCKEditorCDN.php">TextEditorCKEditorCDN.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Loads or imports the external javascript libaries.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">load_script</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">load_script</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>On pages that use wysiwyg textareas, this is called before the &lt;script> tag</p>
+</section>
+
     
     
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The HTML script tag of external javascript libaries.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -419,31 +522,42 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_load_style">
         load_style()
-        <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_style" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_style" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditor.php"><a href="files/app-thirdparty-texteditorckeditor.html"><abbr title="app/ThirdParty/TextEditorCKEditor.php">TextEditorCKEditor.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="app/ThirdParty/TextEditorCKEditorCDN.php"><a href="files/app-thirdparty-texteditorckeditorcdn.html"><abbr title="app/ThirdParty/TextEditorCKEditorCDN.php">TextEditorCKEditorCDN.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Loads the stylesheet.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">load_style</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">load_style</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>This is placed in the header</p>
+</section>
+
     
     
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The HTML link tag.</p>
+</section>
+
+            </section>
+
 </article>
             </section>
 
@@ -451,7 +565,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/app/ThirdParty/TextEditorCKEditor.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/app/ThirdParty/TextEditorCKEditorCDN.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -550,20 +664,26 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/App-ThirdPArty-TextEditorCKEditor.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#property_apiKey">$apiKey</a></li>
+                                            </ul>
+                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_assign_editor">assign_editor()</a></li>
-                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_get">get()</a></li>
-                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_init_script">init_script()</a></li>
-                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_script">load_script()</a></li>
-                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_style">load_style()</a></li>
+                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_assign_editor">assign_editor()</a></li>
+                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_get">get()</a></li>
+                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_init_script">init_script()</a></li>
+                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_script">load_script()</a></li>
+                                            <li class=""><a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_style">load_style()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -583,7 +703,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/App-ThirdPArty-TextEditorCKEditor.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/App-ThirdPArty-TextEditorCKEditorCDN.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

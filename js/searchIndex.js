@@ -1478,123 +1478,118 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditor",
             "name": "TextEditor",
-            "summary": "",
+            "summary": "Provides\u0020base\u0020class\u0020for\u0020modular\u0020wysiwyg\u0020text\u0020editors",
             "url": "classes/App-ThirdPArty-TextEditor.html"
-        },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditor\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditor.html#method___construct"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditor\u003A\u003A\u0024apiKey",
             "name": "apiKey",
             "summary": "",
             "url": "classes/App-ThirdPArty-TextEditor.html#property_apiKey"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditor",
-            "name": "TextEditorCKEditor",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditor.html"
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN",
+            "name": "TextEditorCKEditorCDN",
+            "summary": "Implements\u0020the\u0020CKEditor\u0020CDN\u0020version\u0020using\u0020a\u0020apiKey.",
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorCDN.html"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditor\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditor.html#method___construct"
-        },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditor\u003A\u003Aload_style\u0028\u0029",
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN\u003A\u003Aload_style\u0028\u0029",
             "name": "load_style",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_style"
+            "summary": "Loads\u0020the\u0020stylesheet.",
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_style"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditor\u003A\u003Aload_script\u0028\u0029",
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN\u003A\u003Aload_script\u0028\u0029",
             "name": "load_script",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditor.html#method_load_script"
+            "summary": "Loads\u0020or\u0020imports\u0020the\u0020external\u0020javascript\u0020libaries.",
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_load_script"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditor\u003A\u003Ainit_script\u0028\u0029",
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN\u003A\u003Ainit_script\u0028\u0029",
             "name": "init_script",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditor.html#method_init_script"
+            "summary": "Sets\u0020up\u0020the\u0020functions\u0020required\u0020to\u0020create\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020textarea",
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_init_script"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditor\u003A\u003Aassign_editor\u0028\u0029",
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN\u003A\u003Aassign_editor\u0028\u0029",
             "name": "assign_editor",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditor.html#method_assign_editor"
+            "summary": "Use\u0020this\u0020wrapper\u0020in\u0020the\u0020view\u0020template\u0020to\u0020create\u0020a\u0020new\u0020textarea\u0020instance",
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_assign_editor"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditor\u003A\u003Aget\u0028\u0029",
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN\u003A\u003Aget\u0028\u0029",
             "name": "get",
+            "summary": "Use\u0020this\u0020wrapper\u0020in\u0020the\u0020view\u0020template\u0020to\u0020get\u0020the\u0020value\u0020of\u0020a\u0020textarea",
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorCDN.html#method_get"
+        },                {
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN\u003A\u003A\u0024apiKey",
+            "name": "apiKey",
             "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditor.html#method_get"
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorCDN.html#property_apiKey"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL",
             "name": "TextEditorCKEditorGPL",
-            "summary": "",
+            "summary": "Implements\u0020the\u0020CKEditor\u0020GPL\u0020version\u0020using\u0020a\u0020apiKey.",
             "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html"
-        },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html#method___construct"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL\u003A\u003Aload_style\u0028\u0029",
             "name": "load_style",
-            "summary": "",
+            "summary": "Loads\u0020the\u0020stylesheet.",
             "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html#method_load_style"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL\u003A\u003Aload_script\u0028\u0029",
             "name": "load_script",
-            "summary": "",
+            "summary": "Loads\u0020or\u0020imports\u0020the\u0020external\u0020javascript\u0020libaries.",
             "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html#method_load_script"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL\u003A\u003Ainit_script\u0028\u0029",
             "name": "init_script",
-            "summary": "",
+            "summary": "Sets\u0020up\u0020the\u0020functions\u0020required\u0020to\u0020create\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020textarea",
             "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html#method_init_script"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL\u003A\u003Aassign_editor\u0028\u0029",
             "name": "assign_editor",
-            "summary": "",
+            "summary": "Use\u0020this\u0020wrapper\u0020in\u0020the\u0020view\u0020template\u0020to\u0020create\u0020a\u0020new\u0020textarea\u0020instance",
             "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html#method_assign_editor"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL\u003A\u003Aget\u0028\u0029",
             "name": "get",
-            "summary": "",
+            "summary": "Use\u0020this\u0020wrapper\u0020in\u0020the\u0020view\u0020template\u0020to\u0020get\u0020the\u0020value\u0020of\u0020a\u0020textarea",
             "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html#method_get"
+        },                {
+            "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorGPL\u003A\u003A\u0024apiKey",
+            "name": "apiKey",
+            "summary": "",
+            "url": "classes/App-ThirdPArty-TextEditorCKEditorGPL.html#property_apiKey"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote",
             "name": "TextEditorSummernote",
-            "summary": "",
+            "summary": "Implements\u0020the\u0020free\u0020Summernote\u0020CDN\u0020version.",
             "url": "classes/App-ThirdPArty-TextEditorSummernote.html"
-        },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditorSummernote.html#method___construct"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote\u003A\u003Aload_style\u0028\u0029",
             "name": "load_style",
-            "summary": "",
+            "summary": "Loads\u0020the\u0020stylesheet.",
             "url": "classes/App-ThirdPArty-TextEditorSummernote.html#method_load_style"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote\u003A\u003Aload_script\u0028\u0029",
             "name": "load_script",
-            "summary": "",
+            "summary": "Loads\u0020or\u0020imports\u0020the\u0020external\u0020javascript\u0020libaries.",
             "url": "classes/App-ThirdPArty-TextEditorSummernote.html#method_load_script"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote\u003A\u003Ainit_script\u0028\u0029",
             "name": "init_script",
-            "summary": "",
+            "summary": "Sets\u0020up\u0020the\u0020functions\u0020required\u0020to\u0020create\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020textarea",
             "url": "classes/App-ThirdPArty-TextEditorSummernote.html#method_init_script"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote\u003A\u003Aassign_editor\u0028\u0029",
             "name": "assign_editor",
-            "summary": "",
+            "summary": "Use\u0020this\u0020wrapper\u0020in\u0020the\u0020view\u0020template\u0020to\u0020create\u0020a\u0020new\u0020textarea\u0020instance",
             "url": "classes/App-ThirdPArty-TextEditorSummernote.html#method_assign_editor"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote\u003A\u003Aget\u0028\u0029",
             "name": "get",
-            "summary": "",
+            "summary": "Use\u0020this\u0020wrapper\u0020in\u0020the\u0020view\u0020template\u0020to\u0020get\u0020the\u0020value\u0020of\u0020a\u0020textarea",
             "url": "classes/App-ThirdPArty-TextEditorSummernote.html#method_get"
+        },                {
+            "fqsen": "\\App\\ThirdPArty\\TextEditorSummernote\u003A\u003A\u0024apiKey",
+            "name": "apiKey",
+            "summary": "",
+            "url": "classes/App-ThirdPArty-TextEditorSummernote.html#property_apiKey"
         },                {
             "fqsen": "\\",
             "name": "\\",
