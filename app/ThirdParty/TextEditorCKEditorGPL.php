@@ -4,18 +4,52 @@ namespace App\ThirdPArty;
 
 use App\ThirdParty\TextEditor;
 
+/**
+ * Implements the CKEditor GPL version using a apiKey.
+ *
+ * @package App\ThirdParty
+ *
+ * @example
+ * ```
+ * // Controller:
+ * $this->data['text_editor'] = service('text_editor');
+ *
+ * // View:
+ * // header: 
+ * <?=service('text_editor')->load_style()?>
+ *
+ * // footer:
+ * <?=$text_editor->load_script()?>
+ * <script {csp-script-nonce}>
+ * 	$(document).ready(function () {
+ * 		<?=$text_editor->init_script()?>
+ * 		<?=$text_editor->assign_editor('"#id_of_textarea"')?>
+  		let value = <?=$text_editor->get('#id_of_textarea"')?>
+ * 	});
+ * </script>
+ * ```
+ */
 class TextEditorCKEditorGPL extends TextEditor
 {
-	public function __construct( )
-	{
-		$this->apiKey = "GPL";
-	}
-	
+	protected string $apiKey = "GPL";
+
+	/**
+	 * Loads the stylesheet.
+	 * This is placed in the header
+	 *
+	 * @return string The HTML link tag.
+	 */
 	public function load_style()
 	{
 		return '<link rel="stylesheet" href="http://vlam.hoeklab.nl/public/assets/ckeditor/ckeditor5.css">';
 	}
 	
+	/**
+	 * Loads or imports the external javascript libaries.
+	 * On pages that use wysiwyg textareas, this is called before the <script> tag
+	 *
+	 * @return string The HTML script tag of external javascript libaries.
+	 */
 	public function load_script()
 	{
 		return "
@@ -265,16 +299,35 @@ class TextEditorCKEditorGPL extends TextEditor
 		";
 	}	
 	
+	/**
+	 * Sets up the functions required to create a new instance of a textarea
+	 *
+	 * @return string The javascript functions and arrays.
+	 */
 	public function init_script()
 	{
 		return '';
 	}
 	
+	/**
+	 * Use this wrapper in the view template to create a new textarea instance
+	 *
+	 * @param string dom_id The DOM ID of the element, includes #.
+	 *
+	 * @return string The javascript syntax
+	 */	
 	public function assign_editor( $dom_id )
 	{
 		return "window.set_text_editor( {$dom_id} );";
 	}
 	
+	/**
+	 * Use this wrapper in the view template to get the value of a textarea
+	 *
+	 * @param string dom_id The DOM ID of the element, includes #.
+	 *
+	 * @return string The javascript syntax
+	 */	
 	public function get( $dom_id )
 	{
 		return "window.CKEditorArray[ {$dom_id} ].getData();";
