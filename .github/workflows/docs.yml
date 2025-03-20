@@ -26,11 +26,11 @@ jobs:
 
       - name: Generate Documentation
         run: |
-          vendor/bin/phpdoc -d app -t docs
+          vendor/bin/phpdoc -c phpdoc.xml
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./docs/build
           publish_branch: gh-pages

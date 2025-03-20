@@ -1,0 +1,19 @@
+Deploy
+===============
+
+Assuming you received a copy of a production ready version.
+
+Requirements
+------------
+#. Hosting environemnt with ``PHP>8.2`` and ``ext-intl`` extension enabled.
+#. .zip file containing a copy of an existing install
+#. .sql file containing a copy of the database
+
+- If root folder ``vendor`` is not included with the .zip. Run composer like mentioned in Installation
+
+Setup
+-----
+#. From the received .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.
+#. Create a `Mysql` database with `PhpMyAdmin` and import the recevied .sql
+
+Proceed to Configuration

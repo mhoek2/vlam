@@ -1,0 +1,34 @@
+Installation
+============
+
+Setting up a fresh install
+
+Requirements
+------------
+1. Hosting environemnt with ``PHP>8.2`` and ``ext-intl`` extension enabled.
+2. A fresh copy containing core files from the github repository.
+
+Installation
+------------
+
+#. Install `Composer<https://getcomposer.org/>`_
+#. From the downloaded .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.
+#. composer.json
+   .. code-block:: bash
+   
+        composer install
+		
+#. Or, manually
+   .. code-block:: bash
+   
+        composer create-project codeigniter4/appstarter vlam
+		
+        composer require phpdocumentor/shim
+		
+        composer require codeigniter4/shield:dev-develop
+		
+        php spark shield:setup
+	  
+	  
+	  
+Proceed to Configuration

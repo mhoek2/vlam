@@ -8,7 +8,7 @@
     <title>VLAM Documentation</title>
 
     <paths>
-        <output>docs/</output>
+        <output>docs/build</output>
     </paths>
 
     <version number="0.1.0">
@@ -21,8 +21,15 @@
             <ignore hidden="true" symlinks="true">
                 <!-- Exclude all files in app/Config except Services.php -->
                 <path>app/Config/*</path>
+				<path>docs/build/*</path>
             </ignore>
         </api>
+        <guide>
+            <source dsn=".">
+                <path>docs</path>
+            </source>
+            <output>/guide</output>
+        </guide>
     </version>
 
     <template name="default" />

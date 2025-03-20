@@ -130,4 +130,5 @@ _notes
 
 app/Config/Database.php
 
-docs/
+docs/build
+.phpdoc
