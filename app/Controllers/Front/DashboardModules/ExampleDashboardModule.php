@@ -4,10 +4,16 @@ namespace App\Controllers\Front\DashboardModules;
 
 use App\Controllers\Front\DashboardModules\DashboardModule;
 
+/**
+ * Dashboard Module
+ *
+ * @package App\Controllers\Front\DashboardModules
+ *
+ */
 class ExampleDashboardModule extends DashboardModule
 {
-	protected $sort = 5;
-	protected $css_class = 'wide';
+	protected int $sort = 5;
+	protected string $css_class = 'wide';
 	
     public function index( &$data ) : string
     {

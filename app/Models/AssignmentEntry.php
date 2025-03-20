@@ -11,9 +11,15 @@ class AssignmentEntry extends Model
 
     protected $allowedFields = ['id', 'type', 'name', 'sort_order', 'info', 'assignment_id'];
 	
-	// NOTE: 	Do not make change or remove existing type/group identifiers, this can have negative impact on existing training data.<br>
-	//			If required, make sure to update the database enum and stored databse records accordingly!
-	// Adding types is fine, remember to add the 'type' to the enum in the database.
+	/**
+	 * This is how question/entry types are defined.
+	 *
+	 * <em><p style="color:red"><b>IMPORTANT!</b> 
+	 * Do not change or remove existing type/group 'type' identifiers. This can have negative impact on existing training data.
+	 * If required, <u>make sure</u> to update the database enum and all database records that reference that type!
+	 * </p></em>
+	 * When adding types, <u>make sure</u> to add the new 'type' to the enum in the database.
+	 */
     public $type_enum = [ 
         ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze'],
         ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2'],
@@ -33,6 +39,9 @@ class AssignmentEntry extends Model
        $this->group_counts = $this->find_group_counts();
     }	
 	
+	/**
+	 * Return the group identifier of a type
+	 */
 	public function find_group( $type )
 	{
 		// find the group identifier of a type
@@ -46,10 +55,11 @@ class AssignmentEntry extends Model
 		return !empty($filtered) ? $filtered[0]['group'] : NULL;
 	}
 
-	public function find_group_counts()
+	/**
+	 * returns an array with number of types per group
+	 */
+	public function find_group_counts() : array
 	{
-		// return table with count of types for each group
-		
 		$group_counts = [];
 
 		foreach ($this->type_enum as $item) {
@@ -65,19 +75,21 @@ class AssignmentEntry extends Model
 		return $group_counts;
 	}
 	
-	public function type_to_group_table()
+	/**
+	 * return an array where key represents the type, and the value the group of the type
+	 */	
+	public function type_to_group_table() : array
 	{
-		// return a table where key represents the type, and the value the group of the type
-		
         return array_merge(...array_map(function($item) {
             return [$item['type'] => $item['group']];
         }, $this->type_enum));
 	}
 	
-	public function valid_type( $type )
+	/**
+	 * check validity of an entry type by matching with $this->type_enum
+	 */	
+	public function valid_type( $type ) : bool
 	{
-		// check validity of an entry type by matching with $this->type_enum
-		
 		foreach ($this->type_enum as $item) {
 			if ($item['type'] === $type) {
 				return true;
@@ -91,6 +103,10 @@ class AssignmentEntry extends Model
 	// Query overrides:
 	// provide a fail-safe for when types are removed, and database records are no longer valid
 	//
+
+	/**
+	 * Override: Returns null if type is invalid
+	 */	
     public function find($id = null)
     {
         $entry = parent::find($id);
@@ -101,7 +117,10 @@ class AssignmentEntry extends Model
         return $entry;
     }
 
-    public function findAll( $limit = null, $offset = 0 )
+	/**
+	 * Override: Do not inclide invalid types
+	 */
+    public function findAll( $limit = null, $offset = 0 ) : array
     {
         $entries = parent::findAll($limit, $offset);
 
@@ -110,6 +129,9 @@ class AssignmentEntry extends Model
         });
     }
 
+	/**
+	 * Override: Returns null if type is invalid
+	 */	
     public function first()
 	{
 		$entry = parent::first();

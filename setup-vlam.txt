@@ -6,3 +6,6 @@ php spark shield:setup
 
 fromEmail: vlam@reacollege.nl // fake
 name: VLAM
+
+
+phpdoc -d path_to_project_root\app -t path_to_project_root\docs

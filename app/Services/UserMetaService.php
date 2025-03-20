@@ -6,6 +6,23 @@ use App\Models\User;
 use App\Models\UserMeta;			// for admin debug
 use App\Models\TrainingUserMeta;
 
+/**
+ * Provides service to store user meta
+ *
+ * The user meta is split into two identical database tables
+ * * <b>'user_meta'</b> table for admin users, allowing them to run the training is if they are a participant. But with the feature that the training data is in real-time
+ * * <b>'training_user_meta'</b> table for participants, where the training data is static, and cloned when the training session is started.
+ *
+ * @example
+ * ```
+ * $meta = service('user_meta');
+ * $meta->save( 'key', 'string/json' );
+ * $value = $meta->find( 'key' );
+ * ```
+ *
+ * @package App\Services
+ *
+ */
 class UserMetaService
 {
 	/**
