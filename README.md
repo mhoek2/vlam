@@ -36,6 +36,26 @@ This will either be the 'post' page, after an assignment is saved. or when no en
 
 https://github.com/user-attachments/assets/28bf56af-63be-42d5-a7f9-4b29f385eba0
 
+## Devlog 003 - week 10-12
+- Style training manager in the admin panel.
+- Some graphics of the figma front-end design have been implemented. (sidebar background and logo)
+- Implement CSRF security tokens to all front and admin forms.
+- Added javacript eventHandler to track and synchronize CSRF token across multipel tabs using localStorage.
+- Added user manager for back-end "Create, Change password, Remove". 
+    - <em>```(SSO is a future feature request. So, keep time spent on build-in user manager to minimum. )```</em>
+- Create dashboard module system, making easier adn cleaner to extend. (OOP)
+- Create a service and database structure for 'User Meta', allowing to store per-user data.
+- Create helper functions. ( csrf, user, dashboard modules)
+- Implement [phpDocumentor](https://phpdoc.org/) using composer, with CI-CD workflow for auto-generation and upload to 'gh-pages' branch
+- Begin adding php docstrings for documentation, and adding Guide (.rst) structure.
+- Update Font Awesome version from 6.0.0 to 6.7.2
+- Implement schedule management per training, in preparation for a Agenda dashboard module
+- Add ability to store actual 'multi-choice' questions. (more then one answer)
+- Add entry/question type grouping system
+- Some general cleanup, refactoring, security type checks and bits and bobs.
+
+https://github.com/user-attachments/assets/c965076f-2da3-48aa-b187-af8999dd34ae
+
 
 
 # Helpful SQL Queries:
