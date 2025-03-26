@@ -48,6 +48,20 @@ class CaseController extends BaseController
 		die('can not load sub assignment');
 	}
 	
+	/**
+	 * Helper to return json error message.
+	 */
+	private function errorResponse( &$warnings, $message )
+	{
+		array_push($warnings, $message);
+		
+		return $this->response->setJSON([
+			'status'         => 'error',
+			'warnings'       => $warnings,
+			'new_csrf_token' => csrf_hash(),
+		]);
+	}
+	
 	public function save( $meeting_id, $assignment_id, $case_id, $entry_num )
 	{
 		$warnings = [];
@@ -70,14 +84,7 @@ class CaseController extends BaseController
 		
 		// check if entry type exists!
 		if (!$this->caseEntry->valid_type($entry['type']))
-		{
-			array_push( $warnings, "entry type '".$entry['type']."' does not exist!" );
-			return $this->response->setJSON([
-				'status' 			=> 'error', 
-				'warnings' 			=> $warnings,
-				'new_csrf_token' 	=> csrf_hash(),
-			]);
-		}
+			return $this->errorResponse( $warnings, "entry type '".$entry['type']."' does not exist!" );
 		
 		$value = NULL;	// stores list of property ids (integer list), or dynamic user-defined inputs (strings)
 		
@@ -86,28 +93,23 @@ class CaseController extends BaseController
 			$property_id = NULL;
 		}
 			
-		if ( $entry_type_group == 'mcq' ){
-
+		if ( $entry_type_group == 'mcq' )
+		{
+			// mark -1 for invalid/empty
+			if (is_null($property_id))
+				$property_id = -1;
+			
+			// validate property ids
+			else if ( !$this->caseEntryProperties->valid_property($entry_id, $property_id) )
+				return $this->errorResponse( $warnings, "Invalid entry property! .. what are you trying to do mate?" );
+			
 			if ( is_array($property_id) )
 			{
-				if ( !preg_match('/^mcq-(\d+)$/', $entry['type'], $matches) ) {
-					array_push( $warnings, "entry type '".$entry['type']."' does not match valid multi-selectable type of 'mcq-(int)'.." );
-					return $this->response->setJSON([
-						'status' 			=> 'error', 
-						'warnings' 			=> $warnings,
-						'new_csrf_token' 	=> csrf_hash(),
-					]);
-				}
+				if ( !preg_match('/^mcq-(\d+)$/', $entry['type'], $matches) )
+	            	return $this->errorResponse( $warnings, "Entry type '{$entry['type']}' does not match valid multi-selectable type of 'mcq-(int)'.." );
 
 				if ( count($property_id) > (int)$matches[1] )
-				{
-					array_push( $warnings, "count does not match with entry! .. what are you trying to do mate?" );
-					return $this->response->setJSON([
-						'status' 			=> 'error', 
-						'warnings' 			=> $warnings,
-						'new_csrf_token' 	=> csrf_hash(),
-					]);
-				}
+            		return $this->errorResponse( $warnings, "Count does not match with entry! .. what are you trying to do mate?" );
 
 				// use array_slice as fail-safe, for non matching property-counts
 				$value = json_encode(array_map('intval', array_slice($property_id, 0, (int)$matches[1])));	// store as integers

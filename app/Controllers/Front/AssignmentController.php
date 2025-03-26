@@ -6,91 +6,6 @@ use App\Controllers\Front\BaseController;
 
 class AssignmentController extends BaseController
 {
-    public function save( $meeting_id, $assignment_id )
-    {
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
-		
-		$warnings = [];
-		
-        $user = $this->user->getUserInfo();
-        $meeting = $this->get_meeting( $meeting_id );
-  
-        $assignment = $this->get_assignment($assignment_id);
-        $assignment_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
-
-        $post_entries = $this->request->getPost('entries');
-
-        if(is_null($post_entries))
-        {
-		    return $this->response->setJSON([
-			    'status' 			=> 'error',
-                'message' 			=> 'No entries in this assignment to save',
-				'new_csrf_token' 	=> csrf_hash(),
-		    ]);
-        }
-
-        foreach($post_entries as $entry_id => $property_id )
-        {
-			$entry = $this->assignmentEntry->find($entry_id);
-			$entry_type_group = $this->assignmentEntry->find_group($entry['type']);
-			
-			$value = NULL;	// stores list of property ids (integer list), or dynamic user-defined inputs (strings)
-			
-			// check if entry type exists!
-			if (!$this->assignmentEntry->valid_type($entry['type']))
-			{
-				array_push( $warnings, "entry type '".$entry['type']."' does not exist!" );
-				continue;
-			}
-			
-			if ($entry['type'] === "text_input") {
-				$value = $property_id;
-				$property_id = NULL;
-			}
-			
-			if ( $entry_type_group == 'mcq' ){
-				
-				if ( is_array($property_id) )
-				{
-					if ( !preg_match('/^mcq-(\d+)$/', $entry['type'], $matches) ) {
-						array_push( $warnings, "entry type '".$entry['type']."' does not match valid multi-selectable type of 'mcq-(int)'.." );
-						continue;
-					}
-					
-					if ( count($property_id) > (int)$matches[1] )
-					{
-						array_push( $warnings, "count does not match with entry! .. what are you trying to do mate?" );
-						continue;
-					}
-				
-					// use array_slice as fail-safe, for non matching property-counts
-					$value = json_encode(array_map('intval', array_slice($property_id, 0, (int)$matches[1])));	// store as integers
-				}
-				else
-					$value = json_encode([(int)$property_id]);	// store as integer
-					
-				$property_id = 1; // used to check if value is list of properties or a user-defined value
-			}
-			
-			$this->assignmentResult->replace([ 
-				'user_id' 		=> $user['id'], 
-				'assignment_id' => $assignment_id,
-				'entry_id' 		=> $entry_id,
-				'property_id' 	=> $property_id,
-				'value'			=> $value
-				]
-			);
-        }
-
-		return $this->response->setJSON([
-			'status' 			=> 'success', 
-			'message' 			=> 'Assignemnt results stored successfully', 
-			'warnings'			=> $warnings,
-			'new_csrf_token' 	=> csrf_hash(),
-		]);
-    }
-	
 	private function is_sub_assignment( $controller_name )
 	{
 		$controller_class = "App\Controllers\Front\SubAssignments\\" . $controller_name;
@@ -131,6 +46,102 @@ class AssignmentController extends BaseController
 		
 		die('can not load sub assignment');
 	}
+	
+    public function save( $meeting_id, $assignment_id )
+    {
+		$meeting_id 	= (int) $meeting_id;
+		$assignment_id 	= (int) $assignment_id;
+		
+		$warnings = [];
+		
+        $user = $this->user->getUserInfo();
+        $meeting = $this->get_meeting( $meeting_id );
+  
+        $assignment = $this->get_assignment($assignment_id);
+        $assignment_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
+
+        $post_entries = $this->request->getPost('entries');
+
+        if(is_null($post_entries))
+        {
+		    return $this->response->setJSON([
+			    'status' 			=> 'error',
+                'message' 			=> 'No entries in this assignment to save',
+				'new_csrf_token' 	=> csrf_hash(),
+		    ]);
+        }
+
+        foreach($post_entries as $entry_id => $property_id )
+        {
+			$entry = $this->assignmentEntry->find($entry_id);
+			$entry_type_group = $this->assignmentEntry->find_group($entry['type']);
+
+			$value = NULL;	// stores list of property ids (integer list), or dynamic user-defined inputs (strings)
+			
+			// check if entry type exists!
+			if (!$this->assignmentEntry->valid_type($entry['type']))
+			{
+				array_push( $warnings, "entry type '".$entry['type']."' does not exist!" );
+				continue;
+			}
+			
+			if ($entry['type'] === "text_input") {
+				$value = $property_id;
+				$property_id = NULL;
+			}
+			
+			if ( $entry_type_group == 'mcq' )
+			{
+				// mark -1 for invalid/empty
+				if (is_null($property_id))
+					$property_id = -1;
+				
+				// validate property ids
+				else if ( !$this->assignmentEntryProperties->valid_property($entry_id, $property_id) )
+				{
+					array_push( $warnings, "Invalid entry property! .. what are you trying to do mate?" );
+					continue;
+				}
+
+				if ( is_array($property_id) )
+				{
+					if ( !preg_match('/^mcq-(\d+)$/', $entry['type'], $matches) ) {
+						array_push( $warnings, "entry type '".$entry['type']."' does not match valid multi-selectable type of 'mcq-(int)'.." );
+						continue;
+					}
+					
+					if ( count($property_id) > (int)$matches[1] )
+					{
+						array_push( $warnings, "count does not match with entry! .. what are you trying to do mate?" );
+						continue;
+					}
+				
+					// use array_slice as fail-safe, for non matching property-counts
+					$value = json_encode(array_map('intval', array_slice($property_id, 0, (int)$matches[1])));	// store as integers
+				}
+				else
+					$value = json_encode([(int)$property_id]);	// store as integer
+					
+				$property_id = 1; // used to check if value is list of properties or a user-defined value
+			}
+			
+			$this->assignmentResult->replace([ 
+				'user_id' 		=> $user['id'], 
+				'assignment_id' => $assignment_id,
+				'entry_id' 		=> $entry_id,
+				'property_id' 	=> $property_id,
+				'value'			=> $value
+				]
+			);
+        }
+
+		return $this->response->setJSON([
+			'status' 			=> 'success', 
+			'message' 			=> 'Assignemnt results stored successfully', 
+			'warnings'			=> $warnings,
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
+    }
 	
     public function index( $meeting_id, $assignment_id, $is_sub = false ): string
     {  

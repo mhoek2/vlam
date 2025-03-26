@@ -177,6 +177,11 @@
 							$(this).addClass('selected');
 						<?php endif ?>	
 					}
+					else if (response.status === 'error') {
+						<?php if ($mcq_multi): ?>
+							$(this).removeClass('selected');
+						<?php endif ?>	
+					}
 				}.bind(this),
 				error: function(xhr, status, error) {
 

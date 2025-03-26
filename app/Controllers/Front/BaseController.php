@@ -227,8 +227,16 @@ abstract class BaseController extends Controller
 			
 			$results[$id]['value'] = [];
 			
-			foreach ( $properties as $property_id )
+			foreach ( $properties as $property_id ) 
+			{	
+				// primary key indexing starts at 1
+				if ( $property_id <= 0 )
+					continue;
+				
+				// should also check '$property_object->valid_property' perhaps?
+				
 				$results[$id]['value'][$property_id] = $property_object->find($property_id)['content'];
+			}
 		}
 		
 		return $results;
