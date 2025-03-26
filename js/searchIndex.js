@@ -471,11 +471,6 @@ Search.appendIndex(
             "summary": "Class\u0020BaseController",
             "url": "classes/App-Controllers-Front-AssignmentController.html"
         },                {
-            "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Asave\u0028\u0029",
-            "name": "save",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-AssignmentController.html#method_save"
-        },                {
             "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Ais_sub_assignment\u0028\u0029",
             "name": "is_sub_assignment",
             "summary": "",
@@ -490,6 +485,11 @@ Search.appendIndex(
             "name": "get_sub_assignment",
             "summary": "",
             "url": "classes/App-Controllers-Front-AssignmentController.html#method_get_sub_assignment"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Asave\u0028\u0029",
+            "name": "save",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-AssignmentController.html#method_save"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
@@ -580,6 +580,11 @@ Search.appendIndex(
             "name": "get_complete_action",
             "summary": "",
             "url": "classes/App-Controllers-Front-CaseController.html#method_get_complete_action"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\CaseController\u003A\u003AerrorResponse\u0028\u0029",
+            "name": "errorResponse",
+            "summary": "Helper\u0020to\u0020return\u0020json\u0020error\u0020message.",
+            "url": "classes/App-Controllers-Front-CaseController.html#method_errorResponse"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\CaseController\u003A\u003Asave\u0028\u0029",
             "name": "save",
@@ -956,6 +961,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-AssignmentEntryProperties.html"
         },                {
+            "fqsen": "\\App\\Models\\AssignmentEntryProperties\u003A\u003Avalid_property\u0028\u0029",
+            "name": "valid_property",
+            "summary": "Validate\u0020whether\u0020the\u0020given\u0020property\u0020ID\u0028s\u0029\u0020exist\u0020for\u0020the\u0020specified\u0020entry.",
+            "url": "classes/App-Models-AssignmentEntryProperties.html#method_valid_property"
+        },                {
             "fqsen": "\\App\\Models\\AssignmentEntryProperties\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
@@ -1090,6 +1100,11 @@ Search.appendIndex(
             "name": "CaseEntryProperties",
             "summary": "",
             "url": "classes/App-Models-CaseEntryProperties.html"
+        },                {
+            "fqsen": "\\App\\Models\\CaseEntryProperties\u003A\u003Avalid_property\u0028\u0029",
+            "name": "valid_property",
+            "summary": "Validate\u0020whether\u0020the\u0020given\u0020property\u0020ID\u0028s\u0029\u0020exist\u0020for\u0020the\u0020specified\u0020entry.",
+            "url": "classes/App-Models-CaseEntryProperties.html#method_valid_property"
         },                {
             "fqsen": "\\App\\Models\\CaseEntryProperties\u003A\u003A\u0024table",
             "name": "table",
