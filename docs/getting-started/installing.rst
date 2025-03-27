@@ -28,4 +28,10 @@ Setup
 	  
 #. Create a Mysql database with PhpMyAdmin and import ``sql/vlam.sql``
 
+.. tip::
+
+	For **development** use a local web server such as `XAMPP<https://www.apachefriends.org/>`_, or just apache with php and MySQL if you prefer custom installation.
+	
+	- Instead of **step 2**. Clone the repository using your preferred **GIT** workflow for version control.
+
 `Proceed to: Configure <configure.rst>`_
