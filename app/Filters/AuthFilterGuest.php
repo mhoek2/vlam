@@ -17,10 +17,13 @@ class AuthFilterGuest implements FilterInterface
 		{
 			return redirect()->to('/home');
 		}
+		
+		return null;
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
         // No actions needed after the request
+		return null;
     }
 }

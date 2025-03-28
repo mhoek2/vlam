@@ -4,6 +4,7 @@ namespace Config;
 
 use CodeIgniter\Config\BaseService;
 
+use App\ThirdParty\TextEditor;
 use App\ThirdParty\TextEditorCKEditorCDN as CKEditorCDN;
 use App\ThirdParty\TextEditorCKEditorGPL as CKEditorGPL;
 use App\ThirdParty\TextEditorSummernote as Summernote;
@@ -36,7 +37,7 @@ class Services extends BaseService
      * }
      */
 
-	public static function user_meta($getShared = true)
+	public static function user_meta($getShared = true): UserMetaService
 	{
 		if ($getShared) {
 			return static::getSharedInstance('user_meta');
@@ -45,7 +46,7 @@ class Services extends BaseService
 		return new UserMetaService();
 	}
 	
-	public static function text_editor($getShared = true)
+	public static function text_editor($getShared = true): TextEditor
 	{
 		if ($getShared) {
 			return static::getSharedInstance('text_editor');

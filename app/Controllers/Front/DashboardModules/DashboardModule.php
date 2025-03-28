@@ -38,6 +38,9 @@ namespace App\Controllers\Front\DashboardModules;
  */
 class DashboardModule
 {
+	/** Used for the view */
+	protected $data = [];
+	
 	/** Sort order */
 	protected int $sort = 100;
 

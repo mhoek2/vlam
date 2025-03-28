@@ -29,10 +29,13 @@ class AuthFilterAdmin implements FilterInterface
 		//if (!auth()->user()->can('test.control')) {
 		//	return redirect()->to('/');
 		//}
+		
+		return null;
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
         // No actions needed after the request
+		return null;
     }
 }

@@ -27,10 +27,13 @@ class AuthFilterSession implements FilterInterface
 		if ( !$user->inGroup('admin') && is_null($user_info['training_id']) && current_url() !== url_to('home')){
 			return redirect()->to(url_to('home'));
 		}
+		
+		return null;
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
         // No actions needed after the request
+		return null;
     }
 }
