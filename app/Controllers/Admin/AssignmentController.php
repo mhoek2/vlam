@@ -15,8 +15,14 @@ use Config\CKeditor;
 
 class AssignmentController extends BaseController
 {
-    protected $assignments;
-
+	protected $meetings;	
+	
+	protected $assignments;
+	protected $assignmentEntry;	
+	protected $assignmentEntryProperties;
+	
+	protected $cases;	
+	
     public function __construct()
     {
         $this->meetings = new Meetings();

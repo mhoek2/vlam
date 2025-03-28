@@ -11,6 +11,9 @@ use Config\CKeditor;
 
 class MeetingController extends BaseController
 {
+	protected $meetings;	
+	protected $assignments;	
+
     public function __construct() {
         $this->meetings = new Meetings();
         $this->assignments = new Assignments();

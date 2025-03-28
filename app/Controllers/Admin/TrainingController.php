@@ -30,6 +30,11 @@ use App\Models\TrainingCaseEntryProperties;
 
 class TrainingController extends BaseController
 {
+	protected $meetings;	
+	protected $trainings;	
+	protected $trainingMembers;	
+	protected $TrainingSchedule;	
+	
     public function __construct() {
 		$this->meetings 		= new Meetings();
         $this->trainings 		= new Trainings();

@@ -14,8 +14,13 @@ use Config\CKeditor;
 
 class CaseController extends BaseController
 {
-    protected $cases;
-
+	protected $meetings;	
+	protected $assignments;	
+	
+	protected $cases;
+	protected $caseEntry;	
+	protected $caseEntryProperties;	
+	
     public function __construct()
     {
         $this->meetings = new Meetings();

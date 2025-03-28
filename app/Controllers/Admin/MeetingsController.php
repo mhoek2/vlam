@@ -8,6 +8,8 @@ use App\Models\Meetings;
 
 class MeetingsController extends BaseController
 {
+	protected $meetings;
+	
     public function __construct() {
         $this->meetings = new Meetings();
     }

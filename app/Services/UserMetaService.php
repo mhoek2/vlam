@@ -25,6 +25,11 @@ use App\Models\TrainingUserMeta;
  */
 class UserMetaService
 {
+	protected $user;
+	protected $user_data;
+	protected $user_meta;
+	
+	
 	/**
 	 * This method initializes the `User` object, retrieves the user's information, and ensures the user is valid. 
 	 * If the user is not valid, the process is halted with an error message. 

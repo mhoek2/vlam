@@ -10,6 +10,9 @@ use App\Models\TrainingUsers;
 
 class TrainingsController extends BaseController
 {
+	protected $trainings;	
+	protected $trainingMembers;	
+	
     public function __construct() {
         $this->trainings = new Trainings();
         $this->trainingMembers = new TrainingUsers();

@@ -312,7 +312,7 @@ class TextEditorCKEditorGPL extends TextEditor
 	/**
 	 * Use this wrapper in the view template to create a new textarea instance
 	 *
-	 * @param string dom_id The DOM ID of the element, includes #.
+	 * @param string $dom_id The DOM ID of the element, includes #.
 	 *
 	 * @return string The javascript syntax
 	 */	
@@ -324,7 +324,7 @@ class TextEditorCKEditorGPL extends TextEditor
 	/**
 	 * Use this wrapper in the view template to get the value of a textarea
 	 *
-	 * @param string dom_id The DOM ID of the element, includes #.
+	 * @param string $dom_id The DOM ID of the element, includes #.
 	 *
 	 * @return string The javascript syntax
 	 */	

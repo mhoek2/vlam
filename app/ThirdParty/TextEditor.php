@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ThirdPArty;
+namespace App\ThirdParty;
 
 /**
  * Provides base class for modular wysiwyg text editors

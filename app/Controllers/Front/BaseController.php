@@ -49,7 +49,19 @@ abstract class BaseController extends Controller
      * @var CLIRequest|IncomingRequest
      */
     protected $request;
-
+	
+	protected $data = [];
+	protected $user;
+	protected $meetings;
+	protected $assignments;
+	protected $assignmentEntry;
+	protected $assignmentEntryProperties;
+	protected $assignmentResult;
+	protected $cases;
+	protected $caseEntry;
+	protected $caseEntryProperties;
+	protected $caseResult;
+	
     /**
      * An array of helpers to be loaded automatically upon
      * class instantiation. These helpers will be available

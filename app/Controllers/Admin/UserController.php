@@ -17,6 +17,8 @@ use App\Models\Users;
 
 class UserController extends BaseController
 {
+	protected $userModel;
+	
     public function __construct() {
 		$this->userModel = new Users();
     }
