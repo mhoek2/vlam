@@ -546,6 +546,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-UsersController.html#method_index"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UsersController\u003A\u003A\u0024userModel",
+            "name": "userModel",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UsersController.html#property_userModel"
+        },                {
             "fqsen": "\\App\\Controllers\\BaseController",
             "name": "BaseController",
             "summary": "Class\u0020BaseController",
@@ -820,6 +825,11 @@ Search.appendIndex(
             "name": "getVisibility",
             "summary": "Returns\u0020true\u0020if\u0020module\u0020is\u0020visible,\u0020false\u0020if\u0020not",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#method_getVisibility"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "Used\u0020for\u0020the\u0020view",
+            "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#property_data"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule\u003A\u003A\u0024sort",
             "name": "sort",
