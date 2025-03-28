@@ -11,6 +11,7 @@ Quick-Guides
    user-meta-service
    entry-types
    documentation
+   phpstan
    
 Introduction
 ============
