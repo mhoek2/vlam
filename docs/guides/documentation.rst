@@ -20,11 +20,17 @@ To prevent clutter and save github CI-CD time, it is advised to make changes to 
 	Continue assuming you to have a local development environment active. A web server such as  `XAMPP<https://www.apachefriends.org/>`_, or just apache with php if you prefer custom installation.
 	
 #. Make sure ```path/to/my/project/vendor/bin``` contains phpdoc.
-#. Open a terminal of choice and change current directory to the path in step 1.
+#. Open a terminal of choice and change current directory to the root directory.
 #. Run the following command
     .. code-block:: bash
    
-        phpdoc -c ../../phpdoc.xml
+        # linux
+        vendor/bin/phpdoc -c phpdoc.xml
+        
+        # windows
+        php vendor/bin/phpdoc -c phpdoc.xml
+        
+        # -c phpdoc.xml is optional
         
     The output should be similar to:
     
@@ -205,5 +211,9 @@ If you see this error (Windows):
         
         :PAUSE_END
         PAUSE
-		
-#. Return to step 3. in the Editing section above.
+
+#. Open a terminal of choice and change current directory to ```path/to/my/project/vendor/bin```
+#. Run the following command
+    .. code-block:: bash
+   
+        phpdoc -c ../../phpdoc.xml
