@@ -538,7 +538,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_entry_properties_result\u0028\u0029",
             "name": "get_entry_properties_result",
-            "summary": "",
+            "summary": "Retrieves\u0020entry\u0020properties\u0020and\u0020maps\u0020property\u0020values\u0020based\u0020on\u0020user\u0020ID.",
             "url": "classes/App-Controllers-Front-BaseController.html#method_get_entry_properties_result"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_assignment_results\u0028\u0029",
