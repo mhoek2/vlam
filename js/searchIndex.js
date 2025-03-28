@@ -81,10 +81,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-AssignmentController.html#method_properties_save_order"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003A\u0024meetings",
+            "name": "meetings",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-AssignmentController.html#property_meetings"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003A\u0024assignments",
             "name": "assignments",
             "summary": "",
             "url": "classes/App-Controllers-Admin-AssignmentController.html#property_assignments"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003A\u0024assignmentEntry",
+            "name": "assignmentEntry",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-AssignmentController.html#property_assignmentEntry"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003A\u0024assignmentEntryProperties",
+            "name": "assignmentEntryProperties",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-AssignmentController.html#property_assignmentEntryProperties"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003A\u0024cases",
+            "name": "cases",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-AssignmentController.html#property_cases"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\AssignmentsController",
             "name": "AssignmentsController",
@@ -130,6 +150,16 @@ Search.appendIndex(
             "name": "request",
             "summary": "Instance\u0020of\u0020the\u0020main\u0020Request\u0020object.",
             "url": "classes/App-Controllers-Admin-BaseController.html#property_request"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\BaseController\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-BaseController.html#property_data"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\BaseController\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-BaseController.html#property_user"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\BaseController\u003A\u003A\u0024helpers",
             "name": "helpers",
@@ -216,10 +246,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-CaseController.html#method_properties_save_order"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\CaseController\u003A\u003A\u0024meetings",
+            "name": "meetings",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-CaseController.html#property_meetings"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\CaseController\u003A\u003A\u0024assignments",
+            "name": "assignments",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-CaseController.html#property_assignments"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\CaseController\u003A\u003A\u0024cases",
             "name": "cases",
             "summary": "",
             "url": "classes/App-Controllers-Admin-CaseController.html#property_cases"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\CaseController\u003A\u003A\u0024caseEntry",
+            "name": "caseEntry",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-CaseController.html#property_caseEntry"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\CaseController\u003A\u003A\u0024caseEntryProperties",
+            "name": "caseEntryProperties",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-CaseController.html#property_caseEntryProperties"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\CasesController",
             "name": "CasesController",
@@ -281,6 +331,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-MeetingController.html#method_index"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\MeetingController\u003A\u003A\u0024meetings",
+            "name": "meetings",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-MeetingController.html#property_meetings"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\MeetingController\u003A\u003A\u0024assignments",
+            "name": "assignments",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-MeetingController.html#property_assignments"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\MeetingsController",
             "name": "MeetingsController",
             "summary": "Class\u0020BaseController",
@@ -295,6 +355,11 @@ Search.appendIndex(
             "name": "index",
             "summary": "",
             "url": "classes/App-Controllers-Admin-MeetingsController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\MeetingsController\u003A\u003A\u0024meetings",
+            "name": "meetings",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-MeetingsController.html#property_meetings"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\TrainingController",
             "name": "TrainingController",
@@ -356,6 +421,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-TrainingController.html#method_index"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\TrainingController\u003A\u003A\u0024meetings",
+            "name": "meetings",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-TrainingController.html#property_meetings"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\TrainingController\u003A\u003A\u0024trainings",
+            "name": "trainings",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-TrainingController.html#property_trainings"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\TrainingController\u003A\u003A\u0024trainingMembers",
+            "name": "trainingMembers",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-TrainingController.html#property_trainingMembers"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\TrainingController\u003A\u003A\u0024TrainingSchedule",
+            "name": "TrainingSchedule",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-TrainingController.html#property_TrainingSchedule"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\TrainingsController",
             "name": "TrainingsController",
             "summary": "Class\u0020BaseController",
@@ -380,6 +465,16 @@ Search.appendIndex(
             "name": "index",
             "summary": "",
             "url": "classes/App-Controllers-Admin-TrainingsController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\TrainingsController\u003A\u003A\u0024trainings",
+            "name": "trainings",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-TrainingsController.html#property_trainings"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\TrainingsController\u003A\u003A\u0024trainingMembers",
+            "name": "trainingMembers",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-TrainingsController.html#property_trainingMembers"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\UserController",
             "name": "UserController",
@@ -430,6 +525,11 @@ Search.appendIndex(
             "name": "getValidationRules",
             "summary": "Returns\u0020the\u0020rules\u0020that\u0020should\u0020be\u0020used\u0020for\u0020validation.",
             "url": "classes/App-Controllers-Admin-UserController.html#method_getValidationRules"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserController\u003A\u003A\u0024userModel",
+            "name": "userModel",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserController.html#property_userModel"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\UsersController",
             "name": "UsersController",
@@ -555,6 +655,61 @@ Search.appendIndex(
             "name": "request",
             "summary": "Instance\u0020of\u0020the\u0020main\u0020Request\u0020object.",
             "url": "classes/App-Controllers-Front-BaseController.html#property_request"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_data"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_user"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024meetings",
+            "name": "meetings",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_meetings"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignments",
+            "name": "assignments",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_assignments"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignmentEntry",
+            "name": "assignmentEntry",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_assignmentEntry"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignmentEntryProperties",
+            "name": "assignmentEntryProperties",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_assignmentEntryProperties"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignmentResult",
+            "name": "assignmentResult",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_assignmentResult"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024cases",
+            "name": "cases",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_cases"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024caseEntry",
+            "name": "caseEntry",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_caseEntry"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024caseEntryProperties",
+            "name": "caseEntryProperties",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_caseEntryProperties"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024caseResult",
+            "name": "caseResult",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#property_caseResult"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024helpers",
             "name": "helpers",
@@ -1491,15 +1646,30 @@ Search.appendIndex(
             "summary": "Retrieve\u0020a\u0020meta\u0020value\u0020for\u0020a\u0020given\u0020user.",
             "url": "classes/App-Services-UserMetaService.html#method_find"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditor",
+            "fqsen": "\\App\\Services\\UserMetaService\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "",
+            "url": "classes/App-Services-UserMetaService.html#property_user"
+        },                {
+            "fqsen": "\\App\\Services\\UserMetaService\u003A\u003A\u0024user_data",
+            "name": "user_data",
+            "summary": "",
+            "url": "classes/App-Services-UserMetaService.html#property_user_data"
+        },                {
+            "fqsen": "\\App\\Services\\UserMetaService\u003A\u003A\u0024user_meta",
+            "name": "user_meta",
+            "summary": "",
+            "url": "classes/App-Services-UserMetaService.html#property_user_meta"
+        },                {
+            "fqsen": "\\App\\ThirdParty\\TextEditor",
             "name": "TextEditor",
             "summary": "Provides\u0020base\u0020class\u0020for\u0020modular\u0020wysiwyg\u0020text\u0020editors",
-            "url": "classes/App-ThirdPArty-TextEditor.html"
+            "url": "classes/App-ThirdParty-TextEditor.html"
         },                {
-            "fqsen": "\\App\\ThirdPArty\\TextEditor\u003A\u003A\u0024apiKey",
+            "fqsen": "\\App\\ThirdParty\\TextEditor\u003A\u003A\u0024apiKey",
             "name": "apiKey",
             "summary": "",
-            "url": "classes/App-ThirdPArty-TextEditor.html#property_apiKey"
+            "url": "classes/App-ThirdParty-TextEditor.html#property_apiKey"
         },                {
             "fqsen": "\\App\\ThirdPArty\\TextEditorCKEditorCDN",
             "name": "TextEditorCKEditorCDN",
@@ -1660,6 +1830,11 @@ Search.appendIndex(
             "name": "Services",
             "summary": "",
             "url": "namespaces/app-services.html"
+        },                {
+            "fqsen": "\\App\\ThirdParty",
+            "name": "ThirdParty",
+            "summary": "",
+            "url": "namespaces/app-thirdparty.html"
         },                {
             "fqsen": "\\App\\ThirdPArty",
             "name": "ThirdPArty",

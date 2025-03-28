@@ -218,12 +218,18 @@ when a push or pull request event triggers and is uploaded to the <code>`gh-page
     <li>Make sure <code>`path/to/my/project/vendor/bin`</code>
  contains phpdoc.</li>
 
-    <li>Open a terminal of choice and change current directory to the path in step 1.</li>
+    <li>Open a terminal of choice and change current directory to the root directory.</li>
 
     <li><dl>
                         <dt>Run the following command</dt>
         
-        <dd><pre><code class="language-bash">phpdoc -c ../../phpdoc.xml</code></pre>
+        <dd><pre><code class="language-bash"># linux
+vendor/bin/phpdoc -c phpdoc.xml
+
+# windows
+php vendor/bin/phpdoc -c phpdoc.xml
+
+# -c phpdoc.xml is optional</code></pre>
 
     <p>The output should be similar to:</p>
 <pre><code class="language-bash">phpDocumentor 3.7.1
@@ -417,7 +423,16 @@ PAUSE</code></pre>
 </blockquote>
 </li>
 
-    <li>Return to step 3. in the Editing section above.</li>
+    <li>Open a terminal of choice and change current directory to <code>`path/to/my/project/vendor/bin`</code>
+</li>
+
+    <li><dl>
+                        <dt>Run the following command</dt>
+        
+        <dd><pre><code class="language-bash">phpdoc -c ../../phpdoc.xml</code></pre>
+</dd>
+            </dl>
+</li>
 
 </ol>
 
