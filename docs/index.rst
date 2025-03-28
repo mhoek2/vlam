@@ -7,6 +7,7 @@
 
    getting-started/index
    guides/index
+   report/index
 
 Documentation
 =============

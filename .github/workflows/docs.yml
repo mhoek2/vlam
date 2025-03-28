@@ -19,11 +19,35 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'  # Adjust based on your project requirements
-          tools: composer
+          tools: composer, phpstan
 
       - name: Install dependencies
-        run: composer install --no-dev --prefer-dist
+        run: composer install --prefer-dist
 
+      - name: Run PHPStan and Generate JSON Report
+        run: vendor/bin/phpstan analyse --error-format=json --no-progress --memory-limit=512M > phpstan-report.json || true
+      
+      - name: Upload PHPStan JSON Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: phpstan-json-report
+          path: phpstan-report.json 
+      
+      - name: Convert JSON to RST
+        run: |
+            mkdir -p docs/report
+            echo "PHPStan Report" > docs/report/phpstan.rst
+            echo "==============" >> docs/report/phpstan.rst
+            echo "" >> docs/report/phpstan.rst
+            jq -r '
+              .files | to_entries[] |
+              "**" + (.key | gsub("/home/runner/work/vlam/vlam/"; "")) + "**\n" +
+              "\n    .. code-block:: bash\n" +
+              "\n" +
+              (.value.messages | map("        Line " + (.line|tostring) + ": " + .message) | join("\n")) +
+              "\n"
+            ' phpstan-report.json >> docs/report/phpstan.rst
+       
       - name: Generate Documentation
         run: |
           vendor/bin/phpdoc -c phpdoc.xml
