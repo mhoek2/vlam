@@ -203,39 +203,65 @@ abstract class BaseController extends Controller
 		return $item;
 	}	
 	
+	/**
+	 * Retrieves entry properties and maps property values based on user ID.
+	 *
+	 * This function fetches results from the given result object (assignment or case), joins it with the entry object, 
+	 * and maps the corresponding property values using the property object.
+	 *
+	 * @param int    $id              The ID of the entry to fetch properties for.
+	 * @param string $id_key          The column name used to filter results by ID.
+	 * @param object &$result_object  The model instance representing the results table (passed by reference).
+	 * @param object &$entry_object   The model instance representing the entry table (passed by reference).
+	 * @param object &$property_object The model instance representing the property table (passed by reference).
+	 *
+	 * @return array An array of results with mapped property values. Returns an empty array if no user ID is found.
+	 */
 	public function get_entry_properties_result( $id, $id_key, &$result_object, &$entry_object, &$property_object )
 	{
+		$user_id = $this->data['user']['id'] ?? null;
+		
+		if ( !$user_id )
+			return [];
+		
 		$results = $result_object->select(
-				$result_object->table . '.value, ' .
-				$result_object->table . '.property_id, ' .
-				$result_object->table . '.entry_id, ' .
-				$entry_object->table . '.name as entry_name'
+				"{$result_object->table}.value, 
+				 {$result_object->table}.property_id, 
+				 {$result_object->table}.entry_id, 
+				 {$entry_object->table}.name as entry_name"
 			)
-			->join($entry_object->table, $result_object->table . '.entry_id = '.$entry_object->table . '.id', 'left')
+			->join($entry_object->table, "{$result_object->table}.entry_id = {$entry_object->table}.id", 'left')
 			->where([
-				$result_object->table . '.user_id'		=> $this->data['user']['id'],
-				$result_object->table . '.' .$id_key 	=> $id
+				"{$result_object->table}.user_id" => $user_id,
+				"{$result_object->table}.$id_key" => $id
 			])
-			->orderBy($entry_object->table . '.sort_order', 'ASC')->findAll();
-
-		foreach ( $results as $id => $item )
+			->orderBy("{$entry_object->table}.sort_order", 'ASC')
+			->findAll();
+		
+		// Find and bind property names
+		foreach ( $results as $index => $item )
 		{
 			$properties = json_decode($item['value'], true);
 			
 			if ( !is_array($properties) || is_null($item['property_id']) )
 				continue;
 			
-			$results[$id]['value'] = [];
+			$property_ids = array_filter($properties, fn($prop_id) => $prop_id > 0);
+			$results[$index]['value'] = [];
 			
-			foreach ( $properties as $property_id ) 
-			{	
-				// primary key indexing starts at 1
-				if ( $property_id <= 0 )
-					continue;
+			if ( !empty($property_ids) ) 
+			{
+				// Fetch and map all properties using a single query
+				$property_data = $property_object->whereIn('id', $property_ids)->findAll();
+				$property_map = array_column($property_data, 'content', 'id');
 				
-				// should also check '$property_object->valid_property' perhaps?
-				
-				$results[$id]['value'][$property_id] = $property_object->find($property_id)['content'];
+				foreach ($property_ids as $property_id) 
+				{
+					if ( isset($property_map[$property_id]) ) 
+					{
+						$results[$index]['value'][$property_id] = $property_map[$property_id];
+					}
+				}
 			}
 		}
 		
