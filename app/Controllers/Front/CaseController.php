@@ -228,7 +228,7 @@ class CaseController extends BaseController
 		
 		$this->fetch_entry_properties( $this->data['properties'], $saved_results, $this->data['entry'] );
 		
-		return !is_null($this->data['entry']);
+		return (bool) $this->data['entry'];
 	}
 	
 	public function entry( int $meeting_id, int $assignment_id, int $case_id, int $entry_num )
