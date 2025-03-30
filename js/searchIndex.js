@@ -596,6 +596,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Front-AssignmentController.html#method_save"
         },                {
+            "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Afetch_entry_properties\u0028\u0029",
+            "name": "fetch_entry_properties",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-AssignmentController.html#method_fetch_entry_properties"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Afetch_entries\u0028\u0029",
+            "name": "fetch_entries",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-AssignmentController.html#method_fetch_entries"
+        },                {
             "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "",
@@ -760,6 +770,16 @@ Search.appendIndex(
             "name": "outro",
             "summary": "",
             "url": "classes/App-Controllers-Front-CaseController.html#method_outro"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\CaseController\u003A\u003Afetch_entry_properties\u0028\u0029",
+            "name": "fetch_entry_properties",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-CaseController.html#method_fetch_entry_properties"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\CaseController\u003A\u003Afetch_entry\u0028\u0029",
+            "name": "fetch_entry",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-CaseController.html#method_fetch_entry"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\CaseController\u003A\u003Aentry\u0028\u0029",
             "name": "entry",
