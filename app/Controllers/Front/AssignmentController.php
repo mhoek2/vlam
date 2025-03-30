@@ -47,11 +47,8 @@ class AssignmentController extends BaseController
 		die('can not load sub assignment');
 	}
 	
-    public function save( $meeting_id, $assignment_id )
+    public function save( int $meeting_id, int $assignment_id )
     {
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
-		
 		$warnings = [];
 		
         $user = $this->user->getUserInfo();
@@ -143,11 +140,61 @@ class AssignmentController extends BaseController
 		]);
     }
 	
-    public function index( $meeting_id, $assignment_id, $is_sub = false ): string
-    {  
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
+	private function fetch_entry_properties( array $properties, array &$saved_results, array &$entry )
+	{		
+		// set stored value for this entry, (property_id or the dynamic user input value)
+		$entry['value'] = $saved_results[$entry['id']] ?? '';			
+		$entry['properties'] = [];
 		
+		foreach( $properties as $property )
+		{
+			if ( $property['entry_id'] !== $entry['id'] )
+				continue;
+
+			// Mark property as selected if it exists in saved results - used for eg: mcq entry group (selects)
+			$property['selected'] = isset($saved_results[$entry['id']]) && is_array($saved_results[$entry['id']]) && 
+				in_array($property['id'], $saved_results[$entry['id']]);
+
+			array_push( $entry['properties'], $property );
+		}
+	}
+	
+	private function fetch_entries( int $assignment_id )
+	{
+        // Entries
+        $this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
+        $this->data['has_entries'] = empty($this->data['entries']);
+		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
+
+        // Entry properties
+		$this->data['properties'] = $this->assignmentEntryProperties->orderBy('sort_order', 'ASC')->findAll();
+		
+		// Get saved user property ids and values
+		// create array $saved_results with structure:
+		// [entry_id] => property_id !== null) ? (array)json_decode(property_id) : value
+		// if property_id is set to 1 (mcq), value contains integer list of selected property_id's
+		$saved_properties = $this->assignmentResult->where('user_id', $this->data['user']['id'])->where('assignment_id', $assignment_id)->select(['property_id', 'entry_id', 'value'])->get()->getResultArray();
+        $saved_results = array_reduce($saved_properties, function ($result, $property) {
+			$result[$property['entry_id']] = !is_null($property['property_id']) ? json_decode($property['value'], true) : $property['value'];
+			return $result;
+		}, []);
+		
+        foreach( $this->data['entries'] as $id => &$entry )
+        {
+			// should never happen!
+			// this is a fail-safe, assignmentEntry Model has query overrides.
+			if (!$this->assignmentEntry->valid_type($entry['type'])) 
+			{
+				unset($this->data['entries'][$id]);
+				continue;
+			}
+
+			$this->fetch_entry_properties( $this->data['properties'], $saved_results, $entry );
+        }
+	}
+	
+    public function index( int $meeting_id, int $assignment_id, bool $is_sub = false ): string
+    {  
         // Meeting
         $this->data['meeting'] = $this->get_meeting( $meeting_id ); 
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
@@ -159,61 +206,9 @@ class AssignmentController extends BaseController
         // Cases
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
 		
-        // Entries
-        $this->data['entries'] = $this->assignmentEntry->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
-        $this->data['has_entries'] = empty($this->data['entries']);
-		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
-
-        // Entry properties
-		$this->data['properties'] = $this->assignmentEntryProperties->orderBy('sort_order', 'ASC')->findAll();
-
-		// Get saved user property ids and values
-		// create array $saved_results with structure:
-		// [entry_id] => property_id !== null) ? (array)json_decode(property_id) : value<br>
-		// if property_id is set to 1 (mcq), value contains integer list of selected property_id's
-		$saved_properties = $this->assignmentResult->where('user_id', $this->data['user']['id'])->where('assignment_id', $assignment_id)->select(['property_id', 'entry_id', 'value'])->get()->getResultArray();
-        $saved_results = array_reduce($saved_properties, function ($result, $property) {
-			$result[$property['entry_id']] = !is_null($property['property_id']) ? json_decode($property['value'], true) : $property['value'];
-			return $result;
-		}, []);
-		
-        foreach( $this->data['entries'] as $id => $entry )
-        {
-			// should never happen!
-			// this is a fail-safe, assignmentEntry Model has query overrides.
-			if (!$this->assignmentEntry->valid_type($entry['type'])) {
-				unset($this->data['entries'][$id]);
-				continue;
-			}
-			
-			// set value stored for this entry, (property_id or the dynamic user input value)
-			$this->data['entries'][$id]['value'] = $saved_results[$entry['id']] ?? '';	
-			
-			$this->data['entries'][$id]['properties'] = array();
-
-            foreach( $this->data['properties'] as $property ){
-                if ( $property['entry_id'] !== $entry['id'] )
-                    continue;
-
-                if (!isset($this->data['entries'][$id]['properties']))
-                    $this->data['entries'][$id]['properties'] = array();
-             
-				// set selected to true if this is property is selected
-				// used for eg: mcq entry group
-				$property['selected'] = isset($saved_results[$entry['id']]) && is_array($saved_results[$entry['id']]) && 
-					in_array($property['id'], $saved_results[$entry['id']]);
-				
-                array_push( $this->data['entries'][$id]['properties'], $property );
-            }
-        }
-
-		if (!$this->data['assignment']) {
-			// Handle the case when the assignment is not found
-			//return redirect()->to('/some-error-page')->with('error', 'Assignment not found.');
-			echo "Assignment not found.";
-			exit;
-		}
-		
+		// Fetch entries and properties with saved values
+		$this->fetch_entries( $assignment_id );
+	
 		// Sub assignment
 		$this->data['sub_assignment'] = $this->has_sub_assignment($this->data['assignment']);
 

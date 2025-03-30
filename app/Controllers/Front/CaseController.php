@@ -62,14 +62,9 @@ class CaseController extends BaseController
 		]);
 	}
 	
-	public function save( $meeting_id, $assignment_id, $case_id, $entry_num )
+	public function save( int $meeting_id, int $assignment_id, int $case_id, int $entry_num )
 	{
 		$warnings = [];
-		
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
-		$case_id 		= (int) $case_id;
-		$entry_num 		= (int) $entry_num;
 		
 		// check if case if valid
 		$case = $this->get_case( $assignment_id, $case_id );
@@ -188,13 +183,56 @@ class CaseController extends BaseController
         return view('front/case_outro', $this->data);		
 	}
 	
-	public function entry( $meeting_id, $assignment_id, $case_id, $entry_num )
-	{		
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
-		$case_id 		= (int) $case_id;
-		$entry_num 		= (int) $entry_num;
+	private function fetch_entry_properties( array $properties, array &$saved_results, array &$entry )
+	{
+		$entry['value'] = '';
+		$entry['properties'] = [];
 		
+		foreach( $properties as $property )
+		{
+			if ( $property['entry_id'] !== $entry['id'] )
+				continue;
+
+			// Mark a property as selected if matched with saved property
+			$property['selected'] = isset($saved_results[$entry['id']]) && is_array($saved_results[$entry['id']]) && 
+				in_array($property['id'], $saved_results[$entry['id']]);
+			
+			array_push( $entry['properties'], $property );
+		}
+	}
+	
+	private function fetch_entry( int $assignment_id, int $case_id, int $entry_num ): bool
+	{
+        // Entries
+		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();	// to draw progressbar		
+		$this->data['entry'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->offset($entry_num)->limit(1)->first();
+		$this->data['entry_num'] = $entry_num;
+		$this->data['entry_types'] = $this->caseEntry->type_enum;
+		
+		// Entry properties
+		$this->data['properties'] = $this->caseEntryProperties->where('entry_id', $this->data['entry']['id'])->orderBy('sort_order', 'ASC')->findAll();
+				
+		// Get saved user property ids and values
+		// create array $saved_results with structure:
+		// [entry_id] => property_id !== null) ? (array)json_decode(property_id) : value<br>
+		// if property_id is set to 1 (mcq), value contains integer list of selected property_id's
+		$saved_properties = $this->caseResult->where('user_id', $this->data['user']['id'])->where([
+				'assignment_id' => $assignment_id,
+				'case_id' 		=> $case_id,
+			])->select(['property_id', 'entry_id', 'value'])->get()->getResultArray();
+		
+        $saved_results = array_reduce($saved_properties, function ($result, $property) {
+			$result[$property['entry_id']] = !is_null($property['property_id']) ? json_decode($property['value'], true) : $property['value'];
+			return $result;
+		}, []);	
+		
+		$this->fetch_entry_properties( $this->data['properties'], $saved_results, $this->data['entry'] );
+		
+		return !is_null($this->data['entry']);
+	}
+	
+	public function entry( int $meeting_id, int $assignment_id, int $case_id, int $entry_num )
+	{		
         // Meeting
         $this->data['meeting'] = $this->get_meeting($meeting_id);
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
@@ -207,47 +245,10 @@ class CaseController extends BaseController
         $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();
 		$this->data['case'] = $this->get_case( $assignment_id, $case_id );
 		
-        // Entries
-		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();	// to draw progressbar		
-		$this->data['entry'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->offset($entry_num)->limit(1)->first();
-		$this->data['entry_num'] = $entry_num;
-		$this->data['entry_types'] = $this->caseEntry->type_enum;
-		
-		if (is_null($this->data['entry'])){
+		// Fetch entry and properties with saved values
+		if ( !$this->fetch_entry( $assignment_id, $case_id, $entry_num ) )
 			die("Invalid case entry!");
-		}
-		
-		// Entry properties
-		$this->data['properties'] = $this->caseEntryProperties->where('entry_id', $this->data['entry']['id'])->orderBy('sort_order', 'ASC')->findAll();
-		
-		// Get saved user property ids and values
-		// create array $saved_results with structure:
-		// [entry_id] => property_id !== null) ? (array)json_decode(property_id) : value<br>
-		// if property_id is set to 1 (mcq), value contains integer list of selected property_id's
-		$saved_properties = $this->caseResult->where('user_id', $this->data['user']['id'])->where([
-				'assignment_id' => $assignment_id,
-				'case_id' 		=> $case_id,
-			])->select(['property_id', 'entry_id', 'value'])->get()->getResultArray();
-        $saved_results = array_reduce($saved_properties, function ($result, $property) {
-			$result[$property['entry_id']] = !is_null($property['property_id']) ? json_decode($property['value'], true) : $property['value'];
-			return $result;
-		}, []);	
-		
-		$this->data['entry']['properties'] = array();
-		foreach( $this->data['properties'] as $property ){
-			if ( $property['entry_id'] !== $this->data['entry']['id'] )
-				continue;
 
-			if (!isset($this->data['entry']['properties']))
-				$this->data['entry']['properties'] = array();
-
-			// Mark a property as selected if matched with saved property
-			$property['selected'] = isset($saved_results[$this->data['entry']['id']]) && is_array($saved_results[$this->data['entry']['id']]) && 
-				in_array($property['id'], $saved_results[$this->data['entry']['id']]);
-			
-			array_push( $this->data['entry']['properties'], $property );
-		}
-	
 		// previous and next urls
 		if ($entry_num > 0)
 			$this->data['entry_prev_url'] = base_url(route_to('front.case.entry', $meeting_id, $assignment_id, $case_id, ($entry_num - 1)));
