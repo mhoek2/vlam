@@ -125,7 +125,7 @@ jobs:
         run: |
           vendor/bin/phpdoc -c phpdoc.xml
 
-       - name: Run SchemaSpy
+      - name: Run SchemaSpy
         run: |
           java -jar schemaspy.jar -t mysql -host 127.0.0.1 -port 3306 \
           -db vlamdb -s vlamdb -u root -p root -o docs/build/guide/report/schemaspy/ -dp mysql-connector-java.jar         
