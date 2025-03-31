@@ -59,11 +59,6 @@ jobs:
         run: |
           sudo mysql -uroot -proot vlamdb < sql/vlam.sql
 
-      - name: Run SchemaSpy
-        run: |
-          java -jar schemaspy.jar -t mysql -host 127.0.0.1 -port 3306 \
-          -db vlamdb -s vlamdb -u root -p root -o docs/build/guide/report/schemaspy/ -dp mysql-connector-java.jar
-
       - name: Run PHPStan and Generate JSON Report
         run: vendor/bin/phpstan analyse --error-format=json --no-progress --memory-limit=512M > phpstan-report.json || true
 
@@ -130,6 +125,11 @@ jobs:
         run: |
           vendor/bin/phpdoc -c phpdoc.xml
 
+       - name: Run SchemaSpy
+        run: |
+          java -jar schemaspy.jar -t mysql -host 127.0.0.1 -port 3306 \
+          -db vlamdb -s vlamdb -u root -p root -o docs/build/guide/report/schemaspy/ -dp mysql-connector-java.jar         
+          
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
