@@ -648,7 +648,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_case\u0028\u0029",
             "name": "get_case",
-            "summary": "",
+            "summary": "Get\u0020case\u0020from\u0020database\u0020and\u0020make\u0020sure\u0020it\u0020exists",
             "url": "classes/App-Controllers-Front-BaseController.html#method_get_case"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_entry_properties_result\u0028\u0029",
