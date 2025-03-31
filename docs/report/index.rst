@@ -5,3 +5,6 @@ Reports
    :maxdepth: 2
 
    phpstan
+   eslint
+   stylelint
+   schemaspy

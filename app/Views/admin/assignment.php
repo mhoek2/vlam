@@ -101,7 +101,7 @@
 		const entry_group_to_type = <?=json_encode($entry_type_to_group)?>;
 		
 		<?=updateCSRFMeta() // csrf helper ?>
-		
+
 		/* 
 		ASSIGNMENT
 		*/

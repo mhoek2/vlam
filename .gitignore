@@ -132,3 +132,5 @@ app/Config/Database.php
 
 docs/build
 .phpdoc
+
+/node_modules/

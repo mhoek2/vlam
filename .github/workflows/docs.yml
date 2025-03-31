@@ -21,19 +21,67 @@ jobs:
           php-version: '8.2'  # Adjust based on your project requirements
           tools: composer, phpstan
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
       - name: Install dependencies
-        run: composer install --prefer-dist
+        run: |
+            composer install --prefer-dist
+            npm install
+
+      - name: Install Java (Required for SchemaSpy)
+        run: sudo apt-get install -y openjdk-17-jre
+
+      - name: Install Graphviz (Required for SchemaSpy Diagrams)
+        run: sudo apt-get install -y graphviz
+
+      - name: Download SchemaSpy
+        run: wget https://github.com/schemaspy/schemaspy/releases/download/v6.2.4/schemaspy-6.2.4.jar -O schemaspy.jar
+
+      - name: Install MySQL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-server
+          sudo systemctl start mysql
+          sudo systemctl enable mysql
+
+      - name: Install MySQL JDBC Driver
+        run: |
+          wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar -O mysql-connector-java.jar        
+  
+      - name: Create MySQL Database
+        run: |
+          sudo mysql -uroot -proot -e "CREATE DATABASE vlamdb;"
+
+      - name: Import SQL Dump
+        run: |
+          sudo mysql -uroot -proot vlamdb < sql/vlam.sql
+
+      - name: Run SchemaSpy
+        run: |
+          java -jar schemaspy.jar -t mysql -host 127.0.0.1 -port 3306 \
+          -db vlamdb -s vlamdb -u root -p root -o docs/build/guide/report/schemaspy/ -dp mysql-connector-java.jar
 
       - name: Run PHPStan and Generate JSON Report
         run: vendor/bin/phpstan analyse --error-format=json --no-progress --memory-limit=512M > phpstan-report.json || true
-      
+
       - name: Upload PHPStan JSON Report
         uses: actions/upload-artifact@v4
         with:
           name: phpstan-json-report
           path: phpstan-report.json 
-      
-      - name: Convert JSON to RST
+
+      - name: Run ESLint
+        run: |
+          npx eslint "app/Views/**/*.php" --format json --output-file eslint-report.json || true
+          
+      - name: Run Stylelint
+        run: |
+          npx stylelint "app/Views/**/*.php" --formatter json --output-file stylelint-report.json || true 
+          
+      - name: Convert PHPStan JSON to RST
         run: |
             mkdir -p docs/report
             echo "PHPStan Report" > docs/report/phpstan.rst
@@ -47,7 +95,37 @@ jobs:
               (.value.messages | map("        Line " + (.line|tostring) + ": " + .message) | join("\n")) +
               "\n"
             ' phpstan-report.json >> docs/report/phpstan.rst
-       
+
+      - name: Convert ESLint JSON to RST
+        run: |
+            mkdir -p docs/report
+            echo "ESLint Report" > docs/report/eslint.rst
+            echo "==============" >> docs/report/eslint.rst
+            echo "" >> docs/report/eslint.rst
+            jq -r '
+              .[] | 
+              "**" + (.filePath) + "**\n" +
+              "\n    .. code-block:: bash\n" +
+              "\n" +
+              (.messages | map("        Line " + (.line|tostring) + ": " + .message) | join("\n")) +
+              "\n"
+            ' eslint-report.json >> docs/report/eslint.rst
+
+      - name: Convert Stylelint JSON to RST
+        run: |
+            mkdir -p docs/report
+            echo "Stylelint Report" > docs/report/stylelint.rst
+            echo "==============" >> docs/report/stylelint.rst
+            echo "" >> docs/report/stylelint.rst
+            jq -r '
+              .[] |
+              "**" + (.source) + "**\n" +
+              "\n    .. code-block:: bash\n" +
+              "\n" +
+              (.warnings | map("        Line " + (.line|tostring) + ", Column " + (.column|tostring) + ": " + .text) | join("\n")) +
+              "\n"
+            ' stylelint-report.json >> docs/report/stylelint.rst
+
       - name: Generate Documentation
         run: |
           vendor/bin/phpdoc -c phpdoc.xml

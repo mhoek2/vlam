@@ -204,6 +204,9 @@ abstract class BaseController extends Controller
 		return $item;
 	}	
 	
+	/**
+	 * Get case from database and make sure it exists
+	 */
 	public function get_case( int $assignment_id, int $case_id )
 	{
 		$item = $this->cases->find($case_id);
