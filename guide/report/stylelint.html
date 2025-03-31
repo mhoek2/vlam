@@ -4,8 +4,9 @@
     <meta charset="utf-8">
             <title>VLAM Documentation</title>
     
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="../">
+    <base href="../../">
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
@@ -204,155 +205,271 @@
 </aside>
 
             <div class="phpdocumentor-column -nine phpdocumentor-content">
-                                <section>
-                                        <ul class="phpdocumentor-breadcrumbs">
-    </ul>
-
-    <article class="phpdocumentor-element -file">
-        <h2 class="phpdocumentor-content__title">training.php</h2>
-
-        
-
-
-
-
-
-
-
-
-<h3 id="toc">
-    Table of Contents
-    <a href="files/app-views-admin-training.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
-
-</h3>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-        
-        <div class="phpdocumentor-modal" id="source-view">
-    <div class="phpdocumentor-modal-bg" data-exit-button></div>
-    <div class="phpdocumentor-modal-container">
-        <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/app/Views/admin/training.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
-        </div>
-        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
-    </div>
-</div>
-
-    <script type="text/javascript">
-        (function () {
-            function loadExternalCodeSnippet(el, url, line) {
-                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
-                    const language = 'php';
-
-                    const code = document.createElement('code');
-                    code.className = 'language-' + language;
-                    pre.textContent = '';
-                    pre.setAttribute('data-line', line)
-                    code.textContent = 'Loading…';
-                    pre.appendChild(code);
-
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open('GET', src, true);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-                            Prism.highlightElement(code);
-                            return;
-                        }
-
-                        if (xhr.status === 404) {
-                            code.textContent = '✖ Error: File could not be found';
-                            return;
-                        }
-
-                        if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                            return;
-                        }
-
-                        code.textContent = '✖ Error: An unknown error occurred';
-                    };
-
-                    xhr.send(null);
-                });
-            }
-
-            const modalButtons = document.querySelectorAll("[data-modal]");
-            const openedAsLocalFile = window.location.protocol === 'file:';
-            if (modalButtons.length > 0 && openedAsLocalFile) {
-                console.warn(
-                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
-                    'browsers block XHR requests when a page is opened this way'
-                );
-            }
-
-            modalButtons.forEach(function (trigger) {
-                if (openedAsLocalFile) {
-                    trigger.setAttribute("hidden", "hidden");
-                }
-
-                trigger.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modal);
-                    if (!modal) {
-                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
-                        return;
-                    }
-                    modal.classList.add("phpdocumentor-modal__open");
-
-                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
-                    const exits = modal.querySelectorAll("[data-exit-button]");
-                    exits.forEach(function (exit) {
-                        exit.addEventListener("click", function (event) {
-                            event.preventDefault();
-                            modal.classList.remove("phpdocumentor-modal__open");
-                        });
-                    });
-                });
-            });
-        })();
-    </script>
-
-    </article>
-                                </section>
-                <section class="phpdocumentor-on-this-page__sidebar">
-                            
-    <section class="phpdocumentor-on-this-page__content">
-        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
-
-        <ul class="phpdocumentor-list -clean">
-            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
-            <li>
-                <ul class="phpdocumentor-list -clean">
-                                                                                                                                                                                </ul>
-            </li>
+                                        <section class="section " id="stylelint-report">
+            <h1>Stylelint Report</h1>
 
             
-                    </ul>
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/assignment.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/assignment_entry.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/assignments.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 22, Column 17: Unexpected unit (length-zero-no-unit)
+Line 53, Column 20: Expected class selector &quot;.add_assignment&quot; to be kebab-case
+Line 57, Column 20: Expected class selector &quot;.add_assignment&quot; to be kebab-case
+Line 60, Column 21: Expected class selector &quot;.add_assignment&quot; to be kebab-case
+Line 71, Column 22: Expected class selector &quot;.add_assignment&quot; to be kebab-case
+Line 38, Column 22: Expected id selector &quot;#delete_assignment&quot; to be kebab-case
+Line 44, Column 34: Expected id selector &quot;#delete_assignment&quot; to be kebab-case</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/case.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/case_entry.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/cases.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 21, Column 17: Unexpected unit (length-zero-no-unit)
+Line 52, Column 13: Expected class selector &quot;.add_case&quot; to be kebab-case
+Line 56, Column 13: Expected class selector &quot;.add_case&quot; to be kebab-case
+Line 59, Column 14: Expected class selector &quot;.add_case&quot; to be kebab-case
+Line 70, Column 15: Expected class selector &quot;.add_case&quot; to be kebab-case
+Line 37, Column 15: Expected id selector &quot;#delete_case&quot; to be kebab-case
+Line 43, Column 27: Expected id selector &quot;#delete_case&quot; to be kebab-case</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/dashboard.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/footer.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/header.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/meeting.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/meetings.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 17, Column 17: Unexpected unit (length-zero-no-unit)
+Line 25, Column 17: Unexpected unit (length-zero-no-unit)</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/training.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 96, Column 9: Expected &quot;context&quot; media feature range notation (media-feature-range-notation)
+Line 92, Column 2: Expected id selector &quot;#search_member&quot; to be kebab-case</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/trainings.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/user.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 88, Column 2: Unknown word &lt;?php (CssSyntaxError)</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/users.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/assignment.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/assignment_entry.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/case.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/case_entry.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 6, Column 17: Unexpected empty block (block-no-empty)
+Line 33, Column 34: Unexpected empty block (block-no-empty)
+Line 44, Column 25: Unexpected empty block (block-no-empty)
+Line 52, Column 4: Expected selector &quot;.case-progress .indicator &gt; div&quot; to come before selector &quot;.case-entry .properties-container .properties &gt; div&quot; (no-descending-specificity)
+Line 63, Column 4: Expected selector &quot;.case-progress .indicator &gt; div.selected&quot; to come before selector &quot;.case-entry .properties-container .properties &gt; div.selected&quot; (no-descending-specificity)
+Line 22, Column 14: Expected &quot;1em 1em&quot; to be &quot;1em&quot; (shorthand-property-no-redundant-values)</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/case_outro.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/dashboard.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 4, Column 2: Expected class selector &quot;.dashboard_modules&quot; to be kebab-case
+Line 9, Column 3: Expected class selector &quot;.dashboard_modules&quot; to be kebab-case
+Line 16, Column 3: Expected class selector &quot;.dashboard_modules&quot; to be kebab-case</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/footer.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/header.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/landing.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/meeting.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/sidebar.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/cli/error_404.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/cli/error_exception.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/cli/production.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/html/error_400.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 60, Column 22: Expected &quot;1em 2em 0 2em&quot; to be &quot;1em 2em 0&quot; (shorthand-property-no-redundant-values)</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/html/error_404.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 60, Column 22: Expected &quot;1em 2em 0 2em&quot; to be &quot;1em 2em 0&quot; (shorthand-property-no-redundant-values)</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/html/error_exception.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 15, Column 9: Unknown word &lt;?= (CssSyntaxError)</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/html/production.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 10, Column 9: Unknown word &lt;?= (CssSyntaxError)</code></pre>
+</blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/dashboard_modules/agenda.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/dashboard_modules/example.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/sub_assignments/card.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/sub_assignments/outro.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
+            
+    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/sub_assignments/podcast.php</strong>
+</p>
+
+            <blockquote></blockquote>
+
     </section>
 
-                </section>
                             </div>
             <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
@@ -366,7 +483,7 @@
     </section>
 </section>
         </div>
-        <a href="files/app-views-admin-training.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
