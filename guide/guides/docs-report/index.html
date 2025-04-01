@@ -6,7 +6,7 @@
     
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="../../">
+    <base href="../../../">
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
@@ -104,15 +104,7 @@
                 
             </li>
                     <li>
-                <a href="guide/guides/documentation.html#documentation" class="">Documentation</a>
-                
-            </li>
-                    <li>
-                <a href="guide/guides/phpstan.html#phpstan" class="">PHPStan</a>
-                
-            </li>
-                    <li>
-                <a href="guide/guides/eslint-stylelint.html#phpstan" class="">PHPStan</a>
+                <a href="guide/guides/docs-report/index.html#docs-reports" class="">Docs &amp; Reports</a>
                 
             </li>
             </ul>
@@ -209,54 +201,77 @@
 </aside>
 
             <div class="phpdocumentor-column -nine phpdocumentor-content">
-                                        <section class="section " id="phpstan">
-            <h1>PHPStan</h1>
+                                        <section class="section " id="docs-reports">
+            <h1>Docs &amp; Reports</h1>
 
-            
-    <p>This platform integrates <a href="https://phpstan.org/">PHPStan</a>.</p>
+            <div class="toc">
+    <ul class="phpdocumentor-list">
+    <li class="toc-item">
+    <a href="guide/guides/docs-report/documentation.html#documentation">Documentation</a>
 
-            
-    <p>This scans the whole codebase and looks for both obvious &amp; tricky bugs. Even in those rarely executed if statements that certainly aren&#039;t covered by tests.</p>
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/docs-report/documentation.html#editing">Editing</a>
 
-            
-    <p>There is a CI-CD workflow <code>`path/to/my/project/github/workflows/docs.yml`</code>
- in place containing a step that automaticly scans the codebase.
-The output report is processed in a auto-generated .rst file which stores in <code>`path/to/my/project/docs/report/`</code>
- and included in the phpdocs guide 
-when a push or pull request event triggers and is uploaded to the <code>`gh-pages`</code>
- branch.</p>
 
-            <section class="section " id="testing">
-            <h2>Testing</h2>
-
-            
-    <p>Follow these steps to run PHPStan locally</p>
-
-            
-    
-<ol type="1">
-    <li>Make sure <code>`path/to/my/project/vendor/bin`</code>
- contains phpstan.</li>
-
-    <li>Open a terminal of choice and change current directory to the root directory.</li>
-
-    <li><dl>
-                        <dt>Run the following command</dt>
-        
-        <dd><pre><code class="language-bash"># linux
-vendor/bin/phpstan analyse
-
-# windows
-php vendor/bin/phpstan analyse</code></pre>
-
-    <p>This will report directly to the terminal</p>
-</dd>
-            </dl>
 </li>
 
-</ol>
+            <li class="toc-item">
+    <a href="guide/guides/docs-report/documentation.html#conclusion">Conclusion</a>
 
-    </section>
+
+</li>
+
+            <li class="toc-item">
+    <a href="guide/guides/docs-report/documentation.html#troubleshooting">Troubleshooting</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    <li class="toc-item">
+    <a href="guide/guides/docs-report/phpstan.html#phpstan">PHPStan</a>
+
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/docs-report/phpstan.html#testing">Testing</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    <li class="toc-item">
+    <a href="guide/guides/docs-report/eslint.html#eslint">ESLint</a>
+
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/docs-report/eslint.html#testing">Testing</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    <li class="toc-item">
+    <a href="guide/guides/docs-report/stylelint.html#stylelint">StyleLint</a>
+
+        <ul class="section-level-1">
+            <li class="toc-item">
+    <a href="guide/guides/docs-report/stylelint.html#testing">Testing</a>
+
+
+</li>
+
+                    </ul>
+</li>
+
+    </ul>
+</div>
 
     </section>
 
