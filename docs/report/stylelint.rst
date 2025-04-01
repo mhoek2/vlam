@@ -1,3 +1,3 @@
-Stylelint Report
+StyleLint Report
 ================
 

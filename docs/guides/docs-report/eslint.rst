@@ -1,0 +1,23 @@
+ESLint
+======
+
+This platform integrates `ESLint<https://eslint.org/>`_.
+
+ESLint is an open source project that helps you find and fix problems with your JavaScript code.
+
+There is a CI-CD workflow ```path/to/my/project/github/workflows/docs.yml``` in place containing a step that automaticly scans the codebase.
+The output report is processed in a auto-generated .rst file which stores in ```path/to/my/project/docs/report/``` and included in the phpdocs guide 
+when a push or pull request event triggers and is uploaded to the ```gh-pages``` branch.
+
+Testing
+---------------
+Follow these steps to run ESLint locally 
+
+#. Make sure npm packages are installed.
+#. Open a terminal of choice and change current directory to the root directory.
+#. Run the following command
+    .. code-block:: bash
+   
+        npx eslint "app/Views/**/*.php" --format stylish
+        
+    This will report directly to the terminal

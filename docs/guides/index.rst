@@ -3,15 +3,22 @@ Quick-Guides
 
 .. toctree::
    :maxdepth: 2
-
+   :caption: How the core of the platform works
+   
    general
    dashboard-modules
    complete-case-actions
    sub-assignments
    user-meta-service
    entry-types
-   documentation
-   phpstan
+   
+Docs & Reports
+--------------
+.. toctree::
+   :maxdepth: 3
+   :caption: How can the documentation and reporting system be tested locally?
+   
+   docs-report/index
    
 Introduction
 ============
