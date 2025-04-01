@@ -99,11 +99,15 @@ jobs:
             echo "" >> docs/report/eslint.rst
             jq -r '
               .[] | 
-              "**" + (.filePath) + "**\n" +
-              "\n    .. code-block:: bash\n" +
-              "\n" +
-              (.messages | map("        Line " + (.line|tostring) + ": " + .message) | join("\n")) +
-              "\n"
+              if (.messages | length > 0) then
+                "**" + (.filePath) + "**\n" +
+                "\n    .. code-block:: bash\n" +
+                "\n" +
+                (.messages | map("        Line " + (.line|tostring) + ": " + .message) | join("\n")) +
+                "\n"
+              else
+                ""
+              end
             ' eslint-report.json >> docs/report/eslint.rst
 
       - name: Convert Stylelint JSON to RST
@@ -114,11 +118,15 @@ jobs:
             echo "" >> docs/report/stylelint.rst
             jq -r '
               .[] |
-              "**" + (.source) + "**\n" +
-              "\n    .. code-block:: bash\n" +
-              "\n" +
-              (.warnings | map("        Line " + (.line|tostring) + ", Column " + (.column|tostring) + ": " + .text) | join("\n")) +
-              "\n"
+              if (.warnings | length > 0) then
+                "**" + (.source) + "**\n" +
+                "\n    .. code-block:: bash\n" +
+                "\n" +
+                (.warnings | map("        Line " + (.line|tostring) + ", Column " + (.column|tostring) + ": " + .text) | join("\n")) +
+                "\n"
+              else
+                ""
+              end
             ' stylelint-report.json >> docs/report/stylelint.rst
 
       - name: Generate Documentation
