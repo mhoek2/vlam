@@ -104,7 +104,11 @@
                 
             </li>
                     <li>
-                <a href="guide/guides/docs-report/index.html#docs-reports" class="">Docs &amp; Reports</a>
+                <a href="guide/guides/documentation.html#documentation" class="">Documentation</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/phpstan.html#phpstan" class="">PHPStan</a>
                 
             </li>
             </ul>
@@ -189,6 +193,7 @@
             
     <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
@@ -203,44 +208,6 @@
             <div class="phpdocumentor-column -nine phpdocumentor-content">
                                         <section class="section " id="phpstan-report">
             <h1>PHPStan Report</h1>
-
-            
-    <p><strong>app/Controllers/Admin/UserController.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 68: Call to an undefined method CodeIgniter\Shield\Models\UserModel::createNewUser().
-Line 145: Call to unknown service method &#039;passwords&#039;.
-Line 198: Parameter #1 $name of function model expects a valid class string, array|bool|float|int|object|string|null given.
-Line 200: Call to function assert() with false and &#039;Config Auth…&#039; will always evaluate to false.
-Line 200: Instanceof between null and CodeIgniter\Shield\Models\UserModel will always evaluate to false.</code></pre>
-</blockquote>
-
-            
-    <p><strong>app/Helpers/front/dashboard_helper.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 8: Call to function is_subclass_of() with class-string and mixed will always evaluate to true.</code></pre>
-</blockquote>
-
-            
-    <p><strong>app/Models/TrainingSchedule.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 25: Access to protected property App\Models\Meetings::$table.
-Line 26: Access to protected property App\Models\Meetings::$table.
-Line 27: Access to protected property App\Models\Trainings::$table.
-Line 29: Access to protected property App\Models\Trainings::$table.
-Line 29: Access to protected property App\Models\Trainings::$table.
-Line 30: Access to protected property App\Models\Meetings::$table.
-Line 30: Access to protected property App\Models\Meetings::$table.</code></pre>
-</blockquote>
-
-            
-    <p><strong>app/Services/UserMetaService.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 42: PHPDoc tag @throws with type App\Services\Exception is not subtype of Throwable</code></pre>
-</blockquote>
 
     </section>
 

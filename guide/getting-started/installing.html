@@ -104,7 +104,11 @@
                 
             </li>
                     <li>
-                <a href="guide/guides/docs-report/index.html#docs-reports" class="">Docs &amp; Reports</a>
+                <a href="guide/guides/documentation.html#documentation" class="">Documentation</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/phpstan.html#phpstan" class="">PHPStan</a>
                 
             </li>
             </ul>
@@ -189,6 +193,7 @@
             
     <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
@@ -233,13 +238,10 @@
 
     <li>From the downloaded .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.</li>
 
-    <li>Open a terminal of choice and change current directory to the root directory of the project folder.</li>
-
     <li><dl>
-                        <dt>Run the following command</dt>
+                        <dt>composer.json</dt>
         
-        <dd><pre><code class="language-bash"># This will install the dependencies set in composer.json
-composer install</code></pre>
+        <dd><pre><code class="language-bash">composer install</code></pre>
 </dd>
             </dl>
 </li>
@@ -247,11 +249,10 @@ composer install</code></pre>
     <li><dl>
                         <dt>Or, manually</dt>
         
-        <dd><pre><code class="language-bash"># This will not install dev-tools
-   composer create-project codeigniter4/appstarter vlam
-   composer require phpdocumentor/shim
-   composer require codeigniter4/shield:dev-develop
-   php spark shield:setup</code></pre>
+        <dd><pre><code class="language-bash">composer create-project codeigniter4/appstarter vlam
+composer require phpdocumentor/shim
+composer require codeigniter4/shield:dev-develop
+php spark shield:setup</code></pre>
 </dd>
             </dl>
 </li>
