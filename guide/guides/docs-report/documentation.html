@@ -6,7 +6,7 @@
     
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="../../">
+    <base href="../../../">
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
@@ -104,11 +104,7 @@
                 
             </li>
                     <li>
-                <a href="guide/guides/documentation.html#documentation" class="">Documentation</a>
-                
-            </li>
-                    <li>
-                <a href="guide/guides/phpstan.html#phpstan" class="">PHPStan</a>
+                <a href="guide/guides/docs-report/index.html#docs-reports" class="">Docs &amp; Reports</a>
                 
             </li>
             </ul>
@@ -205,34 +201,44 @@
 </aside>
 
             <div class="phpdocumentor-column -nine phpdocumentor-content">
-                                        <section class="section " id="phpstan">
-            <h1>PHPStan</h1>
+                                        <section class="section " id="documentation">
+            <h1>Documentation</h1>
 
             
-    <p>This platform integrates <a href="https://phpstan.org/">PHPStan</a>.</p>
+    <p>This platform integrates <a href="https://phpdoc.org/">phpDocumentator</a>.</p>
 
             
-    <p>This scans the whole codebase and looks for both obvious &amp; tricky bugs. Even in those rarely executed if statements that certainly aren&#039;t covered by tests.</p>
+    <p>This will automaticly generate codebase documenation based on (docstings, namespaces, classes and inheritance)</p>
 
             
     <p>There is a CI-CD workflow <code>`path/to/my/project/github/workflows/docs.yml`</code>
- in place containing a step that automaticly scans the codebase.
-The output report is processed in a auto-generated .rst file which stores in <code>`path/to/my/project/docs/report/`</code>
- and included in the phpdocs guide 
+ in place to automaticly re-generate the documentation
 when a push or pull request event triggers and is uploaded to the <code>`gh-pages`</code>
  branch.</p>
 
-            <section class="section " id="testing">
-            <h2>Testing</h2>
+            <section class="section " id="editing">
+            <h2>Editing</h2>
 
             
-    <p>Follow these steps to run PHPStan locally</p>
+    <p>You want to make changes to the documentation or guides,</p>
+
+            
+    <p>To prevent clutter and save github CI-CD time, it is advised to make changes to docs locally first.</p>
+
+            <div class="phpdocumentor-admonition important">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <article>
+        
+    <p>Continue assuming you to have a local development environment active. A web server such as  <a href="https://www.apachefriends.org/">XAMPP</a>, or just apache with php if you prefer custom installation.</p>
+
+    </article>
+</div>
 
             
     
 <ol type="1">
     <li>Make sure <code>`path/to/my/project/vendor/bin`</code>
- contains phpstan.</li>
+ contains phpdoc.</li>
 
     <li>Open a terminal of choice and change current directory to the root directory.</li>
 
@@ -240,12 +246,212 @@ when a push or pull request event triggers and is uploaded to the <code>`gh-page
                         <dt>Run the following command</dt>
         
         <dd><pre><code class="language-bash"># linux
-vendor/bin/phpstan analyse
+vendor/bin/phpdoc -c phpdoc.xml
 
 # windows
-php vendor/bin/phpstan analyse</code></pre>
+php vendor/bin/phpdoc -c phpdoc.xml
 
-    <p>This will report directly to the terminal</p>
+# -c phpdoc.xml is optional</code></pre>
+
+    <p>The output should be similar to:</p>
+<pre><code class="language-bash">phpDocumentor 3.7.1
+
+Parsing source files
+ 111/111 [============================] 100%
+Applying transformations (can take a while)
+ 44/44 [============================] 100%
+All done in 5 seconds!</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li>All done, you can proceed to open the index.html in <code>`path/to/my/project/docs/build`</code>
+ folder</li>
+
+</ol>
+
+    </section>
+
+            <section class="section " id="conclusion">
+            <h2>Conclusion</h2>
+
+            
+    <p>Integrating <a href="https://phpdoc.org/">phpDocumentor</a> into a CI/CD workflow simplifies documentation and encourages developers to write meaningful docstrings and comments. This not only improves code maintainability but also stimulates better collaboration and best practices.</p>
+
+    </section>
+
+            <section class="section " id="troubleshooting">
+            <h2>Troubleshooting</h2>
+
+            
+    <p>If you see this error (Windows):</p>
+
+            <pre><code class="language-bash">&#039;phpdoc&#039; is not recognized as an internal or external command,
+operable program or batch file.</code></pre>
+
+            
+    
+<ol type="1">
+    <li>Create a new file: <code>`path/to/my/project/vendor/bin/phpdoc.bat`</code>
+</li>
+
+    <li>
+    <p>Open the file and paste the following batch intructions:</p>
+<blockquote><pre><code class="language-batch">@ECHO OFF
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::
+:: Batch file to start phpDocumentor with PHP&#039;s CLI
+::
+:: This SW was contributed by BlueShoes www.blueshoes.org &quot;The PHP Framework&quot;
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::----------------------------------------------------------------------------------
+:: Please set following to PHP&#039;s CLI
+:: NOTE: In PHP 4.2.x the PHP-CLI used to be named php-cli.exe. 
+::       PHP 4.3.x names it php.exe but stores it in a subdir called /cli/php.exe
+::       E.g. for PHP 4.2 C:\phpdev\php-4.2-Win32\php-cli.exe
+::            for PHP 4.3 C:\phpdev\php-4.3-Win32\cli\php.exe
+
+  SET phpCli=D:\Platforms\Xampp\php\php.exe
+
+
+
+::---------------------------------------------------------------------------------
+::---------------------------------------------------------------------------------
+:: Do not modify below this line!! (Unless you know what your doing :)
+::---------------------------------------------------------------------------------
+::---------------------------------------------------------------------------------
+
+:: Only show this intro when no options are passed
+IF &#039;%1&#039;==&#039;&#039; (
+  ECHO ******************************************************************************
+  ECHO * PhpDocument Command-Line  Starter 
+  ECHO * 
+  ECHO * phpDocumentor is a JavaDoc-like automatic documentation generator for PHP
+  ECHO * written in PHP. It is the most versatile tool for documenting PHP.
+  ECHO *
+  ECHO * This batch-file will try to run the phpDocumentor using the command-line
+  ECHO * version of PHP4. NOTE: It will not run with the PHP ISAPI module! 
+  ECHO * Please update the path in this batch-file to your PHP-CLI.
+  ECHO *
+  ECHO * Tip: o Grab a copy of one of the ini-files in the user/ dir of the 
+  ECHO *        phpDocumentor and modify the settings there. 
+  ECHO *      o To see the command line options type  phpdoc -h
+  ECHO * 
+  ECHO * @version 1.3  2003-06-28
+  ECHO * @author Sam Blum sam@blueshoes.org
+  ECHO * @Copyright Free Software released under the GNU/GPL license
+  ECHO * 
+  ECHO * This SW was contributed by BlueShoes www.blueshoes.org &quot;The PHP Framework&quot;
+  ECHO ******************************************************************************
+)
+
+:: Check existence of php.exe
+IF EXIST &quot;%phpCli%&quot; (
+  SET doNothing=
+) ELSE GOTO :NoPhpCli
+
+:: If called using options, just call phpdoc and end after without pausing.
+:: This will allow use where pausing is not wanted.
+IF &#039;%1&#039;==&#039;&#039; (
+  SET doNothing=
+) ELSE (
+  &quot;%phpCli%&quot; phpdoc %*
+  GOTO :EOF
+)
+
+
+SET iniFile=
+
+ECHO ------------------------------------------------------------------------------
+ECHO Select Ini-File [default is phpDocumentor.ini]
+ECHO ------------------------------------------------------------------------------
+ECHO # 0: phpDocumentor.ini
+SET count=0
+FOR /R user %%I IN (*.ini) DO (
+  SET /a count+=1
+  CALL :exec ECHO # %%count%%: %%~nI%%~xI
+)
+
+:LOOP_1
+:: SET /P prompts for input and sets the variable
+:: to whatever the user types
+SET iniNr=
+SET /P iniNr=Type a number and press Enter[0]:
+
+::  Use default
+IF &#039;%iniNr%&#039;==&#039;&#039; (
+  SET iniNr=0
+)
+
+:: Check for default selection
+SET iniFile=phpDocumentor.ini
+IF %iniNr%==0 (
+  CALL :exec GOTO :run
+  GOTO :PAUSE_END
+)
+
+:: Check selected
+SET count=0
+SET found=
+FOR /R user %%I IN (*.ini) DO (
+  SET /a count+=1
+  SET iniFile=%%~nI%%~xI
+  CALL :exec IF &#039;%%iniNr%%&#039;==&#039;%%count%%&#039; GOTO :run 
+)
+
+:: Check if selected # was found
+IF &#039;%found%&#039;==&#039;&#039; (
+  ECHO Invalid input [%iniNr%]... try again
+  ECHO.
+  GOTO :LOOP_1
+)
+
+::
+:: php.exe not found error  
+GOTO :PAUSE_END
+:NoPhpCli
+ECHO ** ERROR *****************************************************************
+ECHO * Sorry, can&#039;t find the php.exe file.
+ECHO * You must edit this file to point to your php.exe (CLI version!)
+ECHO *    [Currently set to %phpCli%]
+ECHO * 
+ECHO * NOTE: In PHP 4.2.x the PHP-CLI used to be named php-cli.exe. 
+ECHO *       PHP 4.3.x renamed it php.exe but stores it in a subdir 
+ECHO *       called /cli/php.exe
+ECHO *       E.g. for PHP 4.2 C:\phpdev\php-4.2-Win32\php-cli.exe
+ECHO *            for PHP 4.3 C:\phpdev\php-4.3-Win32\cli\php.exe
+ECHO **************************************************************************
+
+::
+:: Stupid MS-batch: Can&#039;t evaluate environment variable inside a FOR loop!!! :((  
+GOTO :PAUSE_END
+:exec 
+%*
+GOTO :EOF
+
+::
+:: Start the phpDocumentor 
+GOTO :PAUSE_END
+:run
+SET found=1
+ECHO Starting: &quot;%phpCli%&quot; phpdoc -c &quot;%iniFile%&quot;
+ECHO.
+&quot;%phpCli%&quot; phpdoc -c &quot;%iniFile%&quot;
+GOTO :EOF
+
+:PAUSE_END
+PAUSE</code></pre>
+</blockquote>
+</li>
+
+    <li>Open a terminal of choice and change current directory to <code>`path/to/my/project/vendor/bin`</code>
+</li>
+
+    <li><dl>
+                        <dt>Run the following command</dt>
+        
+        <dd><pre><code class="language-bash">phpdoc -c ../../phpdoc.xml</code></pre>
 </dd>
             </dl>
 </li>
