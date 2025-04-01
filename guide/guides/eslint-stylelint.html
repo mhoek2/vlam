@@ -6,7 +6,7 @@
     
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="../../../">
+    <base href="../../">
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
@@ -104,7 +104,15 @@
                 
             </li>
                     <li>
-                <a href="guide/guides/docs-report/index.html#docs-reports" class="">Docs &amp; Reports</a>
+                <a href="guide/guides/documentation.html#documentation" class="">Documentation</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/phpstan.html#phpstan" class="">PHPStan</a>
+                
+            </li>
+                    <li>
+                <a href="guide/guides/eslint-stylelint.html#phpstan" class="">PHPStan</a>
                 
             </li>
             </ul>
@@ -227,19 +235,14 @@ when a push or pull request event triggers and is uploaded to the <code>`gh-page
             
     
 <ol type="1">
-    <li>Make sure <code>`path/to/my/project/vendor/bin`</code>
- contains phpstan.</li>
+    <li>Make sure npm packages are installed.</li>
 
     <li>Open a terminal of choice and change current directory to the root directory.</li>
 
     <li><dl>
                         <dt>Run the following command</dt>
         
-        <dd><pre><code class="language-bash"># linux
-vendor/bin/phpstan analyse
-
-# windows
-php vendor/bin/phpstan analyse</code></pre>
+        <dd><pre><code class="language-bash">npx eslint &quot;app/Views/**/*.php&quot; --format stylish</code></pre>
 
     <p>This will report directly to the terminal</p>
 </dd>

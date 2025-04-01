@@ -573,7 +573,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\AssignmentController",
             "name": "AssignmentController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-AssignmentController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Ais_sub_assignment\u0028\u0029",
@@ -611,129 +611,9 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Front-AssignmentController.html#method_index"
         },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController",
-            "name": "BaseController",
-            "summary": "Class\u0020BaseController",
-            "url": "classes/App-Controllers-Front-BaseController.html"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003AvalidTrainingForUser\u0028\u0029",
-            "name": "validTrainingForUser",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_validTrainingForUser"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003AinitSessionController\u0028\u0029",
-            "name": "initSessionController",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_initSessionController"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003AinitController\u0028\u0029",
-            "name": "initController",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_initController"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_training\u0028\u0029",
-            "name": "get_training",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_get_training"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_meeting\u0028\u0029",
-            "name": "get_meeting",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_get_meeting"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_assignment\u0028\u0029",
-            "name": "get_assignment",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_get_assignment"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_case\u0028\u0029",
-            "name": "get_case",
-            "summary": "Get\u0020case\u0020from\u0020database\u0020and\u0020make\u0020sure\u0020it\u0020exists",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_get_case"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_entry_properties_result\u0028\u0029",
-            "name": "get_entry_properties_result",
-            "summary": "Retrieves\u0020entry\u0020properties\u0020and\u0020maps\u0020property\u0020values\u0020based\u0020on\u0020user\u0020ID.",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_get_entry_properties_result"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_assignment_results\u0028\u0029",
-            "name": "get_assignment_results",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_get_assignment_results"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_case_results\u0028\u0029",
-            "name": "get_case_results",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#method_get_case_results"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024request",
-            "name": "request",
-            "summary": "Instance\u0020of\u0020the\u0020main\u0020Request\u0020object.",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_request"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024data",
-            "name": "data",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_data"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024user",
-            "name": "user",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_user"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024meetings",
-            "name": "meetings",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_meetings"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignments",
-            "name": "assignments",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_assignments"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignmentEntry",
-            "name": "assignmentEntry",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_assignmentEntry"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignmentEntryProperties",
-            "name": "assignmentEntryProperties",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_assignmentEntryProperties"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024assignmentResult",
-            "name": "assignmentResult",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_assignmentResult"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024cases",
-            "name": "cases",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_cases"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024caseEntry",
-            "name": "caseEntry",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_caseEntry"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024caseEntryProperties",
-            "name": "caseEntryProperties",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_caseEntryProperties"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024caseResult",
-            "name": "caseResult",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_caseResult"
-        },                {
-            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003A\u0024helpers",
-            "name": "helpers",
-            "summary": "An\u0020array\u0020of\u0020helpers\u0020to\u0020be\u0020loaded\u0020automatically\u0020upon\nclass\u0020instantiation.\u0020These\u0020helpers\u0020will\u0020be\u0020available\nto\u0020all\u0020other\u0020controllers\u0020that\u0020extend\u0020BaseController.",
-            "url": "classes/App-Controllers-Front-BaseController.html#property_helpers"
-        },                {
             "fqsen": "\\App\\Controllers\\Front\\CaseController",
             "name": "CaseController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-CaseController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\CaseController\u003A\u003Ais_complete_action\u0028\u0029",
@@ -793,7 +673,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\CompleteCaseActions\\CompleteTestController",
             "name": "CompleteTestController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-CompleteCaseActions-CompleteTestController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\CompleteCaseActions\\CompleteTestController\u003A\u003Aindex\u0028\u0029",
@@ -803,7 +683,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\CompleteCaseActions\\ExamplePostSaveController",
             "name": "ExamplePostSaveController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-CompleteCaseActions-ExamplePostSaveController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\CompleteCaseActions\\ExamplePostSaveController\u003A\u003Aindex\u0028\u0029",
@@ -888,7 +768,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\Home",
             "name": "Home",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-Home.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\Home\u003A\u003Aindex\u0028\u0029",
@@ -903,7 +783,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\MeetingController",
             "name": "MeetingController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-MeetingController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\MeetingController\u003A\u003Aindex\u0028\u0029",
@@ -913,7 +793,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\CardController",
             "name": "CardController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-SubAssignments-CardController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\CardController\u003A\u003Aindex\u0028\u0029",
@@ -923,7 +803,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\ExamplePostSaveController",
             "name": "ExamplePostSaveController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-SubAssignments-ExamplePostSaveController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\ExamplePostSaveController\u003A\u003Aindex\u0028\u0029",
@@ -933,7 +813,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\OutroController",
             "name": "OutroController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-SubAssignments-OutroController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\OutroController\u003A\u003Aindex\u0028\u0029",
@@ -943,7 +823,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\PodcastController",
             "name": "PodcastController",
-            "summary": "Class\u0020BaseController",
+            "summary": "",
             "url": "classes/App-Controllers-Front-SubAssignments-PodcastController.html"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\SubAssignments\\PodcastController\u003A\u003Aindex\u0028\u0029",
