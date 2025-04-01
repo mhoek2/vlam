@@ -233,10 +233,13 @@
 
     <li>From the downloaded .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.</li>
 
+    <li>Open a terminal of choice and change current directory to the root directory of the project folder.</li>
+
     <li><dl>
-                        <dt>composer.json</dt>
+                        <dt>Run the following command</dt>
         
-        <dd><pre><code class="language-bash">composer install</code></pre>
+        <dd><pre><code class="language-bash"># This will install the dependencies set in composer.json
+composer install</code></pre>
 </dd>
             </dl>
 </li>
@@ -244,10 +247,11 @@
     <li><dl>
                         <dt>Or, manually</dt>
         
-        <dd><pre><code class="language-bash">composer create-project codeigniter4/appstarter vlam
-composer require phpdocumentor/shim
-composer require codeigniter4/shield:dev-develop
-php spark shield:setup</code></pre>
+        <dd><pre><code class="language-bash"># This will not install dev-tools
+   composer create-project codeigniter4/appstarter vlam
+   composer require phpdocumentor/shim
+   composer require codeigniter4/shield:dev-develop
+   php spark shield:setup</code></pre>
 </dd>
             </dl>
 </li>
