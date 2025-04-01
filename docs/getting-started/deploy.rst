@@ -9,7 +9,7 @@ Requirements
 #. .zip file containing a copy of an existing install
 #. .sql file containing a copy of the database
 
-- If root folder ``vendor`` is not included with the .zip. Run composer like mentioned in Installation
+- If root folder ``vendor`` is not included with the .zip. Run composer from step 4 in `Installation <installing.rst>`_
 
 Setup
 -----

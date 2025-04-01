@@ -13,14 +13,17 @@ Setup
 
 #. Install `Composer<https://getcomposer.org/>`_
 #. From the downloaded .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.
-#. composer.json
+#. Open a terminal of choice and change current directory to the root directory of the project folder.
+#. Run the following command
     .. code-block:: bash
-   
+	
+        # This will install the dependencies set in composer.json
         composer install
 		
-#. Or, manually
+#. Or, manually 
     .. code-block:: bash
    
+   		# This will not install dev-tools
         composer create-project codeigniter4/appstarter vlam
         composer require phpdocumentor/shim
         composer require codeigniter4/shield:dev-develop
