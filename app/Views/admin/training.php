@@ -228,7 +228,7 @@
 
 		<?=updateCSRFMeta() // csrf helper ?>
 
-		$(".datetime-picker").datetimepicker({
+		$('.datetime-picker').datetimepicker({
 			format: 'Y-m-d H:i', // Format (YYYY-MM-DD HH:mm)
 			step: 15,            // Step in minutes (15-minute intervals)
 			minDate: 0,          // Prevent selecting past dates
@@ -248,7 +248,7 @@
 					updateCSRFMeta(response);
 
 			        if (response.status === 'success') {
-				        $(`#search_member`).val('');
+				        $('#search_member').val('');
                         location.reload();
 			        }
 		        }
@@ -260,7 +260,7 @@
 			event.preventDefault();
 
             const member_id = $(this).data('member-id');
-			const confirmation = confirm("Are you sure you want to delete this member?");
+			const confirmation = confirm('Are you sure you want to delete this member?');
 
 			if (confirmation) {
                 $.ajax({
@@ -304,7 +304,7 @@
             select: function(event, ui) {
                 // Optionally handle the selection of a user from the autocomplete list
                 console.log(ui);
-                console.log("User selected: " + ui.item.label);
+                console.log('User selected: ' + ui.item.label);
                 add_member(ui.item.value);
             }
         });
@@ -312,10 +312,10 @@
         $('#edit_training').submit(function (event) {
             event.preventDefault();
 
-            var formData = $(this).serialize();
+            const formData = $(this).serialize();
 
             $.ajax({
-                url: '<?=base_url(route_to('admin.training.save', $training["id"]))?>',
+                url: '<?=base_url(route_to('admin.training.save', $training['id']))?>',
                 type: 'POST',
                 data: formData,
                 success: function(response) {
@@ -351,7 +351,7 @@
 
 		$(document).on('click', '#start_training', function ()
 		{
-			const confirmation = confirm("Weet je zeker dat je de training wilt starten");
+			const confirmation = confirm('Weet je zeker dat je de training wilt starten');
 
 			if (!confirmation)
 				return;
@@ -374,7 +374,7 @@
 
 		$(document).on('click', '#stop_training', function ()
 					   {
-			const confirmation = confirm("Weet je zeker dat je de training wilt stoppen");
+			const confirmation = confirm('Weet je zeker dat je de training wilt stoppen');
 
 			if (!confirmation)
 				return;
@@ -397,7 +397,7 @@
 
 		$(document).on('click', '#force_reset_training', function ()
 					   {
-			const confirmation = confirm("Weet je het zeker? Alle deelnemersgegevens worden gewist");
+			const confirmation = confirm('Weet je het zeker? Alle deelnemersgegevens worden gewist');
 
 			if (!confirmation)
 				return;

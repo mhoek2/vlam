@@ -47,9 +47,8 @@
             $('#assignment_form').submit(function (event) {
                 event.preventDefault();
 
-                var formData = $(this).serialize();
+                const formData = $(this).serialize();
 
-                console.log(formData);
                 $.ajax({
                     url: '<?=current_url().'/save'?>',
                     type: 'POST',

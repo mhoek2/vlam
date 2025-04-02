@@ -252,7 +252,7 @@ else {
             $('#change_password_form').submit(function (event) {
                 event.preventDefault();
 
-                var formData = $(this).serialize();
+                const formData = $(this).serialize();
 
                 $.ajax({
 					url: '<?=base_url(route_to('admin.user.change_password', $selected_user['id']))?>',
@@ -281,25 +281,19 @@ else {
                 });
             });
 
-
-
 			$(document).on('click', '#delete_user', function()
 			{
-				const confirmation = confirm('Are you sure you want to remove this user?');
-
 				if (confirmation) {
-					window.location = '<?=base_url(route_to('admin.user.delete', $selected_user['id']))?>';
-
 					//
 					// Use a form to perform this action
 					// allows to make use of csrf tokenization and redirect back functionalities
 					//
 
-					var form = document.createElement('form');
+					const form = document.createElement('form');
 					form.method = 'POST';
 					form.action = '<?= base_url(route_to('admin.user.delete', $selected_user['id'])) ?>';
 
-					var csrfFieldToken = document.createElement('input');
+					const csrfFieldToken = document.createElement('input');
 					csrfFieldToken.type = 'hidden';
 					csrfFieldToken.name = '<?= csrf_token() ?>';
 					csrfFieldToken.value = '<?= csrf_hash() ?>';

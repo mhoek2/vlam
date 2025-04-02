@@ -51,7 +51,7 @@
         $(document).on('click', '#delete_training', function ()
         {
             const training_id = $(this).data('training-id');
-			const confirmation = confirm("Are you sure you want to remove this training");
+			const confirmation = confirm('Are you sure you want to remove this training');
 
 			if (confirmation) {
                 $.ajax({

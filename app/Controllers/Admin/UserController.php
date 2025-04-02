@@ -127,6 +127,8 @@ class UserController extends BaseController
 	{
 		$user = auth()->user(); // current user
 
+		return redirect()->back()->with('error', 'You cannot delete your own account.');
+		
 		if ($user->id === $user_id) {
 			return redirect()->back()->with('error', 'You cannot delete your own account.');
 		}

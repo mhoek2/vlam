@@ -48,7 +48,7 @@
             $('#edit_meeting').submit(function (event) {
                 event.preventDefault();
 
-                var formData = $(this).serialize();
+                const formData = $(this).serialize();
 
                 $.ajax({
                     url: '<?= base_url(route_to('admin.meeting.save', $current_meeting)) ?>',

@@ -137,7 +137,7 @@
 			<?php if ($mcq_multi): ?>
 				// support for multiple selectables
 				let addProperty = false;
-				let selectedProperties = [];
+				const selectedProperties = [];
 
 				if ($(this).hasClass('selected'))
 					$(this).removeClass('selected');

@@ -106,11 +106,11 @@
 	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
 
-		$("#cases").sortable({
+		$('#cases').sortable({
 			handle: '.sortable-handle',
 			cancel: ':input,button,[contenteditable]', // not used.
 			update: function(event, ui) {
-				let ids = $("#cases").sortable("toArray", { attribute: 'data-id' });
+				const ids = $('#cases').sortable('toArray', { attribute: 'data-id' });
 				saveSortOrder(ids);
 			},
 			items: '.case-item:not(.disabled)',
@@ -138,7 +138,7 @@
         $(document).on('click', '#delete_case', function ()
         {
             const case_id = $(this).data('case-id');
-			const confirmation = confirm("Are you sure you want to remove this case");
+			const confirmation = confirm('Are you sure you want to remove this case');
 
 			if (confirmation) {
                 $.ajax({

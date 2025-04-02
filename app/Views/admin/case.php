@@ -97,7 +97,7 @@
             $('#edit_case').submit(function (event) {
                 event.preventDefault();
 
-                var formData = $(this).serialize();
+                const formData = $(this).serialize();
 
                 $.ajax({
 					url: '<?= base_url(route_to('admin.case.save', $case["id"])) ?>',
@@ -120,11 +120,10 @@
 		/*
 		ENTRIES
 		*/
-		$("#sortable").sortable({
+		$('#sortable').sortable({
 			cancel: ':input,button,[contenteditable]',
 			update: function(event, ui) {
-
-				let ids = $("#sortable").sortable("toArray", { attribute: 'data-id' });
+				const ids = $('#sortable').sortable('toArray', { attribute: 'data-id' });
 				saveEntrySortOrder(ids);
 			}
 		});
@@ -167,7 +166,7 @@
 						loadProperties(entryId, newType);
 					}
 					else{
-						alert("Er is iets mis gegaan! Vernieuw de pagina.");
+						alert('Er is iets mis gegaan! Vernieuw de pagina.');
 					}
 				}
 			});
@@ -177,7 +176,7 @@
 			const entryId = $(this).data('entry-id');
 			const newEntryName = $(this).text().trim();
 
-			if (newEntryName !== "") {
+			if (newEntryName !== '') {
 				$.ajax({
 					url: '<?=current_url()?>/update_entry_name',
 					method: 'POST',
@@ -201,7 +200,7 @@
 			const newEntryName = $(this).siblings('#new-entry-name').val().trim();
 			const newType = $(this).siblings('#new-entry-type').val();
 
-			if (newEntryName !== "") {
+			if (newEntryName !== '') {
 				$.ajax({
 					url: '<?=current_url()?>/add_entry',
 					method: 'POST',
@@ -223,7 +222,7 @@
 		});
 
 		$(document).on('click', '.delete-entry', function () {
-			const confirmation = confirm("Are you sure you want to delete this entry?");
+			const confirmation = confirm('Are you sure you want to delete this entry?');
 			const entryId = $(this).closest('.entry').data('entry-id');
 
 			if (confirmation) {
@@ -294,8 +293,8 @@
 
 					propertyList.empty();
 					response.forEach(function (property) {
-						//if (entryType.startsWith("mcq"))
-						if (entryTypeGroup === "mcq")
+						//if (entryType.startsWith('mcq'))
+						if (entryTypeGroup === 'mcq')
 						{
 							propertyList.append(`
 								<li data-property-id="${property.id}">
@@ -312,9 +311,9 @@
 								</li>
 							`);
 						}
-						else if(entryType === "text_separator")
+						else if(entryType === 'text_separator')
 						{
-							let textareaId = "ckeditor_" + property.id;
+							const textareaId = 'ckeditor_' + property.id;
 
 							propertyList.append(`
 								<li data-property-id="${property.id}">
@@ -327,14 +326,14 @@
 						}
 					});
 
-					//if (!entryType.startsWith("mcq") )
-					if (entryTypeGroup !== "mcq")
+					//if (!entryType.startsWith('mcq') )
+					if (entryTypeGroup !== 'mcq')
 						return;
 
 					propertyList.sortable({
 						cancel: ':input,button,[contenteditable]',
 						update: function(event, ui) {
-							let ids = propertyList.sortable("toArray", { attribute: 'data-property-id' });
+							const ids = propertyList.sortable('toArray', { attribute: 'data-property-id' });
 							savePropertySortOrder(entryId, ids);
 						}
 					});
@@ -367,8 +366,8 @@
 			let newPropertyContent = $(this).siblings('.edit-property').val();
 
 			// For CKEDITOR
-			if(entryType === "text_separator") {
-				let textareaId = "#ckeditor_" + propertyId;
+			if(entryType === 'text_separator') {
+				const textareaId = '#ckeditor_' + propertyId;
 				newPropertyContent = <?=$text_editor->get('textareaId')?>
 			}
 
@@ -394,7 +393,7 @@
 
 		$(document).on('click', '.delete-property', function () {
 			const propertyId = $(this).data('property-id');
-			const confirmation = confirm("Are you sure you want to delete this property?");
+			const confirmation = confirm('Are you sure you want to delete this property?');
 
 			if (confirmation) {
 				$.ajax({

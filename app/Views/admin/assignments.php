@@ -107,11 +107,11 @@
 	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
 
-		$("#assignments").sortable({
+		$('#assignments').sortable({
 			handle: '.sortable-handle',
 			cancel: ':input,button,[contenteditable]', // not used.
 			update: function(event, ui) {
-				let ids = $("#assignments").sortable("toArray", { attribute: 'data-id' });
+				const ids = $('#assignments').sortable('toArray', { attribute: 'data-id' });
 				saveSortOrder(ids);
 			},
 			placeholder: 'assignments-item sortable-placeholder',
@@ -138,7 +138,7 @@
         $(document).on('click', '#delete_assignment', function ()
         {
             const assignment_id = $(this).data('assignment-id');
-			const confirmation = confirm("Are you sure you want to remove this assignment");
+			const confirmation = confirm('Are you sure you want to remove this assignment');
 
 			if (confirmation) {
                 $.ajax({
