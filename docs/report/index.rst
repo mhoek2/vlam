@@ -8,3 +8,4 @@ Reports
    eslint
    stylelint
    schemaspy
+   phpmetrics

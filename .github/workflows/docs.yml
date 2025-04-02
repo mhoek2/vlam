@@ -137,6 +137,11 @@ jobs:
         run: |
           java -jar schemaspy.jar -t mysql -host 127.0.0.1 -port 3306 \
           -db vlamdb -s vlamdb -u root -p root -o docs/build/guide/report/schemaspy/ -dp mysql-connector-java.jar         
+        
+      - name: Run PHP Metrics
+        run: |
+          composer require --dev phpmetrics/phpmetrics:^v3.0.0rc8 -W
+          vendor/bin/phpmetrics  --verbose --report-html=docs/build/guide/report/phpmetrics app/
           
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
