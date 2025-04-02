@@ -47,7 +47,38 @@ export default [
     languageOptions: {
       globals: globals.browser,
     },
+	rules: {
+		/*"brace-style": ["error", "1tbs"],*/     		// One true brace style ["1tbs", "allman", "stroustrup"] https://eslint.org/docs/latest/rules/brace-style
+		/*/*"object-curly-spacing": ["error", "always"],*/  	// Enforce spaces inside curly braces for objects
+		/*"curly": ["error", "all"],*/
+		/*"semi": ["error", "always"],*/
+		"no-console": ["warn"],
+		"no-unused-vars": ["warn",
+			{
+				"argsIgnorePattern": "^xhr$|^status$|^error$|^ui$|^event$"
+			}
+		],
+		"prefer-const": "error",
+		"no-var": "error",
+		"quotes": ["error", "single"],
+		"no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+		"max-len": ["warn", { "code": 100 }],
+		"object-curly-spacing": ["error", "always"],  	// Enforce spaces inside curly braces for objects
+		"space-in-parens": ["error", "never"],      	// No spaces inside parentheses
+		"array-bracket-spacing": ["error", "never"],  	// No spaces inside array brackets
+		"no-trailing-spaces": "error",             		// Disallow trailing spaces at the end of lines
+		"eqeqeq": ["error", "always"],
+		/*"no-alert": "warn",*/
+		"no-eval": "error",
+		"no-implied-eval": "error",
+		"consistent-return": "error",
+		"no-magic-numbers": ["warn", { "ignore": [0, 1, -1] }],
+		"no-empty-function": "warn",
+		"no-else-return": "warn",
+		"no-use-before-define": ["error", { "functions": false, "classes": true }],
+		"no-nested-ternary": "warn",
+		"max-lines": ["warn", 500],
+		"no-const-assign": "error",
+	}
   },
-  
-
 ];
