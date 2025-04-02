@@ -50,14 +50,14 @@
 				top: 10px;
 				cursor: move;
 			}
-		.assignments-item.add_assignment {
+		.assignments-item.add {
 			background:var(--button-background-color);
 			opacity: 0.5;
 		}
-		.assignments-item.add_assignment:hover {
+		.assignments-item.add:hover {
 			opacity: 0.9;
 		}
-			.assignments-item.add_assignment button {
+			.assignments-item.add button {
 				all:unset;
 				display: flex;
 				width: 100%;
@@ -68,7 +68,7 @@
 				height: 100%;
 				cursor:pointer;
 			}
-				.assignments-item.add_assignment button i {
+				.assignments-item.add button i {
 					font-size: 38px;
 					width: 75px;
 					height: 75px;
@@ -96,7 +96,7 @@
         </div>
     <?php }; ?>
     
-	<div class="assignments-item disabled add_assignment">
+	<div class="assignments-item add disabled">
 		<button id="add_assignment" >
 			<i class="fa-solid fa-plus"></i>
 		</button>

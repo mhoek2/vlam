@@ -49,14 +49,14 @@
 				top: 10px;
 				cursor: move;
 			}
-		.case-item.add_case {
+		.case-item.add {
 			background:var(--button-background-color);
 			opacity: 0.5;
 		}
-		.case-item.add_case:hover {
+		.case-item.add:hover {
 			opacity: 0.9;
 		}
-			.case-item.add_case button {
+			.case-item.add button {
 				all:unset;
 				display: flex;
 				width: 100%;
@@ -67,7 +67,7 @@
 				height: 100%;
 				cursor:pointer;
 			}
-				.case-item.add_case button i {
+				.case-item.add button i {
 					font-size: 38px;
 					width: 75px;
 					height: 75px;
@@ -95,7 +95,7 @@
         </div>
     <?php }; ?>
 
-	<div class="case-item disabled add_case">
+	<div class="case-item add disabled">
 		<button id="add_case" >
 			<i class="fa-solid fa-plus"></i>
 		</button>
