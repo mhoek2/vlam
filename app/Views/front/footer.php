@@ -1,3 +1,9 @@
+<?php if( isset($edit_url) && $edit_url ) { ?>
+	<a href="<?=$edit_url?>" class="edit-page">
+		<i class="fas fa-edit"></i>
+	</a>
+<?php } ?>
+
 <!--
 <footer>
     <div class="environment">

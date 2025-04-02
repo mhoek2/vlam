@@ -6,10 +6,8 @@ use App\Controllers\Front\BaseController;
 
 class MeetingController extends BaseController
 {
-    public function index( $meeting_id ): string
+    public function index( int $meeting_id ): string
     {
-		$meeting_id 	= (int) $meeting_id;
-
 		// Meeting
         $this->data['meeting'] = $this->get_meeting( $meeting_id );
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
@@ -19,6 +17,8 @@ class MeetingController extends BaseController
 		
 		// previous and next urls
 		$this->data['prev_url'] = base_url(route_to('home'));
+		
+		$this->data['edit_url'] = $this->get_edit_route('admin.meeting', $meeting_id);
 		
 		load_header( $this->data );
 		load_footer( $this->data );

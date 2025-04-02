@@ -6,7 +6,7 @@ use App\Controllers\Front\BaseController;
 
 class AssignmentController extends BaseController
 {
-	private function is_sub_assignment( $controller_name )
+	private function is_sub_assignment( string $controller_name )
 	{
 		$controller_class = "App\Controllers\Front\SubAssignments\\" . $controller_name;
 		
@@ -231,6 +231,9 @@ class AssignmentController extends BaseController
 			$this->data['post_url'] = current_url() . "/sub";
 		else
 			$this->data['post_url'] = base_url(route_to('front.meeting', $meeting_id));
+		
+		
+		$this->data['edit_url'] = $this->get_edit_route('admin.assignment', $assignment_id);
 		
 		load_header( $this->data );
 		load_footer( $this->data );

@@ -171,6 +171,14 @@ abstract class BaseController extends Controller
 		$this->data['case'] 				= NULL;				
     }
 	
+	public function get_edit_route( string $route, ...$args )
+	{
+		if ( $this->user->isAdmin() )
+			return base_url(route_to($route, ...$args));
+		
+		return false;
+	}
+	
 	public function get_training( int $training_id )
 	{
 		$item = (new Trainings())->find($training_id);

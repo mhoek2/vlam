@@ -7,7 +7,7 @@ use App\Controllers\Front\BaseController;
 
 class CaseController extends BaseController
 {
-	private function is_complete_action( $controller_name )
+	private function is_complete_action( string $controller_name )
 	{
 		$controller_class = "App\Controllers\Front\CompleteCaseActions\\" . $controller_name;
 		
@@ -131,12 +131,8 @@ class CaseController extends BaseController
 		]);
 	}
 	
-	public function complete( $meeting_id, $assignment_id, $case_id )
+	public function complete( int $meeting_id, int $assignment_id, int $case_id )
 	{
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
-		$case_id 		= (int) $case_id;
-		
 		$assignment = $this->get_assignment( $assignment_id );
 		$case = $this->get_case( $assignment_id, $case_id );
 		
@@ -154,12 +150,8 @@ class CaseController extends BaseController
 		return redirect()->to(route_to('front.assignment', $meeting_id, $assignment_id));
 	}
 	
-	public function outro( $meeting_id, $assignment_id, $case_id )
+	public function outro( int $meeting_id, int $assignment_id, int $case_id )
 	{
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
-		$case_id 		= (int) $case_id;
-		
         // Meeting
         $this->data['meeting'] = $this->get_meeting($meeting_id);
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
@@ -175,7 +167,9 @@ class CaseController extends BaseController
 		// previous and next urls
 		$this->data['case_reset_url'] = base_url(route_to('front.case.entry', $meeting_id, $assignment_id, $case_id, 0));
 		$this->data['case_complete_url'] = base_url(route_to('front.case.complete', $meeting_id, $assignment_id, $case_id));
-			
+		
+		$this->data['edit_url'] = $this->get_edit_route('admin.case', $case_id);
+		
 		load_header( $this->data );
 		load_footer( $this->data );
 		load_sidebar( $this->data );
@@ -260,6 +254,8 @@ class CaseController extends BaseController
 		else
 			$this->data['entry_next_url'] = base_url(route_to('front.case.end', $meeting_id, $assignment_id, $case_id));
 
+		$this->data['edit_url'] = $this->get_edit_route('admin.case', $case_id);
+		
 		load_header( $this->data );
 		load_footer( $this->data );
 		load_sidebar( $this->data );
@@ -267,12 +263,8 @@ class CaseController extends BaseController
         return view('front/case_entry', $this->data);		
 	}
 
-    public function index( $meeting_id, $assignment_id, $case_id ): string
+    public function index( int $meeting_id, int $assignment_id, int $case_id ): string
     {
-		$meeting_id 	= (int) $meeting_id;
-		$assignment_id 	= (int) $assignment_id;
-		$case_id 		= (int) $case_id;
-		
         // Meeting
         $this->data['meeting'] = $this->get_meeting($meeting_id);
         $this->data["current_meeting"] = $this->data["meeting"] != false ? $meeting_id : false;
@@ -292,6 +284,8 @@ class CaseController extends BaseController
 		$this->data['prev_url'] = base_url(route_to('front.assignment', $meeting_id, $assignment_id));
 		
 		$this->data['start_url'] = count($entries) > 0 ? base_url(route_to('front.case.entry', $meeting_id, $assignment_id, $case_id, 0)) : NULL;
+		
+		$this->data['edit_url'] = $this->get_edit_route('admin.case', $case_id);
 		
 		load_header( $this->data );
 		load_footer( $this->data );
