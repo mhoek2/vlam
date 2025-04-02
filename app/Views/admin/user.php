@@ -101,7 +101,7 @@ else {
 		<form action="<?=$action?>" method="post">
 			<div class="container">
 				<section class="block">
-					<?php if( empty($selected_user) ): ?>
+					<?php if(empty($selected_user) ): ?>
 						<div class="form-group">
 							<label for="username">Username</label>
 							<input type="text" id="username" name="username" class="form-control" value="<?= old('username') ?>">
@@ -156,7 +156,7 @@ else {
 				<section>
 					<h3>Persoonsgegevens</h3>
 
-					<?php foreach( $additional_fields as $item ): ?>
+					<?php foreach($additional_fields as $item): ?>
 						<div class="form-group">
 							<label for="name"><?=$item['name']?></label>
 							<input type="text" id="<?=$item['field']?>" name="<?=$item['field']?>" class="form-control" value="<?= !empty($selected_user) ? $selected_user[$item['field']] : old($item['field']) ?>">
@@ -189,7 +189,7 @@ else {
 			</div>
 		</form>
 
-		<?php if( !empty($selected_user) ): ?>
+		<?php if(!empty($selected_user) ): ?>
 		<div class="alert-actions">
 			<p>Speciale handelingen:</p>
 
@@ -237,13 +237,13 @@ else {
 
 		<?=updateCSRFMeta() // csrf helper ?>
 
-		<?php if( !empty($selected_user) ): ?>
+		<?php if(!empty($selected_user) ): ?>
 
 			$(document).on('click', '#change_password', function()
 			{
 				const confirmation = confirm('Weet je zeker dat je het wachtwoord wilt wijzigen?');
 
-				if ( confirmation )
+				if (confirmation)
 				{
 					$('#change_password_form').parent().css('display', 'block');
 				}
@@ -287,7 +287,7 @@ else {
 			{
 				const confirmation = confirm('Are you sure you want to remove this user?');
 
-				if ( confirmation ) {
+				if (confirmation) {
 					window.location = '<?=base_url(route_to('admin.user.delete', $selected_user['id']))?>';
 
 					//

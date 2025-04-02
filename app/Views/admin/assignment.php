@@ -192,8 +192,8 @@
 					updateCSRFMeta(response);
 
 					if (response.status === 'success') {
-						 $('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
-						loadProperties( entryId, newType);
+						$('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
+						loadProperties(entryId, newType);
 					}
 					else{
 						alert("Er is iets mis gegaan! Vernieuw de pagina.");
@@ -283,7 +283,7 @@
 			$(`#properties-list-${entryId}`).parent().toggle();
 
 			if ($(`#properties-list-${entryId}`).children().length === 0) {
-				loadProperties( entryId, entryType);
+				loadProperties(entryId, entryType);
 			}
 		});
 
@@ -305,7 +305,7 @@
 						updateCSRFMeta(response);
 
 						if (response.status === 'success') {
-							loadProperties( entryId, entryType );
+							loadProperties(entryId, entryType);
 							$(`#new-property-${entryId}`).val('');
 						}
 					}
@@ -313,7 +313,7 @@
 			}
 		});
 
-        function loadProperties( entryId, entryType ) {
+        function loadProperties(entryId, entryType) {
 			$.ajax({
 				url: '<?=current_url()?>/get_properties/' + entryId,
 				method: 'GET',
@@ -361,7 +361,7 @@
 						}
 					});
 
-					//if ( !entryType.startsWith("mcq") )
+					//if (!entryType.startsWith("mcq") )
 					if (entryTypeGroup !== "mcq")
 						return;
 
@@ -369,7 +369,7 @@
 						cancel: ':input,button,[contenteditable]',
 						update: function(event, ui) {
 							let ids = propertyList.sortable("toArray", { attribute: 'data-property-id' });
-							savePropertySortOrder( entryId, ids);
+							savePropertySortOrder(entryId, ids);
 						},
 						placeholder: 'sortable-placeholder',
 					});
@@ -377,7 +377,7 @@
 			});
 		}
 
-		function savePropertySortOrder( entryId, ids ) {
+		function savePropertySortOrder(entryId, ids) {
 			$.ajax({
 				url: '<?=current_url()?>/properties_save_order',
 				method: 'POST',
@@ -410,9 +410,9 @@
 				newPropertyContent = <?=$text_editor->get('textareaId')?>
 			}
 
-			console.log( 'entryType: ' + entryType);
-			console.log( 'propertyId: ' + propertyId);
-			console.log( 'ewPropertyContent: ' + newPropertyContent);
+			console.log('entryType: ' + entryType);
+			console.log('propertyId: ' + propertyId);
+			console.log('ewPropertyContent: ' + newPropertyContent);
 		});
 
 		$(document).on('click', '.save-property', function () {
@@ -458,6 +458,7 @@
 						<?=setCSRFPostData()?>
 					},
 					success: function (response) {
+						updateCSRFMeta(response);
 						updateCSRFMeta(response);
 
 						if (response.status === 'success') {

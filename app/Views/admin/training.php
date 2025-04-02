@@ -107,7 +107,7 @@
 				<section class="block">
 					<div class="meeting-schedule">
 						<h3>Agenda</h3>
-						<?php foreach( $meetings as $item): ?>
+						<?php foreach($meetings as $item): ?>
 							<div>
 								<label for="meeting-<?= $item['id'] ?>">
 									<span><?= $item['name'] ?></span>
@@ -190,11 +190,11 @@
 
 			<label>
 				Info:<br>
-				<?php if ( !$training_started ): ?>
+				<?php if (!$training_started): ?>
 					<ul>
 						<li><em>Starten: De laatste versie van het online lesprogramma wordt voor deze training vastgelegd.</em></li>
 					</ul>
-				<?php elseif ( !$training_stopped ): ?>
+				<?php elseif (!$training_stopped): ?>
 					<ul>
 						<li><em>Stoppen: De deelnemers kunnen geen opdrachten meer wijzigen. Alles wordt vast gezet.</em></li>
 						<li><em>Reset: Alle deelnemersgegevens worden gewist! De training kan daarna worden herstart</em></li>
@@ -204,12 +204,12 @@
 				<?php endif ?>
 			</label>
 
-			<?php if ( !$training_started ): ?>
+			<?php if (!$training_started): ?>
 				<a class="button-primary" id="start_training">
 					<i class="fa-solid fa-circle-play"></i> Starten
 				</a>
 
-			<?php elseif ( !$training_stopped ): ?>
+			<?php elseif (!$training_stopped): ?>
 				<a class="button-alert" id="stop_training">
 					<i class="fa-solid fa-circle-stop"></i> Stoppen
 				</a>
@@ -235,7 +235,7 @@
 			closeOnDateSelect: true, // Close the picker after date selection
 		});
 
-        function add_member( user_id )
+        function add_member(user_id)
         {
 	        $.ajax({
 		        url: '<?=current_url()?>/add_member',
@@ -331,7 +331,7 @@
             });
         });
 
-		function training_post_action( post_url )
+		function training_post_action(post_url)
 		{
 	        $.ajax({
 		        url: post_url,
@@ -353,7 +353,7 @@
 		{
 			const confirmation = confirm("Weet je zeker dat je de training wilt starten");
 
-			if ( !confirmation )
+			if (!confirmation)
 				return;
 
 			$.ajax({
@@ -376,7 +376,7 @@
 					   {
 			const confirmation = confirm("Weet je zeker dat je de training wilt stoppen");
 
-			if ( !confirmation )
+			if (!confirmation)
 				return;
 
 			$.ajax({
@@ -399,7 +399,7 @@
 					   {
 			const confirmation = confirm("Weet je het zeker? Alle deelnemersgegevens worden gewist");
 
-			if ( !confirmation )
+			if (!confirmation)
 				return;
 
 			$.ajax({

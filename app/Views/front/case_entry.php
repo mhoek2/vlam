@@ -82,7 +82,7 @@
 					<?=$property['content']?>
 				<?php endforeach ?>
 
-			<?php elseif( $entry['type'] == "mcq" || $mcq_multi ): ?>
+			<?php elseif($entry['type'] == "mcq" || $mcq_multi): ?>
 				<h2><?=$entry['name']?></h2>
 				<div class="properties-container">
 					<div class="properties">
@@ -148,10 +148,10 @@
 					selectedProperties.push($(this).data('property-id'));
 				});
 
-				if ( addProperty ) {
-					if ( selectedProperties.length < <?=$max_selectable?> ) {
+				if (addProperty) {
+					if (selectedProperties.length < <?=$max_selectable?>) {
 						$(this).addClass('selected')
-						selectedProperties.push( propertyId );
+						selectedProperties.push(propertyId);
 					}
 					else
 						return;
