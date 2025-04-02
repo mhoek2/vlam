@@ -18,10 +18,4 @@
     </div>
 </section>
 
-<script>
-	$(document).ready(function() {
-
-    });
-</script>
-
 <?php echo $footer; ?>

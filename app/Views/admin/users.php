@@ -75,9 +75,4 @@
     </div>
 </section>
 
-<script {csp-script-nonce}>
-    $(document).ready(function () {
-    });
-</script>
-
 <?php echo $footer; ?>
