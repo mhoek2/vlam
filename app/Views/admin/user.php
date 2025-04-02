@@ -8,7 +8,7 @@ $breadcrumb_title = '';
 if (!empty($selected_user)){
 	$action_button = 'Opslaan';
 	$action = base_url(route_to('admin.user.update', $selected_user['id']));
-	$breadcrumb_title = $selected_user['fullname'];	
+	$breadcrumb_title = $selected_user['fullname'];
 }
 else {
 	$action_button = 'Nieuwe gebruiker aanmaken';
@@ -72,7 +72,7 @@ else {
 					font-size: 13px;
 					color: #555;
 				}
-	
+
 		/*
 		#change_password_form {
 			padding: 1em;
@@ -144,7 +144,7 @@ else {
 						</div>
 					<?php endif ?>
 
-					<?php 
+					<?php
 					$additional_fields = [
 						['field' => 'firstname', 	'name' => "First name"],
 						['field' => 'middlename', 	'name' => "Middle name"],
@@ -167,7 +167,7 @@ else {
 					<?php endforeach ?>
 				</section>
 			</div>
-			
+
 			<div class="request-response">
 				<?php if (session('error') !== null) : ?>
 						<p class="alert"><?= esc(session('error')) ?></p>
@@ -181,18 +181,18 @@ else {
 					<?php endif ?>
 				<?php endif ?>
 			</div>
-			
+
 			<?= csrf_field() ?>
 
 			<div class="actions">
 				<button type="submit" class="button-primary"><?=$action_button?></button>
 			</div>
 		</form>
-		
+
 		<?php if( !empty($selected_user) ): ?>
 		<div class="alert-actions">
 			<p>Speciale handelingen:</p>
-			
+
 			<a id="change_password" class="button-alert">
 				<i class="fa-solid fa-key"></i> Wachtwoord wijzigen
 			</a>
@@ -209,11 +209,11 @@ else {
 						<label for="floatingPasswordConfirmInput"><?= lang('Auth.passwordConfirm') ?></label>
 						<input type="password" class="form-control" id="floatingPasswordConfirmInput" name="password_confirm" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.passwordConfirm') ?>" required>
 					</div>
-					
+
 					<?= csrf_field() ?>
-					
+
 					<div id="password_error_container" class="request-response"></div>
-					
+
 					<div class="actions">
 						<button type="submit" class="button-alert">
 							<i class="fa-regular fa-floppy-disk"></i>Wijzigen
@@ -221,7 +221,7 @@ else {
 					</div>
 				</form>
 			</div>
-			
+
 			<?php if ($selected_user['id'] !== $user['id']): ?>
 				<a id="delete_user" class="button-alert">
 					<i class="fa-solid fa-ban"></i> Gebruiker verwijderen
@@ -234,24 +234,24 @@ else {
 
 <script {csp-script-nonce}>
     $(document).ready(function () {
-		
+
 		<?=updateCSRFMeta() // csrf helper ?>
-		
+
 		<?php if( !empty($selected_user) ): ?>
-		
+
 			$(document).on('click', '#change_password', function()
 			{
 				const confirmation = confirm('Weet je zeker dat je het wachtwoord wilt wijzigen?');
-				
+
 				if ( confirmation )
 				{
 					$('#change_password_form').parent().css('display', 'block');
 				}
 			});
-		
+
             $('#change_password_form').submit(function (event) {
                 event.preventDefault();
-				
+
                 var formData = $(this).serialize();
 
                 $.ajax({
@@ -261,7 +261,7 @@ else {
                     success: function(response) {
 						updateCSRFMeta(response);
 						$('#password_error_container').empty();
-						
+
                        	if (response.status === 'success') {
 							$('#password_error_container').append('<p class="success">' + response.message + '</p>');
 							$(this).find('.form-group').remove();
@@ -281,8 +281,8 @@ else {
                 });
             });
 
-		
-		
+
+
 			$(document).on('click', '#delete_user', function()
 			{
 				const confirmation = confirm('Are you sure you want to remove this user?');
@@ -293,7 +293,7 @@ else {
 					//
 					// Use a form to perform this action
 					// allows to make use of csrf tokenization and redirect back functionalities
-					// 
+					//
 
 					var form = document.createElement('form');
 					form.method = 'POST';
@@ -306,7 +306,7 @@ else {
 
 					form.appendChild(csrfFieldToken);
 					document.body.appendChild(form);
-					form.submit();	
+					form.submit();
 				}
 			});
 		<?php endif ?>

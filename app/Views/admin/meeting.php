@@ -11,7 +11,7 @@
     <div class="content">
         <form id="edit_meeting" method="POST">
 			<h2>Bijeenkomst</h2>
-			
+
             <label>Info<label>
             <input type="text" name="info" value="<?=$meeting["info"]?>">
 
@@ -41,9 +41,9 @@
     $(document).ready(function () {
 	    <?=$text_editor->init_script()?>
 	    <?=$text_editor->assign_editor('"#intro"')?>
-		
+
 		<?=updateCSRFMeta() // csrf helper ?>
-		
+
         $(document).ready(function () {
             $('#edit_meeting').submit(function (event) {
                 event.preventDefault();
@@ -56,7 +56,7 @@
                     data: formData,
                     success: function(response) {
 						updateCSRFMeta(response);
-						
+
                         // Handle the response from the server
                         $('#responseMessage').html('<p>' + response.message + '</p>');
                     },
@@ -69,5 +69,5 @@
         });
     });
 </script>
-				
+
 <?php echo $footer; ?>

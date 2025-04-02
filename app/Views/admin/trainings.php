@@ -8,13 +8,13 @@
 
 <section class="main">
     <div class="content">
-		
+
 		<div class="actions left" style="margin-bottom:25px;">
             <button class="button-primary" id="add_training">
                 <i class="fa-solid fa-circle-plus"></i> Training aanmaken
             </button>
 		</div>
-		
+
         <table>
             <thead>
                 <tr>
@@ -47,8 +47,8 @@
 <script {csp-script-nonce}>
     $(document).ready(function () {
 		<?=updateCSRFMeta() // csrf helper ?>
-		
-        $(document).on('click', '#delete_training', function () 
+
+        $(document).on('click', '#delete_training', function ()
         {
             const training_id = $(this).data('training-id');
 			const confirmation = confirm("Are you sure you want to remove this training");
@@ -63,7 +63,7 @@
 		            },
 		            success: function (response) {
 						updateCSRFMeta(response);
-						
+
 			            if (response.status === 'success') {
                             location.reload();
 			            }
@@ -72,7 +72,7 @@
             }
         });
 
-        $(document).on('click', '#add_training', function () 
+        $(document).on('click', '#add_training', function ()
         {
             $.ajax({
 		        url: '<?=current_url()?>/add_training',
@@ -82,7 +82,7 @@
 		        },
 		        success: function (response) {
 					updateCSRFMeta(response);
-					
+
 			        if (response.status === 'success') {
 						window.location = response.redirect_url;
 			        }

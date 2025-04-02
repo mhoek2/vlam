@@ -78,7 +78,7 @@
 <script>
 	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
-		
+
 		$('.entry-property').on('change', function() {
 			const propertyContainer = $(this).closest('.property-container');
 			const checkedCount = propertyContainer.find('.entry-property:checked').length;
@@ -98,7 +98,7 @@
 				type: 'POST',
 				data: formData,
 				success: function(response) {
-					updateCSRFMeta(response);	
+					updateCSRFMeta(response);
 
 					window.location = '<?=$post_url?>';
 				},

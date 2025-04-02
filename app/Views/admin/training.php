@@ -13,7 +13,7 @@
 		flex-direction: row;
 		gap:20px;
 	}
-	
+
 		.container .block {
 			background-color: #fff;
 			border-radius: var(--secondary-border-radius);
@@ -26,11 +26,11 @@
 		.container > section:nth-child(2) {
 			flex:2
 		}
-	
+
 	.users-table {
 		margin-top:2em;
 	}
-	
+
 	.users-table .user-meta {
 		display:flex;
 		flex-direction: row;
@@ -64,7 +64,7 @@
 			display: flex;
 			flex-direction: row;
 			gap:15px;
-		}	
+		}
 			.meeting-schedule > div input {
 				flex: 1;
 			}
@@ -92,7 +92,7 @@
 	#search_member {
 		max-width:300px;
 	}
-	
+
 	@media (max-width: 1199px) {
 		.container {
 			display:block;
@@ -104,7 +104,7 @@
     <div class="content">
         <form id="edit_training" method="POST">
 			<div class="container">
-				<section class="block">	
+				<section class="block">
 					<div class="meeting-schedule">
 						<h3>Agenda</h3>
 						<?php foreach( $meetings as $item): ?>
@@ -119,15 +119,15 @@
 						<?php endforeach; ?>
 					</div>
 				</section>
-				
+
 				<section>
 					<h2>Training</h2>
-					
+
 					<label>Name<label>
 					<input type="text" name="name" value="<?=$training["name"]?>">
 				</section>
 			</div>
-			
+
 			<?= csrf_field() ?>
 
 			<div class="actions">
@@ -138,13 +138,13 @@
         </form>
    </div>
 </section>
-		
+
 <section class="main">
-	<div class="content">		
+	<div class="content">
 		<h3>Deelnemers</h3>
-						
+
 		<label for="user">Deelnemer toevoegen:</label>
-		<input type="text" id="search_member" placeholder="Search users...">	
+		<input type="text" id="search_member" placeholder="Search users...">
 
 		<table class="users-table">
 			<thead>
@@ -181,7 +181,7 @@
 		</table>
    </div>
 </section>
-		
+
 <section class="main">
 	<div class="content">
 
@@ -227,14 +227,14 @@
     $(document).ready(function () {
 
 		<?=updateCSRFMeta() // csrf helper ?>
-		
+
 		$(".datetime-picker").datetimepicker({
 			format: 'Y-m-d H:i', // Format (YYYY-MM-DD HH:mm)
 			step: 15,            // Step in minutes (15-minute intervals)
 			minDate: 0,          // Prevent selecting past dates
 			closeOnDateSelect: true, // Close the picker after date selection
 		});
-		
+
         function add_member( user_id )
         {
 	        $.ajax({
@@ -246,7 +246,7 @@
 		        },
 		        success: function (response) {
 					updateCSRFMeta(response);
-					
+
 			        if (response.status === 'success') {
 				        $(`#search_member`).val('');
                         location.reload();
@@ -255,10 +255,10 @@
 	        });
         }
 
-        $(document).on('click', '#delete_member', function () 
+        $(document).on('click', '#delete_member', function ()
         {
 			event.preventDefault();
-			
+
             const member_id = $(this).data('member-id');
 			const confirmation = confirm("Are you sure you want to delete this member?");
 
@@ -272,7 +272,7 @@
 		            },
 		            success: function (response) {
 						updateCSRFMeta(response);
-						
+
 			            if (response.status === 'success') {
                             location.reload();
 			            }
@@ -292,9 +292,9 @@
                     success: function(data) {
                         // Map the data to display in the autocomplete dropdown
                         response($.map(data, function(item) {
- 
+
                             return {
-                                label: item.firstname + ' ' + item.middlename + ' ' + item.lastname, 
+                                label: item.firstname + ' ' + item.middlename + ' ' + item.lastname,
                                 value: item.id // Store user ID (to be used when the form is submitted)
                             };
                         }));
@@ -308,7 +308,7 @@
                 add_member(ui.item.value);
             }
         });
-        
+
         $('#edit_training').submit(function (event) {
             event.preventDefault();
 
@@ -320,7 +320,7 @@
                 data: formData,
                 success: function(response) {
 					updateCSRFMeta(response);
-					
+
                     // Handle the response from the server
                     $('#responseMessage').html('<p>' + response.message + '</p>');
                 },
@@ -341,21 +341,21 @@
 		        },
 		        success: function (response) {
 					updateCSRFMeta(response);
-					
+
 			        if (response.status === 'success') {
                         location.reload();
 			        }
 		        }
 	        });
 		}
-		
+
 		$(document).on('click', '#start_training', function ()
 		{
 			const confirmation = confirm("Weet je zeker dat je de training wilt starten");
-			
+
 			if ( !confirmation )
 				return;
-			
+
 			$.ajax({
 				url: '<?=base_url(route_to('admin.training.start', $current_training))?>',
 				method: 'POST',
@@ -371,14 +371,14 @@
 				}
 			});
 		});
-		
-		$(document).on('click', '#stop_training', function () 
+
+		$(document).on('click', '#stop_training', function ()
 					   {
 			const confirmation = confirm("Weet je zeker dat je de training wilt stoppen");
-			
+
 			if ( !confirmation )
 				return;
-			
+
 			$.ajax({
 				url: '<?=base_url(route_to('admin.training.stop', $current_training))?>',
 				method: 'POST',
@@ -394,14 +394,14 @@
 				}
 			});
 		});
-		
-		$(document).on('click', '#force_reset_training', function () 
+
+		$(document).on('click', '#force_reset_training', function ()
 					   {
 			const confirmation = confirm("Weet je het zeker? Alle deelnemersgegevens worden gewist");
-			
+
 			if ( !confirmation )
 				return;
-			
+
 			$.ajax({
 				url: '<?=base_url(route_to('admin.training.force_reset', $current_training))?>',
 				method: 'POST',

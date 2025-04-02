@@ -15,7 +15,7 @@
             text-align: center;
             border: 1px solid #f1f1f1;
 			border-radius: var(--secondary-border-radius);
-            
+
         }
 		.case-item:not(.disabled) {
 			box-shadow: 0px 2px 8px 1px #f1f1f1;
@@ -30,7 +30,7 @@
 					font-size: 20px;
 					color: #000;
 					text-decoration: none;
-				}	
+				}
 				.case-item .details p {
 					margin: 0;
 				}
@@ -105,7 +105,7 @@
 <script>
 	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
-		
+
 		$("#cases").sortable({
 			handle: '.sortable-handle',
 			cancel: ':input,button,[contenteditable]', // not used.
@@ -116,26 +116,26 @@
 			items: '.case-item:not(.disabled)',
 			placeholder: 'case-item sortable-placeholder',
 		}).disableSelection();
-		
+
 		function saveSortOrder(ids) {
 			$.ajax({
 				url: '<?= base_url(route_to('admin.cases.save_order')) ?>',
 				method: 'POST',
-				data: { 
+				data: {
 					sort_order: ids,
 					<?=setCSRFPostData()?>
 				},
 				success: function(response) {
-					updateCSRFMeta(response);	
-					
+					updateCSRFMeta(response);
+
 					/*if (response.status === 'success') {
 						alert('Sort order saved successfully!');
 					}*/
 				}
 			});
 		}
-		
-        $(document).on('click', '#delete_case', function () 
+
+        $(document).on('click', '#delete_case', function ()
         {
             const case_id = $(this).data('case-id');
 			const confirmation = confirm("Are you sure you want to remove this case");
@@ -150,16 +150,16 @@
 		            },
 		            success: function (response) {
 						updateCSRFMeta(response);
-						
+
 			            if (response.status === 'success') {
                             $(this).closest('.case-item').remove();
 			            }
 		            }.bind(this)
 	            });
             }
-        });	
-		
-	    $(document).on('click', '#add_case', function () 
+        });
+
+	    $(document).on('click', '#add_case', function ()
         {
             $.ajax({
 				url: '<?=current_url()?>/add_case',
@@ -171,13 +171,13 @@
 		        },
 		        success: function (response) {
 					updateCSRFMeta(response);
-					
+
 			        if (response.status === 'success') {
                         window.location = response.redirect_url;
 			        }
 		        }
 	        });
-        });		
-		
-	});		
+        });
+
+	});
 </script>

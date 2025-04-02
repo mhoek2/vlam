@@ -16,20 +16,20 @@
 <section class="main">
     <div class="content">
 		<h2>Case</h2>
-		
+
         <form id="edit_case" method="POST">
             <label>Name<label>
             <input type="text" name="name" value="<?=$case["name"]?>">
-            
+
 			<label>Info<label>
             <input type="text" name="info" value="<?=$case["info"]?>">
 
             <label>Intro<label>
             <textarea name="intro" id="intro"><?=$case["intro"]?></textarea>
-            
+
             <label>Outro<label>
             <textarea name="outro" id="outro"><?=$case["outro"]?></textarea>
-            
+
 			<label>
 				Custom Action<br>
 				<small><em>Optional: Choose an additional action to run after the case is completed.</em></small>
@@ -38,10 +38,10 @@
 				<?php foreach ($complete_actions as $id => $item): ?>
 					<option value="<?=$item['name'] ?>" <?= $item['selected'] ? 'selected' : '' ?>><?= $item['name'] ?></option>
 				<?php endforeach; ?>
-			</select>	
-				
+			</select>
+
 			<?= csrf_field() ?>
-			
+
 			<div class="actions">
 				<button type="submit" class="button-primary">
 					<i class="fa-regular fa-floppy-disk"></i>Opslaan
@@ -54,14 +54,14 @@
 <section class="main">
     <div class="content">
 		<h2>Case Entries</h2>
-		
+
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
 				<?php $item['entry_type_group_counts'] = $entry_type_group_counts; ?>
 				<?=view('admin/case_entry', $item);?>
 			<?php }; ?>
 		</div>
-    
+
 		<label>Toevoegen</label>
 		<div class="entry-actions">
     		<input type="text" id="new-entry-name" placeholder="option">
@@ -89,8 +89,8 @@
 		const entry_group_to_type = <?=json_encode($entry_type_to_group)?>;
 
 		<?=updateCSRFMeta() // csrf helper ?>
-		
-		/* 
+
+		/*
 		CASE
 		*/
         $(document).ready(function () {
@@ -105,7 +105,7 @@
                     data: formData,
                     success: function(response) {
 						updateCSRFMeta(response);
-						
+
                         // Handle the response from the server
                         $('#responseMessage').html('<p>' + response.message + '</p>');
                     },
@@ -117,8 +117,8 @@
             });
         });
 
-		/* 
-		ENTRIES 
+		/*
+		ENTRIES
 		*/
 		$("#sortable").sortable({
 			cancel: ':input,button,[contenteditable]',
@@ -128,25 +128,25 @@
 				saveEntrySortOrder(ids);
 			}
 		});
-	
+
 		function saveEntrySortOrder(ids) {
 			$.ajax({
 				url: '<?=current_url()?>/entries_save_order',
 				method: 'POST',
-				data: { 
+				data: {
 					sort_order: ids,
 					<?=setCSRFPostData()?>
 				},
 				success: function(response) {
 					updateCSRFMeta(response);
-					
+
 					if (response.status === 'success') {
-		
+
 					}
 				}
 			});
 		}
-		
+
 		$(document).on('change', '.entry-type-select', function() {
 			const entryId = $(this).data('entry-id');
 			const newType = $(this).val();
@@ -161,7 +161,7 @@
 				},
 				success: function(response) {
 					updateCSRFMeta(response);
-					
+
 					if (response.status === 'success') {
 						 $('.entry[data-entry-id="' + entryId + '"]').data('type', newType).attr('data-type', newType);
 						loadProperties( entryId, newType);
@@ -172,7 +172,7 @@
 				}
 			});
 		});
-		
+
 		$(document).off('blur', '.entry-name').on('blur', '.entry-name', function () {
 			const entryId = $(this).data('entry-id');
 			const newEntryName = $(this).text().trim();
@@ -188,19 +188,19 @@
 					},
 					success: function (response) {
 						updateCSRFMeta(response);
-						
+
 						if (response.status === 'success') {
-							
+
 						}
 					}
 				});
 			}
-		});		
-		
+		});
+
 		$(document).on('click', '.add-entry', function () {
 			const newEntryName = $(this).siblings('#new-entry-name').val().trim();
 			const newType = $(this).siblings('#new-entry-type').val();
-			
+
 			if (newEntryName !== "") {
 				$.ajax({
 					url: '<?=current_url()?>/add_entry',
@@ -213,7 +213,7 @@
 					},
 					success: function (response) {
 						updateCSRFMeta(response);
-						
+
 						if (response.status === 'success') {
 							$('.grid-container').append(response.html);
 						}
@@ -236,7 +236,7 @@
 					},
 					success: function (response) {
 						updateCSRFMeta(response);
-						
+
 						if (response.status === 'success') {
 							$(this).closest('.entry').remove();
 						}
@@ -244,9 +244,9 @@
 				});
 			}
 		});
-		
-		/* 
-		PROPERTIES 
+
+		/*
+		PROPERTIES
 		*/
 		$(document).on('click', '.toggle-properties', function () {
 			const entryId = $(this).closest('.entry').data('entry-id');
@@ -257,7 +257,7 @@
 				loadProperties( entryId, entryType);
 			}
 		});
-		
+
 		$(document).on('click', '.add-property', function () {
 			const entryId = $(this).data('entry-id');
 			const entryType = $(this).closest('.entry').data('type');
@@ -274,7 +274,7 @@
 					},
 					success: function (response) {
 						updateCSRFMeta(response);
-						
+
 						if (response.status === 'success') {
 							loadProperties( entryId, entryType );
 							$(`#new-property-${entryId}`).val('');
@@ -282,7 +282,7 @@
 					}
 				});
 			}
-		});	
+		});
 
         function loadProperties( entryId, entryType ) {
 			$.ajax({
@@ -291,8 +291,8 @@
 				success: function (response) {
 					const entryTypeGroup = entry_group_to_type[entryType];
 					const propertyList = $(`#properties-list-${entryId}`);
-					
-					propertyList.empty(); 
+
+					propertyList.empty();
 					response.forEach(function (property) {
 						//if (entryType.startsWith("mcq"))
 						if (entryTypeGroup === "mcq")
@@ -326,11 +326,11 @@
 							<?=$text_editor->assign_editor('"#" + textareaId')?>
 						}
 					});
-					
+
 					//if ( !entryType.startsWith("mcq") )
 					if (entryTypeGroup !== "mcq")
 						return;
-					
+
 					propertyList.sortable({
 						cancel: ':input,button,[contenteditable]',
 						update: function(event, ui) {
@@ -341,26 +341,26 @@
 				}
 			});
 		}
-		
+
 		function savePropertySortOrder( entryId, ids ) {
 			$.ajax({
 				url: '<?=current_url()?>/properties_save_order',
 				method: 'POST',
-				data: { 
-					entry_id: entryId, 
+				data: {
+					entry_id: entryId,
 					sort_order: ids,
 					<?=setCSRFPostData()?>
 				},
 				success: function(response) {
 					updateCSRFMeta(response);
-					
+
 					/*if (response.status === 'success') {
 						alert('Sort order saved successfully!');
 					}*/
 				}
 			});
 		}
-		
+
 		$(document).on('click', '.save-property', function () {
 			const entryType = $(this).closest('.entry').data('type');
 			const propertyId = $(this).data('property-id');
@@ -383,7 +383,7 @@
 					},
 					success: function (response) {
 						updateCSRFMeta(response);
-						
+
 						if (response.status === 'success') {
 							alert('Property updated successfully!');
 						}
@@ -405,15 +405,15 @@
 					},
 					success: function (response) {
 						updateCSRFMeta(response);
-						
+
 						if (response.status === 'success') {
-							$(this).closest('li').remove(); 
+							$(this).closest('li').remove();
 						}
 					}.bind(this)
 				});
 			}
-		});		
+		});
 	});
 </script>
-				
+
 <?php echo $footer; ?>

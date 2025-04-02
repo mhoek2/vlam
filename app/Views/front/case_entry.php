@@ -10,7 +10,7 @@
 			display: flex;
 			flex-direction: row;
 		}
-			.case-entry .properties-container .properties 
+			.case-entry .properties-container .properties
 			{
 				margin:3em 0;
 				display: flex;
@@ -33,7 +33,7 @@
 			.case-entry .properties-aside {
 
 			}
-	
+
 	.case-progress {
         display: flex;
         align-items: center;
@@ -70,13 +70,13 @@
     <?=$sidebar?>
 
     <div class="content">
-           
+
 		<div class="case-entry">
 			<?php
 				$mcq_multi = preg_match('/^mcq-(\d+)$/', $entry['type'], $matches);
 				$max_selectable = $mcq_multi ? (int)$matches[1] : NULL;
 			?>
-			
+
 			<?php if($entry['type'] == "text_separator"): ?>
 				<?php foreach ($entry['properties'] as $property): ?>
 					<?=$property['content']?>
@@ -95,22 +95,22 @@
 					<div class="properties-aside">
 					</div>
 				</div>
-			
+
 			<?php elseif($entry['type'] == "text_input"): ?>
 				<h3><?=$entry['name']?></h3>
-			
+
 			<?php else: ?>
 				<h3><?=$entry['name']?></h3>
 
 			<?php endif ?>
-		</div> 
-       
+		</div>
+
         <div class="case-progress">
-        
+
         	<a class="button-primary" href="<?=$entry_prev_url?>">
 				<i class="fa-solid fa-chevron-left"></i> Previous
 			</a>
-        	
+
         	<div class="indicator">
 				<?php foreach ($entries as $i => $item): ?>
 					<div class="<?= ($entry['id'] == $item['id']) ? 'selected' : '' ?>">
@@ -118,19 +118,19 @@
 					</div>
 				<?php endforeach ?>
         	</div>
-        	
+
          	<a class="button-primary" href="<?=$entry_next_url?>">
 				Next <i class="fa-solid fa-chevron-right"></i>
 			</a>
-		</div>    
-        
+		</div>
+
     </div>
 </section>
 
 <script>
 	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
-		
+
 		$(document).on('click', '#property', function(){
 			let propertyId = $(this).data('property-id');
 
@@ -155,7 +155,7 @@
 					}
 					else
 						return;
-				} 
+				}
 
 				propertyId = selectedProperties;
 			<?php endif?>
@@ -169,18 +169,18 @@
 					<?=setCSRFPostData()?>
 				},
 				success: function(response) {
-					updateCSRFMeta(response);	
-			
+					updateCSRFMeta(response);
+
 					if (response.status === 'success') {
 						<?php if (!$mcq_multi): ?>
 							$(this).siblings().removeClass('selected');
 							$(this).addClass('selected');
-						<?php endif ?>	
+						<?php endif ?>
 					}
 					else if (response.status === 'error') {
 						<?php if ($mcq_multi): ?>
 							$(this).removeClass('selected');
-						<?php endif ?>	
+						<?php endif ?>
 					}
 				}.bind(this),
 				error: function(xhr, status, error) {
