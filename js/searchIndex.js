@@ -631,6 +631,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Front-BaseController.html#method_initController"
         },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_edit_route\u0028\u0029",
+            "name": "get_edit_route",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#method_get_edit_route"
+        },                {
             "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_training\u0028\u0029",
             "name": "get_training",
             "summary": "",
