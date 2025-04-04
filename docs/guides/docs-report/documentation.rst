@@ -20,6 +20,14 @@ To prevent clutter and save github CI-CD time, it is advised to make changes to 
 	Continue assuming you to have a local development environment active. A web server such as  `XAMPP<https://www.apachefriends.org/>`_, or just apache with php if you prefer custom installation.
 	
 #. Make sure ```path/to/my/project/vendor/bin``` contains phpdoc.
+#. If it is missing
+    .. code-block:: bash
+   
+        # cd to the root directory of the project folder
+        
+        # This will install the dependencies set in composer.json
+        composer install	
+		
 #. Open a terminal of choice and change current directory to the root directory.
 #. Run the following command
     .. code-block:: bash

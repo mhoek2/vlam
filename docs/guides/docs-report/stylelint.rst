@@ -14,6 +14,13 @@ Testing
 Follow these steps to run StyleLint locally 
 
 #. Make sure npm packages are installed.
+#. If it is missing
+    .. code-block:: bash
+   
+        # cd to the root directory of the project folder
+        
+        # This will install the dependencies set in package.json
+        npm install
 #. Open a terminal of choice and change current directory to the root directory.
 #. Run the following command
     .. code-block:: bash
