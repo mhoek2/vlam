@@ -214,20 +214,28 @@
             
     <p>This will automaticly generate codebase documenation based on (docstings, namespaces, classes and inheritance)</p>
 
+            <section class="section " id="configuration">
+            <h2>Configuration</h2>
+
+            
+    <p>File <code>`phpdoc.xml`</code>
+ in the root folder contains global settings for output documentation</p>
+
+    </section>
+
+            <section class="section " id="ci-cd">
+            <h2>CI-CD</h2>
+
             
     <p>There is a CI-CD workflow <code>`path/to/my/project/github/workflows/docs.yml`</code>
  in place to automaticly re-generate the documentation
 when a push or pull request event triggers and is uploaded to the <code>`gh-pages`</code>
  branch.</p>
 
-            <section class="section " id="editing">
-            <h2>Editing</h2>
+    </section>
 
-            
-    <p>You want to make changes to the documentation or guides,</p>
-
-            
-    <p>To prevent clutter and save github CI-CD time, it is advised to make changes to docs locally first.</p>
+            <section class="section " id="run-locally">
+            <h2>Run locally</h2>
 
             <div class="phpdocumentor-admonition important">
         <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>

@@ -214,6 +214,18 @@
             
     <p>This scans the whole codebase and looks for both obvious &amp; tricky bugs. Even in those rarely executed if statements that certainly aren&#039;t covered by tests.</p>
 
+            <section class="section " id="configuration">
+            <h2>Configuration</h2>
+
+            
+    <p>File <code>`phpstan.neon`</code>
+ in the root folder contains settings</p>
+
+    </section>
+
+            <section class="section " id="ci-cd">
+            <h2>CI-CD</h2>
+
             
     <p>There is a CI-CD workflow <code>`path/to/my/project/github/workflows/docs.yml`</code>
  in place containing a step that automaticly scans the codebase.
@@ -222,8 +234,19 @@ The output report is processed in a auto-generated .rst file which stores in <co
 when a push or pull request event triggers and is uploaded to the <code>`gh-pages`</code>
  branch.</p>
 
-            <section class="section " id="testing">
-            <h2>Testing</h2>
+    </section>
+
+            <section class="section " id="run-locally">
+            <h2>Run locally</h2>
+
+            <div class="phpdocumentor-admonition important">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <article>
+        
+    <p>Continue assuming you to have a local development environment active. A web server such as  <a href="https://www.apachefriends.org/">XAMPP</a>, or just apache with php if you prefer custom installation.</p>
+
+    </article>
+</div>
 
             
     <p>Follow these steps to run PHPStan locally</p>
