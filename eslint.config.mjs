@@ -14,16 +14,16 @@ const inlinePHP = {
 				version: "1.2.3",
 			},
 			preprocess: (text, filename) => [
-			  text.replace(/<\?(?:php)?(.*?)\?>/g, (match, phpContent) => {
-				// If the PHP tag is inside an object or array (we check for the presence of a key)
-				if (/[\w\-]+\s*:/.test(match)) {
-				  // Inside an object or array, replace the PHP code with key assigned `undefined`
-				  return '__eslint_value: undefined';
-				} else {
-				  // If the PHP code is standalone, such as in `value = <?=phpstuff?>;`, replace with `undefined`
-				  return 'undefined'; // Or 'null', or another suitable placeholder
-				}
-			  })
+				text.replace(/<\?(?:php)?(.*?)\?>/g, (match, phpContent) => {
+					// If the PHP tag is inside an object or array (we check for the presence of a key)
+					if (/[\w\-]+\s*:/.test(match)) {
+						// Inside an object or array, replace the PHP code with key assigned `undefined`
+						return '__eslint_value: undefined';
+					}
+
+					// If the PHP code is standalone, such as in `value = <?=phpstuff?>;`, replace with `undefined`
+					return 'undefined'; // Or 'null', or another suitable placeholder
+				})
 			],
 			postprocess(messages, filename) {
 				// `messages` argument contains two-dimensional array of Message objects

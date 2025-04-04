@@ -5,15 +5,20 @@ This platform integrates `phpDocumentator<https://phpdoc.org/>`_.
 
 This will automaticly generate codebase documenation based on (docstings, namespaces, classes and inheritance)
 
+Configuration
+-------------
+
+File ```phpdoc.xml``` in the root folder contains global settings for output documentation
+
+CI-CD
+-----
 
 There is a CI-CD workflow ```path/to/my/project/github/workflows/docs.yml``` in place to automaticly re-generate the documentation
 when a push or pull request event triggers and is uploaded to the ```gh-pages``` branch.
 
-Editing
----------------
-You want to make changes to the documentation or guides,
 
-To prevent clutter and save github CI-CD time, it is advised to make changes to docs locally first.
+Run locally
+-----------
 
 .. important::
 
