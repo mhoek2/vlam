@@ -1196,6 +1196,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-Assignments.html"
         },                {
+            "fqsen": "\\App\\Models\\Assignments\u003A\u003AgetDetailed\u0028\u0029",
+            "name": "getDetailed",
+            "summary": "Get\u0020assignments\u0020combined\u0020with\u0020detailed\u0020metrics\u0020about\u0020referenced\u0020questions\/entries\u0020and\u0020cases",
+            "url": "classes/App-Models-Assignments.html#method_getDetailed"
+        },                {
             "fqsen": "\\App\\Models\\Assignments\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
@@ -1336,6 +1341,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-Cases.html"
         },                {
+            "fqsen": "\\App\\Models\\Cases\u003A\u003AgetDetailed\u0028\u0029",
+            "name": "getDetailed",
+            "summary": "Get\u0020cases\u0020combined\u0020with\u0020detailed\u0020metrics\u0020about\u0020referenced\u0020questions\/entries",
+            "url": "classes/App-Models-Cases.html#method_getDetailed"
+        },                {
             "fqsen": "\\App\\Models\\Cases\u003A\u003A\u0024table",
             "name": "table",
             "summary": "",
@@ -1355,6 +1365,11 @@ Search.appendIndex(
             "name": "Meetings",
             "summary": "",
             "url": "classes/App-Models-Meetings.html"
+        },                {
+            "fqsen": "\\App\\Models\\Meetings\u003A\u003AgetDetailed\u0028\u0029",
+            "name": "getDetailed",
+            "summary": "Get\u0020meetings\u0020combined\u0020with\u0020detailed\u0020metrics\u0020about\u0020referenced\u0020assignments\u0020and\u0020cases",
+            "url": "classes/App-Models-Meetings.html#method_getDetailed"
         },                {
             "fqsen": "\\App\\Models\\Meetings\u003A\u003A\u0024table",
             "name": "table",
