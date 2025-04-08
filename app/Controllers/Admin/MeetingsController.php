@@ -17,7 +17,7 @@ class MeetingsController extends BaseController
     public function index(): string
     {
 		// Meeting
-        $this->data['meetings'] = $this->meetings->findAll();
+        $this->data['meetings'] = $this->meetings->getDetailed();
 
 		load_header( $this->data );
 		load_footer( $this->data );
