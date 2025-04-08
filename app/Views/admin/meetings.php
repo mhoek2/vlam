@@ -85,15 +85,12 @@
 						align-items: center;
 					}
 					.meetings li .details > div .sub-details > div:nth-child(even) {
-						text-align: center;
-						font-weight: bold;
-						font-size: 2em;
-						font-weight: bold;
 						width: 25px;
 						height: 25px;
 						background: var(--button-background-color);
 						color: var(--button-text-color);
 						font-size: 14px;
+						text-align: center;
 						font-weight: bold;
 						border-radius: 50%;
 						display: flex;

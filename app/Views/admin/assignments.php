@@ -35,6 +35,29 @@
 				.assignments-item .details p {
 					margin: 0;
 				}
+				.assignments-item .details .sub-details {
+					display: flex;
+					font-size: 14px;
+					color: var(--button-text-color);
+					padding-top: 20px;
+					align-items: center;
+					flex-direction: row;
+					justify-content: space-around;
+				}
+				.assignments-item .details .sub-details .count {
+					width: 25px;
+					height: 25px;
+					background: var(--button-background-color);
+					color: var(--button-text-color);
+					font-size: 14px;
+					text-align: center;
+					font-weight: bold;
+					border-radius: 50%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin: 0.25em auto 0 auto;
+				}
 			.assignments-item #delete_assignment {
 				position: absolute;
 				right: 10px;
@@ -89,7 +112,19 @@
 			<div class="details">
 				<a href="<?=base_url(route_to('admin.assignment', $item['id']))?>"><?= $item['name'] ?></a>
 				<p><?= esc($item['info']) ?></p>
+				
+				<div class="sub-details">
+					<div>
+						<div>Vragen</div>
+						<div class="count"><?=$item['assignment_entry_count']?></div>
+					</div>
+					<div>
+						<div>Casusses</div>
+						<div class="count"><?=$item['case_count']?></div>
+					</div>
+				</div>
        		</div>
+			
             <div id="delete_assignment" data-assignment-id="<?=$item['id']?>">
 				<i class="fa-regular fa-trash-can"></i>
 			</div>
