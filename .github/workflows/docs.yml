@@ -28,27 +28,16 @@ jobs:
       - name: Generate Documentation
         run: |
             vendor/bin/phpdoc -c phpdoc.xml
-            
-      #- name: Deploy to GitHub Pages
-      #  uses: peaceiris/actions-gh-pages@v3
-      #  with:
-      #    github_token: ${{ secrets.GH_TOKEN }}
-      #    publish_dir: ./docs/build
-      #    publish_branch: gh-pages
-      
+
+  create-release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/cicd'
+    runs-on: ubuntu-latest
+    steps:         
       - name: Create archives
         run: |
             7z a -r standalone.zip . -x!.git -x!.github -x!.phpdoc
             7z a -r core.zip . -x!vendor -x!.git -x!.github -x!.phpdoc -x!*.zip
-
-      #- name: Upload archives
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: phpstan-json-report
-      #  path: |
-      #      standalone.zip
-      #      core.zip
-                     
+          
       - name: Create Release
         id: create_release
         uses: marvinpinto/action-automatic-releases@latest
