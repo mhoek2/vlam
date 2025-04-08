@@ -153,8 +153,8 @@ jobs:
 
       - name: Create packages
         run: |
-            7z a -r standalone.zip . -x!node_modules -x!.git -x!.github -x!.phpdoc -x!docs -x!*.zip -x!*.jar
-            7z a -r core.zip . -x!vendor -x!node_modules -x!docs -x!.git -x!.github -x!.phpdoc -x!*.zip -x!*.jar
+            7z a -r standalone.zip . -x!node_modules -x!.git -x!.github -x!.phpdoc -x!docs/build -x!*.zip -x!*.jar
+            7z a -r core.zip . -x!vendor -x!node_modules -x!docs/build -x!.git -x!.github -x!.phpdoc -x!*.zip -x!*.jar
 
       - name: Upload packages
         uses: actions/upload-artifact@v4
