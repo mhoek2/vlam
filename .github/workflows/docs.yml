@@ -9,7 +9,7 @@ on:
       - cicd
 
 jobs:
-  docs:
+  app-and-docs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -29,15 +29,28 @@ jobs:
         run: |
             vendor/bin/phpdoc -c phpdoc.xml
 
-  create-release:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/cicd'
-    needs: [docs]
-    runs-on: ubuntu-latest
-    steps:         
-      - name: Create archives
+      - name: Create packages
         run: |
             7z a -r standalone.zip . -x!.git -x!.github -x!.phpdoc
             7z a -r core.zip . -x!vendor -x!.git -x!.github -x!.phpdoc -x!*.zip
+            
+      - name: Upload packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: packages
+          path: |
+            standalone.zip
+            core.zip
+            
+  create-release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/cicd'
+    needs: [app-and-docs]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: packages
           
       - name: Create Release
         id: create_release
