@@ -9,7 +9,7 @@ on:
       - cicd
 
 jobs:
-  deploy:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -31,6 +31,7 @@ jobs:
 
   create-release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/cicd'
+    needs: [docs]
     runs-on: ubuntu-latest
     steps:         
       - name: Create archives
