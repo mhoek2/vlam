@@ -11,6 +11,9 @@ class Assignments extends Model
 
     protected $allowedFields = ['id', 'meeting_id', 'name', 'sort_order', 'intro', 'outro', 'info', 'sub_assignment', 'created_at'];
 	
+	/**
+	 * Get assignments combined with detailed metrics about referenced questions/entries and cases
+	 */
     public function getDetailed( int $meeting_id )
     {
 		$builder = $this->select('	

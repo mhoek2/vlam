@@ -27,6 +27,7 @@
 				height: 100%;
 			}
 				.case-item .details a {
+					margin-top: 20px;
 					font-size: 20px;
 					color: #000;
 					text-decoration: none;
@@ -34,10 +35,39 @@
 				.case-item .details p {
 					margin: 0;
 				}
+				.case-item .details .sub-details {
+					display: flex;
+					font-size: 14px;
+					color: var(--button-text-color);
+					margin-top: auto;
+					align-items: center;
+					flex-direction: row;
+					justify-content: flex-start;
+					gap: 0.5em;
+				}
+				.case-item .details .sub-details > div {
+					display:flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 0.5em;
+				}
+				.case-item .details .sub-details .count {
+					width: 25px;
+					height: 25px;
+					background: var(--button-background-color);
+					color: var(--button-text-color);
+					font-size: 14px;
+					text-align: center;
+					font-weight: bold;
+					border-radius: 50%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
 			.case-item #delete_case {
 				position: absolute;
 				right: 10px;
-				bottom: 10px;
+				top: 10px;
 				cursor: pointer;
 			}
 			.case-item:not(:hover) #delete_case {
@@ -88,6 +118,11 @@
 			<div class="details">
 				<a href="<?=base_url(route_to('admin.case', $item['id']))?>"><?= $item['name'] ?></a>
 				<p><?= esc($item['info']) ?></p>
+				
+				<div class="sub-details">
+					<div>Vragen</div>
+					<div class="count"><?=$item['case_entry_count']?></div>
+				</div>
 			</div>
             <div id="delete_case" data-case-id="<?=$item['id']?>">
 				<i class="fa-regular fa-trash-can"></i>

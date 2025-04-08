@@ -28,6 +28,7 @@
 				height: 100%;
 			}
 				.assignments-item .details a {
+					margin-top: 20px;
 					font-size: 20px;
 					color:#000;
 					text-decoration: none;
@@ -39,10 +40,16 @@
 					display: flex;
 					font-size: 14px;
 					color: var(--button-text-color);
-					padding-top: 20px;
+					margin-top: auto;
 					align-items: center;
 					flex-direction: row;
 					justify-content: space-around;
+				}
+				.assignments-item .details .sub-details > div {
+					display:flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 0.5em;
 				}
 				.assignments-item .details .sub-details .count {
 					width: 25px;
@@ -56,12 +63,11 @@
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					margin: 0.25em auto 0 auto;
 				}
 			.assignments-item #delete_assignment {
 				position: absolute;
 				right: 10px;
-				bottom: 10px;
+				top: 10px;
 				cursor: pointer;
 			}
 			.assignments-item:not(:hover) #delete_assignment {
@@ -119,7 +125,7 @@
 						<div class="count"><?=$item['assignment_entry_count']?></div>
 					</div>
 					<div>
-						<div>Casusses</div>
+						<div>Casussen</div>
 						<div class="count"><?=$item['case_count']?></div>
 					</div>
 				</div>

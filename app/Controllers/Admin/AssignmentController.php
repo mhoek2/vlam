@@ -113,7 +113,8 @@ class AssignmentController extends BaseController
 		}
 		
 		// Case
-        $this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
+        //$this->data['cases'] = $this->cases->where('assignment_id', $assignment_id)->orderBy('sort_order', 'ASC')->findAll();	
+        $this->data['cases'] = $this->cases->getDetailed( $assignment_id );	
         $this->data['cases_view'] = view('admin/cases', $this->data);		
 		
 		$this->data['text_editor'] = service('text_editor');
