@@ -38,8 +38,8 @@ jobs:
       
       - name: Create archives
         run: |
-            7z a -r standalone.zip .
-            7z a -r core.zip . -x!vendor/*
+            7z a -r standalone.zip . -x!.git -x!.github -x!.phpdoc
+            7z a -r core.zip . -x!vendor -x!.git -x!.github -x!.phpdoc
 
       #- name: Upload archives
       #  uses: actions/upload-artifact@v4
