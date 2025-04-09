@@ -46,7 +46,7 @@ https://github.com/user-attachments/assets/28bf56af-63be-42d5-a7f9-4b29f385eba0
 - Create dashboard module system, making easier adn cleaner to extend. (OOP)
 - Create a service and database structure for 'User Meta', allowing to store per-user data.
 - Create helper functions. ( csrf, user, dashboard modules)
-- Implement [phpDocumentor](https://phpdoc.org/) using composer, with CI-CD workflow for auto-generation and upload to 'gh-pages' branch
+- Implement [phpDocumentor](https://phpdoc.org/) using composer, with CI workflow for auto-generation and upload to 'gh-pages' branch
 - Begin adding php docstrings for documentation, and adding Guide (.rst) structure.
 - Update Font Awesome version from 6.0.0 to 6.7.2
 - Implement schedule management per training, in preparation for a Agenda dashboard module
@@ -56,6 +56,19 @@ https://github.com/user-attachments/assets/28bf56af-63be-42d5-a7f9-4b29f385eba0
 
 https://github.com/user-attachments/assets/c965076f-2da3-48aa-b187-af8999dd34ae
 
+## Devlog 004 - week 14-15
+- Extend CI workflow with auto-generated docs reports using PHPStan (php), Schemaspy(sql), ESLint (javascript), Stylelint (css)
+- Improve docs guide
+- Add metrics for assignment and case to admin panel ( count entries/questions and cases )
+- Define ESLint and Stylelint code conventions/format
+- Add InlinePHP filter for ESLint and Stylelint
+- Some general cleanup, refactoring
+
+![image](https://github.com/user-attachments/assets/d3ca855f-e227-48c1-98a9-6180e7d418eb)
+
+
+
+https://github.com/user-attachments/assets/71bc435d-2095-4756-809a-f4e6d362fca7
 
 
 # Helpful SQL Queries:
