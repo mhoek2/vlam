@@ -141,9 +141,18 @@ class CaseController extends BaseController
 		$insert_id = $this->caseEntry->insertID();
 
 		$entry = $this->caseEntry->where('case_id', $case_id)->find( $insert_id );
+		
+		if ( is_null( $entry ) ) {
+			return $this->response->setJSON([
+				'status' 			=> 'error', 
+				'new_csrf_token'	=> csrf_hash(),
+			]);
+		}
+			
 		$entry['entry_types'] = $this->caseEntry->type_enum;
-		$entry['entry_type_group_counts'] = $this->caseEntry->group_counts;
 		$entry['type_group'] = $this->caseEntry->find_group($entry['type']);
+		$entry['is_multi_type_group'] = !is_null($entry['type_group']) && ($this->caseEntry->group_counts[$entry['type_group']] > 1);
+		$entry['is_input'] = $this->caseEntry->user_input_type($entry['type']);
 		
 		// add default property if required for the new type
 		if ($new_entry_type === "text_separator") {

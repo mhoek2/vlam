@@ -145,7 +145,7 @@
 				dataType: 'json',
 				success: function(response) {
 					updateCSRFMeta(response);
-					//window.location = '<?=$post_url?>';
+					window.location = '<?=$post_url?>';
 				},
 				error: function(xhr, status, error) {
 					// Handle any error

@@ -9,7 +9,7 @@ class Assignments extends Model
     protected $table      = 'assignments';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'meeting_id', 'name', 'sort_order', 'intro', 'outro', 'info', 'sub_assignment', 'created_at'];
+    protected $allowedFields = ['id', 'meeting_id', 'sort_order', 'name', 'intro', 'outro', 'info', 'sub_assignment', 'created_at'];
 	
 	/**
 	 * Get assignments combined with detailed metrics about referenced questions/entries and cases

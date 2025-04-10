@@ -9,7 +9,7 @@ class Cases extends Model
     protected $table      = 'cases';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'assignment_id', 'name', 'sort_order', 'intro', 'outro', 'info', 'complete_action', 'created_at'];
+    protected $allowedFields = ['id', 'assignment_id', 'sort_order', 'name', 'intro', 'outro', 'info', 'complete_action', 'created_at'];
 	
 	/**
 	 * Get cases combined with detailed metrics about referenced questions/entries

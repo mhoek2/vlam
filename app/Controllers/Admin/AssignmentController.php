@@ -144,9 +144,18 @@ class AssignmentController extends BaseController
 		$insert_id = $this->assignmentEntry->insertID();
 
 		$entry = $this->assignmentEntry->where('assignment_id', $assignment_id)->find( $insert_id );
+		
+		if ( is_null( $entry ) ) {
+			return $this->response->setJSON([
+				'status' 			=> 'error', 
+				'new_csrf_token'	=> csrf_hash(),
+			]);
+		}
+		
 		$entry['entry_types'] = $this->assignmentEntry->type_enum;	
-		$entry['entry_type_group_counts'] = $this->assignmentEntry->group_counts;
 		$entry['type_group'] = $this->assignmentEntry->find_group($entry['type']);
+		$entry['is_multi_type_group'] = !is_null($entry['type_group']) && ($this->assignmentEntry->group_counts[$entry['type_group']] > 1);
+		$entry['is_input'] = $this->assignmentEntry->user_input_type($entry['type']);
 		
 		// add default property if required for the new type
 		if ($new_entry_type === "text_separator") {
