@@ -47,6 +47,44 @@ class AssignmentController extends BaseController
 		die('can not load sub assignment');
 	}
 	
+	/**
+	 * Return array of missing required fields, NULL if sucesfully validated
+	 */
+	private function post_get_missing_required_entries( int $assignment_id, &$post_entries )
+	{
+		// retrieve list of required entry ids that require user-input
+        $required_entry_ids = array_column( $this->assignmentEntry->where([
+			'assignment_id' => $assignment_id,
+			'optional' 		=> 0,
+		])->findAllUserInputs(), 'id');
+		
+		foreach($post_entries as $entry_id => $property_id )
+		{
+			// entry is optional
+			if ( !in_array( $entry_id,  $required_entry_ids) )
+				continue;
+			
+			// make sure required strings are at least 1 character
+			if ( is_string($property_id) && strlen($property_id) === 0 )
+				unset( $post_entries[$entry_id] );
+		}
+
+		$post_entry_ids = array_keys($post_entries);
+		$missing_post_entries = array_diff($required_entry_ids, $post_entry_ids);
+		
+		if ( !empty($missing_post_entries) )
+		{
+		    return $this->response->setJSON([
+			    'status' 			=> 'error',
+                'message' 			=> 'Required entries are missing',
+				'entries'			=> array_values( $missing_post_entries ),
+				'new_csrf_token' 	=> csrf_hash(),
+		    ]);
+		}
+		
+		return NULL;
+	}
+	
     public function save( int $meeting_id, int $assignment_id )
     {
 		$warnings = [];
@@ -55,22 +93,36 @@ class AssignmentController extends BaseController
         $meeting = $this->get_meeting( $meeting_id );
   
         $assignment = $this->get_assignment($assignment_id);
-        $assignment_entries = $this->assignmentEntry->where('assignment_id', $assignment_id)->findAll();
 
         $post_entries = $this->request->getPost('entries');
 
-        if(is_null($post_entries))
+		// post does not contain anything to save
+        if ( is_null($post_entries) || !is_array($post_entries) )
         {
 		    return $this->response->setJSON([
 			    'status' 			=> 'error',
-                'message' 			=> 'No entries in this assignment to save',
+                'message' 			=> 'Nothing to save',
 				'new_csrf_token' 	=> csrf_hash(),
 		    ]);
         }
+		
+		// validate if there are no missing required entries
+		$missing_post_entries = $this->post_get_missing_required_entries( $assignment_id, $post_entries );
+		
+		if ( $missing_post_entries )
+			return $missing_post_entries;
 
+		// further process post entries, by checking if existance and type checking
         foreach($post_entries as $entry_id => $property_id )
         {
 			$entry = $this->assignmentEntry->find($entry_id);
+			
+			if ( is_null($entry) ) 
+			{
+				array_push( $warnings, sprintf("Invalid entry id [%s]! .. what are you trying to do mate?", $entry_id) );
+				continue;
+			}
+			
 			$entry_type_group = $this->assignmentEntry->find_group($entry['type']);
 
 			$value = NULL;	// stores list of property ids (integer list), or dynamic user-defined inputs (strings)
@@ -96,7 +148,7 @@ class AssignmentController extends BaseController
 				// validate property ids
 				else if ( !$this->assignmentEntryProperties->valid_property($entry_id, $property_id) )
 				{
-					array_push( $warnings, "Invalid entry property! .. what are you trying to do mate?" );
+					array_push( $warnings, sprintf("Invalid entry property if [%s]! .. what are you trying to do mate?", $property_id) );
 					continue;
 				}
 

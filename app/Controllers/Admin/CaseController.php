@@ -92,27 +92,25 @@ class CaseController extends BaseController
 		// Entry
 		$this->data['entries'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->findAll();
 		
-		foreach( $this->data['entries'] as $id => $entry )
-		{
-			$this->data['entries'][$id]['type_group'] = $this->caseEntry->find_group($entry['type']);
-			
-			// should never happen, make sure entry is valid!
-			// this is a fail-safe, assignmentEntry Model has query overrides.
-			if (!$this->caseEntry->valid_type($entry['type'])) {
-				unset($this->data['entries'][$id]);
-				
-				// prehaps even remove from DB !?
-				//$this->caseEntry->where([
-				//	'assignment_id' => $entry['assignment_id']
-				//])->delete($entry['id']);
-			}
-		}
-		
 		// Entry types
 		$this->data['entry_types'] = $this->caseEntry->type_enum;
 		$this->data['entry_type_to_group'] = $this->caseEntry->type_to_group;
-		$this->data['entry_type_group_counts'] = $this->caseEntry->group_counts;
-		
+
+		foreach( $this->data['entries'] as $id => &$entry )
+		{
+			// should never happen, make sure entry is valid!
+			// this is a fail-safe, caseEntry Model has query overrides.
+			if (!$this->caseEntry->valid_type($entry['type'])) {
+				unset($this->data['entries'][$id]);
+				continue;
+			}
+			
+			
+			$entry['type_group'] = $this->caseEntry->find_group($entry['type']);
+			$entry['is_multi_type_group'] = !is_null($entry['type_group']) && ($this->caseEntry->group_counts[$entry['type_group']] > 1);
+			$entry['is_input'] = $this->caseEntry->user_input_type($entry['type']);
+		}
+
 		$this->data['complete_actions'] = $this->get_complete_actions( $this->data['case'] );
 		
 		$this->data['text_editor'] = service('text_editor');
@@ -187,6 +185,19 @@ class CaseController extends BaseController
 		return $this->response->setJSON([
 			'status' 			=> 'success',
 			'new_csrf_token'	=> csrf_hash(),
+		]);
+	}
+	
+	public function update_entry_optional()
+	{
+		$entry_id = $this->request->getPost('entry_id');
+		$value = (int)$this->request->getPost('value');
+		
+		$this->caseEntry->update($entry_id, ['optional' => $value]);
+		
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
 		]);
 	}
 	

@@ -3,8 +3,13 @@
 <!-- CONTENT -->
 
 <style>
+	#case_entry_form {
+		display: flex;
+		flex-direction: column;
+		min-height: 100%;
+	}
     .case-entry {
-
+		flex-grow: 1;
     }
 		.case-entry .properties-container {
 			display: flex;
@@ -71,59 +76,63 @@
 
     <div class="content">
 
-		<div class="case-entry">
-			<?php
-				$mcq_multi = preg_match('/^mcq-(\d+)$/', $entry['type'], $matches);
-				$max_selectable = $mcq_multi ? (int)$matches[1] : NULL;
-			?>
+		<form method="POST" id="case_entry_form">
+			<div class="case-entry <?= (bool)$entry['optional'] ? 'optional' : '' ?>">
+				<?php
+					$mcq_multi = preg_match('/^mcq-(\d+)$/', $entry['type'], $matches);
+					$max_selectable = $mcq_multi ? (int)$matches[1] : NULL;
+	
+					$mcq_has_selected = ( ($entry['type'] == "mcq" || $mcq_multi) && $entry['selected_count'] !== 0 );
+				?>
 
-			<?php if($entry['type'] == "text_separator"): ?>
-				<?php foreach ($entry['properties'] as $property): ?>
-					<?=$property['content']?>
-				<?php endforeach ?>
+				<?php if($entry['type'] == "text_separator"): ?>
+					<?php foreach ($entry['properties'] as $property): ?>
+						<?=$property['content']?>
+					<?php endforeach ?>
 
-			<?php elseif($entry['type'] == "mcq" || $mcq_multi): ?>
-				<h2><?=$entry['name']?></h2>
-				<div class="properties-container">
-					<div class="properties">
-						<?php foreach ($entry['properties'] as $property): ?>
-							<div class="<?= $property['selected'] ? 'selected' : '' ?>" id="property" data-property-id="<?=$property['id']?>">
-								<?=$property['content']?>
-							</div>
-						<?php endforeach; ?>
+				<?php elseif($entry['type'] == "mcq" || $mcq_multi): ?>
+					<h2><?=$entry['name']?></h2>
+					<div class="properties-container" <?= (bool)!$entry['optional'] ? 'data-required' : '' ?>>
+						<div class="properties">
+							<?php foreach ($entry['properties'] as $property): ?>
+								<div class="<?= $property['selected'] ? 'selected' : '' ?>" id="property" data-property-id="<?=$property['id']?>">
+									<?=$property['content']?>
+								</div>
+							<?php endforeach; ?>
+						</div>
+						<div class="properties-aside">
+						</div>
 					</div>
-					<div class="properties-aside">
-					</div>
+
+				<?php elseif($entry['type'] == "text_input"): ?>
+					<h3><?=$entry['name']?></h3>
+
+				<?php else: ?>
+					<h3><?=$entry['name']?></h3>
+
+				<?php endif ?>
+			</div>
+
+			<div class="case-progress">
+
+				<a class="button-primary" href="<?=$entry_prev_url?>">
+					<i class="fa-solid fa-chevron-left"></i> Previous
+				</a>
+
+				<div class="indicator">
+					<?php foreach ($entries as $i => $item): ?>
+						<div class="<?= ($entry['id'] == $item['id']) ? 'selected' : '' ?>">
+							<?=($i + 1)?>
+						</div>
+					<?php endforeach ?>
 				</div>
 
-			<?php elseif($entry['type'] == "text_input"): ?>
-				<h3><?=$entry['name']?></h3>
-
-			<?php else: ?>
-				<h3><?=$entry['name']?></h3>
-
-			<?php endif ?>
-		</div>
-
-        <div class="case-progress">
-
-        	<a class="button-primary" href="<?=$entry_prev_url?>">
-				<i class="fa-solid fa-chevron-left"></i> Previous
-			</a>
-
-        	<div class="indicator">
-				<?php foreach ($entries as $i => $item): ?>
-					<div class="<?= ($entry['id'] == $item['id']) ? 'selected' : '' ?>">
-						<?=($i + 1)?>
-					</div>
-				<?php endforeach ?>
-        	</div>
-
-         	<a class="button-primary" href="<?=$entry_next_url?>">
-				Next <i class="fa-solid fa-chevron-right"></i>
-			</a>
-		</div>
-
+				<button class="button-primary <?= ($is_input_type && (bool)!$entry['optional'] && !$mcq_has_selected) ? 'disabled' : '' ?>" type="submit" id="next_entry">
+					Next <i class="fa-solid fa-chevron-right"></i>
+				</button>
+			</div>
+		</form>
+		
     </div>
 </section>
 
@@ -131,6 +140,39 @@
 	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
 
+		function set_next_entry_button_state( state )
+		{
+			$('#next_entry').toggleClass('disabled', !state);
+		}
+		
+		function validate_mcq_properties()
+		{
+			const propertyContainer = $('.properties-container');
+			
+			if ( typeof propertyContainer.data('required') === 'undefined')
+				return true;
+			
+			const checkedCount = propertyContainer.find('#property.selected').length;
+			
+			// Check if at least one checkbox is selected
+			if ( checkedCount === 0 )
+				return false;
+			
+			return true;
+		}
+
+		$('#case_entry_form').submit(function (event) {
+			event.preventDefault();
+			
+			const validated = validate_mcq_properties();
+			set_next_entry_button_state( validated );
+			
+			if ( !validated )
+				return;
+			
+			window.location = '<?=$entry_next_url?>';
+		});
+		
 		$(document).on('click', '#property', function(){
 			let propertyId = $(this).data('property-id');
 
@@ -144,7 +186,7 @@
 				else
 					addProperty = true;
 
-				$(this).closest('.properties-container').find('.properties .selected').each(function() {
+				$(this).closest('.properties-container').find('#property.selected').each(function() {
 					selectedProperties.push($(this).data('property-id'));
 				});
 
@@ -182,6 +224,8 @@
 							$(this).removeClass('selected');
 						<?php endif ?>
 					}
+			
+					set_next_entry_button_state( validate_mcq_properties() );
 				}.bind(this),
 				error: function(xhr, status, error) {
 					console.log(error);

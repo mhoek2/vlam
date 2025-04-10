@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 13, 2025 at 02:15 PM
+-- Generation Time: Apr 10, 2025 at 12:56 PM
 -- Server version: 8.0.41-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -62,21 +62,23 @@ CREATE TABLE `assignment_entry` (
   `name` text NOT NULL,
   `info` text NOT NULL,
   `assignment_id` int NOT NULL,
-  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `assignment_entry`
 --
 
-INSERT INTO `assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`) VALUES
-(29, 1, 'Ben je tevreden', '', 1, 'mcq'),
-(36, 3, 'Toevoeging 1', '', 1, 'text_input'),
-(38, 4, 'Toevoeging 2', '', 1, 'text_input'),
-(43, 1, 'Of een tussenvoegsel', '', 11, 'text_separator'),
-(44, 0, 'Er moet wel een vraag zijn', '', 11, 'mcq'),
-(48, 2, 'Tekstkop 1', '', 1, 'text_separator'),
-(55, 0, 'Rustgevende kleur', '', 1, 'mcq-2');
+INSERT INTO `assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`, `optional`) VALUES
+(29, 2, 'Ben je tevreden', '', 1, 'mcq', 0),
+(36, 4, 'Toevoeging 1', '', 1, 'text_input', 0),
+(38, 5, 'Toevoeging 2', '', 1, 'text_input', 1),
+(43, 1, 'Of een tussenvoegsel', '', 11, 'text_separator', 0),
+(44, 0, 'Er moet wel een vraag zijn', '', 11, 'mcq', 0),
+(48, 3, 'Tekstkop 1', '', 1, 'text_separator', 0),
+(55, 0, 'Rustgevende kleur', '', 1, 'mcq-2', 0),
+(64, 1, 'nog een optie', '', 1, 'mcq-2', 0);
 
 -- --------------------------------------------------------
 
@@ -103,10 +105,15 @@ INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_or
 (62, 43, '<p>Of een tussenvoegsel.</p>', 0),
 (67, 48, '<p>Dit is tekst tussen de vragen</p>', 0),
 (72, 55, 'Rood', 0),
-(73, 55, 'Groen', 2),
-(74, 55, 'Blauw', 3),
-(75, 55, 'Zwart', 4),
-(76, 55, 'Oranje', 1);
+(73, 55, 'Groen', 3),
+(74, 55, 'Blauw', 4),
+(75, 55, 'Zwart', 1),
+(76, 55, 'Oranje', 2),
+(97, 64, '1', 0),
+(98, 64, '2', 1),
+(99, 64, '3', 2),
+(100, 64, '4', 3),
+(101, 64, '5', 4);
 
 -- --------------------------------------------------------
 
@@ -128,10 +135,11 @@ CREATE TABLE `assignment_result` (
 --
 
 INSERT INTO `assignment_result` (`id`, `user_id`, `assignment_id`, `entry_id`, `property_id`, `value`) VALUES
-(367, 2, 1, 55, 1, '[72,75]'),
-(368, 2, 1, 29, 1, '[37]'),
-(369, 2, 1, 36, NULL, '4'),
-(370, 2, 1, 38, NULL, '5');
+(1046, 2, 1, 55, 1, '[72]'),
+(1047, 2, 1, 64, 1, '[97]'),
+(1048, 2, 1, 29, 1, '[37]'),
+(1049, 2, 1, 36, NULL, '1'),
+(1050, 2, 1, 38, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -185,12 +193,12 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-03-13 07:46:06', '2025-02-05 09:20:35', '2025-03-13 07:46:06'),
-(3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-06 07:54:57', '2025-02-13 08:21:52', '2025-03-06 07:54:57'),
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-04-10 06:53:32', '2025-02-05 09:20:35', '2025-04-10 06:53:32'),
+(3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-28 19:09:26', '2025-02-13 08:21:52', '2025-03-28 19:09:26'),
 (4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
 (5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
 (6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14'),
-(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$oHNz7PkSRW5Bcgja7iAtiu5/NBEGh1i4fB.C6J/sPdvYMva0VQNBG', NULL, NULL, 0, '2025-03-13 08:06:36', '2025-02-13 08:23:40', '2025-03-13 08:06:36'),
+(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$oHNz7PkSRW5Bcgja7iAtiu5/NBEGh1i4fB.C6J/sPdvYMva0VQNBG', NULL, NULL, 0, '2025-04-02 16:30:16', '2025-02-13 08:23:40', '2025-04-02 16:30:16'),
 (15, 15, 'email_password', NULL, 'user6@vlam.nl', '$2y$12$y91iuFAsF4LxeHRND0zQ3ek1vUovbQTk.CHOk3EGVbatUJgh3YP8a', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:22');
 
 -- --------------------------------------------------------
@@ -209,108 +217,6 @@ CREATE TABLE `auth_logins` (
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `auth_logins`
---
-
-INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identifier`, `user_id`, `date`, `success`) VALUES
-(15, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:10:40', 1),
-(16, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:13:07', 1),
-(17, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:15:10', 1),
-(18, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:18:58', 1),
-(19, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:28:16', 1),
-(20, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 10:58:47', 1),
-(21, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-11 12:15:51', 1),
-(22, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-12 08:29:17', 1),
-(23, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-13 08:07:03', 0),
-(24, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-13 08:07:08', 1),
-(25, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-13 08:23:47', 1),
-(26, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-13 11:16:38', 1),
-(27, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-17 17:12:21', 1),
-(28, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-17 17:58:53', 1),
-(29, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-17 21:53:58', 1),
-(30, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-18 07:00:32', 0),
-(31, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-18 07:00:38', 1),
-(32, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-18 11:55:55', 0),
-(33, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-18 11:56:02', 1),
-(34, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-19 10:40:04', 1),
-(35, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-19 22:20:11', 0),
-(36, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-19 22:20:22', 1),
-(37, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-20 07:36:14', 0),
-(38, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-20 07:36:19', 1),
-(39, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-21 14:23:11', 1),
-(40, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-22 10:04:26', 0),
-(41, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-22 10:04:58', 1),
-(42, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-22 15:34:37', 1),
-(43, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-23 10:39:59', 1),
-(44, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-24 10:21:23', 1),
-(45, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-24 15:06:29', 0),
-(46, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-24 15:06:34', 0),
-(47, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-24 15:06:38', 1),
-(48, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-24 19:53:06', 1),
-(49, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-25 08:05:48', 0),
-(50, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-25 08:05:52', 1),
-(51, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-25 15:26:16', 1),
-(52, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-25 20:54:48', 1),
-(53, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-26 07:58:15', 1),
-(54, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-26 08:38:07', 1),
-(55, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-02-26 08:38:55', 0),
-(56, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-26 08:38:59', 1),
-(57, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-26 08:40:44', 1),
-(58, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'user1@vlam.nl', 3, '2025-02-26 10:32:33', 1),
-(59, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', 'email_password', 'user1@vlam.nl', 3, '2025-02-26 10:34:14', 1),
-(60, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-26 12:21:55', 1),
-(61, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-27 11:09:29', 1),
-(62, '157.97.51.172', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-02-27 15:25:05', 1),
-(63, '31.21.96.98', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-01 07:24:07', 1),
-(64, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-03 07:57:41', 1),
-(65, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-04 07:56:51', 1),
-(66, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-04 17:20:12', 1),
-(67, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-04 17:34:57', 1),
-(68, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-05 07:55:29', 1),
-(69, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-05 16:57:25', 1),
-(70, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-03-06 07:54:43', 0),
-(71, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-06 07:54:47', 1),
-(72, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', 'email_password', 'user1@vlam.nl', 3, '2025-03-06 07:54:57', 1),
-(73, '157.97.51.172', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-06 16:47:49', 1),
-(74, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-10 07:43:51', 1),
-(75, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user6@vlam.nl', 11, '2025-03-10 11:21:37', 1),
-(76, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user6@vlam.nl', 13, '2025-03-10 12:49:55', 1),
-(77, '31.21.96.98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-10 15:03:33', 1),
-(78, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 07:42:38', 0),
-(79, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 07:42:43', 1),
-(80, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 11:02:55', 1),
-(81, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:28:25', 0),
-(82, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:28:29', 0),
-(83, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-11 12:28:33', 1),
-(84, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:28:59', 0),
-(85, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:02', 0),
-(86, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:11', 0),
-(87, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:16', 0),
-(88, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 12:29:19', 0),
-(89, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 12:30:23', 1),
-(90, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 12:30:30', 1),
-(91, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:41', 0),
-(92, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:44', 0),
-(93, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:48', 0),
-(94, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', NULL, '2025-03-11 12:33:53', 0),
-(95, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-11 12:34:08', 1),
-(96, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-11 12:35:45', 1),
-(97, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:15:11', 0),
-(98, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:15:15', 0),
-(99, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:15:20', 0),
-(100, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:16:25', 0),
-(101, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:16:30', 0),
-(102, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', NULL, '2025-03-11 13:17:05', 0),
-(103, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 13:18:25', 1),
-(104, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 13:19:01', 1),
-(105, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 13:19:17', 1),
-(106, '87.210.51.192', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-11 21:43:20', 1),
-(107, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-12 07:29:57', 1),
-(108, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-12 12:00:15', 1),
-(109, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'email_password', 'admin@vlam.nl', 2, '2025-03-13 07:46:06', 1),
-(110, '84.27.224.56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'email_password', 'user5@vlam.nl', 7, '2025-03-13 08:06:36', 1);
 
 -- --------------------------------------------------------
 
@@ -396,18 +302,20 @@ CREATE TABLE `case_entry` (
   `name` text NOT NULL,
   `info` text NOT NULL,
   `case_id` int NOT NULL,
-  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `case_entry`
 --
 
-INSERT INTO `case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`) VALUES
-(1, 0, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 9, 'mcq-2'),
-(2, 1, 'Wanneer zou je openheid geven?', '', 9, 'mcq'),
-(3, 3, 'Welke informatie zou jij delen?', '', 9, 'mcq'),
-(9, 2, 'Handmatige invoer', '', 9, 'text_input');
+INSERT INTO `case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`, `optional`) VALUES
+(1, 1, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 9, 'mcq-2', 0),
+(2, 2, 'Wanneer zou je openheid geven?', '', 9, 'mcq', 0),
+(3, 3, 'Welke informatie zou jij delen?', '', 9, 'mcq', 0),
+(22, 0, 'Mooie kleur', '', 20, 'mcq', 0),
+(23, 0, 'test', '', 9, 'text_separator', 0);
 
 -- --------------------------------------------------------
 
@@ -428,14 +336,17 @@ CREATE TABLE `case_entry_properties` (
 
 INSERT INTO `case_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
 (42, 1, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
-(43, 1, 'B: Ik geef geen openheid om stigmatisering te vermijden', 3),
-(47, 1, 'C: Ik weet het niet en wil meer informatie', 1),
+(43, 1, 'B: Ik geef geen openheid om stigmatisering te vermijden', 1),
+(47, 1, 'C: Ik weet het niet en wil meer informatie', 2),
 (48, 3, 'A: Ik deel alles, inclusief de details van mijn belemmeringen', 0),
 (49, 3, 'B: Ik deel alleen wat relevant is voor mijn werk', 0),
 (50, 3, 'C: Ik deel helemaal niets!', 0),
 (65, 2, 'A: Ik geef openheid om ondersteuning te krijgen', 0),
 (66, 2, 'B: Ik geef geen openheid om stigmatisering te vermijden', 1),
-(67, 2, 'C: Ik weet het niet en wil meer informatie', 2);
+(67, 2, 'C: Ik weet het niet en wil meer informatie', 2),
+(89, 22, 'groen', 0),
+(90, 22, 'zwart', 1),
+(91, 23, '<p>asdasd</p>', 0);
 
 -- --------------------------------------------------------
 
@@ -458,9 +369,9 @@ CREATE TABLE `case_result` (
 --
 
 INSERT INTO `case_result` (`id`, `user_id`, `assignment_id`, `case_id`, `entry_id`, `property_id`, `value`) VALUES
-(166, 2, 1, 9, 3, 1, '[48]'),
-(211, 2, 1, 9, 1, 1, '[42,47]'),
-(214, 2, 1, 9, 2, 1, '[67]');
+(461, 2, 1, 9, 2, 1, '[65]'),
+(462, 2, 1, 9, 3, 1, '[49]'),
+(464, 2, 1, 9, 1, 1, '[-1]');
 
 -- --------------------------------------------------------
 
@@ -480,7 +391,7 @@ CREATE TABLE `meetings` (
 --
 
 INSERT INTO `meetings` (`id`, `name`, `info`, `intro`) VALUES
-(1, 1, 'Kennismaking en werkvoorwaarden', '<h2><span style=\"color:hsl(270,75%,60%);\">Lorem Ipsum2</span></h2><h4><i>\"Neque <span style=\"background-color:hsl(30,75%,60%);\">porro quisquam </span>est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"</i></h4><p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>'),
+(1, 1, 'Kennismaking en werkvoorwaarden', '<h2><span style=\"color:hsl(270,75%,60%);\">Lorem Ipsum33</span></h2><h4><i>\"Neque <span style=\"background-color:hsl(30,75%,60%);\">porro quisquam </span>est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"</i></h4><p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>'),
 (2, 2, 'Kwaliteiten en persoonlijk profiel', ''),
 (3, 3, 'Het belang van een sterk CV', ''),
 (4, 4, 'Openheid geven', ''),
@@ -549,7 +460,8 @@ CREATE TABLE `trainings` (
 
 INSERT INTO `trainings` (`id`, `name`, `started`, `stopped`, `created_at`) VALUES
 (6, 'Training #3', NULL, NULL, '2025-02-13 14:23:31'),
-(23, 'Training 23', '2025-03-13 10:59:58', NULL, '2025-03-12 12:39:58');
+(23, 'Training 23', '2025-03-13 10:59:58', NULL, '2025-03-12 12:39:58'),
+(24, 'Nieuwe training', NULL, NULL, '2025-04-01 08:18:08');
 
 -- --------------------------------------------------------
 
@@ -592,21 +504,22 @@ CREATE TABLE `training_assignment_entry` (
   `name` text NOT NULL,
   `info` text NOT NULL,
   `assignment_id` int NOT NULL,
-  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `training_assignment_entry`
 --
 
-INSERT INTO `training_assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`) VALUES
-(463, 1, 'Ben je tevreden', '', 306, 'mcq'),
-(464, 3, 'Toevoeging 1', '', 306, 'text_input'),
-(465, 4, 'Toevoeging 2', '', 306, 'text_input'),
-(466, 1, 'Of een tussenvoegsel', '', 309, 'text_separator'),
-(467, 0, 'Er moet wel een vraag zijn', '', 309, 'mcq'),
-(468, 2, 'Tekstkop 1', '', 306, 'text_separator'),
-(469, 0, 'Rustgevende kleur', '', 306, 'mcq-2');
+INSERT INTO `training_assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`, `optional`) VALUES
+(463, 1, 'Ben je tevreden', '', 306, 'mcq', 0),
+(464, 3, 'Toevoeging 1', '', 306, 'text_input', 0),
+(465, 4, 'Toevoeging 2', '', 306, 'text_input', 0),
+(466, 1, 'Of een tussenvoegsel', '', 309, 'text_separator', 0),
+(467, 0, 'Er moet wel een vraag zijn', '', 309, 'mcq', 0),
+(468, 2, 'Tekstkop 1', '', 306, 'text_separator', 0),
+(469, 0, 'Rustgevende kleur', '', 306, 'mcq-2', 0);
 
 -- --------------------------------------------------------
 
@@ -658,10 +571,10 @@ CREATE TABLE `training_assignment_result` (
 --
 
 INSERT INTO `training_assignment_result` (`id`, `user_id`, `assignment_id`, `entry_id`, `property_id`, `value`) VALUES
-(310, 7, 306, 469, 1, '[512,513]'),
-(311, 7, 306, 463, 1, '[504]'),
-(312, 7, 306, 464, NULL, 'blab'),
-(313, 7, 306, 465, NULL, 'bla');
+(314, 7, 306, 469, 1, '[511,512]'),
+(315, 7, 306, 463, 1, '[504]'),
+(316, 7, 306, 464, NULL, 'blab'),
+(317, 7, 306, 465, NULL, 'bla');
 
 -- --------------------------------------------------------
 
@@ -701,18 +614,19 @@ CREATE TABLE `training_case_entry` (
   `name` text NOT NULL,
   `info` text NOT NULL,
   `case_id` int NOT NULL,
-  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `training_case_entry`
 --
 
-INSERT INTO `training_case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`) VALUES
-(178, 0, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 91, 'mcq-2'),
-(179, 1, 'Wanneer zou je openheid geven?', '', 91, 'mcq'),
-(180, 3, 'Welke informatie zou jij delen?', '', 91, 'mcq'),
-(181, 2, 'Handmatige invoer', '', 91, 'text_input');
+INSERT INTO `training_case_entry` (`id`, `sort_order`, `name`, `info`, `case_id`, `type`, `optional`) VALUES
+(178, 0, 'Wat zou jij doen als je in de situatie van de hoofdpersoon zat?', '', 91, 'mcq-2', 0),
+(179, 1, 'Wanneer zou je openheid geven?', '', 91, 'mcq', 0),
+(180, 3, 'Welke informatie zou jij delen?', '', 91, 'mcq', 0),
+(181, 2, 'Handmatige invoer', '', 91, 'text_input', 0);
 
 -- --------------------------------------------------------
 
@@ -763,9 +677,9 @@ CREATE TABLE `training_case_result` (
 --
 
 INSERT INTO `training_case_result` (`id`, `user_id`, `assignment_id`, `case_id`, `entry_id`, `property_id`, `value`) VALUES
-(58, 7, 306, 91, 178, 1, '[450,452]'),
 (59, 7, 306, 91, 179, 1, '[457]'),
-(60, 7, 306, 91, 180, 1, '[454]');
+(62, 7, 306, 91, 178, 1, '[450,451]'),
+(63, 7, 306, 91, 180, 1, '[455]');
 
 -- --------------------------------------------------------
 
@@ -791,12 +705,12 @@ INSERT INTO `training_schedule` (`id`, `training_id`, `meeting_id`, `date`) VALU
 (46, 6, 4, '2025-03-12 10:45:00'),
 (47, 6, 5, '2025-03-12 11:15:00'),
 (48, 6, 6, '2025-03-12 11:45:00'),
-(61, 23, 1, '2025-03-12 11:15:00'),
-(62, 23, 2, '2025-03-12 13:41:00'),
-(63, 23, 3, '2025-03-12 14:45:00'),
-(64, 23, 4, '2025-03-12 14:15:00'),
-(65, 23, 5, '2025-03-12 11:15:00'),
-(66, 23, 6, '2025-03-12 14:15:00');
+(67, 23, 1, '2025-03-12 12:00:00'),
+(68, 23, 2, '2025-03-12 13:41:00'),
+(69, 23, 3, '2025-03-12 14:45:00'),
+(70, 23, 4, '2025-03-12 14:15:00'),
+(71, 23, 5, '2025-03-12 11:15:00'),
+(72, 23, 6, '2025-03-12 14:15:00');
 
 -- --------------------------------------------------------
 
@@ -815,6 +729,8 @@ CREATE TABLE `training_users` (
 --
 
 INSERT INTO `training_users` (`id`, `training_id`, `user_id`) VALUES
+(61, 6, 3),
+(60, 23, 2),
 (59, 23, 7);
 
 -- --------------------------------------------------------
@@ -836,8 +752,8 @@ CREATE TABLE `training_user_meta` (
 --
 
 INSERT INTO `training_user_meta` (`id`, `user_id`, `name`, `value`, `created_at`) VALUES
-(83, 7, 'assignment_meta', '[{\"value\":{\"512\":\"Blauw\",\"513\":\"Zwart\"},\"property_id\":\"1\",\"entry_id\":\"469\",\"entry_name\":\"Rustgevende kleur\"},{\"value\":{\"504\":\"Nee\"},\"property_id\":\"1\",\"entry_id\":\"463\",\"entry_name\":\"Ben je tevreden\"},{\"value\":\"blab\",\"property_id\":null,\"entry_id\":\"464\",\"entry_name\":\"Toevoeging 1\"},{\"value\":\"bla\",\"property_id\":null,\"entry_id\":\"465\",\"entry_name\":\"Toevoeging 2\"}]', '2025-03-13 14:05:59'),
-(84, 7, 'case_meta', '[{\"value\":{\"450\":\"A: Ik geef openheid om ondersteuning te krijgen\",\"452\":\"C: Ik weet het niet en wil meer informatie\"},\"property_id\":\"1\",\"entry_id\":\"178\",\"entry_name\":\"Wat zou jij doen als je in de situatie van de hoofdpersoon zat?\"},{\"value\":{\"457\":\"B: Ik geef geen openheid om stigmatisering te vermijden\"},\"property_id\":\"1\",\"entry_id\":\"179\",\"entry_name\":\"Wanneer zou je openheid geven?\"},{\"value\":{\"454\":\"B: Ik deel alleen wat relevant is voor mijn werk\"},\"property_id\":\"1\",\"entry_id\":\"180\",\"entry_name\":\"Welke informatie zou jij delen?\"}]', '2025-03-13 14:06:07');
+(85, 7, 'assignment_meta', '[{\"value\":{\"511\":\"Groen\",\"512\":\"Blauw\"},\"property_id\":\"1\",\"entry_id\":\"469\",\"entry_name\":\"Rustgevende kleur\"},{\"value\":{\"504\":\"Nee\"},\"property_id\":\"1\",\"entry_id\":\"463\",\"entry_name\":\"Ben je tevreden\"},{\"value\":\"blab\",\"property_id\":null,\"entry_id\":\"464\",\"entry_name\":\"Toevoeging 1\"},{\"value\":\"bla\",\"property_id\":null,\"entry_id\":\"465\",\"entry_name\":\"Toevoeging 2\"}]', '2025-03-28 20:09:52'),
+(86, 7, 'case_meta', '[{\"value\":{\"450\":\"A: Ik geef openheid om ondersteuning te krijgen\",\"451\":\"B: Ik geef geen openheid om stigmatisering te vermijden\"},\"property_id\":\"1\",\"entry_id\":\"178\",\"entry_name\":\"Wat zou jij doen als je in de situatie van de hoofdpersoon zat?\"},{\"value\":{\"457\":\"B: Ik geef geen openheid om stigmatisering te vermijden\"},\"property_id\":\"1\",\"entry_id\":\"179\",\"entry_name\":\"Wanneer zou je openheid geven?\"},{\"value\":{\"455\":\"C: Ik deel helemaal niets!\"},\"property_id\":\"1\",\"entry_id\":\"180\",\"entry_name\":\"Welke informatie zou jij delen?\"}]', '2025-03-28 20:10:06');
 
 -- --------------------------------------------------------
 
@@ -871,7 +787,7 @@ INSERT INTO `users` (`id`, `username`, `firstname`, `middlename`, `lastname`, `s
 (5, 'user3', 'User', '', '3', NULL, NULL, 1, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57', NULL),
 (6, 'user4', 'User', '', '4', NULL, NULL, 1, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14', NULL),
 (7, 'user5', 'User', '', '5', NULL, NULL, 1, NULL, '2025-02-13 08:23:39', '2025-02-13 08:23:40', NULL),
-(15, 'user6', 'User', '', 'a.', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:21', NULL);
+(15, 'user6', 'User', 'as', 'a.', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -886,6 +802,14 @@ CREATE TABLE `user_meta` (
   `value` text NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `user_meta`
+--
+
+INSERT INTO `user_meta` (`id`, `user_id`, `name`, `value`, `created_at`) VALUES
+(132, 2, 'case_meta', '[{\"value\":{\"43\":\"B: Ik geef geen openheid om stigmatisering te vermijden\",\"47\":\"C: Ik weet het niet en wil meer informatie\"},\"property_id\":\"1\",\"entry_id\":\"1\",\"entry_name\":\"Wat zou jij doen als je in de situatie van de hoofdpersoon zat?\"},{\"value\":{\"67\":\"C: Ik weet het niet en wil meer informatie\"},\"property_id\":\"1\",\"entry_id\":\"2\",\"entry_name\":\"Wanneer zou je openheid geven?\"},{\"value\":{\"50\":\"C: Ik deel helemaal niets!\"},\"property_id\":\"1\",\"entry_id\":\"3\",\"entry_name\":\"Welke informatie zou jij delen?\"}]', '2025-04-02 19:41:39'),
+(143, 2, 'assignment_meta', '[{\"value\":{\"75\":\"Zwart\"},\"property_id\":\"1\",\"entry_id\":\"55\",\"entry_name\":\"Rustgevende kleur\"},{\"value\":{\"97\":\"1\"},\"property_id\":\"1\",\"entry_id\":\"64\",\"entry_name\":\"nog een optie\"},{\"value\":{\"37\":\"Zeker weten\"},\"property_id\":\"1\",\"entry_id\":\"29\",\"entry_name\":\"Ben je tevreden\"},{\"value\":\"asd\",\"property_id\":null,\"entry_id\":\"36\",\"entry_name\":\"Toevoeging 1\"},{\"value\":\"1\",\"property_id\":null,\"entry_id\":\"38\",\"entry_name\":\"Toevoeging 2\"}]', '2025-04-10 11:37:13');
 
 --
 -- Indexes for dumped tables
@@ -1123,25 +1047,25 @@ ALTER TABLE `user_meta`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry`
 --
 ALTER TABLE `assignment_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry_properties`
 --
 ALTER TABLE `assignment_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `assignment_result`
 --
 ALTER TABLE `assignment_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=371;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1051;
 
 --
 -- AUTO_INCREMENT for table `auth_groups_users`
@@ -1159,7 +1083,7 @@ ALTER TABLE `auth_identities`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions_users`
@@ -1183,25 +1107,25 @@ ALTER TABLE `auth_token_logins`
 -- AUTO_INCREMENT for table `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `case_entry`
 --
 ALTER TABLE `case_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `case_entry_properties`
 --
 ALTER TABLE `case_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `case_result`
 --
 ALTER TABLE `case_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=465;
 
 --
 -- AUTO_INCREMENT for table `meetings`
@@ -1225,7 +1149,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `trainings`
 --
 ALTER TABLE `trainings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `training_assignments`
@@ -1249,7 +1173,7 @@ ALTER TABLE `training_assignment_entry_properties`
 -- AUTO_INCREMENT for table `training_assignment_result`
 --
 ALTER TABLE `training_assignment_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
 
 --
 -- AUTO_INCREMENT for table `training_cases`
@@ -1273,25 +1197,25 @@ ALTER TABLE `training_case_entry_properties`
 -- AUTO_INCREMENT for table `training_case_result`
 --
 ALTER TABLE `training_case_result`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `training_schedule`
 --
 ALTER TABLE `training_schedule`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `training_users`
 --
 ALTER TABLE `training_users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `training_user_meta`
 --
 ALTER TABLE `training_user_meta`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1303,7 +1227,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_meta`
 --
 ALTER TABLE `user_meta`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- Constraints for dumped tables

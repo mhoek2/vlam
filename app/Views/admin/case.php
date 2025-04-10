@@ -57,7 +57,6 @@
 
 		<div class="grid-container" id="sortable">
 			<?php foreach ($entries as $item) { ?>
-				<?php $item['entry_type_group_counts'] = $entry_type_group_counts; ?>
 				<?=view('admin/case_entry', $item);?>
 			<?php }; ?>
 		</div>
@@ -145,7 +144,31 @@
 				}
 			});
 		}
+		
+		$(document).on('change', '[id^="entry_optional_checkbox_"]', function() {
+			const entryId = $(this).data('entry-id');
+			const is_optional = $(this).prop( "checked" ) ? 1 : 0;
 
+			$.ajax({
+				url: '<?= current_url() ?>/update_entry_optional',
+				method: 'POST',
+				data: {
+					entry_id: entryId,
+					value: is_optional,
+					<?=setCSRFPostData()?>
+				},
+				success: function(response) {
+					updateCSRFMeta(response);
+
+					if (response.status === 'success') {
+					}
+					else{
+						alert('Er is iets mis gegaan! Vernieuw de pagina.');
+					}
+				}
+			});
+		});
+		
 		$(document).on('change', '.entry-type-select', function() {
 			const entryId = $(this).data('entry-id');
 			const newType = $(this).val();

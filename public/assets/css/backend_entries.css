@@ -24,6 +24,7 @@
 			.grid-container .entry .details  {
 				display: flex;
 				flex-direction: row;
+				gap: 0.5em;
 			}
 				.grid-container .entry .details .sortable-handle {
 					font-size: 18px;
@@ -34,18 +35,37 @@
 					align-items: center;
 					cursor: move;
 				}
+				.grid-container .entry .details .separator {
+					width: 2px;
+					height: 30px;
+					background: var(--button-background-color);
+					margin: auto 0;
+				}
 				.grid-container .entry .details h3 {
 					flex:1;
 					text-align: left;
 					margin-left: 20px;
 				}
 				.grid-container .entry .details select {
+					position: relative;
 					border: 0;
-					height: 20px;
+					height: 30px;
 					margin: auto 0;
 					background:#fff;
 					border-color:#fff;
 				}
+				.grid-container .entry .details .entry-optional {
+					height: 30px;
+					margin: auto 0;
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 0.5em;
+				}
+					.grid-container .entry .details .entry-optional label {
+						margin: 0;
+						font-weight: normal;
+					}
 				.grid-container .entry .details .toggle-properties {
 					all:unset;
 					font-size: 18px;

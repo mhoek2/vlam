@@ -9,7 +9,7 @@ class CaseEntry extends Model
     protected $table      = 'case_entry';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'type', 'name', 'sort_order', 'info', 'case_id'];
+    protected $allowedFields = ['id', 'sort_order', 'name', 'info', 'case_id', 'type', 'optional'];
 	
 	/**
 	 * This is how question/entry types are defined.
@@ -21,11 +21,11 @@ class CaseEntry extends Model
 	 * When adding types, <u>make sure</u> to add the new 'type' to the enum in the database.
 	 */
     public $type_enum = [ 
-        ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze'],
-        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2'],
-        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3'],
-        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input'], 
-        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator']
+        ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze',			'is_input' => true],
+        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2',	'is_input' => true],
+        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3',	'is_input' => true],
+        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input',		'is_input' => true], 
+        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator',	'is_input' => false]
     ];
 	
 	public $type_to_group;	// reference lookup-table for what group a type is part of
@@ -95,6 +95,32 @@ class CaseEntry extends Model
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Returns true if entry type explicitly requires user input (question only)
+	 */	
+	public function user_input_type( $type ) : bool
+	{
+		foreach ($this->type_enum as $item) {
+			if ($item['type'] === $type && $item['is_input']) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	/**
+	 * Returns array of entries that explicitly require user input (questions only)
+	 */	
+	public function findAllUserInputs( $limit = null, $offset = 0 ) : array
+	{
+        $entries = parent::findAll($limit, $offset);
+
+        return array_filter($entries, function ($entry) {
+            return $this->user_input_type($entry['type']);
+        });
 	}
 	
 	//

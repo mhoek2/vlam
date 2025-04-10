@@ -6,7 +6,7 @@
 		
 		<h3 class="entry-name contenteditable" data-entry-id="<?= $id ?>" contenteditable="true"><?= $name ?></h3>
 
-		<?php if (!is_null($type_group) && $entry_type_group_counts[$type_group] > 1): ?>
+		<?php if ( $is_multi_type_group ): ?>
 			<select class="entry-type-select" data-entry-id="<?= $id ?>">
 				<?php foreach($entry_types as $entry_type): ?>
 					<?php 
@@ -19,7 +19,18 @@
 					</option>
 				<?php endforeach ?>
 			</select>
+		
+			<div class="separator"></div>
 		<?php endif ?>
+		
+		<?php if ( $is_input ): ?>
+			<div class="entry-optional">
+				<label for="entry_optional_checkbox_<?=$id?>">*Optioneel</label>
+				<input id="entry_optional_checkbox_<?=$id?>"  data-entry-id="<?= $id ?>" type="checkbox" <?= (bool)$optional ? 'checked' : '' ?>/>
+			</div>
+		<?php endif ?>
+		
+		<div class="separator"></div>
 		
 		<button class="delete-entry" data-entry-id="<?= $id ?>">
 			<i class="fa-regular fa-trash-can"></i>

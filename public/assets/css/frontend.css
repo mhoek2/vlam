@@ -6,8 +6,12 @@
 	--pink-light-color: #eaccda; 	/* light pink */
 	
 	--button-background-color: #2e3180;
-	--button-hover-color: #fff;
+	--button-hover-color: #1e2180;
 	--button-text-color: #fff;	
+	
+	--button-disabled-background-color: rgb(230 227 227);
+	--button-disabled-hover-color: rgb(230 227 227);
+	--button-disabled-text-color: rgb(160, 160, 160);
 	
 	--primary-border-radius: 10px;
 	--secondary-border-radius: 3px;
@@ -51,18 +55,26 @@ html, body {
     text-align: center;
     background: var(--button-background-color);
     color: var(--button-text-color);
+	border-radius: var(--secondary-border-radius);
     display: flex;
 	flex-direction: row;
     align-items: center;
     gap: 10px;
     font-size: 14px;
     padding:10px 20px;
-    font-weight: 600;
-	border-radius: var(--secondary-border-radius);
+    font-weight: 600;	
 }
 
 .button-primary.small {
 	padding:5px 10px;
+}
+
+.button-primary.disabled, 
+.button-alert.disabled {
+    background: var(--button-disabled-background-color);
+    color: var(--button-disabled-text-color);
+	border-radius: var(--secondary-border-radius);
+	cursor:default !important;
 }
 
 label {
@@ -270,7 +282,7 @@ footer {
 		}
 
 .edit-page {
-	position: absolute;
+	position: fixed;
 	bottom: 1em;
 	right:1em;
 	display: flex;

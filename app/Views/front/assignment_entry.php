@@ -1,34 +1,38 @@
-<?php if($type == "text_separator"): ?>
-	<?php foreach( $properties as $property ): ?>
-		<?=$property['content']?>
-	<?php endforeach ?>
+<div class="assignment-entry <?= (bool)$optional ? 'optional' : '' ?>" data-entry-id="<?=$id?>">
+	<?php if($type == "text_separator"): ?>
+		<?php foreach( $properties as $property ): ?>
+			<?=$property['content']?>
+		<?php endforeach ?>
 
-<?php elseif($type == "mcq"): ?>
-	<label><?=$name?></label>
-	<select name="entries[<?=$id?>]">
-		<?php foreach ($properties as $property): ?>
-			<option value="<?= $property['id'] ?>" <?= $property['selected'] ? 'selected' : '' ?>><?= $property['content'] ?></option>
-		<?php endforeach; ?>
-	</select>
+	<?php elseif($type == "mcq"): ?>
+		<label><?=$name?></label>
 
-<?php elseif(preg_match('/^mcq-(\d+)$/', $type, $matches)): ?>
-	<label><?=$name?></label>
+		<select name="entries[<?=$id?>]" <?= (bool)!$optional ? 'required' : '' ?>>
+			<?php foreach ($properties as $property): ?>
+				<option value="<?= $property['id'] ?>" <?= $property['selected'] ? 'selected' : '' ?>><?= $property['content'] ?></option>
+			<?php endforeach; ?>
+		</select>
 
-	<div class="property-container" id="entry_<?=$id?>" data-max-selectable="<?= (int)$matches[1] ?>">
-		<?php foreach ($properties as $property): ?>
-			<div>
-				<input type="checkbox" name="entries[<?=$id?>][]" class="entry-property" id="e_<?=$id?>_p_<?=$property['id']?>" value="<?=$property['id']?>" 
-					<?= $property['selected'] ? 'checked' : '' ?>>
-				<label for="e_<?=$id?>_p_<?=$property['id']?>"><?= $property['content'] ?></label>
-			</div>
-		<?php endforeach; ?>
-	</div>
+	<?php elseif(preg_match('/^mcq-(\d+)$/', $type, $matches)): ?>
+		<label><?=$name?></label>
 
-<?php elseif($type == "text_input"): ?>
-	<label><?=$name?></label>
-	<input type="text" name="entries[<?=$id?>]" value="<?=$value?>"/>
+		<div class="property-container" id="entry_<?=$id?>" data-max-selectable="<?= (int)$matches[1] ?>" <?= (bool)!$optional ? 'data-required' : '' ?>>
+			<?php foreach ($properties as $property): ?>
+				<div>
+					<input type="checkbox" name="entries[<?=$id?>][]" class="entry-property" id="e_<?=$id?>_p_<?=$property['id']?>" value="<?=$property['id']?>" 
+						<?= $property['selected'] ? 'checked' : '' ?>>
+					<label for="e_<?=$id?>_p_<?=$property['id']?>"><?= $property['content'] ?></label>
+				</div>
+			<?php endforeach; ?>
+		</div>
 
-<?php else: ?>
-	<h3><?=$name?></h3>
+	<?php elseif($type == "text_input"): ?>
+		<label><?=$name?></label>
 
-<?php endif ?>
+		<input type="text" name="entries[<?=$id?>]" value="<?=$value?>" <?= (bool)!$optional ? 'required' : '' ?>/>
+
+	<?php else: ?>
+		<h3><?=$name?></h3>
+
+	<?php endif ?>
+</div>

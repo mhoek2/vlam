@@ -79,6 +79,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 	{
 		$routes->post(	'entries_save_order', 		'AssignmentController::entries_save_order/$1');
 		$routes->post(	'update_entry_name', 		'AssignmentController::update_entry_name');
+		$routes->post(	'update_entry_optional', 	'AssignmentController::update_entry_optional');
 		$routes->post(	'update_entry_type', 		'AssignmentController::update_entry_type');
 		$routes->post(	'add_entry', 				'AssignmentController::add_entry/$1');
 		$routes->post(	'delete_entry', 			'AssignmentController::delete_entry/$1');
@@ -100,6 +101,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 	{
 		$routes->post(	'entries_save_order', 		'CaseController::entries_save_order/$1');
 		$routes->post(	'update_entry_name', 		'CaseController::update_entry_name');
+		$routes->post(	'update_entry_optional', 	'CaseController::update_entry_optional');
 		$routes->post(	'update_entry_type', 		'CaseController::update_entry_type');
 		$routes->post(	'add_entry', 				'CaseController::add_entry/$1');
 		$routes->post(	'delete_entry', 			'CaseController::delete_entry/$1');

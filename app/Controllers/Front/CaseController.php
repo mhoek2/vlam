@@ -75,6 +75,15 @@ class CaseController extends BaseController
         $property_id = $this->request->getPost('property_id');
 		
 		$entry = $this->caseEntry->find($entry_id);
+		
+		if ( is_null($entry) ) 
+		{
+			return $this->response->setJSON([
+				'status' 			=> 'error',
+				'new_csrf_token' 	=> csrf_hash(),
+			]);
+		}
+		
 		$entry_type_group = $this->caseEntry->find_group($entry['type']);
 		
 		// check if entry type exists!
@@ -193,6 +202,11 @@ class CaseController extends BaseController
 			
 			array_push( $entry['properties'], $property );
 		}
+		
+		// Count how many are selected
+		$entry['selected_count'] = count(array_filter($entry['properties'], function($property) {
+			return !empty($property['selected']);
+		}));
 	}
 	
 	private function fetch_entry( int $assignment_id, int $case_id, int $entry_num ): bool
@@ -202,6 +216,7 @@ class CaseController extends BaseController
 		$this->data['entry'] = $this->caseEntry->where('case_id', $case_id)->orderBy('sort_order', 'ASC')->offset($entry_num)->limit(1)->first();
 		$this->data['entry_num'] = $entry_num;
 		$this->data['entry_types'] = $this->caseEntry->type_enum;
+		$this->data['is_input_type'] = $this->caseEntry->user_input_type( $this->data['entry']['type'] );
 		
 		// Entry properties
 		$this->data['properties'] = $this->caseEntryProperties->where('entry_id', $this->data['entry']['id'])->orderBy('sort_order', 'ASC')->findAll();

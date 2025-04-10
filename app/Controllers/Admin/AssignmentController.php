@@ -94,22 +94,19 @@ class AssignmentController extends BaseController
 		// Entry types
 		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
 		$this->data['entry_type_to_group'] = $this->assignmentEntry->type_to_group;
-		$this->data['entry_type_group_counts'] = $this->assignmentEntry->group_counts;
 		
-		foreach( $this->data['entries'] as $id => $entry )
+		foreach( $this->data['entries'] as $id => &$entry )
 		{
-			$this->data['entries'][$id]['type_group'] = $this->assignmentEntry->find_group($entry['type']);
-			
 			// should never happen, make sure entry is valid!
 			// this is a fail-safe, assignmentEntry Model has query overrides.
 			if (!$this->assignmentEntry->valid_type($entry['type'])) {
 				unset($this->data['entries'][$id]);
-				
-				// prehaps even remove from DB !?
-				//$this->assignmentEntry->where([
-				//	'assignment_id' => $entry['assignment_id']
-				//])->delete($entry['id']);
+				continue;
 			}
+			
+			$entry['type_group'] = $this->assignmentEntry->find_group($entry['type']);
+			$entry['is_multi_type_group'] = !is_null($entry['type_group']) && ($this->assignmentEntry->group_counts[$entry['type_group']] > 1);
+			$entry['is_input'] = $this->assignmentEntry->user_input_type($entry['type']);
 		}
 		
 		// Case
@@ -188,6 +185,19 @@ class AssignmentController extends BaseController
 
 		$this->assignmentEntry->update($entry_id, ['name' => $new_entry_name]);
 
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
+	}
+	
+	public function update_entry_optional()
+	{
+		$entry_id = $this->request->getPost('entry_id');
+		$value = (int)$this->request->getPost('value');
+		
+		$this->assignmentEntry->update($entry_id, ['optional' => $value]);
+		
 		return $this->response->setJSON([
 			'status' 			=> 'success',
 			'new_csrf_token' 	=> csrf_hash(),

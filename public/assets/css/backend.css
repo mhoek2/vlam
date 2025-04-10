@@ -23,6 +23,10 @@
 	--button-alert-hover-color: rgb(253 236 241);
 	--button-alert-text-color: rgb(161 82 82);	
 	
+	--button-disabled-background-color: rgb(240, 240, 240);
+	--button-disabled-hover-color: rgb(235, 235, 235);
+	--button-disabled-text-color: rgb(160, 160, 160);
+	
 	--primary-border-radius: 10px;
 	--secondary-border-radius: 3px;
 }
@@ -71,6 +75,14 @@
     font-size: 14px;
     padding: 0 10px;
     font-weight: 600;
+}
+
+.button-primary.disabled, 
+.button-alert.disabled {
+    background: var(--button-alert-background-color);
+    color: var(--button-alert-text-color);
+	border-radius: var(--secondary-border-radius);
+	cursor:default !important;
 }
 
 html, body {

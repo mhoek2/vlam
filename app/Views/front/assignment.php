@@ -15,11 +15,20 @@
 			align-items: center;
 			gap: 15px;
 		}
-			.assignment-container .assignment-entry label {
+			.assignment-container .assignment-entry > label {
+				position: relative;
 				min-width: 250px;
 				width: 250px;
 			}
-
+				.assignment-container .assignment-entry.optional > label::after {
+					content: '*Optioneel';
+					position: absolute;
+					left: 0;
+					bottom: -1.5em;
+					font-weight: normal;
+					font-size: 10px;
+					color: var(--primary-color);
+				}
 			.assignment-container .assignment-entry .property-container {
 				display: flex;
 				flex-direction: column;
@@ -42,6 +51,8 @@
 				.assignment-container .assignment-entry .property-container > div label {
 					padding:0;
 					margin:0;
+					min-width: 250px;
+					width: 250px;
 				}
 </style>
 
@@ -62,9 +73,7 @@
         <form method="POST" id="assignment_form">
 			<div class="assignment-container">
 				<?php foreach ($entries as $item) { ?>
-					<div class="assignment-entry">
-						<?=view('front/assignment_entry', $item)?>
-					</div>
+					<?=view('front/assignment_entry', $item)?>
 				<?php }; ?>
 			</div>
 			
@@ -81,26 +90,62 @@
 
 		$('.entry-property').on('change', function() {
 			const propertyContainer = $(this).closest('.property-container');
+			const checkboxes = propertyContainer.find('input[type="checkbox"]');
 			const checkedCount = propertyContainer.find('.entry-property:checked').length;
 
 			if (checkedCount > propertyContainer.data('max-selectable')) {
 				$(this).prop('checked', false);
 			}
+			
+			// reset because browsers can prevent form submissions if a form was previousely marked invalid.
+			checkboxes.each(function() {
+				this.setCustomValidity('');
+			});
 		});
 
+		// Validate if mcq-* type. where multiple options are asked. (check if at least one is selected)
+		function validate_mcq_properties()
+		{
+			let isValid = true;
+
+			$('.property-container').each(function() {
+				const propertyContainer = $(this);
+				
+				if ( typeof propertyContainer.data('required') === 'undefined')
+					return true;
+				
+				const checkboxes = propertyContainer.find('input[type="checkbox"]');
+				const checkedCount = propertyContainer.find('.entry-property:checked').length;
+				
+				// Check if at least one checkbox is selected
+				if ( checkedCount === 0 ) {
+					const checkbox = checkboxes.first();
+					checkbox[0].setCustomValidity('Please select at least one option.');
+					checkbox[0].reportValidity();
+					
+					isValid = false;
+				} 
+			});
+
+			return isValid;
+		}
+		
 		$('#assignment_form').submit(function (event) {
 			event.preventDefault();
-
+			
+			if ( !validate_mcq_properties() )
+				return;
+			
 			const formData = $(this).serialize();
 
 			$.ajax({
 				url: '<?=current_url().'/save'?>',
 				type: 'POST',
 				data: formData,
+				dataType: 'json',
 				success: function(response) {
 					updateCSRFMeta(response);
-
-					window.location = '<?=$post_url?>';
+					//window.location = '<?=$post_url?>';
 				},
 				error: function(xhr, status, error) {
 					// Handle any error
