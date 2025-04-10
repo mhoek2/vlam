@@ -41,6 +41,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-AssignmentController.html#method_update_entry_name"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003Aupdate_entry_optional\u0028\u0029",
+            "name": "update_entry_optional",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-AssignmentController.html#method_update_entry_optional"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003Aupdate_entry_type\u0028\u0029",
             "name": "update_entry_type",
             "summary": "",
@@ -205,6 +210,11 @@ Search.appendIndex(
             "name": "update_entry_name",
             "summary": "",
             "url": "classes/App-Controllers-Admin-CaseController.html#method_update_entry_name"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\CaseController\u003A\u003Aupdate_entry_optional\u0028\u0029",
+            "name": "update_entry_optional",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-CaseController.html#method_update_entry_optional"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\CaseController\u003A\u003Aupdate_entry_type\u0028\u0029",
             "name": "update_entry_type",
@@ -590,6 +600,11 @@ Search.appendIndex(
             "name": "get_sub_assignment",
             "summary": "",
             "url": "classes/App-Controllers-Front-AssignmentController.html#method_get_sub_assignment"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Apost_get_missing_required_entries\u0028\u0029",
+            "name": "post_get_missing_required_entries",
+            "summary": "Return\u0020array\u0020of\u0020missing\u0020required\u0020fields,\u0020NULL\u0020if\u0020sucesfully\u0020validated",
+            "url": "classes/App-Controllers-Front-AssignmentController.html#method_post_get_missing_required_entries"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\AssignmentController\u003A\u003Asave\u0028\u0029",
             "name": "save",
@@ -1101,6 +1116,16 @@ Search.appendIndex(
             "summary": "check\u0020validity\u0020of\u0020an\u0020entry\u0020type\u0020by\u0020matching\u0020with\u0020\u0024this\u002D\u003Etype_enum",
             "url": "classes/App-Models-AssignmentEntry.html#method_valid_type"
         },                {
+            "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Auser_input_type\u0028\u0029",
+            "name": "user_input_type",
+            "summary": "Returns\u0020true\u0020if\u0020entry\u0020type\u0020explicitly\u0020requires\u0020user\u0020input\u0020\u0028question\u0020only\u0029",
+            "url": "classes/App-Models-AssignmentEntry.html#method_user_input_type"
+        },                {
+            "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003AfindAllUserInputs\u0028\u0029",
+            "name": "findAllUserInputs",
+            "summary": "Returns\u0020array\u0020of\u0020entries\u0020that\u0020explicitly\u0020require\u0020user\u0020input\u0020\u0028questions\u0020only\u0029",
+            "url": "classes/App-Models-AssignmentEntry.html#method_findAllUserInputs"
+        },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Afind\u0028\u0029",
             "name": "find",
             "summary": "Override\u003A\u0020Returns\u0020null\u0020if\u0020type\u0020is\u0020invalid",
@@ -1108,7 +1133,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003AfindAll\u0028\u0029",
             "name": "findAll",
-            "summary": "Override\u003A\u0020Do\u0020not\u0020inclide\u0020invalid\u0020types",
+            "summary": "Override\u003A\u0020Do\u0020not\u0020include\u0020invalid\u0020types",
             "url": "classes/App-Models-AssignmentEntry.html#method_findAll"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Afirst\u0028\u0029",
@@ -1245,6 +1270,16 @@ Search.appendIndex(
             "name": "valid_type",
             "summary": "check\u0020validity\u0020of\u0020an\u0020entry\u0020type\u0020by\u0020matching\u0020with\u0020\u0024this\u002D\u003Etype_enum",
             "url": "classes/App-Models-CaseEntry.html#method_valid_type"
+        },                {
+            "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Auser_input_type\u0028\u0029",
+            "name": "user_input_type",
+            "summary": "Returns\u0020true\u0020if\u0020entry\u0020type\u0020explicitly\u0020requires\u0020user\u0020input\u0020\u0028question\u0020only\u0029",
+            "url": "classes/App-Models-CaseEntry.html#method_user_input_type"
+        },                {
+            "fqsen": "\\App\\Models\\CaseEntry\u003A\u003AfindAllUserInputs\u0028\u0029",
+            "name": "findAllUserInputs",
+            "summary": "Returns\u0020array\u0020of\u0020entries\u0020that\u0020explicitly\u0020require\u0020user\u0020input\u0020\u0028questions\u0020only\u0029",
+            "url": "classes/App-Models-CaseEntry.html#method_findAllUserInputs"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Afind\u0028\u0029",
             "name": "find",

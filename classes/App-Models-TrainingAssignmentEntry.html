@@ -346,7 +346,14 @@
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd>Override: Do not inclide invalid types</dd>
+<dd>Override: Do not include invalid types</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Models-AssignmentEntry.html#method_findAllUserInputs">findAllUserInputs()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Returns array of entries that explicitly require user input (questions only)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-AssignmentEntry.html#method_first">first()</a>
@@ -361,6 +368,13 @@
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd>return an array where key represents the type, and the value the group of the type</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Models-AssignmentEntry.html#method_user_input_type">user_input_type()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns true if entry type explicitly requires user input (question only)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-AssignmentEntry.html#method_valid_type">valid_type()</a>
@@ -446,7 +460,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$type_enum</span>
-     = <span class="phpdocumentor-signature__default-value">[[&#039;type&#039; =&gt; &#039;mcq&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze&#039;], [&#039;type&#039; =&gt; &#039;mcq-2&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 2&#039;], [&#039;type&#039; =&gt; &#039;mcq-3&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 3&#039;], [&#039;type&#039; =&gt; &#039;text_input&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Input&#039;], [&#039;type&#039; =&gt; &#039;text_separator&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Separator&#039;]]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[[&#039;type&#039; =&gt; &#039;mcq&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;mcq-2&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 2&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;mcq-3&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 3&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;text_input&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Input&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;text_separator&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Separator&#039;, &#039;is_input&#039; =&gt; false]]</span></code>
 
         <section class="phpdocumentor-description"><p><em><p style="color:red"><b>IMPORTANT!</b>
 Do not change or remove existing type/group 'type' identifiers. This can have negative impact on existing training data.
@@ -524,7 +538,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$allowedFields</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;id&#039;, &#039;type&#039;, &#039;name&#039;, &#039;sort_order&#039;, &#039;info&#039;, &#039;assignment_id&#039;]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;id&#039;, &#039;sort_order&#039;, &#039;name&#039;, &#039;info&#039;, &#039;assignment_id&#039;, &#039;type&#039;, &#039;optional&#039;]</span></code>
 
     
     
@@ -661,7 +675,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/AssignmentEntry.php"><a href="files/app-models-assignmententry.html"><abbr title="app/Models/AssignmentEntry.php">AssignmentEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -790,15 +804,71 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/AssignmentEntry.php"><a href="files/app-models-assignmententry.html"><abbr title="app/Models/AssignmentEntry.php">AssignmentEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">123</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Override: Do not inclide invalid types</p>
+        <p class="phpdocumentor-summary">Override: Do not include invalid types</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">findAll</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$limit</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$offset</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findAllUserInputs">
+        findAllUserInputs()
+        <a href="classes/App-Models-AssignmentEntry.html#method_findAllUserInputs" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/AssignmentEntry.php"><a href="files/app-models-assignmententry.html"><abbr title="app/Models/AssignmentEntry.php">AssignmentEntry.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">119</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns array of entries that explicitly require user input (questions only)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findAllUserInputs</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -846,7 +916,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/AssignmentEntry.php"><a href="files/app-models-assignmententry.html"><abbr title="app/Models/AssignmentEntry.php">AssignmentEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">161</span>
 
     </aside>
 
@@ -903,6 +973,55 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_user_input_type">
+        user_input_type()
+        <a href="classes/App-Models-AssignmentEntry.html#method_user_input_type" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/AssignmentEntry.php"><a href="files/app-models-assignmententry.html"><abbr title="app/Models/AssignmentEntry.php">AssignmentEntry.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">105</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns true if entry type explicitly requires user input (question only)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">user_input_type</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
             </section>
 
 </article>
@@ -1085,8 +1204,10 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
                                             <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_find_group">find_group()</a></li>
                                             <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_find_group_counts">find_group_counts()</a></li>
                                             <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_findAll">findAll()</a></li>
+                                            <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_findAllUserInputs">findAllUserInputs()</a></li>
                                             <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_first">first()</a></li>
                                             <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_type_to_group_table">type_to_group_table()</a></li>
+                                            <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_user_input_type">user_input_type()</a></li>
                                             <li class=""><a href="classes/App-Models-AssignmentEntry.html#method_valid_type">valid_type()</a></li>
                                     </ul>
             </li>
