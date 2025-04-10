@@ -1,4 +1,5 @@
-# Framework:
+# VLAM Training
+[![build](https://github.com/mhoek2/vlam/actions/workflows/docs.yml/badge.svg)](https://github.com/mhoek2/vlam/actions/workflows/docs.yml)
 
 ## CodeIgniter 4
 CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
