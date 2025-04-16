@@ -1861,6 +1861,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-ThirdPArty-TextEditorSummernote.html#property_apiKey"
         },                {
+            "fqsen": "\\parse_entry_meta\u0028\u0029",
+            "name": "parse_entry_meta",
+            "summary": "",
+            "url": "namespaces/default.html#function_parse_entry_meta"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
