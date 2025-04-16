@@ -111,7 +111,8 @@ class TrainingController extends BaseController
 				'sort_order' 	=> $entry['sort_order'],
 				'name' 			=> $entry['name'],
 				'info' 			=> $entry['info'],
-				'type' 			=> $entry['type']
+				'type' 			=> $entry['type'],
+				'optional' 		=> $entry['optional']
 			]);
 			
 			$oldToNewAssignmentEntryIdMap[ $entry['id'] ] = $trainingAssignmentEntry->getInsertID();	// map the cloned assignment entry id
@@ -156,7 +157,8 @@ class TrainingController extends BaseController
 				'sort_order' 	=> $entry['sort_order'],
 				'name' 			=> $entry['name'],
 				'info' 			=> $entry['info'],
-				'type' 			=> $entry['type']
+				'type' 			=> $entry['type'],
+				'optional' 		=> $entry['optional']
 			]);
 			
 			$oldToNewCasesEntryIdMap[ $entry['id'] ] = $trainingCaseEntry->getInsertID();	// map the cloned case entry id
