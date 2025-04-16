@@ -112,7 +112,7 @@
 				const propertyContainer = $(this);
 
 				if (typeof propertyContainer.data('required') === 'undefined')
-					return true;
+					return true; // Jqeury.each equivalent to continue, false for break;
 
 				const checkboxes = propertyContainer.find('input[type="checkbox"]');
 				const checkedCount = propertyContainer.find('.entry-property:checked').length;
