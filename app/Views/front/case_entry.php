@@ -38,7 +38,19 @@
 			.case-entry .properties-aside {
 
 			}
-
+		.case-entry.optional > h2 {
+			position: relative;
+		}
+		.case-entry.optional > h2::after {
+			content: '*Optioneel';
+			position: absolute;
+			left: 0;
+			bottom: -2.5em;
+			font-weight: normal;
+			font-size: 10px;
+			color: var(--primary-color);
+		}
+	
 	.case-progress {
         display: flex;
         align-items: center;
@@ -92,6 +104,7 @@
 
 				<?php elseif($entry['type'] == "mcq" || $mcq_multi): ?>
 					<h2><?=$entry['name']?></h2>
+
 					<div class="properties-container" <?= (bool)!$entry['optional'] ? 'data-required' : '' ?>>
 						<div class="properties">
 							<?php foreach ($entry['properties'] as $property): ?>
@@ -105,10 +118,10 @@
 					</div>
 
 				<?php elseif($entry['type'] == "text_input"): ?>
-					<h3><?=$entry['name']?></h3>
+					<h2><?=$entry['name']?></h2>
 
 				<?php else: ?>
-					<h3><?=$entry['name']?></h3>
+					<h2><?=$entry['name']?></h2>
 
 				<?php endif ?>
 			</div>
