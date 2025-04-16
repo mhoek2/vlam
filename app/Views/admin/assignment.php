@@ -173,10 +173,10 @@
 				}
 			});
 		}
-		
+
 		$(document).on('change', '[id^="entry_optional_checkbox_"]', function() {
 			const entryId = $(this).data('entry-id');
-			const is_optional = $(this).prop( "checked" ) ? 1 : 0;
+			const is_optional = $(this).prop('checked') ? 1 : 0;
 
 			$.ajax({
 				url: '<?= current_url() ?>/update_entry_optional',
@@ -197,7 +197,7 @@
 				}
 			});
 		});
-		
+
 		$(document).on('change', '.entry-type-select', function() {
 			const entryId = $(this).data('entry-id');
 			const newType = $(this).val();

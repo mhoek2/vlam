@@ -58,14 +58,14 @@
 
 <section class="main">
     <?=$sidebar?>
-	
+
     <div class="content">
     	<div class="actions">
     		<?php if ( isset($prev_url) && !is_null($meeting) ): ?>
 				<a class="button-primary small" href="<?=$prev_url?>"><i class="fa-solid fa-chevron-left"></i> Terug naar bijeenkomst <?=$meeting['name']?></a>
 			<?php endif ?>
 		</div>
-       
+
         <h2><?=$assignment['name']?>: <?=$assignment['info']?></h2>
 
         <?=$assignment['intro']?>
@@ -76,9 +76,9 @@
 					<?=view('front/assignment_entry', $item)?>
 				<?php }; ?>
 			</div>
-			
+
 			<?= csrf_field() ?>
-			
+
             <button class="button-primary" type="submit"><?=$sub_assignment ? 'Volgende' : 'Opslaan'?></button>
         </form>
     </div>
@@ -96,7 +96,7 @@
 			if (checkedCount > propertyContainer.data('max-selectable')) {
 				$(this).prop('checked', false);
 			}
-			
+
 			// reset because browsers can prevent form submissions if a form was previousely marked invalid.
 			checkboxes.each(function() {
 				this.setCustomValidity('');
@@ -110,32 +110,32 @@
 
 			$('.property-container').each(function() {
 				const propertyContainer = $(this);
-				
-				if ( typeof propertyContainer.data('required') === 'undefined')
+
+				if (typeof propertyContainer.data('required') === 'undefined')
 					return true;
-				
+
 				const checkboxes = propertyContainer.find('input[type="checkbox"]');
 				const checkedCount = propertyContainer.find('.entry-property:checked').length;
-				
+
 				// Check if at least one checkbox is selected
-				if ( checkedCount === 0 ) {
+				if (checkedCount === 0) {
 					const checkbox = checkboxes.first();
 					checkbox[0].setCustomValidity('Please select at least one option.');
 					checkbox[0].reportValidity();
-					
+
 					isValid = false;
-				} 
+				}
 			});
 
 			return isValid;
 		}
-		
+
 		$('#assignment_form').submit(function (event) {
 			event.preventDefault();
-			
-			if ( !validate_mcq_properties() )
+
+			if (!validate_mcq_properties())
 				return;
-			
+
 			const formData = $(this).serialize();
 
 			$.ajax({

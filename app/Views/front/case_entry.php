@@ -50,7 +50,7 @@
 			font-size: 10px;
 			color: var(--primary-color);
 		}
-	
+
 	.case-progress {
         display: flex;
         align-items: center;
@@ -93,7 +93,7 @@
 				<?php
 					$mcq_multi = preg_match('/^mcq-(\d+)$/', $entry['type'], $matches);
 					$max_selectable = $mcq_multi ? (int)$matches[1] : NULL;
-	
+
 					$mcq_has_selected = ( ($entry['type'] == "mcq" || $mcq_multi) && $entry['selected_count'] !== 0 );
 				?>
 
@@ -145,7 +145,7 @@
 				</button>
 			</div>
 		</form>
-		
+
     </div>
 </section>
 
@@ -153,39 +153,39 @@
 	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
 
-		function set_next_entry_button_state( state )
+		function set_next_entry_button_state(state)
 		{
 			$('#next_entry').toggleClass('disabled', !state);
 		}
-		
+
 		function validate_mcq_properties()
 		{
 			const propertyContainer = $('.properties-container');
-			
-			if ( typeof propertyContainer.data('required') === 'undefined')
+
+			if (typeof propertyContainer.data('required') === 'undefined')
 				return true;
-			
+
 			const checkedCount = propertyContainer.find('#property.selected').length;
-			
+
 			// Check if at least one checkbox is selected
-			if ( checkedCount === 0 )
+			if (checkedCount === 0)
 				return false;
-			
+
 			return true;
 		}
 
 		$('#case_entry_form').submit(function (event) {
 			event.preventDefault();
-			
+
 			const validated = validate_mcq_properties();
-			set_next_entry_button_state( validated );
-			
-			if ( !validated )
+			set_next_entry_button_state(validated);
+
+			if (!validated)
 				return;
-			
+
 			window.location = '<?=$entry_next_url?>';
 		});
-		
+
 		$(document).on('click', '#property', function(){
 			let propertyId = $(this).data('property-id');
 
@@ -237,8 +237,8 @@
 							$(this).removeClass('selected');
 						<?php endif ?>
 					}
-			
-					set_next_entry_button_state( validate_mcq_properties() );
+
+					set_next_entry_button_state(validate_mcq_properties());
 				}.bind(this),
 				error: function(xhr, status, error) {
 					console.log(error);
