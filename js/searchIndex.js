@@ -521,6 +521,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-UserController.html#method_change_password"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserController\u003A\u003Atraining\u0028\u0029",
+            "name": "training",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserController.html#method_training"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\UserController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "",
