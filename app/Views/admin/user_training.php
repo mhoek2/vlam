@@ -61,6 +61,18 @@
 			display:block;
 		}
 	}
+	
+	.container.insight {
+		
+	}
+		.container.insight .tree {
+			padding:0;
+			background:#f1f1f1;
+			max-width: 400px;
+		}
+		.container.insight .result {
+
+		}
 	<?php endif ?>
 </style>
 
@@ -85,6 +97,37 @@
 							<span class="email"><?=$selected_user['email']?></span>
 						</div>
 					</div>
+			</section>
+		</div>
+		
+		<div class="container insight">
+			<section class="tree">
+				<ul>
+				<?php foreach ( $training_tree as $meeting_id => $meeting ) : ?>
+					<ul class="meeting">
+						<div class="title"><?=$meeting['name']?></div>
+						<div class="sub">
+						<?php foreach ( $meeting['assignments'] as $assignment_id => $assignment ) : ?>
+							<ul class="assignment">
+								<div class="title"><?=$assignment['assignment']?></div>
+								<div class="sub">
+								
+								<?php if (!empty($assignment['cases'])) : ?>
+									<ul class="cases">
+									<?php foreach ( $assignment['cases'] as $case_id => $case ) : ?>
+										<div class="title"><?=$case?></div>
+									<?php endforeach ?>
+									</ul>
+								<?php endif ?>
+								</div>
+							</ul>
+						<?php endforeach ?>
+						</div>
+					</ul>
+				<?php endforeach ?>
+				</ul>
+			</section>
+			<section class="result">
 			</section>
 		</div>
     </div>

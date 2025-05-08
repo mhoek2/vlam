@@ -15,6 +15,14 @@ use CodeIgniter\Shield\Validation\ValidationRules;
 
 use App\Models\Users;
 
+use App\Models\Meetings;
+
+use App\Models\Cases;
+use App\Models\Assignments;
+
+use App\Models\TrainingCases;
+use App\Models\TrainingAssignments;
+
 class UserController extends BaseController
 {
 	protected $userModel;
@@ -187,7 +195,41 @@ class UserController extends BaseController
 		if ( empty($selected_user[0]['training_id']))
 			die('user not in a training!');
 		
+
+		//
+		// Fetch training tree
+		// 
+		// todo:
+		// this needs to be the training data, admin fetches from leading tables..
+		//
+		//$this->meetings = new Meetings();
+		//$this->assignments = new Assignments();
+		$this->meetings = new Meetings();
+		$this->assignments = new TrainingAssignments();
+		$this->cases = new TrainingCases();
+		
+		$training_tree = [];
+		
+		foreach( $this->meetings->findAll() as $meeting )
+		{
+			$training_tree[$meeting['id']] = [
+				'name' => $meeting['name'] . " " . $meeting['info'],
+				'assignments' => []
+			];
+			
+			foreach( $this->assignments->where(['training_id' => $selected_user[0]['training_id'], 'meeting_id' => $meeting['id']])->findAll() as $assignment )
+			{
+				$training_tree[$meeting['id']]["assignments"][$assignment['id']]['assignment'] = $assignment['name'] . " " . $assignment['info'];
+				
+				foreach( $this->cases->where(['assignment_id' => $assignment['id']])->findAll() as $case )
+				{
+					$training_tree[$meeting['id']]["assignments"][$assignment['id']]['cases'][$case['id']] = $case['name'] . " " . $case['info'];
+				}
+			}
+		}
+
 		$this->data['selected_user'] = $selected_user[0];
+		$this->data['training_tree'] = &$training_tree;
 		
 		load_header( $this->data );
 		load_footer( $this->data );
