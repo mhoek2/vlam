@@ -123,6 +123,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 	{
 		$routes->get(	'', 						'UserController::index/$1', 						['as' => 'admin.user']);
 		$routes->post(	'', 						'UserController::update/$1', 						['as' => 'admin.user.update']);
+		$routes->get(	'training', 				'UserController::training/$1', 						['as' => 'admin.user.training']);
 		$routes->post(	'delete', 					'UserController::delete/$1', 						['as' => 'admin.user.delete']);
 		$routes->post(	'change_password', 			'UserController::change_password/$1', 				['as' => 'admin.user.change_password']);
 		

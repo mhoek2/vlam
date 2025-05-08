@@ -163,7 +163,7 @@
 							<div class="profile">
 								<?=$item['shortname']?>
 							</div>
-							<a href="<?=base_url(route_to('admin.user', $item['id']))?>">
+							<a href="<?=base_url(route_to('admin.user', $item['user_id']))?>">
 								<?=$item['username']?>
 							</a>
 						</td>

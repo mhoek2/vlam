@@ -176,6 +176,25 @@ class UserController extends BaseController
 		]);
 	}
 	
+    public function training( int $user_id ): string
+    {
+		// User
+		$selected_user = $this->userModel->getUser( $user_id );
+		
+		if ( empty($selected_user) && isset($selected_user[0]) )
+			die('invalid user!');
+		
+		if ( empty($selected_user[0]['training_id']))
+			die('user not in a training!');
+		
+		$this->data['selected_user'] = $selected_user[0];
+		
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+        return view('admin/user_training', $this->data);
+    }
+	
     public function index( int $user_id ): string
     {
 		// User
@@ -188,7 +207,7 @@ class UserController extends BaseController
 		
 		load_header( $this->data );
 		load_footer( $this->data );
-		
+
         return view('admin/user', $this->data);
     }
 	
