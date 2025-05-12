@@ -141,7 +141,7 @@ else {
 								<span><?=$selected_user['username']?></span>
 								<span class="email"><?=$selected_user['email']?></span>
 								<?php if( !empty($selected_user['training_id'])) : ?>
-									<a class="button-primary" href="<?=base_url(route_to('admin.user.training', $selected_user['id']))?>">Inzicht training</a>
+									<a class="button-primary" href="<?=base_url(route_to('admin.user.insight', $selected_user['id']))?>">Inzicht training</a>
 								<?php endif ?>
 							</div>
 

@@ -29,6 +29,9 @@
 	
 	--primary-border-radius: 10px;
 	--secondary-border-radius: 3px;
+	
+	--sidebar-background-image: url(../images/sidebar_bg.png);
+	--sidebar-background: linear-gradient(rgb(58 166 202 / 80%), rgb(58 166 202 / 25%)), var(--sidebar-background-image) var(--primary-color) bottom / 100% no-repeat
 }
 
 * {
