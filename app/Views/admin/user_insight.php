@@ -1,6 +1,10 @@
 <?php echo $header; ?>
 
 <style>
+	:root {
+		--insight-color-selected: #389f45;
+	}
+	
 	.container {
 		display:flex;
 		flex-direction: row;
@@ -196,51 +200,48 @@
 		background: #fff;
 	}
 	
-	.container.insight .result .selected {
-		font-weight: bold;
-		color: var(--primary-color);
-	}
-	
 	.container.insight .result .entry {
 		
 	}
 	
-	.container.insight .result .entry .properties {
-		display:flex;
-		flex-direction: column;
-		gap:5px;
-	    width: fit-content;
-	}
-	.container.insight .result .entry .properties > div {
-		position: relative;
-	}
-	.container.insight .result .entry .properties > div.selected {
-	
-	}
-	.container.insight .result .entry .properties > div::before {
-		font-family: "Font Awesome 6 Free";
-		font-weight: 900;
-		font-size: 14px;
-		color:#fff;
-		width: 25px;
-		height: 25px;
-		line-height: 25px;
-		text-align: center;
-		cursor:pointer;
-	}
-	.container.insight .result .entry .properties > div::before {
-		content: '\f0c8';
-		color: #f1f1f1;
-		margin-right: 10px;
-	}
-	.container.insight .result .entry .properties > div.selected::before {
-		content: '\f14a';
-		color: var(--primary-color);
-	}
-	.container.insight .result .entry .properties,
-	.container.insight .result .entry .value {
-		margin-left:20px;
-	}
+		.container.insight .result .entry .properties {
+			display:flex;
+			flex-direction: column;
+			gap:5px;
+			width: fit-content;
+		}
+			.container.insight .result .entry .properties > div {
+				position: relative;
+			}
+			.container.insight .result .entry .properties > div::before {
+				font-family: "Font Awesome 6 Free";
+				font-weight: 900;
+				font-size: 14px;
+				color:#fff;
+				width: 25px;
+				height: 25px;
+				line-height: 25px;
+				text-align: center;
+				cursor:pointer;
+			}
+			.container.insight .result .entry .properties > div::before {
+				content: '\f0c8';
+				color: #f1f1f1;
+				margin-right: 10px;
+			}
+			.container.insight .result .entry .properties > div.selected::before {
+				content: '\f14a';
+				color: var(--insight-color-selected);
+			}
+		.container.insight .result .entry .selected,
+		.container.insight .result .entry .value {
+			font-weight: bold;
+			color: var(--insight-color-selected);
+		}
+		.container.insight .result .entry .properties,
+		.container.insight .result .entry .value {
+			margin-left:20px;
+		}
 </style>
 
 <div class="breadcrumbs">
