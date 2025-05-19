@@ -14,12 +14,13 @@ use CodeIgniter\Shield\Traits\Viewable;
 use CodeIgniter\Shield\Validation\ValidationRules;
 
 use App\Models\Users;
-use App\Models\Meetings;
 
+use App\Models\Meetings;
 use App\Models\Assignments;					// for admin debug
 use App\Models\AssignmentEntry;				// for admin debug
 use App\Models\AssignmentEntryProperties;	// for admin debug
 use App\Models\AssignmentResult;			// for admin debug
+use App\Models\TrainingMeetings;
 use App\Models\TrainingAssignments;
 use App\Models\TrainingAssignmentEntry;
 use App\Models\TrainingAssignmentEntryProperties;
@@ -50,15 +51,13 @@ class UserInsightController extends BaseController
 		// todo:
 		// for admin" the 'leading' training data tables.
 		// for participants" the actual training data tables.
+		// see: Front::BasecController::initSessionController()
 		//
 		
-		// admin
-		//$this->meetings = new Meetings();
-		//$this->assignments = new Assignments();
-		//$this->cases = new Cases();
-		
-		$this->meetings = new Meetings();
-		
+		// Meetings
+		$this->meetings 					= new TrainingMeetings();
+	
+		// Assignments
 		$this->assignments					= new TrainingAssignments();
 		$this->assignmentEntry 				= new TrainingAssignmentEntry();
         $this->assignmentEntryProperties 	= new TrainingAssignmentEntryProperties();
@@ -205,11 +204,6 @@ class UserInsightController extends BaseController
 		//
 		// Fetch training tree
 		// 
-		// todo:
-		// this needs to be the training data, admin fetches from leading tables..
-		//
-		//$this->meetings = new Meetings();
-		//$this->assignments = new Assignments();
 		$this->set_models( $user_id );
 		
 		$training_tree = [];

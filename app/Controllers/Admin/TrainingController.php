@@ -21,6 +21,7 @@ use App\Models\Cases;
 use App\Models\CaseEntry;
 use App\Models\CaseEntryProperties;
 
+use App\Models\TrainingMeetings;
 use App\Models\TrainingAssignments;
 use App\Models\TrainingAssignmentEntry;
 use App\Models\TrainingAssignmentEntryProperties;
@@ -44,6 +45,9 @@ class TrainingController extends BaseController
 
 	private function clearTraining( int $training_id )
 	{
+		$trainingMeetings = new TrainingMeetings();
+		$trainingMeetings->where('training_id', $training_id)->delete();	
+		
 		$trainingAssignments = new TrainingAssignments();
 		$trainingAssignments->where('training_id', $training_id)->delete();	
 	}
@@ -67,6 +71,7 @@ class TrainingController extends BaseController
 		//
 		// a offline 'handbook' system is no different, pupils do not get new handbooks during a semester.
 
+		$trainingMeetings 					= new TrainingMeetings();
 		$trainingAssignments 				= new TrainingAssignments();
         $trainingAssignmentEntry 			= new TrainingAssignmentEntry();
         $trainingAssignmentEntryProperties 	= new TrainingAssignmentEntryProperties();
@@ -81,6 +86,24 @@ class TrainingController extends BaseController
 		$this->clearTraining( $training_id );
 		
 		//
+		// Meetings
+		//
+		$oldToNewMeetingIdMap = [];
+		
+		$meetings = (new Meetings())->findAll();
+		foreach ($meetings as $meeting) 
+		{
+			$trainingMeetings->insert([
+				'training_id'	=> $training_id,
+				'name' 			=> $meeting['name'],
+				'info' 			=> $meeting['info'],
+				'intro' 		=> $meeting['intro'],
+			]);
+
+			$oldToNewMeetingIdMap[ $meeting['id'] ] = $trainingMeetings->getInsertID();	// map the cloned meeting id
+		}
+			
+		//
 		// Clone assignments
 		//
 		$oldToNewAssignmentIdMap = [];
@@ -91,7 +114,7 @@ class TrainingController extends BaseController
 		{
 			$trainingAssignments->insert([
 				'training_id'	=> $training_id,
-				'meeting_id' 	=> $assignment['meeting_id'],
+				'meeting_id' 	=> $oldToNewMeetingIdMap[ $assignment['meeting_id'] ],	// Set the cloned assignment id
 				'name' 			=> $assignment['name'],
 				'sort_order' 	=> $assignment['sort_order'],
 				'intro' 		=> $assignment['intro'],
@@ -300,13 +323,15 @@ class TrainingController extends BaseController
 
     public function index( $training_id ): string
     {
-		// Meeting
-		$this->data['meetings'] = $this->meetings->findAll();
-
-		$this->data['meeting_schedule'] = $schedule = $this->TrainingSchedule->getSchedule( $training_id );
-
 		// Training
         $this->data['training'] = $this->trainings->find( $training_id );
+		
+		// Meeting
+		$trainingMeetings = new TrainingMeetings();
+		
+		$this->data['meetings'] = $trainingMeetings->where(["training_id" => $training_id])->findAll();
+
+		$this->data['meeting_schedule'] = $schedule = $this->TrainingSchedule->getSchedule( $training_id );
 
 		$this->data['training_started'] = !is_null($this->data['training']['started']);
 		$this->data['training_stopped'] = !is_null($this->data['training']['stopped']);

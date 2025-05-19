@@ -10,13 +10,15 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\User;
-use App\Models\Meetings;
 use App\Models\Trainings;
 
+use App\Models\Meetings;					// for admin debug
 use App\Models\Assignments;					// for admin debug
 use App\Models\AssignmentEntry;				// for admin debug
 use App\Models\AssignmentEntryProperties;	// for admin debug
 use App\Models\AssignmentResult;			// for admin debug
+
+use App\Models\TrainingMeetings;
 use App\Models\TrainingAssignments;
 use App\Models\TrainingAssignmentEntry;
 use App\Models\TrainingAssignmentEntryProperties;
@@ -107,6 +109,10 @@ abstract class BaseController extends Controller
 		if ( !$this->data['user'] )
 			return;
 
+		// Meeting (also visible when not assigned to a training on homepage )
+		if ( $this->data['user'] && !is_null($this->data['user']['training_id']) )
+			$this->meetings 	= new TrainingMeetings();
+		
 		// Validate what training a user or admin is in, and if it is in what state.<br>
 		// Perform redirects to home if the training has ended.
 		$this->data['training_locked'] = $this->validTrainingForUser( $this->data['user'] );
@@ -115,7 +121,10 @@ abstract class BaseController extends Controller
 			if ( current_url() !== url_to('home') )
 				$this->response->redirect( base_url(route_to('home')) );
 			else
+			{
+				$this->meetings 	= new Meetings();	// to display locked meeting data on home
 				return;
+			}
 		}
 		
         // Assignment
@@ -148,13 +157,12 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = service('session');
 		
         $this->user 		= new User();
-        $this->meetings 	= new Meetings();
 		
 	    $this->data = [];
 
 		// User
 		$this->data['user'] = $this->user->getUserInfo();	
-
+		
         $this->initSessionController();
 
 		// Meeting
