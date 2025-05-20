@@ -331,7 +331,7 @@ class TrainingController extends BaseController
 		
 		$this->data['meetings'] = $trainingMeetings->where(["training_id" => $training_id])->findAll();
 
-		$this->data['meeting_schedule'] = $schedule = $this->TrainingSchedule->getSchedule( $training_id );
+		$this->data['meeting_schedule'] = $schedule = $this->TrainingSchedule->getMeetingSchedule( $training_id );
 
 		$this->data['training_started'] = !is_null($this->data['training']['started']);
 		$this->data['training_stopped'] = !is_null($this->data['training']['stopped']);
