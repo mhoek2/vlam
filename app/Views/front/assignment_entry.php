@@ -29,8 +29,8 @@
 	<?php elseif($type == "text_input"): ?>
 		<label><?=$name?></label>
 
-		<input type="text" name="entries[<?=$id?>]" value="<?=$value?>" <?= (bool)!$optional ? 'required' : '' ?>/>
-
+		<!--<input type="text" name="entries[<?=$id?>]" value="<?=$value?>" <?= (bool)!$optional ? 'required' : '' ?>/>-->
+		<textarea name="entries[<?=$id?>]" <?= (bool)!$optional ? 'required' : '' ?>><?=$value?></textarea>
 	<?php else: ?>
 		<h3><?=$name?></h3>
 
