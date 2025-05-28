@@ -33,6 +33,15 @@ class AssignmentController extends BaseController
 		
 		$this->cases = new Cases();
     }
+	
+	private function extractYouTubeID( $url ) {
+		$pattern = '/(?:youtube\.com\/.*v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/';
+
+		if ( preg_match( $pattern, $url, $matches ) )
+			return $matches[1];
+
+		return null;
+	}
 
 	public function save( $assignment_id )
 	{
@@ -162,6 +171,15 @@ class AssignmentController extends BaseController
 			$this->assignmentEntryProperties->insert([
 				'entry_id' 	=> $insert_id,
 				'content' 	=> "",
+			]);
+		}
+		
+		if ($new_entry_type === "video_youtube") {
+			$has_video_id = $this->extractYouTubeID( $new_entry_name );
+			
+			$this->assignmentEntryProperties->insert([
+				'entry_id' 	=> $insert_id,
+				'content' 	=> $has_video_id ? $has_video_id : "",
 			]);
 		}	
 		

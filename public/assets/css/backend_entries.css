@@ -112,6 +112,11 @@
 						align-items: center;
 						cursor: move;
 					}
+					.grid-container .entry .properties ul[id^="properties-list"] li label.property-label {
+						white-space: nowrap;
+						border-right: 1px solid #f1f1f1;
+						padding: 0 10px;
+					}
 					.grid-container .entry .properties ul[id^="properties-list"] li .delete-property,
 					.grid-container .entry .properties ul[id^="properties-list"] li .save-property {
 						all:unset;
@@ -142,7 +147,9 @@
 				}
 	
 			.grid-container .entry[data-type="text_separator"] .properties-actions,
-			.grid-container .entry[data-type="text_separator"] .handle {
+			.grid-container .entry[data-type="text_separator"] .handle,
+			.grid-container .entry[data-type="video_youtube"] .properties-actions,
+			.grid-container .entry[data-type="video_youtube"] .handle {
 				display:none !important;
 			}
 			.grid-container .entry[data-type="text_separator"] li {

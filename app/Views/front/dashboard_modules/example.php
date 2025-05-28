@@ -31,5 +31,4 @@ function parse_entry_meta( $data ){
 parse_entry_meta( $meta['value'] );
 ?>
 
-<b>data:</b><br>
-<?= $meta['value'] ?>
+<?php  // $meta['value'] ?>

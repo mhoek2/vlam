@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 19, 2025 at 10:04 AM
+-- Generation Time: May 28, 2025 at 01:52 PM
 -- Server version: 8.0.42-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -52,7 +52,7 @@ CREATE TABLE `assignment_entry` (
   `name` text NOT NULL,
   `info` text NOT NULL,
   `assignment_id` int NOT NULL,
-  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','video_youtube','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -136,12 +136,12 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-05-19 06:49:41', '2025-02-05 09:20:35', '2025-05-19 06:49:41'),
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-05-28 11:01:35', '2025-02-05 09:20:35', '2025-05-28 11:01:35'),
 (3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-28 19:09:26', '2025-02-13 08:21:52', '2025-03-28 19:09:26'),
 (4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
 (5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
 (6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14'),
-(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$aGbP0bWzJ4bxjHZjtytlDOfnyc3qtC4..pLaKPsAH5eGXnK8dhY5e', NULL, NULL, 0, '2025-05-19 07:00:04', '2025-02-13 08:23:40', '2025-05-19 07:00:04'),
+(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$aGbP0bWzJ4bxjHZjtytlDOfnyc3qtC4..pLaKPsAH5eGXnK8dhY5e', NULL, NULL, 0, '2025-05-28 11:42:41', '2025-02-13 08:23:40', '2025-05-28 11:42:41'),
 (15, 15, 'email_password', NULL, 'user6@vlam.nl', '$2y$12$y91iuFAsF4LxeHRND0zQ3ek1vUovbQTk.CHOk3EGVbatUJgh3YP8a', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:22');
 
 -- --------------------------------------------------------
@@ -373,7 +373,7 @@ CREATE TABLE `training_assignment_entry` (
   `name` text NOT NULL,
   `info` text NOT NULL,
   `assignment_id` int NOT NULL,
-  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `type` enum('mcq','text_input','text_separator','mcq-2','mcq-3','video_youtube','') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 

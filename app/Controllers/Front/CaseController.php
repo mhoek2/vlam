@@ -7,7 +7,7 @@ use App\Controllers\Front\BaseController;
 
 class CaseController extends BaseController
 {
-	private function is_complete_action( string $controller_name )
+	private function is_complete_action( $controller_name )
 	{
 		$controller_class = "App\Controllers\Front\CompleteCaseActions\\" . $controller_name;
 		

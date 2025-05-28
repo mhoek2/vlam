@@ -25,7 +25,8 @@ class AssignmentEntry extends Model
         ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2',	'is_input' => true],
         ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3',	'is_input' => true],
         ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input',		'is_input' => true], 
-        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator',	'is_input' => false]
+        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator',	'is_input' => false],
+        ['type' => 'video_youtube',    	'group' => 'video', 'name' => 'Youtube video',	'is_input' => false]
     ];
 
 	public $type_to_group;	// reference lookup-table for what group a type is part of

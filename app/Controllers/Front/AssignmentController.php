@@ -6,7 +6,7 @@ use App\Controllers\Front\BaseController;
 
 class AssignmentController extends BaseController
 {
-	private function is_sub_assignment( string $controller_name )
+	private function is_sub_assignment( $controller_name )
 	{
 		$controller_class = "App\Controllers\Front\SubAssignments\\" . $controller_name;
 		
@@ -21,7 +21,7 @@ class AssignmentController extends BaseController
 	{
 		if (is_null($assignment))
 			return false;
-		
+
 		return $this->is_sub_assignment( $assignment['sub_assignment'] ) ? $assignment['sub_assignment'] : false;
 	}
 	

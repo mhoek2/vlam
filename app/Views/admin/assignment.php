@@ -381,6 +381,21 @@
 
 							<?=$text_editor->assign_editor('"#" + textareaId')?>
 						}
+						else if(entryType === 'video_youtube')
+						{
+							propertyList.append(`
+								<li data-property-id="${property.id}">
+									<div class="handle">
+										<i class="fa-solid fa-grip-vertical"></i>
+									</div>
+									<label class="property-label">Youtube URL</label>
+									<input type="text" id="mcq-property" class="edit-property" data-property-id="${property.id}" value="${property.content}" placeholder="video ID">
+									<button class="save-property" data-property-id="${property.id}">
+										<i class="fa-regular fa-floppy-disk"></i>
+									</button>
+								</li>
+							`);
+						}
 					});
 
 					//if (!entryType.startsWith("mcq") )
@@ -418,8 +433,12 @@
 			});
 		}
 
-
-
+		function extractYouTubeID(url) {
+			var regex = /(?:youtube\.com\/.*v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/;
+			var match = url.match(regex);
+			return match ? match[1] : null;
+		}
+		
 		$(document).off('blur', '#mcq-property').on('blur', '#mcq-property', function () {
 			const entryType = $(this).closest('.entry').data('type');
 			const propertyId = $(this).data('property-id');
@@ -427,9 +446,16 @@
 			let newPropertyContent = $(this).val();
 
 			// For CKEDITOR
-			if(entryType === 'text_separator') {
+			if (entryType === 'text_separator') {
 				const textareaId = '#ckeditor_' + propertyId;
 				newPropertyContent = <?=$text_editor->get('textareaId')?>
+			}
+				
+			if (entryType === 'video_youtube') {
+				const videoId = extractYouTubeID( $(this).val() );
+				
+				if (videoId)
+					$(this).val( videoId );
 			}
 
 			console.log('entryType: ' + entryType);
@@ -447,7 +473,11 @@
 				const textareaId = '#ckeditor_' + propertyId;
 				newPropertyContent = <?=$text_editor->get('textareaId')?>
 			}
-
+				
+			if (entryType === 'video_youtube') {
+				console.log(2);
+			}
+				
 			if (newPropertyContent.trim()) {
 				$.ajax({
 					url: '<?=current_url()?>/update_property',
