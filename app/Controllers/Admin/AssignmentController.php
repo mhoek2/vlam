@@ -113,7 +113,11 @@ class AssignmentController extends BaseController
 				continue;
 			}
 			
+			$type = $this->assignmentEntry->get_type($entry['type']);
+			$entry['type_short'] = !is_null($type) ? $type['short'] : "n/a";
+			
 			$entry['type_group'] = $this->assignmentEntry->find_group($entry['type']);
+			
 			$entry['is_multi_type_group'] = !is_null($entry['type_group']) && ($this->assignmentEntry->group_counts[$entry['type_group']] > 1);
 			$entry['is_input'] = $this->assignmentEntry->user_input_type($entry['type']);
 		}

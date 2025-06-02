@@ -21,12 +21,12 @@ class AssignmentEntry extends Model
 	 * When adding types, <u>make sure</u> to add the new 'type' to the enum in the database.
 	 */
     public $type_enum = [ 
-        ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze',			'is_input' => true],
-        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2',	'is_input' => true],
-        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3',	'is_input' => true],
-        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input',		'is_input' => true], 
-        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator',	'is_input' => false],
-        ['type' => 'video_youtube',    	'group' => 'video', 'name' => 'Youtube video',	'is_input' => false]
+        ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze',			'is_input' => true,		'short' => 'Keuze'],
+        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2',	'is_input' => true,		'short' => 'Keuze'],
+        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3',	'is_input' => true,		'short' => 'Keuze'],
+        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input',		'is_input' => true,		'short' => 'Invoer'], 
+        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator',	'is_input' => false,	'short' => 'Scheiding'],
+        ['type' => 'video_youtube',    	'group' => 'video', 'name' => 'Youtube video',	'is_input' => false,	'short' => 'Video']
     ];
 
 	public $type_to_group;	// reference lookup-table for what group a type is part of
@@ -112,6 +112,20 @@ class AssignmentEntry extends Model
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Returns true if entry type explicitly requires user input (question only)
+	 */	
+	public function get_type( $type ) : array
+	{
+		foreach ($this->type_enum as $item) {
+			if ($item['type'] === $type) {
+				return $item;
+			}
+		}
+
+		return null;
 	}
 	
 	/**

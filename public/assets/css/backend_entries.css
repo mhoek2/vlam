@@ -41,6 +41,12 @@
 					background: var(--button-background-color);
 					margin: auto 0;
 				}
+				.grid-container .entry .details .type {
+					align-items: center;
+					width: 100px;
+					padding-left: 10px;
+					display: flex;
+				}
 				.grid-container .entry .details h3 {
 					flex:1;
 					text-align: left;

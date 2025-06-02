@@ -4,6 +4,10 @@
 			<i class="fa-solid fa-grip-vertical"></i>
 		</div>
 		
+		<div class="type"><?=$type_short?></div>
+		
+		<div class="separator"></div>
+		
 		<h3 class="entry-name contenteditable" data-entry-id="<?= $id ?>" contenteditable="true"><?= $name ?></h3>
 
 		<?php if ( $is_multi_type_group ): ?>

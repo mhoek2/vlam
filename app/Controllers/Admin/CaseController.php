@@ -105,8 +105,11 @@ class CaseController extends BaseController
 				continue;
 			}
 			
-			
+			$type = $this->caseEntry->get_type($entry['type']);
+			$entry['type_short'] = !is_null($type) ? $type['short'] : "n/a";
+
 			$entry['type_group'] = $this->caseEntry->find_group($entry['type']);
+
 			$entry['is_multi_type_group'] = !is_null($entry['type_group']) && ($this->caseEntry->group_counts[$entry['type_group']] > 1);
 			$entry['is_input'] = $this->caseEntry->user_input_type($entry['type']);
 		}
