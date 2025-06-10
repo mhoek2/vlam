@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2025 at 10:13 AM
+-- Generation Time: Jun 10, 2025 at 10:22 AM
 -- Server version: 8.0.42-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -97,19 +97,6 @@ CREATE TABLE `auth_groups_users` (
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `auth_groups_users`
---
-
-INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
-(2, 2, 'admin', '2025-02-05 09:20:35'),
-(3, 3, 'user', '2025-02-13 08:21:52'),
-(4, 4, 'user', '2025-02-13 08:22:31'),
-(5, 5, 'user', '2025-02-13 08:22:57'),
-(6, 6, 'user', '2025-02-13 08:23:14'),
-(7, 7, 'user', '2025-02-13 08:23:40'),
-(15, 15, 'user', '2025-03-11 13:30:22');
-
 -- --------------------------------------------------------
 
 --
@@ -136,12 +123,12 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-06-04 08:05:42', '2025-02-05 09:20:35', '2025-06-04 08:05:42'),
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-06-10 08:15:51', '2025-02-05 09:20:35', '2025-06-10 08:15:51'),
 (3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-28 19:09:26', '2025-02-13 08:21:52', '2025-03-28 19:09:26'),
 (4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
 (5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
 (6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14'),
-(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$aGbP0bWzJ4bxjHZjtytlDOfnyc3qtC4..pLaKPsAH5eGXnK8dhY5e', NULL, NULL, 0, '2025-06-04 07:33:10', '2025-02-13 08:23:40', '2025-06-04 07:33:10'),
+(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$aGbP0bWzJ4bxjHZjtytlDOfnyc3qtC4..pLaKPsAH5eGXnK8dhY5e', NULL, NULL, 0, '2025-06-05 12:01:05', '2025-02-13 08:23:40', '2025-06-05 12:01:05'),
 (15, 15, 'email_password', NULL, 'user6@vlam.nl', '$2y$12$y91iuFAsF4LxeHRND0zQ3ek1vUovbQTk.CHOk3EGVbatUJgh3YP8a', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:22');
 
 -- --------------------------------------------------------
@@ -524,6 +511,23 @@ CREATE TABLE `training_user_meta` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `uploads`
+--
+
+CREATE TABLE `uploads` (
+  `id` int NOT NULL,
+  `global` int NOT NULL DEFAULT '0',
+  `user_id` int NOT NULL,
+  `path` text NOT NULL,
+  `filename` text NOT NULL,
+  `extension` text NOT NULL,
+  `mime_type` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -792,6 +796,12 @@ ALTER TABLE `training_user_meta`
   ADD UNIQUE KEY `user_id` (`user_id`,`name`(200));
 
 --
+-- Indexes for table `uploads`
+--
+ALTER TABLE `uploads`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -837,7 +847,7 @@ ALTER TABLE `assignment_result`
 -- AUTO_INCREMENT for table `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_identities`
@@ -987,6 +997,12 @@ ALTER TABLE `training_users`
 -- AUTO_INCREMENT for table `training_user_meta`
 --
 ALTER TABLE `training_user_meta`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `uploads`
+--
+ALTER TABLE `uploads`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --

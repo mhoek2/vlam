@@ -110,7 +110,9 @@ abstract class BaseController extends Controller
 			return;
 
 		// Meeting (also visible when not assigned to a training on homepage )
-		if ( $this->data['user'] && !is_null($this->data['user']['training_id']) )
+		if ( $this->data['user'] && is_null($this->data['user']['training_id']) )
+			$this->meetings 	= new Meetings();
+		else
 			$this->meetings 	= new TrainingMeetings();
 		
 		// Validate what training a user or admin is in, and if it is in what state.<br>
@@ -122,7 +124,7 @@ abstract class BaseController extends Controller
 				$this->response->redirect( base_url(route_to('home')) );
 			else
 			{
-				$this->meetings 	= new Meetings();	// to display locked meeting data on home
+				$this->meetings 	= new Meetings();
 				return;
 			}
 		}

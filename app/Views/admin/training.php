@@ -60,6 +60,13 @@
 		max-width:450px;
 		margin: 1em 0;
 	}
+		.meeting-schedule .empty {
+			min-height: 300px;
+			display: flex;
+			text-align: center;
+			align-items: center;
+			justify-content: center;
+		}
 		.meeting-schedule > div {
 			display: flex;
 			flex-direction: row;
@@ -107,6 +114,11 @@
 				<section class="block">
 					<div class="meeting-schedule">
 						<h3>Agenda</h3>
+						<?php if ( !$training_started && empty($meetings) ) {?>
+							<div class="empty">
+								Beschikbaar wanneer de training wordt gestart.
+							</div>
+						<?php } ?>
 						<?php foreach($meetings as $item): ?>
 							<div>
 								<label for="meeting-<?= $item['id'] ?>">

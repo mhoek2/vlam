@@ -9,8 +9,9 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * front
  */
-$routes->get(	'/', 		'Front\Home::index', 			['filter' => \App\Filters\AuthFilterGuest::class]);
-$routes->get(	'/home',	'Front\Home::application', 		['as' => 'home', 'filter' => \App\Filters\AuthFilterSession::class]);
+$routes->get(	'/', 		'Front\Home::index', 							['filter' => \App\Filters\AuthFilterGuest::class]);
+$routes->get(	'/home',	'Front\Home::application', 						['as' => 'home', 'filter' => \App\Filters\AuthFilterSession::class]);
+$routes->get(	'download/(:any)',	'DownloadController::index/$1', 		['as' => 'front.download', 'namespace' => 'App\Controllers\Front']);
 
 // Meeting
 $routes->group('meeting/(:num)', ['namespace' => 'App\Controllers\Front', 'filter' => \App\Filters\AuthFilterSession::class], function ($routes) 
@@ -129,6 +130,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 		$routes->get(	'insight', 					'UserInsightController::index/$1', 					['as' => 'admin.user.insight']);
 		$routes->post(	'insight_result', 			'UserInsightController::get_result/$1', 			['as' => 'admin.user.insight_result']);
 		
+	});
+	
+	// Files
+	$routes->group('files/', function ($routes)
+	{
+		$routes->get(	'', 						'FilesController::index', 							['as' => 'admin.files']);
+		$routes->post(	'upload', 					'FilesController::upload', 							['as' => 'admin.files_upload']);
+		$routes->post(	'delete_file', 				'FilesController::delete_file', 					['as' => 'admin.files_delete']);
 	});
 });
 

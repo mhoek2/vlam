@@ -44,6 +44,7 @@
             <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.meetings'))?>"><i class="fa-solid fa-chalkboard-teacher"></i> Programma</a></li>
             <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.trainings'))?>"><i class="fa-solid fa-users"></i> Trainingen</a></li>
             <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.users'))?>"><i class="fa-solid fa-user-cog"></i> Gebruikers</a></li>
+            <li class="menu-item hidden"><a href="<?=base_url(route_to('admin.files'))?>"><i class="fa-solid fa-cloud-arrow-up"></i> Documenten</a></li>
         </ul>
         <ul>
             <li class="logo">

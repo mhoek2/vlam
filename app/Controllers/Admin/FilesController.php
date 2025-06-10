@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Controllers\Admin;
+
+use App\Controllers\Admin\BaseController;
+
+use CodeIgniter\Files\File;
+
+use App\Models\Uploads;
+
+class FilesController extends BaseController
+{
+	protected $uploads;
+	
+    /*public function initController(\CodeIgniter\HTTP\RequestInterface $request,
+                                    \CodeIgniter\HTTP\ResponseInterface $response,
+                                    \Psr\Log\LoggerInterface $logger)
+    {
+        parent::initController($request, $response, $logger);
+        helper('form');
+    }*/
+	
+    public function __construct() {
+		helper('form');
+		
+		$this->uploads = new Uploads();
+    }
+	
+	private function load_common_data()
+	{
+		load_header( $this->data );
+		load_footer( $this->data );
+		
+		$this->data['errors'] = [];
+		$this->data['uploads'] = $this->uploads->where(['global' => 1])->findAll();
+	}
+
+    public function index(): string
+    {
+		$this->load_common_data();
+		
+        return view('admin/files', $this->data);
+    }
+	
+	public function delete_file(){
+		$file_id = $this->request->getPost('file_id');
+
+		if (empty($file_id)) {
+            return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
+        }
+
+		$file_info = $this->uploads->find($file_id);
+
+		$filepath = WRITEPATH . $file_info['path'];
+
+		if ( file_exists( $filepath ) && unlink( $filepath ) ) 
+		{
+			$this->uploads->delete($file_id);
+		}
+		
+		return $this->response->setJSON(['status' => 'success', 'new_csrf_token'=> csrf_hash()]);
+	}
+	
+    public function upload()
+    {
+        $validationRule = [
+            'userfile' => [
+                'label' => 'Image File',
+                'rules' => [
+                    'uploaded[userfile]',
+					'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/plain]',
+					'max_size[userfile,10240]',
+                ],
+            ],
+        ];
+		
+        if ( !$this->validateData([], $validationRule ) ) 
+		{
+			$this->load_common_data();
+			
+            $this->data['errors'] = $this->validator->getErrors();
+
+            return view('admin/files', $this->data);
+        }
+		
+		$img = $this->request->getFile('userfile');
+
+        if ( !$img->hasMoved() ) 
+		{
+			$sub_directory = 'uploads/training_data/';
+			$directory = WRITEPATH . $sub_directory;
+			
+			if ( !is_dir( $directory ) )
+				mkdir( $directory, 0755, true );
+			
+			$img->move( $directory, $img->getClientName() );
+			
+			$filepath = $directory . $img->getClientName();
+			$file_info = new File($filepath);
+			
+			$this->uploads->insert([
+				'user_id' 		=> $this->data['user']['id'], 
+				'global'		=> 1,
+				'path' 			=> $sub_directory . $img->getName(), 
+				'filename' 		=> $img->getName(), 
+				'extension' 	=> $img->getClientExtension(), 
+				'mime_type' 	=> $img->getClientMimeType(), 
+			]);
+
+			$insert_id = $this->uploads->insertID();
+			
+			$this->load_common_data();
+			
+			$this->data['success'] = sprintf("uploaded to: %s with id %d", $filepath, $insert_id);
+			
+            return view('admin/files', $this->data);
+        }
+	}
+	
+}
