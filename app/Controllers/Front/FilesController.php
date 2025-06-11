@@ -167,6 +167,7 @@ class FilesController extends BaseController
 				'filename' 		=> $file->getName(), 
 				'extension' 	=> $file->getClientExtension(), 
 				'mime_type' 	=> $file->getClientMimeType(), 
+				'bytes' 		=> $file->getSizeByUnit(), 
 			]);
 
 			$insert_id = $this->uploads->insertID();

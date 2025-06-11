@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 10, 2025 at 10:22 AM
+-- Generation Time: Jun 11, 2025 at 02:32 PM
 -- Server version: 8.0.42-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -123,12 +123,12 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-06-10 08:15:51', '2025-02-05 09:20:35', '2025-06-10 08:15:51'),
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-06-11 07:34:30', '2025-02-05 09:20:35', '2025-06-11 07:34:30'),
 (3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-28 19:09:26', '2025-02-13 08:21:52', '2025-03-28 19:09:26'),
 (4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
 (5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
-(6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14'),
-(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$aGbP0bWzJ4bxjHZjtytlDOfnyc3qtC4..pLaKPsAH5eGXnK8dhY5e', NULL, NULL, 0, '2025-06-05 12:01:05', '2025-02-13 08:23:40', '2025-06-05 12:01:05'),
+(6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, '2025-06-11 11:13:02', '2025-02-13 08:23:13', '2025-06-11 11:13:02'),
+(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$aGbP0bWzJ4bxjHZjtytlDOfnyc3qtC4..pLaKPsAH5eGXnK8dhY5e', NULL, NULL, 0, '2025-06-11 12:06:58', '2025-02-13 08:23:40', '2025-06-11 12:06:58'),
 (15, 15, 'email_password', NULL, 'user6@vlam.nl', '$2y$12$y91iuFAsF4LxeHRND0zQ3ek1vUovbQTk.CHOk3EGVbatUJgh3YP8a', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:22');
 
 -- --------------------------------------------------------
@@ -517,11 +517,12 @@ CREATE TABLE `training_user_meta` (
 CREATE TABLE `uploads` (
   `id` int NOT NULL,
   `global` int NOT NULL DEFAULT '0',
-  `user_id` int NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
   `path` text NOT NULL,
   `filename` text NOT NULL,
   `extension` text NOT NULL,
   `mime_type` text NOT NULL,
+  `bytes` int NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -799,7 +800,8 @@ ALTER TABLE `training_user_meta`
 -- Indexes for table `uploads`
 --
 ALTER TABLE `uploads`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `uploads_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -1166,6 +1168,12 @@ ALTER TABLE `training_users`
 --
 ALTER TABLE `training_user_meta`
   ADD CONSTRAINT `training_user_meta_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `training_users` (`user_id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `uploads`
+--
+ALTER TABLE `uploads`
+  ADD CONSTRAINT `uploads_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `user_meta`

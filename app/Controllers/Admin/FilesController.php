@@ -93,10 +93,10 @@ class FilesController extends BaseController
 
             return view('admin/files', $this->data);
         }
-		
-		$img = $this->request->getFile('userfile');
 
-        if ( !$img->hasMoved() ) 
+		$file = $this->request->getFile('userfile');
+
+        if ( !$file->hasMoved() ) 
 		{
 			$sub_directory = 'uploads/training_data/';
 			$directory = WRITEPATH . $sub_directory;
@@ -104,18 +104,19 @@ class FilesController extends BaseController
 			if ( !is_dir( $directory ) )
 				mkdir( $directory, 0755, true );
 			
-			$img->move( $directory, $img->getClientName() );
+			$file->move( $directory, $file->getClientName() );
 			
-			$filepath = $directory . $img->getClientName();
+			$filepath = $directory . $file->getClientName();
 			$file_info = new File($filepath);
 			
 			$this->uploads->insert([
 				'user_id' 		=> $this->data['user']['id'], 
 				'global'		=> 1,
-				'path' 			=> $sub_directory . $img->getName(), 
-				'filename' 		=> $img->getName(), 
-				'extension' 	=> $img->getClientExtension(), 
-				'mime_type' 	=> $img->getClientMimeType(), 
+				'path' 			=> $sub_directory . $file->getName(), 
+				'filename' 		=> $file->getName(), 
+				'extension' 	=> $file->getClientExtension(), 
+				'mime_type' 	=> $file->getClientMimeType(), 
+				'bytes' 		=> $file->getSizeByUnit(), 
 			]);
 
 			$insert_id = $this->uploads->insertID();

@@ -33,6 +33,7 @@
 				<tr>
 					<th>Bestand</th>
 					<th width="150">Type</th>
+					<th width="150">Grootte</th>
 					<th width="150">Geupload</th>
 					<th width="150">Actions</th>
 				</tr>
@@ -44,6 +45,7 @@
 							<a href="<?=download_url( $file['path'] )?>" target="_blank"><?=$file['filename']?></a>
 						</td>
 						<td><?=$file['extension']?></td>
+						<td><?=readable_filesize($file['bytes'])?></td>
 						<td><?=$file['created_at']?></td>
 						<td>
 							<button id="delete_file" data-file-id="<?=$file['id']?>" data-filename="<?=$file['filename']?>">
