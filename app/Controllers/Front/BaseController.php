@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 
 use App\Models\User;
 use App\Models\Trainings;
+use App\Models\TrainingUsers;
 
 use App\Models\Meetings;					// for admin debug
 use App\Models\Assignments;					// for admin debug
@@ -180,6 +181,16 @@ abstract class BaseController extends Controller
         $this->data['cases'] 				= NULL;
 		$this->data['case'] 				= NULL;				
     }
+	
+	public function user_in_training( int $user_id, int $training_id )
+	{
+		$training_user = new TrainingUsers();
+		
+		return isset($training_user->where([
+			'user_id' => $user_id,
+			'training_id' => $training_id,
+		])->find()[0]);
+	}
 	
 	public function get_edit_route( string $route, ...$args )
 	{
