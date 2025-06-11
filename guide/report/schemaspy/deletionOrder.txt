@@ -1,4 +1,3 @@
-uploads
 settings
 migrations
 meetings
@@ -9,6 +8,7 @@ assignment_result
 training_case_result
 training_assignment_result
 user_meta
+uploads
 training_user_meta
 training_schedule
 training_case_entry_properties

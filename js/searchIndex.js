@@ -1256,6 +1256,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_download_url"
         },                {
+            "fqsen": "\\readable_filesize\u0028\u0029",
+            "name": "readable_filesize",
+            "summary": "",
+            "url": "namespaces/default.html#function_readable_filesize"
+        },                {
             "fqsen": "\\getSubclassesOf\u0028\u0029",
             "name": "getSubclassesOf",
             "summary": "",

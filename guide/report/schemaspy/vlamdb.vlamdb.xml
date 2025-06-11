@@ -600,15 +600,21 @@
       <table catalog="vlamdb" name="uploads" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
          <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="global" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="user_id" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="user_id" nullable="false" remarks="" size="10" type="INT UNSIGNED" typeCode="4">
+            <parent catalog="vlamdb" column="id" foreignKey="uploads_user_id_foreign" implied="false" onDeleteCascade="true" table="users"/>
+         </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="path" nullable="false" remarks="" size="65535" type="TEXT" typeCode="-1"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="filename" nullable="false" remarks="" size="65535" type="TEXT" typeCode="-1"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="extension" nullable="false" remarks="" size="65535" type="TEXT" typeCode="-1"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="mime_type" nullable="false" remarks="" size="65535" type="TEXT" typeCode="-1"/>
-         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="7" name="created_at" nullable="false" remarks="" size="19" type="DATETIME" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="bytes" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="8" name="created_at" nullable="false" remarks="" size="19" type="DATETIME" typeCode="93"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+         <index name="uploads_user_id_foreign" unique="false">
+            <column ascending="true" name="user_id"/>
          </index>
       </table>
       <table catalog="vlamdb" name="user_meta" numRows="0" remarks="" type="TABLE">
@@ -637,6 +643,7 @@
             <child catalog="vlamdb" column="user_id" foreignKey="auth_remember_tokens_user_id_foreign" implied="false" onDeleteCascade="true" table="auth_remember_tokens"/>
             <child catalog="vlamdb" column="user_id" foreignKey="case_result_user_id_foreign" implied="false" onDeleteCascade="true" table="case_result"/>
             <child catalog="vlamdb" column="user_id" foreignKey="training_users_user_id_foreign" implied="false" onDeleteCascade="true" table="training_users"/>
+            <child catalog="vlamdb" column="user_id" foreignKey="uploads_user_id_foreign" implied="false" onDeleteCascade="true" table="uploads"/>
             <child catalog="vlamdb" column="user_id" foreignKey="user_meta_user_id_foreign" implied="false" onDeleteCascade="true" table="user_meta"/>
          </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="username" nullable="true" remarks="" size="30" type="VARCHAR" typeCode="12"/>

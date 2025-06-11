@@ -20,6 +20,7 @@ training_assignment_entry_properties
 training_case_entry_properties
 training_schedule
 training_user_meta
+uploads
 user_meta
 training_assignment_result
 training_case_result
@@ -30,4 +31,3 @@ auth_token_logins
 meetings
 migrations
 settings
-uploads
