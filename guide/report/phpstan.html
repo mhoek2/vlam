@@ -212,29 +212,50 @@
     <p><strong>app/Controllers/Admin/UserController.php</strong>
 </p>
 
-            <blockquote><pre><code class="language-bash">Line 76: Call to an undefined method CodeIgniter\Shield\Models\UserModel::createNewUser().
-Line 140: Unreachable statement - code above always terminates.
-Line 155: Call to unknown service method &#039;passwords&#039;.
-Line 207: Access to an undefined property App\Controllers\Admin\UserController::$meetings.
-Line 208: Access to an undefined property App\Controllers\Admin\UserController::$assignments.
-Line 209: Access to an undefined property App\Controllers\Admin\UserController::$cases.
-Line 261: Parameter #1 $name of function model expects a valid class string, array|bool|float|int|object|string|null given.
-Line 263: Call to function assert() with false and &#039;Config Auth…&#039; will always evaluate to false.
-Line 263: Instanceof between null and CodeIgniter\Shield\Models\UserModel will always evaluate to false.</code></pre>
+            <blockquote><pre><code class="language-bash">Line 68: Call to an undefined method CodeIgniter\Shield\Models\UserModel::createNewUser().
+Line 132: Unreachable statement - code above always terminates.
+Line 147: Call to unknown service method &#039;passwords&#039;.
+Line 200: Parameter #1 $name of function model expects a valid class string, array|bool|float|int|object|string|null given.
+Line 202: Call to function assert() with false and &#039;Config Auth…&#039; will always evaluate to false.
+Line 202: Instanceof between null and CodeIgniter\Shield\Models\UserModel will always evaluate to false.</code></pre>
 </blockquote>
 
             
-    <p><strong>app/Controllers/Front/AssignmentController.php</strong>
+    <p><strong>app/Controllers/Admin/UserInsightController.php</strong>
 </p>
 
-            <blockquote><pre><code class="language-bash">Line 13: Call to function is_null() with string will always evaluate to false.</code></pre>
+            <blockquote><pre><code class="language-bash">Line 61: Access to an undefined property App\Controllers\Admin\UserInsightController::$meetings.
+Line 64: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignments.
+Line 65: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignmentEntry.
+Line 66: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignmentEntryProperties.
+Line 67: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignmentResult.
+Line 74: Access to an undefined property App\Controllers\Admin\UserInsightController::$cases.
+Line 75: Access to an undefined property App\Controllers\Admin\UserInsightController::$caseEntry.
+Line 76: Access to an undefined property App\Controllers\Admin\UserInsightController::$caseEntryProperties.
+Line 77: Access to an undefined property App\Controllers\Admin\UserInsightController::$caseResult.
+Line 140: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignmentResult.
+Line 141: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignmentEntry.
+Line 142: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignmentEntryProperties.
+Line 175: Access to an undefined property App\Controllers\Admin\UserInsightController::$caseResult.
+Line 176: Access to an undefined property App\Controllers\Admin\UserInsightController::$caseEntry.
+Line 177: Access to an undefined property App\Controllers\Admin\UserInsightController::$caseEntryProperties.
+Line 243: Access to an undefined property App\Controllers\Admin\UserInsightController::$meetings.
+Line 251: Access to an undefined property App\Controllers\Admin\UserInsightController::$assignments.
+Line 257: Access to an undefined property App\Controllers\Admin\UserInsightController::$cases.</code></pre>
 </blockquote>
 
             
-    <p><strong>app/Controllers/Front/CaseController.php</strong>
+    <p><strong>app/Controllers/Front/BaseController.php</strong>
 </p>
 
-            <blockquote><pre><code class="language-bash">Line 14: Call to function is_null() with string will always evaluate to false.</code></pre>
+            <blockquote><pre><code class="language-bash">Line 114: Left side of &amp;&amp; is always true.</code></pre>
+</blockquote>
+
+            
+    <p><strong>app/Controllers/Front/DashboardModules/DocumentsDashboardModule.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 25: Access to an undefined property App\Controllers\Front\DashboardModules\DocumentsDashboardModule::$uploads.</code></pre>
 </blockquote>
 
             
@@ -245,16 +266,31 @@ Line 263: Instanceof between null and CodeIgniter\Shield\Models\UserModel will a
 </blockquote>
 
             
+    <p><strong>app/Models/AssignmentEntry.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 128: Method App\Models\AssignmentEntry::get_type() should return array but returns null.</code></pre>
+</blockquote>
+
+            
+    <p><strong>app/Models/CaseEntry.php</strong>
+</p>
+
+            <blockquote><pre><code class="language-bash">Line 125: Method App\Models\CaseEntry::get_type() should return array but returns null.</code></pre>
+</blockquote>
+
+            
     <p><strong>app/Models/TrainingSchedule.php</strong>
 </p>
 
-            <blockquote><pre><code class="language-bash">Line 25: Access to protected property App\Models\Meetings::$table.
-Line 26: Access to protected property App\Models\Meetings::$table.
+            <blockquote><pre><code class="language-bash">Line 25: Access to protected property App\Models\TrainingMeetings::$table.
+Line 26: Access to protected property App\Models\TrainingMeetings::$table.
 Line 27: Access to protected property App\Models\Trainings::$table.
 Line 29: Access to protected property App\Models\Trainings::$table.
 Line 29: Access to protected property App\Models\Trainings::$table.
-Line 30: Access to protected property App\Models\Meetings::$table.
-Line 30: Access to protected property App\Models\Meetings::$table.</code></pre>
+Line 30: Access to protected property App\Models\TrainingMeetings::$table.
+Line 30: Access to protected property App\Models\TrainingMeetings::$table.
+Line 89: Parameter #1 $month of method App\Models\TrainingSchedule::get_month_name() expects int, string given.</code></pre>
 </blockquote>
 
             

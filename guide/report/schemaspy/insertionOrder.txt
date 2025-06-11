@@ -9,6 +9,7 @@ assignment_entry
 case_entry
 training_assignment_entry
 training_case_entry
+training_meetings
 assignment_entry_properties
 auth_groups_users
 auth_identities
@@ -29,3 +30,4 @@ auth_token_logins
 meetings
 migrations
 settings
+uploads

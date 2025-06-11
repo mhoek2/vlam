@@ -11,6 +11,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-AssignmentController.html#method___construct"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003AextractYouTubeID\u0028\u0029",
+            "name": "extractYouTubeID",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-AssignmentController.html#method_extractYouTubeID"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003Asave\u0028\u0029",
             "name": "save",
             "summary": "",
@@ -311,6 +316,46 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-CasesController.html#property_cases"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController",
+            "name": "FilesController",
+            "summary": "Class\u0020BaseController",
+            "url": "classes/App-Controllers-Admin-FilesController.html"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-FilesController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003Aload_uploaded_files\u0028\u0029",
+            "name": "load_uploaded_files",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-FilesController.html#method_load_uploaded_files"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003Aload_common_data\u0028\u0029",
+            "name": "load_common_data",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-FilesController.html#method_load_common_data"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-FilesController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003Adelete_file\u0028\u0029",
+            "name": "delete_file",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-FilesController.html#method_delete_file"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003Aupload\u0028\u0029",
+            "name": "upload",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-FilesController.html#method_upload"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003A\u0024uploads",
+            "name": "uploads",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-FilesController.html#property_uploads"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\Home",
             "name": "Home",
             "summary": "Class\u0020BaseController",
@@ -521,11 +566,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-UserController.html#method_change_password"
         },                {
-            "fqsen": "\\App\\Controllers\\Admin\\UserController\u003A\u003Atraining\u0028\u0029",
-            "name": "training",
-            "summary": "",
-            "url": "classes/App-Controllers-Admin-UserController.html#method_training"
-        },                {
             "fqsen": "\\App\\Controllers\\Admin\\UserController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "",
@@ -545,6 +585,66 @@ Search.appendIndex(
             "name": "userModel",
             "summary": "",
             "url": "classes/App-Controllers-Admin-UserController.html#property_userModel"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController",
+            "name": "UserInsightController",
+            "summary": "Class\u0020BaseController",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Aset_models\u0028\u0029",
+            "name": "set_models",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_set_models"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Afetch_entry_properties\u0028\u0029",
+            "name": "fetch_entry_properties",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_fetch_entry_properties"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Afetch_entries\u0028\u0029",
+            "name": "fetch_entries",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_fetch_entries"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Aget_assignment_result\u0028\u0029",
+            "name": "get_assignment_result",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_get_assignment_result"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Aget_uploads\u0028\u0029",
+            "name": "get_uploads",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_get_uploads"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Aget_case_result\u0028\u0029",
+            "name": "get_case_result",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_get_case_result"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Aget_result\u0028\u0029",
+            "name": "get_result",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_get_result"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003A\u0024userModel",
+            "name": "userModel",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#property_userModel"
+        },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserInsightController\u003A\u003A\u0024uploads",
+            "name": "uploads",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-UserInsightController.html#property_uploads"
         },                {
             "fqsen": "\\App\\Controllers\\Admin\\UsersController",
             "name": "UsersController",
@@ -650,6 +750,11 @@ Search.appendIndex(
             "name": "initController",
             "summary": "",
             "url": "classes/App-Controllers-Front-BaseController.html#method_initController"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Auser_in_training\u0028\u0029",
+            "name": "user_in_training",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-BaseController.html#method_user_in_training"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\BaseController\u003A\u003Aget_edit_route\u0028\u0029",
             "name": "get_edit_route",
@@ -851,6 +956,11 @@ Search.appendIndex(
             "summary": "Sort\u0020order",
             "url": "classes/App-Controllers-Front-DashboardModules-AgendaDashboardModule.html#property_sort"
         },                {
+            "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\AgendaDashboardModule\u003A\u003A\u0024css_class",
+            "name": "css_class",
+            "summary": "Custom\u0020css\u0020class",
+            "url": "classes/App-Controllers-Front-DashboardModules-AgendaDashboardModule.html#property_css_class"
+        },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule",
             "name": "DashboardModule",
             "summary": "Provides\u0020base\u0020class\u0020for\u0020modular\u0020dashboard\u0020modules",
@@ -891,6 +1001,26 @@ Search.appendIndex(
             "summary": "Visiblity\u0020state,\u0020default\u0020is\u0020true",
             "url": "classes/App-Controllers-Front-DashboardModules-DashboardModule.html#property_visible"
         },                {
+            "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DocumentsDashboardModule",
+            "name": "DocumentsDashboardModule",
+            "summary": "Dashboard\u0020Module",
+            "url": "classes/App-Controllers-Front-DashboardModules-DocumentsDashboardModule.html"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DocumentsDashboardModule\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-DashboardModules-DocumentsDashboardModule.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DocumentsDashboardModule\u003A\u003A\u0024sort",
+            "name": "sort",
+            "summary": "Sort\u0020order",
+            "url": "classes/App-Controllers-Front-DashboardModules-DocumentsDashboardModule.html#property_sort"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\DocumentsDashboardModule\u003A\u003A\u0024css_class",
+            "name": "css_class",
+            "summary": "Custom\u0020css\u0020class",
+            "url": "classes/App-Controllers-Front-DashboardModules-DocumentsDashboardModule.html#property_css_class"
+        },                {
             "fqsen": "\\App\\Controllers\\Front\\DashboardModules\\ExampleDashboardModule",
             "name": "ExampleDashboardModule",
             "summary": "Dashboard\u0020Module",
@@ -910,6 +1040,61 @@ Search.appendIndex(
             "name": "css_class",
             "summary": "Custom\u0020css\u0020class",
             "url": "classes/App-Controllers-Front-DashboardModules-ExampleDashboardModule.html#property_css_class"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\DownloadController",
+            "name": "DownloadController",
+            "summary": "Class\u0020BaseController",
+            "url": "classes/App-Controllers-Front-DownloadController.html"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\DownloadController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-DownloadController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController",
+            "name": "FilesController",
+            "summary": "Class\u0020BaseController",
+            "url": "classes/App-Controllers-Front-FilesController.html"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Adelete_file\u0028\u0029",
+            "name": "delete_file",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#method_delete_file"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Aload_uploaded_files\u0028\u0029",
+            "name": "load_uploaded_files",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#method_load_uploaded_files"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Aload_common_data\u0028\u0029",
+            "name": "load_common_data",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#method_load_common_data"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Averify_upload_directory\u0028\u0029",
+            "name": "verify_upload_directory",
+            "summary": "verifies\u0020or\u0020creates\u0020the\u0020requested\u0020upload\u0020direcory",
+            "url": "classes/App-Controllers-Front-FilesController.html#method_verify_upload_directory"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Aupload\u0028\u0029",
+            "name": "upload",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#method_upload"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003A\u0024uploads",
+            "name": "uploads",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#property_uploads"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\Home",
             "name": "Home",
@@ -1066,6 +1251,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_setCSRFPostData"
         },                {
+            "fqsen": "\\download_url\u0028\u0029",
+            "name": "download_url",
+            "summary": "",
+            "url": "namespaces/default.html#function_download_url"
+        },                {
             "fqsen": "\\getSubclassesOf\u0028\u0029",
             "name": "getSubclassesOf",
             "summary": "",
@@ -1125,6 +1315,11 @@ Search.appendIndex(
             "name": "user_input_type",
             "summary": "Returns\u0020true\u0020if\u0020entry\u0020type\u0020explicitly\u0020requires\u0020user\u0020input\u0020\u0028question\u0020only\u0029",
             "url": "classes/App-Models-AssignmentEntry.html#method_user_input_type"
+        },                {
+            "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003Aget_type\u0028\u0029",
+            "name": "get_type",
+            "summary": "Returns\u0020true\u0020if\u0020entry\u0020type\u0020explicitly\u0020requires\u0020user\u0020input\u0020\u0028question\u0020only\u0029",
+            "url": "classes/App-Models-AssignmentEntry.html#method_get_type"
         },                {
             "fqsen": "\\App\\Models\\AssignmentEntry\u003A\u003AfindAllUserInputs\u0028\u0029",
             "name": "findAllUserInputs",
@@ -1280,6 +1475,11 @@ Search.appendIndex(
             "name": "user_input_type",
             "summary": "Returns\u0020true\u0020if\u0020entry\u0020type\u0020explicitly\u0020requires\u0020user\u0020input\u0020\u0028question\u0020only\u0029",
             "url": "classes/App-Models-CaseEntry.html#method_user_input_type"
+        },                {
+            "fqsen": "\\App\\Models\\CaseEntry\u003A\u003Aget_type\u0028\u0029",
+            "name": "get_type",
+            "summary": "Returns\u0020true\u0020if\u0020entry\u0020type\u0020explicitly\u0020requires\u0020user\u0020input\u0020\u0028question\u0020only\u0029",
+            "url": "classes/App-Models-CaseEntry.html#method_get_type"
         },                {
             "fqsen": "\\App\\Models\\CaseEntry\u003A\u003AfindAllUserInputs\u0028\u0029",
             "name": "findAllUserInputs",
@@ -1541,6 +1741,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-TrainingCases.html#property_table"
         },                {
+            "fqsen": "\\App\\Models\\TrainingMeetings",
+            "name": "TrainingMeetings",
+            "summary": "",
+            "url": "classes/App-Models-TrainingMeetings.html"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingMeetings\u003A\u003AgetDetailed\u0028\u0029",
+            "name": "getDetailed",
+            "summary": "Get\u0020training\u0020meetings\u0020combined\u0020with\u0020detailed\u0020metrics\u0020about\u0020referenced\u0020training\u0020assignments\u0020and\u0020cases",
+            "url": "classes/App-Models-TrainingMeetings.html#method_getDetailed"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingMeetings\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "",
+            "url": "classes/App-Models-TrainingMeetings.html#property_table"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingMeetings\u003A\u003A\u0024primaryKey",
+            "name": "primaryKey",
+            "summary": "",
+            "url": "classes/App-Models-TrainingMeetings.html#property_primaryKey"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingMeetings\u003A\u003A\u0024allowedFields",
+            "name": "allowedFields",
+            "summary": "",
+            "url": "classes/App-Models-TrainingMeetings.html#property_allowedFields"
+        },                {
             "fqsen": "\\App\\Models\\Trainings",
             "name": "Trainings",
             "summary": "",
@@ -1576,10 +1801,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-TrainingSchedule.html#method_getScheduleRaw"
         },                {
-            "fqsen": "\\App\\Models\\TrainingSchedule\u003A\u003AgetSchedule\u0028\u0029",
-            "name": "getSchedule",
+            "fqsen": "\\App\\Models\\TrainingSchedule\u003A\u003AgetMeetingSchedule\u0028\u0029",
+            "name": "getMeetingSchedule",
             "summary": "",
-            "url": "classes/App-Models-TrainingSchedule.html#method_getSchedule"
+            "url": "classes/App-Models-TrainingSchedule.html#method_getMeetingSchedule"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingSchedule\u003A\u003Aget_day_name\u0028\u0029",
+            "name": "get_day_name",
+            "summary": "",
+            "url": "classes/App-Models-TrainingSchedule.html#method_get_day_name"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingSchedule\u003A\u003Aget_month_name\u0028\u0029",
+            "name": "get_month_name",
+            "summary": "",
+            "url": "classes/App-Models-TrainingSchedule.html#method_get_month_name"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingSchedule\u003A\u003AaddUserScheduleItem\u0028\u0029",
+            "name": "addUserScheduleItem",
+            "summary": "",
+            "url": "classes/App-Models-TrainingSchedule.html#method_addUserScheduleItem"
+        },                {
+            "fqsen": "\\App\\Models\\TrainingSchedule\u003A\u003AgetUserSchedule\u0028\u0029",
+            "name": "getUserSchedule",
+            "summary": "",
+            "url": "classes/App-Models-TrainingSchedule.html#method_getUserSchedule"
         },                {
             "fqsen": "\\App\\Models\\TrainingSchedule\u003A\u003A\u0024table",
             "name": "table",
@@ -1645,6 +1890,26 @@ Search.appendIndex(
             "name": "allowedFields",
             "summary": "",
             "url": "classes/App-Models-TrainingUsers.html#property_allowedFields"
+        },                {
+            "fqsen": "\\App\\Models\\Uploads",
+            "name": "Uploads",
+            "summary": "",
+            "url": "classes/App-Models-Uploads.html"
+        },                {
+            "fqsen": "\\App\\Models\\Uploads\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "",
+            "url": "classes/App-Models-Uploads.html#property_table"
+        },                {
+            "fqsen": "\\App\\Models\\Uploads\u003A\u003A\u0024primaryKey",
+            "name": "primaryKey",
+            "summary": "",
+            "url": "classes/App-Models-Uploads.html#property_primaryKey"
+        },                {
+            "fqsen": "\\App\\Models\\Uploads\u003A\u003A\u0024allowedFields",
+            "name": "allowedFields",
+            "summary": "",
+            "url": "classes/App-Models-Uploads.html#property_allowedFields"
         },                {
             "fqsen": "\\App\\Models\\User",
             "name": "User",

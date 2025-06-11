@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>training_schedule</h1><p><span id="recordNumber">12</span> rows</p><br />
+                    <h1>training_schedule</h1><p><span id="recordNumber">0</span> rows</p><br />
                 </section>
                 <!-- Main content -->
                 <section class="content">
@@ -126,7 +126,24 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="training_id">training_id</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="training_id">training_id</span></td>
+                                    <td>INT</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="meeting_id">meeting_id</span></td>
                                     <td>INT</td>
                                     <td>10</td>
                                     <td title=''></td>
@@ -139,27 +156,10 @@
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
-                                                <td title="training_schedule.training_id references trainings.id via training_schedule_training_id_foreign"><a href='trainings.html'>trainings</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">training_schedule_training_id_foreign</td>
+                                                <td title="training_schedule.meeting_id references training_meetings.id via training_schedule_meeting_id_foreign"><a href='training_meetings.html'>training_meetings</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">training_schedule_meeting_id_foreign</td>
                                                 <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
                                             </tr>
-                                        </table>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="meeting_id">meeting_id</span></td>
-                                    <td>INT</td>
-                                    <td>10</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
                                     <td></td>
@@ -223,6 +223,12 @@
                                     <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
                                     <td>training_id + meeting_id</td>
                                 </tr>
+                                <tr>
+                                    <td title='Indexed'>training_schedule_meeting_id_foreign</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>meeting_id</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div><!-- /.box-body -->
@@ -246,17 +252,16 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="training_schedule.html" target="_top" title="training_schedule" alt="" coords="213,5,532,192">
-<area shape="rect" id="node2" href="trainings.html" target="_top" title="trainings" alt="" coords="5,37,169,155">
+<area shape="rect" id="node1" href="training_schedule.html" target="_top" title="training_schedule" alt="" coords="296,5,615,192">
+<area shape="rect" id="node2" href="training_meetings.html" target="_top" title="training_meetings" alt="" coords="5,67,252,213">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/training_schedule.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="training_assignments.html" target="_top" title="training_assignments" alt="" coords="234,5,511,93">
-<area shape="rect" id="node2" href="trainings.html" target="_top" title="trainings" alt="" coords="5,143,169,260">
-<area shape="rect" id="node3" href="training_schedule.html" target="_top" title="training_schedule" alt="" coords="213,111,532,297">
-<area shape="rect" id="node4" href="training_users.html" target="_top" title="training_users" alt="" coords="267,315,479,403">
+<area shape="rect" id="node1" href="training_meetings.html" target="_top" title="training_meetings" alt="" coords="213,67,460,213">
+<area shape="rect" id="node2" href="trainings.html" target="_top" title="trainings" alt="" coords="5,99,169,187">
+<area shape="rect" id="node3" href="training_schedule.html" target="_top" title="training_schedule" alt="" coords="504,5,823,192">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/training_schedule.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>

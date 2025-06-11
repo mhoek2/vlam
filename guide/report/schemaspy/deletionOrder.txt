@@ -1,3 +1,4 @@
+uploads
 settings
 migrations
 meetings
@@ -18,6 +19,7 @@ auth_permissions_users
 auth_identities
 auth_groups_users
 assignment_entry_properties
+training_meetings
 training_case_entry
 training_assignment_entry
 case_entry

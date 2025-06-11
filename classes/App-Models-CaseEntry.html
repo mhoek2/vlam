@@ -363,6 +363,13 @@
 <dd>Override: Returns null if type is invalid</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Models-CaseEntry.html#method_get_type">get_type()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Returns true if entry type explicitly requires user input (question only)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Models-CaseEntry.html#method_type_to_group_table">type_to_group_table()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
@@ -460,7 +467,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$type_enum</span>
-     = <span class="phpdocumentor-signature__default-value">[[&#039;type&#039; =&gt; &#039;mcq&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;mcq-2&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 2&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;mcq-3&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 3&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;text_input&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Input&#039;, &#039;is_input&#039; =&gt; true], [&#039;type&#039; =&gt; &#039;text_separator&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Separator&#039;, &#039;is_input&#039; =&gt; false]]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[[&#039;type&#039; =&gt; &#039;mcq&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze&#039;, &#039;is_input&#039; =&gt; true, &#039;short&#039; =&gt; &#039;Keuze&#039;], [&#039;type&#039; =&gt; &#039;mcq-2&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 2&#039;, &#039;is_input&#039; =&gt; true, &#039;short&#039; =&gt; &#039;Keuze&#039;], [&#039;type&#039; =&gt; &#039;mcq-3&#039;, &#039;group&#039; =&gt; &#039;mcq&#039;, &#039;name&#039; =&gt; &#039;Keuze uit 3&#039;, &#039;is_input&#039; =&gt; true, &#039;short&#039; =&gt; &#039;Keuze&#039;], [&#039;type&#039; =&gt; &#039;text_input&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Input&#039;, &#039;is_input&#039; =&gt; true, &#039;short&#039; =&gt; &#039;Invoer&#039;], [&#039;type&#039; =&gt; &#039;text_separator&#039;, &#039;group&#039; =&gt; NULL, &#039;name&#039; =&gt; &#039;Text Separator&#039;, &#039;is_input&#039; =&gt; false, &#039;short&#039; =&gt; &#039;Scheiding&#039;]]</span></code>
 
         <section class="phpdocumentor-description"><p><em><p style="color:red"><b>IMPORTANT!</b>
 Do not change or remove existing type/group 'type' identifiers. This can have negative impact on existing training data.
@@ -675,7 +682,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/CaseEntry.php"><a href="files/app-models-caseentry.html"><abbr title="app/Models/CaseEntry.php">CaseEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
@@ -804,7 +811,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/CaseEntry.php"><a href="files/app-models-caseentry.html"><abbr title="app/Models/CaseEntry.php">CaseEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">147</span>
+    <span class="phpdocumentor-element-found-in__line">161</span>
 
     </aside>
 
@@ -860,7 +867,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/CaseEntry.php"><a href="files/app-models-caseentry.html"><abbr title="app/Models/CaseEntry.php">CaseEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -916,7 +923,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/CaseEntry.php"><a href="files/app-models-caseentry.html"><abbr title="app/Models/CaseEntry.php">CaseEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">159</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
     </aside>
 
@@ -936,6 +943,55 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
     
 
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_get_type">
+        get_type()
+        <a href="classes/App-Models-CaseEntry.html#method_get_type" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/CaseEntry.php"><a href="files/app-models-caseentry.html"><abbr title="app/Models/CaseEntry.php">CaseEntry.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">117</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns true if entry type explicitly requires user input (question only)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">get_type</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1206,6 +1262,7 @@ When adding types, <u>make sure</u> to add the new 'type' to the enum in the dat
                                             <li class=""><a href="classes/App-Models-CaseEntry.html#method_findAll">findAll()</a></li>
                                             <li class=""><a href="classes/App-Models-CaseEntry.html#method_findAllUserInputs">findAllUserInputs()</a></li>
                                             <li class=""><a href="classes/App-Models-CaseEntry.html#method_first">first()</a></li>
+                                            <li class=""><a href="classes/App-Models-CaseEntry.html#method_get_type">get_type()</a></li>
                                             <li class=""><a href="classes/App-Models-CaseEntry.html#method_type_to_group_table">type_to_group_table()</a></li>
                                             <li class=""><a href="classes/App-Models-CaseEntry.html#method_user_input_type">user_input_type()</a></li>
                                             <li class=""><a href="classes/App-Models-CaseEntry.html#method_valid_type">valid_type()</a></li>
