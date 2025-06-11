@@ -26,13 +26,18 @@ class FilesController extends BaseController
 		$this->uploads = new Uploads();
     }
 	
+	private function load_uploaded_files()
+	{
+		$this->data['uploads'] = $this->uploads->where(['global' => 1])->findAll();
+	}
+	
 	private function load_common_data()
 	{
 		load_header( $this->data );
 		load_footer( $this->data );
 		
 		$this->data['errors'] = [];
-		$this->data['uploads'] = $this->uploads->where(['global' => 1])->findAll();
+		$this->load_uploaded_files();
 	}
 
     public function index(): string
@@ -45,11 +50,17 @@ class FilesController extends BaseController
 	public function delete_file(){
 		$file_id = $this->request->getPost('file_id');
 
-		if (empty($file_id)) {
+		if ( empty($file_id) ) 
+		{
             return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
         }
 
 		$file_info = $this->uploads->find($file_id);
+
+		if ( is_null($file_info) ) 
+		{
+			return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
+		}
 
 		$filepath = WRITEPATH . $file_info['path'];
 
@@ -57,7 +68,7 @@ class FilesController extends BaseController
 		{
 			$this->uploads->delete($file_id);
 		}
-		
+
 		return $this->response->setJSON(['status' => 'success', 'new_csrf_token'=> csrf_hash()]);
 	}
 	
@@ -74,10 +85,10 @@ class FilesController extends BaseController
             ],
         ];
 		
+		$this->load_common_data();
+		
         if ( !$this->validateData([], $validationRule ) ) 
 		{
-			$this->load_common_data();
-			
             $this->data['errors'] = $this->validator->getErrors();
 
             return view('admin/files', $this->data);
@@ -109,7 +120,7 @@ class FilesController extends BaseController
 
 			$insert_id = $this->uploads->insertID();
 			
-			$this->load_common_data();
+			$this->load_uploaded_files(); // re-load
 			
 			$this->data['success'] = sprintf("uploaded to: %s with id %d", $filepath, $insert_id);
 			

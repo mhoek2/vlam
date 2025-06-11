@@ -11,12 +11,20 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get(	'/', 		'Front\Home::index', 							['filter' => \App\Filters\AuthFilterGuest::class]);
 $routes->get(	'/home',	'Front\Home::application', 						['as' => 'home', 'filter' => \App\Filters\AuthFilterSession::class]);
-$routes->get(	'download/(:any)',	'DownloadController::index/$1', 		['as' => 'front.download', 'namespace' => 'App\Controllers\Front']);
+$routes->get(	'download/(:any)',	'DownloadController::index/$1', 		['as' => 'front.download', 'namespace' => 'App\Controllers\Front', 'filter' => \App\Filters\AuthFilterSession::class]);
 
 // Meeting
 $routes->group('meeting/(:num)', ['namespace' => 'App\Controllers\Front', 'filter' => \App\Filters\AuthFilterSession::class], function ($routes) 
 {
 	$routes->get(	'',	'MeetingController::index/$1', 													['as' => 'front.meeting']);
+	
+	// Files
+	$routes->group('files/', function ($routes)
+	{
+		$routes->get(	'',							'FilesController::index/$1', 						['as' => 'front.files']);
+		$routes->post(	'upload', 					'FilesController::upload/$1', 						['as' => 'front.files_upload']);
+		$routes->post(	'delete_file', 				'FilesController::delete_file/$1', 					['as' => 'front.files_delete']);
+	});
 	
 	// Assignment
 	$routes->group('assignment/(:num)', function ($routes)

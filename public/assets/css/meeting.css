@@ -70,6 +70,27 @@
             flex-grow: 1
         }
 
+.main .meetings .upload {
+	position:absolute;
+	top: 110px;
+	left: 0px;
+	color: #fff;
+	text-decoration: none;
+    background: var(--sidebar-meeting-bg);
+    padding: 10px 10px 10px 20px;
+	border-radius: 0 10px 10px 0;
+    text-align: right;
+	transition: all ease-in-out 100ms;
+}
+	.main .meetings .upload:hover {
+		padding-left:25px;
+	}
+	.main .meetings .upload i {
+		margin-right: 10px;
+	}
+.main .meetings .upload + .assignments {
+	margin-top: 60px;
+}
 .main .meetings .assignments ul {
 
 }

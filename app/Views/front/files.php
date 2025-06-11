@@ -1,21 +1,27 @@
 <?php echo $header; ?>
 
-<!-- CONTENT -->
-
 <section class="main">
+	<?=$sidebar?>
+
     <div class="content">
+    	<div class="actions">
+    		<?php if ( isset($prev_url) && !is_null($meeting) ): ?>
+				<a class="button-primary small" href="<?=$prev_url?>"><i class="fa-solid fa-chevron-left"></i> Terug naar bijeenkomst <?=$meeting['name']?></a>
+			<?php endif ?>
+		</div>
+       
 		<?php foreach ($errors as $error): ?>
 			<li><?= esc($error) ?></li>
 		<?php endforeach ?>
-		
+
 		<?php if ( isset($success)): ?>
 			<div class="success">
 				<?=$success?>	
 			<div>
 		<?php endif ?>
-
+		
 		<div class="upload-container">
-			<?= form_open_multipart(base_url(route_to('admin.files_upload'))) ?>
+			<?= form_open_multipart(base_url(route_to('front.files_upload', $meeting['id']))) ?>
 				<label for="file-upload" class="drop-area" id="drop-area">
 					<i class="fas fa-cloud-upload-alt"></i>
 					<p>Plaats het bestand dat je wilt uploaden</p>
@@ -26,13 +32,12 @@
 			</form>
 
 			<p id="file-name"></p>
-		</div>	
-			
+		</div>		
+	
 		<table>
 			<thead>
 				<tr>
 					<th>Bestand</th>
-					<th width="150">Type</th>
 					<th width="150">Geupload</th>
 					<th width="150">Actions</th>
 				</tr>
@@ -43,7 +48,6 @@
 						<td>
 							<a href="<?=download_url( $file['path'] )?>" target="_blank"><?=$file['filename']?></a>
 						</td>
-						<td><?=$file['extension']?></td>
 						<td><?=$file['created_at']?></td>
 						<td>
 							<button id="delete_file" data-file-id="<?=$file['id']?>" data-filename="<?=$file['filename']?>">
@@ -53,16 +57,14 @@
 					</tr>
 				<?php endforeach; ?>
 			</tbody>
-		</table>			
-				
-				
+		</table>
     </div>
 </section>
-
-	<script {csp-script-nonce}>
-    $(document).ready(function () {
+	
+<script>
+	$(document).ready(function() {
 		<?=updateCSRFMeta() // csrf helper ?>
-
+		
 		var $fileInput = $('#file-upload');
 		var $dropArea = $('#drop-area');
 		var $fileName = $('#file-name');
@@ -112,7 +114,7 @@
 
 			if (confirmation) {
                 $.ajax({
-		            url: '<?=base_url(route_to('admin.files_delete'))?>',
+		            url: '<?=base_url(route_to('front.files_delete', $meeting['id']))?>',
 		            method: 'POST',
 		            data: {
 			            file_id: file_id,
@@ -122,13 +124,13 @@
 						updateCSRFMeta(response);
 
 			            if (response.status === 'success') {
-                            location.href = "<?=base_url(route_to('admin.files'))?>";
+                            location.href = "<?=base_url(route_to('front.files', $meeting['id']))?>";
 			            }
 		            }
 	            });
             }
         });
 	});
-	</script>
-
+</script>
+	
 <?php echo $footer; ?>

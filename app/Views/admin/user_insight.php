@@ -150,7 +150,26 @@
 					font-style: normal;
 					font-size: 16px;
 				}
-
+					.container.insight .tree .tree-group.meeting > .tree-group.sub {
+						padding-top:40px;
+					}
+					.container.insight .tree .tree-group.meeting > .tree-group.sub [data-uploads] {
+						color: #fff;
+						font-size: 12px;
+						background: rgba( 0, 0, 0, 0.08 );
+						width: fit-content;
+						padding: 5px;
+						border-radius: var(--secondary-border-radius);
+						cursor: pointer;
+						position: absolute;
+						left: -20px;
+						top: 0;
+					}
+					.container.insight .tree .tree-group.meeting > .tree-group.sub [data-uploads]:hover {
+						background: rgba( 0, 0, 0, 0.12 );
+						transition: background ease-in-out 100ms;
+					}
+	
 			.container.insight .tree .tree-group .header .title {
 				color: #fff;
 				font-size: 14px;
@@ -279,6 +298,9 @@
 							</label>
 
 							<div class="tree-group sub">
+								<div data-uploads="<?=$meeting_id?>">
+									<i class="fa-solid fa-cloud-arrow-down"></i> Inleverpunt
+								</div>
 								<?php foreach ($meeting['assignments'] as $assignment_id => $assignment) : ?>
 									<div class="assignment">
 										<input type="checkbox" id="assignment-<?=$assignment_id?>" class="toggle">
@@ -321,14 +343,16 @@
 			$('section.result').html( result );
 		}
 		
-		function get_result( meeting_id, assignment_id, case_id )
+		function get_result( meeting_id, assignment_id, case_id, uploads = false )
 		{
 			$.ajax({
 				url: '<?=base_url(route_to('admin.user.insight_result', $selected_user['id']))?>',
 				type: 'POST',
 				data: {
+					'meeting_id':		meeting_id,
 					'assignment_id':	assignment_id,
 					'case_id':			case_id,
+					'uploads':			uploads,
 					<?=setCSRFPostData()?>
 				},
 				success: function(response) {
@@ -340,6 +364,16 @@
 				}
 			});
 		}
+		
+		$(document).on('click', '[data-uploads]', function( e )
+		{
+			e.stopPropagation();
+			let case_id = null;
+			let assignment_id = null;
+			let meeting_id = $(this).closest('.meeting').find('[data-meeting-id]').attr('data-meeting-id');
+
+			get_result( meeting_id, assignment_id, case_id, true );
+		});
 		
 		$(document).on('click', '[data-case-id]', function( e )
 		{

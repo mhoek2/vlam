@@ -9,6 +9,10 @@
 				</li>
 			</a>
 		</ul>
+		
+		<a class="upload" href="<?= base_url(route_to('front.files', $meeting['id'])) ?>">
+			<i class="fa-solid fa-cloud-arrow-up"></i> Inleverpunt
+		</a>
 		<?php else: ?>
 		   <?php if (!is_null($meetings)):?>
 				<ul>

@@ -14,6 +14,7 @@ use CodeIgniter\Shield\Traits\Viewable;
 use CodeIgniter\Shield\Validation\ValidationRules;
 
 use App\Models\Users;
+use App\Models\Uploads;
 
 use App\Models\Meetings;
 use App\Models\Assignments;					// for admin debug
@@ -38,9 +39,11 @@ use App\Models\TrainingCaseResult;
 class UserInsightController extends BaseController
 {
 	protected $userModel;
+	protected $uploads;
 	
     public function __construct() {
 		$this->userModel = new Users();
+		$this->uploads = new Uploads();
     }
 	
 	private function set_models( int $user_id )
@@ -127,9 +130,7 @@ class UserInsightController extends BaseController
 			$this->fetch_entry_properties( $this->data['properties'], $saved_results, $entry );
         }
 	}
-	
-	
-	
+
 	private function get_assignment_result( int $user_id, int $assignment_id )
 	{
 		$this->set_models( $user_id );
@@ -142,6 +143,27 @@ class UserInsightController extends BaseController
 		);
 		
 		return view('admin/insight_result/assignment', $this->data);
+	}
+	
+	private function get_uploads(int $user_id, int $meeting_id )
+	{
+		$meeting = (new TrainingMeetings())->find($meeting_id);
+		
+		if ( is_null( $meeting ) )
+			return "Invalid meeting!";
+		
+		$sub_directory = sprintf( '%d/%s_meeting_id_%d/', 
+						 $user_id, 
+						 $meeting['name'], 
+						 $meeting['id'] 
+						);
+
+		$this->data['uploads'] = $this->uploads->where([
+			'global' 	=> 0,
+			'user_id'	=> (int)$user_id,
+		])->like('path', $sub_directory)->findAll();
+		
+		return view('admin/insight_result/files', $this->data);
 	}
 	
 	private function get_case_result( int $user_id, int $case_id )
@@ -160,8 +182,10 @@ class UserInsightController extends BaseController
 	
 	public function get_result( int $user_id)
 	{
+		$meeting_id = (int)$this->request->getPost('meeting_id');
 		$assignment_id = (int)$this->request->getPost('assignment_id');
 		$case_id = (int)$this->request->getPost('case_id');
+		$get_uploads = $this->request->getPost('uploads', FILTER_VALIDATE_BOOLEAN);
 
 		$selected_user = $this->userModel->getUser( $user_id );
 		
@@ -173,16 +197,24 @@ class UserInsightController extends BaseController
 		
 		$html = '';
 		
-		// get assignment
-		if ( $assignment_id && !$case_id ) {
-			$html = $this->get_assignment_result( $user_id, $assignment_id ); 
+		// get uploads
+		if ( $meeting_id && $get_uploads ) {
+			$html = $this->get_uploads( $user_id, $meeting_id );
 		}
-		
-		// get case
-		if ( $assignment_id && $case_id ) {
-			$html = $this->get_case_result( $user_id, $case_id ); 
+
+		else if( $assignment_id )
+		{
+			// get assignment
+			if ( !$case_id ) {
+				$html = $this->get_assignment_result( $user_id, $assignment_id ); 
+			}
+			
+			// get case
+			else {
+				$html = $this->get_case_result( $user_id, $case_id ); 
+			}
 		}
-		
+
 		return $this->response->setJSON([
 			'status' 			=> 'success', 
 			'html'				=> $html, 

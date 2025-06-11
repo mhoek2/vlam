@@ -20,6 +20,8 @@ class DownloadController extends BaseController
 		if (!file_exists($path)) {
 			throw new \CodeIgniter\Exceptions\PageNotFoundException("File not found");
 		}
+		
+		// check permissions
 
 		return $this->response->download($path, null);
     }

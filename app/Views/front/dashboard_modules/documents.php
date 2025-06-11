@@ -42,7 +42,7 @@
 <div class="title">Documenten</div>
 <div class="items">
 	<?php foreach($documents as $file): ?>
-		<a class="item" href="<?=base_url(route_to('front.download', $file['path']))?>">
+		<a class="item" href="<?=download_url( $file['path'] )?>" target="_blank">
 			<div class="icon">
 				<i class="fa-solid fa-paperclip"></i>
 			</div>

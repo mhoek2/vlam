@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?=base_url('assets/css/header.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/frontend.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/meeting.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/css/upload.css')?>">
 
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css">
     
