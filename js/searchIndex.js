@@ -346,6 +346,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-FilesController.html#method_delete_file"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003Averify_upload_directory\u0028\u0029",
+            "name": "verify_upload_directory",
+            "summary": "verifies\u0020or\u0020creates\u0020the\u0020requested\u0020upload\u0020direcory",
+            "url": "classes/App-Controllers-Admin-FilesController.html#method_verify_upload_directory"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\FilesController\u003A\u003Aupload\u0028\u0029",
             "name": "upload",
             "summary": "",
@@ -1061,11 +1066,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Front-FilesController.html#method___construct"
         },                {
-            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Adelete_file\u0028\u0029",
-            "name": "delete_file",
-            "summary": "",
-            "url": "classes/App-Controllers-Front-FilesController.html#method_delete_file"
-        },                {
             "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Aload_uploaded_files\u0028\u0029",
             "name": "load_uploaded_files",
             "summary": "",
@@ -1080,6 +1080,11 @@ Search.appendIndex(
             "name": "index",
             "summary": "",
             "url": "classes/App-Controllers-Front-FilesController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Adelete_file\u0028\u0029",
+            "name": "delete_file",
+            "summary": "",
+            "url": "classes/App-Controllers-Front-FilesController.html#method_delete_file"
         },                {
             "fqsen": "\\App\\Controllers\\Front\\FilesController\u003A\u003Averify_upload_directory\u0028\u0029",
             "name": "verify_upload_directory",
