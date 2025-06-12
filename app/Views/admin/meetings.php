@@ -50,6 +50,7 @@
 				.meetings li a .info {
 					font-size: 18px;
 					color: #333;
+					font-weight: 500;
 				}
 
 			.meetings li .details {
@@ -64,12 +65,10 @@
 					display:flex;
 					flex-direction: column;
 					padding: 0.5em;
-					background:#f7f8f9;
-					border-radius: var(--secondary-border-radius);
+					/*border-radius: var(--secondary-border-radius);*/
 				}
 					.meetings li .details > div .title {
 						text-transform: uppercase;
-						text-decoration: underline;
 						font-size: 12px;
 					}
 					.meetings li .details > div .count {

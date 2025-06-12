@@ -72,6 +72,30 @@ class FilesController extends BaseController
 		return $this->response->setJSON(['status' => 'success', 'new_csrf_token'=> csrf_hash()]);
 	}
 	
+	/**
+	 * verifies or creates the requested upload direcory
+	 *
+	 * @return mixed returns the upload path as string, false boolean on fail.
+	 */
+	private function verify_upload_directory( string $upload_directory )
+	{
+		$upload_path = WRITEPATH;
+
+		$directories = explode('/', $upload_directory );
+		foreach( $directories as $directory )
+		{
+			if ( empty($directory) )
+				continue;
+			
+			$upload_path .= sprintf('%s/', $directory);
+			
+			if ( !is_dir( $upload_path ) )
+				mkdir( $upload_path, 0755, true );
+		}
+		
+		return is_dir( $upload_path ) ? $upload_path : false;
+	}
+	
     public function upload()
     {
         $validationRule = [
@@ -90,8 +114,7 @@ class FilesController extends BaseController
         if ( !$this->validateData([], $validationRule ) ) 
 		{
             $this->data['errors'] = $this->validator->getErrors();
-
-            return view('admin/files', $this->data);
+            return redirect()->back()->with('errors', $this->data['errors'] );
         }
 
 		$file = $this->request->getFile('userfile');
@@ -99,10 +122,14 @@ class FilesController extends BaseController
         if ( !$file->hasMoved() ) 
 		{
 			$sub_directory = 'uploads/training_data/';
-			$directory = WRITEPATH . $sub_directory;
+			$directory = $this->verify_upload_directory( $sub_directory );
 			
-			if ( !is_dir( $directory ) )
-				mkdir( $directory, 0755, true );
+			// verify that the upload directory is valid!
+			if ( !$directory )
+			{
+				$this->data['errors'][0] = "Upload map is ongeldig";
+				return redirect()->back()->with('errors', $this->data['errors'] );
+			}
 			
 			$file->move( $directory, $file->getClientName() );
 			
@@ -121,11 +148,10 @@ class FilesController extends BaseController
 
 			$insert_id = $this->uploads->insertID();
 			
-			$this->load_uploaded_files(); // re-load
+			// deprecated since redirect back
+			//$this->load_uploaded_files(); // re-load
 			
-			$this->data['success'] = sprintf("uploaded to: %s with id %d", $filepath, $insert_id);
-			
-            return view('admin/files', $this->data);
+			return redirect()->back()->with('success', sprintf("Bestand is geupload") );
         }
 	}
 	

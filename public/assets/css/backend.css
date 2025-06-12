@@ -166,6 +166,53 @@ textarea {
     resize: vertical;
 }
 
+/* NOTIFICATIONS */
+.notifications {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+	
+	display:flex;
+	flex-direction: column;
+	gap:5px;
+	width: fit-content;
+}
+	.notifications .item {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		width: fit-content;
+		padding: 15px;
+		border-radius: var(--secondary-border-radius);
+
+		opacity: 1;
+		animation: anim_notification_fade 5s forwards;
+	}
+
+	.notifications .item.success {
+		background: #bde7ab;
+		color: #47832c;
+	}
+
+	.notifications .item.error {
+		background:#ECCFC7;
+		color:#c75d5d;
+	}
+
+@keyframes anim_notification_fade {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 /* header override */
 header {
     margin: 0;

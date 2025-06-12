@@ -18,32 +18,6 @@ class FilesController extends BaseController
 		$this->uploads = new Uploads();
     }
 
-	public function delete_file(){
-		$file_id = $this->request->getPost('file_id');
-
-		if ( empty($file_id) ) 
-		{
-            return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
-        }
-
-		// !!! CHECK PERMISSIONS/OWNER OF THIS FILE !!!
-		$file_info = $this->uploads->where('user_id', (int)$this->data['user']['id'])->find( $file_id );
-		
-		if ( is_null($file_info) ) 
-		{
-			return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
-		}
-
-		$filepath = WRITEPATH . $file_info['path'];
-
-		if ( file_exists( $filepath ) && unlink( $filepath ) ) 
-		{
-			$this->uploads->delete($file_id);
-		}
-
-		return $this->response->setJSON(['status' => 'success', 'new_csrf_token'=> csrf_hash()]);
-	}
-	
 	private function load_uploaded_files()
 	{
 		$sub_directory = sprintf( '%d/%s_meeting_id_%d/', 
@@ -85,6 +59,32 @@ class FilesController extends BaseController
 		
         return view('front/files', $this->data);
     }
+	
+	public function delete_file(){
+		$file_id = $this->request->getPost('file_id');
+
+		if ( empty($file_id) ) 
+		{
+            return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
+        }
+
+		// !!! CHECK PERMISSIONS/OWNER OF THIS FILE !!!
+		$file_info = $this->uploads->where('user_id', (int)$this->data['user']['id'])->find( $file_id );
+		
+		if ( is_null($file_info) ) 
+		{
+			return $this->response->setJSON(['status' => 'error', 'new_csrf_token'=> csrf_hash()]);
+		}
+
+		$filepath = WRITEPATH . $file_info['path'];
+
+		if ( file_exists( $filepath ) && unlink( $filepath ) ) 
+		{
+			$this->uploads->delete($file_id);
+		}
+
+		return $this->response->setJSON(['status' => 'success', 'new_csrf_token'=> csrf_hash()]);
+	}
 	
 	/**
 	 * verifies or creates the requested upload direcory
@@ -128,13 +128,13 @@ class FilesController extends BaseController
 		if ( is_null($this->data['meeting']) )
 		{
             $this->data['errors'][0] = "Invalid meeting!";
-            return view('front/files', $this->data);
+			return redirect()->back()->with('errors', $this->data['errors'] );
 		}
 		
         if ( !$this->validateData([], $validationRule ) ) 
 		{
             $this->data['errors'] = $this->validator->getErrors();
-            return view('front/files', $this->data);
+			return redirect()->back()->with('errors', $this->data['errors'] );
         }
 		
 		$file = $this->request->getFile('userfile');
@@ -151,8 +151,8 @@ class FilesController extends BaseController
 			// verify that the upload directory is valid!
 			if ( !$directory )
 			{
-				$this->data['errors'][0] = "Invalid upload directory!";
-				return view('front/files', $this->data);
+				$this->data['errors'][0] = "Upload map is ongeldig";
+				return redirect()->back()->with('errors', $this->data['errors'] );
 			}
 	
 			$file->move( $directory, $file->getClientName() );
@@ -172,11 +172,10 @@ class FilesController extends BaseController
 
 			$insert_id = $this->uploads->insertID();
 
-			$this->load_uploaded_files(); // re-load to get added file
+			// deprecated since redirect back
+			//$this->load_uploaded_files(); // re-load to get added file
 
-			$this->data['success'] = sprintf("uploaded to: %s with id %d", $filepath, $insert_id);
-
-            return view('front/files', $this->data);
+			return redirect()->back()->with('success', sprintf("Bestand is geupload") );
 		}
 	}
 }

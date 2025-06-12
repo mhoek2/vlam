@@ -1,4 +1,30 @@
 <?php echo $header; ?>
+	
+<div class="notifications">
+	<?php if (session()->has('errors')): ?>
+		<?php foreach (session('errors') as $error): ?>
+			<div class="item error">
+				<div class="icon">
+					<i class="fa-solid fa-triangle-exclamation"></i>
+				</div>
+				<div>
+					<?=esc($error)?>
+				</div>	
+			</div>
+		<?php endforeach ?>
+	<?php endif ?>
+
+	<?php if (session()->has('success')): ?>
+		<div class="item success">
+			<div class="icon">
+				<i class="fa-regular fa-circle-check"></i>
+			</div>
+			<div>
+				<?=session('success')?>
+			</div>	
+		</div>
+	<?php endif ?>
+</div>
 
 <section class="main">
 	<?=$sidebar?>
@@ -9,16 +35,6 @@
 				<a class="button-primary small" href="<?=$prev_url?>"><i class="fa-solid fa-chevron-left"></i> Terug naar bijeenkomst <?=$meeting['name']?></a>
 			<?php endif ?>
 		</div>
-       
-		<?php foreach ($errors as $error): ?>
-			<li><?= esc($error) ?></li>
-		<?php endforeach ?>
-
-		<?php if ( isset($success)): ?>
-			<div class="success">
-				<?=$success?>	
-			<div>
-		<?php endif ?>
 		
 		<div class="upload-container">
 			<?= form_open_multipart(base_url(route_to('front.files_upload', $meeting['id']))) ?>
@@ -28,7 +44,7 @@
 				</label>
 
 				<input type="file" id="file-upload" name="userfile"/>
-				<button type="submit" class="button-primary">Uploaden</button>
+				<button type="submit" class="button-primary" id="upload">Uploaden</button>
 			</form>
 
 			<p id="file-name"></p>
@@ -70,26 +86,35 @@
 		var $fileInput = $('#file-upload');
 		var $dropArea = $('#drop-area');
 		var $fileName = $('#file-name');
+		var $submitButton = $('#upload');
 
+		$submitButton.on('click', function(e){
+			if (!$(this).hasClass('active'))
+				e.preventDefault();
+		})
+		
 		$fileInput.on('change', function() 
-					  {
+		{
 			var file = this.files[0];
 			if (file) {
 				$fileName.text('Selected file: ' + file.name);
+				$submitButton.addClass('active');
+				
 			} else {
 				$fileName.text('');
+				$submitButton.removeClass('active');
 			}
 		});
 
 		$dropArea.on('dragenter dragover', function(e) 
-					 {
+		{
 			e.preventDefault();
 			e.stopPropagation();
 			$(this).addClass('highlight');
 		});
 
 		$dropArea.on('dragleave', function(e) 
-					 {
+		{
 			e.preventDefault();
 			e.stopPropagation();
 			$(this).removeClass('highlight');
