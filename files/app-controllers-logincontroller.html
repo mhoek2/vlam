@@ -4,9 +4,8 @@
     <meta charset="utf-8">
             <title>VLAM Documentation</title>
     
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="../../">
+    <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
@@ -205,116 +204,163 @@
 </aside>
 
             <div class="phpdocumentor-column -nine phpdocumentor-content">
-                                        <section class="section " id="stylelint-report">
-            <h1>Stylelint Report</h1>
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+    </ul>
+
+    <article class="phpdocumentor-element -file">
+        <h2 class="phpdocumentor-content__title">LoginController.php</h2>
+
+        
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="files/app-controllers-logincontroller.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+    <h4 id="toc-classes">
+        Classes
+        <a href="files/app-controllers-logincontroller.html#toc-classes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Controllers-LoginController.html"><abbr title="\App\Controllers\LoginController">LoginController</abbr></a></dt>    </dl>
+
+
+
+
+
+
+
+
+
+
+        
+
+        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/app/Controllers/LoginController.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                            
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                                                                        <li><a href="files/app-controllers-logincontroller.html#toc-classes">Classes</a></li>
+                                                                                                                    </ul>
+            </li>
 
             
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/assignments.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 22, Column 17: Unexpected unit (length-zero-no-unit)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/cases.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 21, Column 17: Unexpected unit (length-zero-no-unit)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/meetings.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 68, Column 6: Expected empty line before comment (comment-empty-line-before)
-Line 68, Column 8: Expected whitespace after &quot;/*&quot; (comment-whitespace-inside)
-Line 68, Column 53: Expected whitespace before &quot;*/&quot; (comment-whitespace-inside)
-Line 82, Column 7: Expected shorthand property &quot;grid-gap&quot; (declaration-block-no-redundant-longhand-properties)
-Line 17, Column 17: Unexpected unit (length-zero-no-unit)
-Line 23, Column 17: Unexpected unit (length-zero-no-unit)
-Line 81, Column 25: Unexpected unit (length-zero-no-unit)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/training.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 103, Column 9: Expected &quot;context&quot; media feature range notation (media-feature-range-notation)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/user.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 82, Column 3: Expected whitespace before &quot;*/&quot; (comment-whitespace-inside)
-Line 83, Column 9: Expected &quot;context&quot; media feature range notation (media-feature-range-notation)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/admin/user_insight.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 124, Column 32: Expected &quot;0.08&quot; to be &quot;8%&quot; (alpha-value-notation)
-Line 159, Column 34: Expected &quot;0.08&quot; to be &quot;8%&quot; (alpha-value-notation)
-Line 169, Column 34: Expected &quot;0.12&quot; to be &quot;12%&quot; (alpha-value-notation)
-Line 69, Column 21: Unexpected empty block (block-no-empty)
-Line 222, Column 36: Unexpected empty block (block-no-empty)
-Line 124, Column 17: Expected modern color-function notation (color-function-notation)
-Line 159, Column 19: Expected modern color-function notation (color-function-notation)
-Line 169, Column 19: Expected modern color-function notation (color-function-notation)
-Line 72, Column 3: Expected empty line before comment (comment-empty-line-before)
-Line 187, Column 18: Unexpected missing generic font family (font-family-no-missing-generic-family-keyword)
-Line 236, Column 18: Unexpected missing generic font family (font-family-no-missing-generic-family-keyword)
-Line 63, Column 9: Expected &quot;context&quot; media feature range notation (media-feature-range-notation)
-Line 126, Column 5: Expected selector &quot;.container.insight .tree .tree-group.meeting &gt; .header&quot; to come before selector &quot;.container.insight .tree .tree-group:not(.meeting) .header:hover&quot; (no-descending-specificity)
-Line 232, Column 4: Expected selector &quot;.container.insight .result .entry .properties &gt; div&quot; to come before selector &quot;.container.insight .tree .tree-group.meeting &gt; .header &gt; div&quot; (no-descending-specificity)
-Line 246, Column 4: Unexpected duplicate selector &quot;.container.insight .result .entry .properties &gt; div::before&quot;, first used at line 235 (no-duplicate-selectors)
-Line 113, Column 45: [.] class should use hypen delimiter: -</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/auth/login.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 72, Column 58: Expected &quot;1&quot; to be &quot;100%&quot; (alpha-value-notation)
-Line 72, Column 39: Expected modern color-function notation (color-function-notation)
-Line 46, Column 4: Expected shorthand property &quot;inset&quot; (declaration-block-no-redundant-longhand-properties)
-Line 62, Column 4: Expected shorthand property &quot;inset&quot; (declaration-block-no-redundant-longhand-properties)
-Line 9, Column 20: Expected quotes around &quot;url&quot; function argument (function-url-quotes)
-Line 17, Column 13: Unexpected unit (length-zero-no-unit)
-Line 71, Column 3: Expected selector &quot;.btn.btn-bg-gradient::before&quot; to come before selector &quot;.btn.btn-bg-gradient:hover::before&quot; (no-descending-specificity)
-Line 67, Column 3: Unexpected duplicate selector &quot;.btn.btn-bg-gradient&quot;, first used at line 30 (no-duplicate-selectors)
-Line 71, Column 3: Unexpected duplicate selector &quot;.btn.btn-bg-gradient::before&quot;, first used at line 40 (no-duplicate-selectors)
-Line 74, Column 3: Unexpected duplicate selector &quot;.btn.btn-bg-gradient::after&quot;, first used at line 56 (no-duplicate-selectors)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/front/case_entry.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 38, Column 34: Unexpected empty block (block-no-empty)
-Line 61, Column 25: Unexpected empty block (block-no-empty)
-Line 69, Column 4: Expected selector &quot;.case-progress .indicator &gt; div&quot; to come before selector &quot;.case-entry .properties-container .properties &gt; div&quot; (no-descending-specificity)
-Line 80, Column 4: Expected selector &quot;.case-progress .indicator &gt; div.selected&quot; to come before selector &quot;.case-entry .properties-container .properties &gt; div.selected&quot; (no-descending-specificity)
-Line 27, Column 14: Expected &quot;1em 1em&quot; to be &quot;1em&quot; (shorthand-property-no-redundant-values)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/html/error_400.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 60, Column 22: Expected &quot;1em 2em 0 2em&quot; to be &quot;1em 2em 0&quot; (shorthand-property-no-redundant-values)</code></pre>
-</blockquote>
-
-            
-    <p><strong>/home/runner/work/vlam/vlam/app/Views/errors/html/error_404.php</strong>
-</p>
-
-            <blockquote><pre><code class="language-bash">Line 60, Column 22: Expected &quot;1em 2em 0 2em&quot; to be &quot;1em 2em 0&quot; (shorthand-property-no-redundant-values)</code></pre>
-</blockquote>
-
+                    </ul>
     </section>
 
+                </section>
                             </div>
             <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
@@ -328,7 +374,7 @@ Line 27, Column 14: Expected &quot;1em 1em&quot; to be &quot;1em&quot; (shorthan
     </section>
 </section>
         </div>
-        <a href="#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="files/app-controllers-logincontroller.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

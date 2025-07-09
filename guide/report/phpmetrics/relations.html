@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PhpMetrics report [2025-06-12 12:37:58]</title>
+    <title>PhpMetrics report [2025-07-09 08:21:11]</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico?v=v3.0.0-rc8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/milligram.min.css?v=v3.0.0-rc8">
@@ -50,7 +50,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2025-06-12 12:37:58        , with PHPMetrics v3.0.0-rc8 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2025-07-09 08:21:11        , with PHPMetrics v3.0.0-rc8 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -90,7 +90,7 @@
                             <path d="M0 0h24v24H0z" fill="none"/>
                             <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z"/>
                         </svg>
-                        Violations (13)
+                        Violations (12)
                     </a>
                 </li>
                                 <li>
@@ -221,31 +221,210 @@
 
     var relations = [
     {
-        "name": "\\App\\ThirdParty\\TextEditor",
+        "name": "\\App\\Controllers\\Admin\\FilesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Uploads",
+            "\\CodeIgniter\\Files\\File"
+        ]
+    },
+    {
+        "name": "\\App\\Models\\Uploads",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\App\\ThirdPArty\\TextEditorSummernote",
+        "name": "\\CodeIgniter\\Files\\File",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\App\\ThirdPArty\\TextEditorCKEditorCDN",
+        "name": "\\App\\Controllers\\Admin\\AssignmentController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Meetings",
+            "\\App\\Models\\Assignments",
+            "\\App\\Models\\AssignmentEntryProperties",
+            "\\App\\Models\\Cases"
+        ]
+    },
+    {
+        "name": "\\App\\Models\\Meetings",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\App\\ThirdPArty\\TextEditorCKEditorGPL",
+        "name": "\\App\\Models\\Assignments",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\App\\Filters\\AuthFilterAdmin",
+        "name": "\\App\\Models\\AssignmentEntryProperties",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\Cases",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\CaseController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Meetings",
+            "\\App\\Models\\Assignments",
+            "\\App\\Models\\Cases",
+            "\\App\\Models\\CaseEntry",
+            "\\App\\Models\\CaseEntryProperties"
+        ]
+    },
+    {
+        "name": "\\App\\Models\\CaseEntry",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\CaseEntryProperties",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\UserController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Users",
+            "\\CodeIgniter\\Shield\\Models\\UserModel",
+            "\\CodeIgniter\\Shield\\Validation\\ValidationRules"
+        ]
+    },
+    {
+        "name": "\\App\\Models\\Users",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\CodeIgniter\\Shield\\Models\\UserModel",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\CodeIgniter\\Shield\\Validation\\ValidationRules",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\UsersController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Users"
+        ]
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\TrainingController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Meetings",
+            "\\App\\Models\\Trainings",
+            "\\App\\Models\\TrainingUsers",
+            "\\App\\Models\\TrainingSchedule",
+            "\\App\\Models\\TrainingMeetings",
+            "\\App\\Models\\TrainingAssignments",
+            "\\App\\Models\\TrainingAssignmentEntry",
+            "\\App\\Models\\TrainingAssignmentEntryProperties",
+            "\\App\\Models\\TrainingCases",
+            "\\App\\Models\\TrainingCaseEntry",
+            "\\App\\Models\\TrainingCaseEntryProperties",
+            "\\App\\Models\\Assignments",
+            "\\App\\Models\\AssignmentEntry",
+            "\\App\\Models\\AssignmentEntryProperties",
+            "\\App\\Models\\Cases",
+            "\\App\\Models\\CaseEntry",
+            "\\App\\Models\\CaseEntryProperties",
+            "\\CodeIgniter\\I18n\\Time",
+            "\\App\\Models\\Users"
+        ]
+    },
+    {
+        "name": "\\App\\Models\\Trainings",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingUsers",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingSchedule",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\TrainingMeetings",
+            "\\App\\Models\\Trainings",
+            "\\CodeIgniter\\I18n\\Time"
+        ]
+    },
+    {
+        "name": "\\App\\Models\\TrainingMeetings",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingAssignments",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingAssignmentEntry",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingAssignmentEntryProperties",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingCases",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingCaseEntry",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingCaseEntryProperties",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\AssignmentEntry",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\CodeIgniter\\I18n\\Time",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\CasesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Cases",
+            "\\CodeIgniter\\I18n\\Time"
+        ]
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\BaseController",
         "size": 3000,
         "relations": [
             "\\CodeIgniter\\HTTP\\RequestInterface",
-            "\\CodeIgniter\\HTTP\\ResponseInterface"
+            "\\CodeIgniter\\HTTP\\ResponseInterface",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Models\\User"
         ]
     },
     {
@@ -259,39 +438,137 @@
         "relations": []
     },
     {
-        "name": "\\App\\Filters\\AuthFilterSession",
+        "name": "\\Psr\\Log\\LoggerInterface",
         "size": 3000,
-        "relations": [
-            "\\CodeIgniter\\HTTP\\RequestInterface",
-            "\\App\\Models\\User",
-            "\\CodeIgniter\\HTTP\\ResponseInterface"
-        ]
+        "relations": []
     },
     {
         "name": "\\App\\Models\\User",
         "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\Home",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\MeetingController",
+        "size": 3000,
         "relations": [
-            "\\App\\Models\\TrainingUsers"
+            "\\App\\Models\\Meetings",
+            "\\App\\Models\\Assignments"
         ]
     },
     {
-        "name": "\\App\\Filters\\AuthFilterUser",
+        "name": "\\App\\Controllers\\Admin\\TrainingsController",
         "size": 3000,
         "relations": [
-            "\\CodeIgniter\\HTTP\\RequestInterface",
-            "\\CodeIgniter\\HTTP\\ResponseInterface"
+            "\\App\\Models\\Trainings",
+            "\\App\\Models\\TrainingUsers",
+            "\\CodeIgniter\\I18n\\Time"
         ]
     },
     {
-        "name": "\\App\\Filters\\AuthFilterGuest",
+        "name": "\\App\\Controllers\\Admin\\AssignmentsController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Assignments",
+            "\\CodeIgniter\\I18n\\Time"
+        ]
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\UserInsightController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Users",
+            "\\App\\Models\\Uploads",
+            "\\App\\Models\\TrainingMeetings",
+            "\\App\\Models\\TrainingAssignments",
+            "\\App\\Models\\TrainingAssignmentEntry",
+            "\\App\\Models\\TrainingAssignmentEntryProperties",
+            "\\App\\Models\\TrainingAssignmentResult",
+            "\\App\\Models\\TrainingCases",
+            "\\App\\Models\\TrainingCaseEntry",
+            "\\App\\Models\\TrainingCaseEntryProperties",
+            "\\App\\Models\\TrainingCaseResult"
+        ]
+    },
+    {
+        "name": "\\App\\Models\\TrainingAssignmentResult",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Models\\TrainingCaseResult",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Admin\\MeetingsController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Meetings"
+        ]
+    },
+    {
+        "name": "\\App\\Controllers\\BaseController",
         "size": 3000,
         "relations": [
             "\\CodeIgniter\\HTTP\\RequestInterface",
-            "\\CodeIgniter\\HTTP\\ResponseInterface"
+            "\\CodeIgniter\\HTTP\\ResponseInterface",
+            "\\Psr\\Log\\LoggerInterface"
         ]
+    },
+    {
+        "name": "\\App\\Controllers\\LoginController",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\FilesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Uploads",
+            "\\CodeIgniter\\Files\\File"
+        ]
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\AssignmentController",
+        "size": 3000,
+        "relations": []
     },
     {
         "name": "\\App\\Controllers\\Front\\CaseController",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\DashboardModules\\DocumentsDashboardModule",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\Uploads"
+        ]
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\DashboardModules\\AgendaDashboardModule",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\TrainingSchedule"
+        ]
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\DashboardModules\\ExampleDashboardModule",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\CompleteCaseActions\\ExamplePostSaveController",
         "size": 3000,
         "relations": []
     },
@@ -325,77 +602,7 @@
         ]
     },
     {
-        "name": "\\App\\Models\\Meetings",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingMeetings",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\Assignments",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingAssignments",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingAssignmentEntry",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\AssignmentEntryProperties",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingAssignmentEntryProperties",
-        "size": 3000,
-        "relations": []
-    },
-    {
         "name": "\\App\\Models\\AssignmentResult",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingAssignmentResult",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\Cases",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingCases",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\CaseEntry",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingCaseEntry",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\CaseEntryProperties",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingCaseEntryProperties",
         "size": 3000,
         "relations": []
     },
@@ -405,75 +612,24 @@
         "relations": []
     },
     {
-        "name": "\\App\\Models\\TrainingCaseResult",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Psr\\Log\\LoggerInterface",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\TrainingUsers",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Models\\Trainings",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\DashboardModules\\AgendaDashboardModule",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\TrainingSchedule"
-        ]
-    },
-    {
-        "name": "\\App\\Models\\TrainingSchedule",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\TrainingMeetings",
-            "\\App\\Models\\Trainings",
-            "\\CodeIgniter\\I18n\\Time"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\DashboardModules\\DashboardModule",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\DashboardModules\\DocumentsDashboardModule",
+        "name": "\\App\\Controllers\\Front\\DownloadController",
         "size": 3000,
         "relations": [
             "\\App\\Models\\Uploads"
         ]
     },
     {
-        "name": "\\App\\Models\\Uploads",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\DashboardModules\\ExampleDashboardModule",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\MeetingController",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\SubAssignments\\PodcastController",
+        "name": "\\App\\Controllers\\Front\\Home",
         "size": 3000,
         "relations": []
     },
     {
         "name": "\\App\\Controllers\\Front\\SubAssignments\\CardController",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controllers\\Front\\SubAssignments\\PodcastController",
         "size": 3000,
         "relations": []
     },
@@ -488,218 +644,12 @@
         "relations": []
     },
     {
-        "name": "\\App\\Controllers\\Front\\CompleteCaseActions\\ExamplePostSaveController",
+        "name": "\\App\\Controllers\\Front\\MeetingController",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\App\\Controllers\\Front\\FilesController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Uploads",
-            "\\CodeIgniter\\Files\\File"
-        ]
-    },
-    {
-        "name": "\\CodeIgniter\\Files\\File",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\AssignmentController",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\Home",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Front\\DownloadController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Uploads"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\BaseController",
-        "size": 3000,
-        "relations": [
-            "\\CodeIgniter\\HTTP\\RequestInterface",
-            "\\CodeIgniter\\HTTP\\ResponseInterface",
-            "\\Psr\\Log\\LoggerInterface"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\CaseController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Meetings",
-            "\\App\\Models\\Assignments",
-            "\\App\\Models\\Cases",
-            "\\App\\Models\\CaseEntry",
-            "\\App\\Models\\CaseEntryProperties"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\BaseController",
-        "size": 3000,
-        "relations": [
-            "\\CodeIgniter\\HTTP\\RequestInterface",
-            "\\CodeIgniter\\HTTP\\ResponseInterface",
-            "\\Psr\\Log\\LoggerInterface",
-            "\\App\\Models\\User"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\UsersController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Users"
-        ]
-    },
-    {
-        "name": "\\App\\Models\\Users",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\MeetingController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Meetings",
-            "\\App\\Models\\Assignments"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\TrainingsController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Trainings",
-            "\\App\\Models\\TrainingUsers",
-            "\\CodeIgniter\\I18n\\Time"
-        ]
-    },
-    {
-        "name": "\\CodeIgniter\\I18n\\Time",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\UserController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Users",
-            "\\CodeIgniter\\Shield\\Models\\UserModel",
-            "\\CodeIgniter\\Shield\\Validation\\ValidationRules"
-        ]
-    },
-    {
-        "name": "\\CodeIgniter\\Shield\\Models\\UserModel",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\CodeIgniter\\Shield\\Validation\\ValidationRules",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\FilesController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Uploads",
-            "\\CodeIgniter\\Files\\File"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\CasesController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Cases",
-            "\\CodeIgniter\\I18n\\Time"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\MeetingsController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Meetings"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\AssignmentController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Meetings",
-            "\\App\\Models\\Assignments",
-            "\\App\\Models\\AssignmentEntryProperties",
-            "\\App\\Models\\Cases"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\Home",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\AssignmentsController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Assignments",
-            "\\CodeIgniter\\I18n\\Time"
-        ]
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\TrainingController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Meetings",
-            "\\App\\Models\\Trainings",
-            "\\App\\Models\\TrainingUsers",
-            "\\App\\Models\\TrainingSchedule",
-            "\\App\\Models\\TrainingMeetings",
-            "\\App\\Models\\TrainingAssignments",
-            "\\App\\Models\\TrainingAssignmentEntry",
-            "\\App\\Models\\TrainingAssignmentEntryProperties",
-            "\\App\\Models\\TrainingCases",
-            "\\App\\Models\\TrainingCaseEntry",
-            "\\App\\Models\\TrainingCaseEntryProperties",
-            "\\App\\Models\\Assignments",
-            "\\App\\Models\\AssignmentEntry",
-            "\\App\\Models\\AssignmentEntryProperties",
-            "\\App\\Models\\Cases",
-            "\\App\\Models\\CaseEntry",
-            "\\App\\Models\\CaseEntryProperties",
-            "\\CodeIgniter\\I18n\\Time",
-            "\\App\\Models\\Users"
-        ]
-    },
-    {
-        "name": "\\App\\Models\\AssignmentEntry",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controllers\\Admin\\UserInsightController",
-        "size": 3000,
-        "relations": [
-            "\\App\\Models\\Users",
-            "\\App\\Models\\Uploads",
-            "\\App\\Models\\TrainingMeetings",
-            "\\App\\Models\\TrainingAssignments",
-            "\\App\\Models\\TrainingAssignmentEntry",
-            "\\App\\Models\\TrainingAssignmentEntryProperties",
-            "\\App\\Models\\TrainingAssignmentResult",
-            "\\App\\Models\\TrainingCases",
-            "\\App\\Models\\TrainingCaseEntry",
-            "\\App\\Models\\TrainingCaseEntryProperties",
-            "\\App\\Models\\TrainingCaseResult"
-        ]
-    },
-    {
-        "name": "\\App\\Services\\UserMetaService",
+        "name": "\\App\\Models\\TrainingUserMeta",
         "size": 3000,
         "relations": []
     },
@@ -709,7 +659,76 @@
         "relations": []
     },
     {
-        "name": "\\App\\Models\\TrainingUserMeta",
+        "name": "\\App\\ThirdPArty\\TextEditorCKEditorCDN",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ThirdParty\\TextEditor",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ThirdPArty\\TextEditorSummernote",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ThirdPArty\\TextEditorCKEditorGPL",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Filters\\AuthFilterAdmin",
+        "size": 3000,
+        "relations": [
+            "\\CodeIgniter\\CodeIgniter\\Filters\\FilterInterface",
+            "\\CodeIgniter\\HTTP\\RequestInterface",
+            "\\CodeIgniter\\HTTP\\ResponseInterface"
+        ]
+    },
+    {
+        "name": "\\CodeIgniter\\CodeIgniter\\Filters\\FilterInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Filters\\AuthFilterSession",
+        "size": 3000,
+        "relations": [
+            "\\CodeIgniter\\HTTP\\RequestInterface",
+            "\\App\\Models\\User",
+            "\\CodeIgniter\\HTTP\\ResponseInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Filters\\AuthFilterGuest",
+        "size": 3000,
+        "relations": [
+            "\\CodeIgniter\\HTTP\\RequestInterface",
+            "\\CodeIgniter\\HTTP\\ResponseInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Filters\\AuthFilterUser",
+        "size": 3000,
+        "relations": [
+            "\\CodeIgniter\\HTTP\\RequestInterface",
+            "\\CodeIgniter\\HTTP\\ResponseInterface"
+        ]
+    },
+    {
+        "name": "\\Config\\Session",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Filters",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Generators",
         "size": 3000,
         "relations": []
     },
@@ -722,6 +741,15 @@
             "\\App\\ThirdParty\\TextEditorCKEditorCDN",
             "\\App\\ThirdParty\\TextEditorCKEditorGPL",
             "\\App\\ThirdParty\\TextEditorSummernote"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\UserMetaService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Models\\User",
+            "\\App\\Models\\UserMeta",
+            "\\App\\Models\\TrainingUserMeta"
         ]
     },
     {
@@ -740,32 +768,17 @@
         "relations": []
     },
     {
-        "name": "\\Config\\Generators",
+        "name": "\\Config\\Publisher",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Config\\UserAgents",
+        "name": "\\Config\\AuthGroups",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Config\\CURLRequest",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Modules",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Migrations",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\DocTypes",
+        "name": "\\Config\\Honeypot",
         "size": 3000,
         "relations": []
     },
@@ -775,17 +788,72 @@
         "relations": []
     },
     {
-        "name": "\\Config\\Publisher",
+        "name": "\\Config\\Email",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Config\\Paths",
+        "name": "\\Config\\View",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\CURLRequest",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\App",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Auth",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Cache",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\UserAgents",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Routing",
         "size": 3000,
         "relations": []
     },
     {
         "name": "\\Config\\Optimize",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Format",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Logger",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Security",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Database",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Modules",
         "size": 3000,
         "relations": []
     },
@@ -796,6 +864,16 @@
     },
     {
         "name": "\\Config\\ForeignCharacters",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\ContentSecurityPolicy",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Config\\Kint",
         "size": 3000,
         "relations": []
     },
@@ -824,27 +902,17 @@
         "relations": []
     },
     {
-        "name": "\\Config\\Cache",
+        "name": "\\Config\\Cookie",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Config\\Database",
+        "name": "\\Config\\DocTypes",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Config\\Toolbar",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Logger",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\AuthGroups",
+        "name": "\\Config\\Migrations",
         "size": 3000,
         "relations": []
     },
@@ -854,32 +922,17 @@
         "relations": []
     },
     {
-        "name": "\\Config\\Cors",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Format",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Honeypot",
-        "size": 3000,
-        "relations": []
-    },
-    {
         "name": "\\Config\\Autoload",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Config\\View",
+        "name": "\\Config\\Cors",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Config\\Session",
+        "name": "\\Config\\Paths",
         "size": 3000,
         "relations": []
     },
@@ -889,12 +942,7 @@
         "relations": []
     },
     {
-        "name": "\\Config\\App",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Cookie",
+        "name": "\\Config\\Toolbar",
         "size": 3000,
         "relations": []
     },
@@ -904,47 +952,12 @@
         "relations": []
     },
     {
-        "name": "\\Config\\Email",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Routing",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Filters",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\ContentSecurityPolicy",
+        "name": "\\Config\\Validation",
         "size": 3000,
         "relations": []
     },
     {
         "name": "\\Config\\Pager",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Security",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Kint",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Auth",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Config\\Validation",
         "size": 3000,
         "relations": []
     }

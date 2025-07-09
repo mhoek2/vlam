@@ -1166,6 +1166,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Front-SubAssignments-PodcastController.html#method_index"
         },                {
+            "fqsen": "\\App\\Controllers\\LoginController",
+            "name": "LoginController",
+            "summary": "",
+            "url": "classes/App-Controllers-LoginController.html"
+        },                {
+            "fqsen": "\\App\\Controllers\\LoginController\u003A\u003AloginView\u0028\u0029",
+            "name": "loginView",
+            "summary": "",
+            "url": "classes/App-Controllers-LoginController.html#method_loginView"
+        },                {
             "fqsen": "\\App\\Filters\\AuthFilterAdmin",
             "name": "AuthFilterAdmin",
             "summary": "",
