@@ -37,4 +37,9 @@ Setup
 	
 	- Instead of **step 2**. Clone the repository using your preferred **GIT** workflow for version control.
 
+.. tip::
+
+	The Login controller is a clone of Shield's, preventing your custom login page from being overwritten.
+	Ensure ``Controllers\LoginController::loginView()`` matches ``CodeIgniter\Shield\Controllers\LoginController::loginView()``.
+
 `Proceed to: Configure <configure.rst>`_

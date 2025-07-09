@@ -9,6 +9,10 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * front
  */
+
+$routes->get(	'login', 		'LoginController::loginView');
+$routes->post(	'login', 		'LoginController::loginAction');
+
 $routes->get(	'/', 		'Front\Home::index', 							['filter' => \App\Filters\AuthFilterGuest::class]);
 $routes->get(	'/home',	'Front\Home::application', 						['as' => 'home', 'filter' => \App\Filters\AuthFilterSession::class]);
 $routes->get(	'download/(:any)',	'DownloadController::index/$1', 		['as' => 'front.download', 'namespace' => 'App\Controllers\Front', 'filter' => \App\Filters\AuthFilterSession::class]);
