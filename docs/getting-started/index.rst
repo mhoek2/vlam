@@ -10,3 +10,5 @@ Or you want to deploy a existing install, your'e in the right place.
     installing
 	deploy
 	configure
+	cloning
+	updating

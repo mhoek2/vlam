@@ -12,7 +12,7 @@ Setup
 -----
 
 #. Install `Composer<https://getcomposer.org/>`_
-#. From the downloaded .zip, unzip all contents in the subfolder which contains composer.json to the project folder in your web environment.
+#. Clone the repository from GitHub to your web environment. (see :ref:`Cloning <cloning-guide>` if repo is private)
 #. Open a terminal of choice and change current directory to the root directory of the project folder.
 #. Run the following command
     .. code-block:: bash
