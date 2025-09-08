@@ -19,8 +19,8 @@
         "distance": 0.19,
         "incomingCDep": 2,
         "incomingPDep": 0.64,
-        "outgoingCDep": 6.82,
-        "outgoingPDep": 2.09,
+        "outgoingCDep": 6.73,
+        "outgoingPDep": 2,
         "classesPerPackage": 9.64
     },
     "sum": {

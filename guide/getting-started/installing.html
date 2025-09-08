@@ -263,7 +263,22 @@ composer install</code></pre>
     <li>Create a Mysql database with PhpMyAdmin and import <code>sql/vlam.sql</code>
 </li>
 
+    <li>Modify file: app/Config/App.php and match $baseURL with your desired url</li>
+
+    <li>Modify file: app/Config/Database.php and enter database credentials</li>
+
+    <li><dl>
+                        <dt>Give valid permissions to writable folder and subfolders</dt>
+        
+        <dd><pre><code class="language-bash"># This will add permissions, use valid user, commoly www-data for apache2 servers</code></pre>
+</dd>
+            </dl>
+</li>
+
 </ol>
+
+            
+    <p>sudo chown -R www-data writable</p>
 
             <div class="phpdocumentor-admonition tip">
                     <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>

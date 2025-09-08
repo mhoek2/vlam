@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PhpMetrics report [2025-07-09 08:21:11]</title>
+    <title>PhpMetrics report [2025-09-08 09:29:39]</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico?v=v3.0.0-rc8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/milligram.min.css?v=v3.0.0-rc8">
@@ -50,7 +50,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2025-07-09 08:21:11        , with PHPMetrics v3.0.0-rc8 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2025-09-08 09:29:39        , with PHPMetrics v3.0.0-rc8 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -221,16 +221,18 @@
 
     var relations = [
     {
-        "name": "App\\Controllers\\Admin",
+        "name": "App\\Controllers\\Front\\CompleteCaseActions",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "App\\Controllers\\Front",
         "size": 3000,
         "relations": [
             "App\\Models",
-            "CodeIgniter\\Files",
-            "CodeIgniter\\Shield\\Models",
-            "CodeIgniter\\Shield\\Validation",
-            "CodeIgniter\\I18n",
             "CodeIgniter\\HTTP",
-            "Psr\\Log"
+            "Psr\\Log",
+            "CodeIgniter\\Files"
         ]
     },
     {
@@ -241,7 +243,55 @@
         ]
     },
     {
+        "name": "CodeIgniter\\HTTP",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "Psr\\Log",
+        "size": 3000,
+        "relations": []
+    },
+    {
         "name": "CodeIgniter\\Files",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "App\\Controllers\\Front\\SubAssignments",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "App\\Controllers\\Front\\DashboardModules",
+        "size": 3000,
+        "relations": [
+            "App\\Models"
+        ]
+    },
+    {
+        "name": "App\\Controllers",
+        "size": 3000,
+        "relations": [
+            "CodeIgniter\\HTTP",
+            "Psr\\Log"
+        ]
+    },
+    {
+        "name": "App\\Controllers\\Admin",
+        "size": 3000,
+        "relations": [
+            "App\\Models",
+            "CodeIgniter\\I18n",
+            "CodeIgniter\\HTTP",
+            "Psr\\Log",
+            "CodeIgniter\\Shield\\Models",
+            "CodeIgniter\\Shield\\Validation",
+            "CodeIgniter\\Files"
+        ]
+    },
+    {
+        "name": "CodeIgniter\\I18n",
         "size": 3000,
         "relations": []
     },
@@ -256,89 +306,21 @@
         "relations": []
     },
     {
-        "name": "CodeIgniter\\I18n",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "CodeIgniter\\HTTP",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "Psr\\Log",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "App\\Controllers",
-        "size": 3000,
-        "relations": [
-            "CodeIgniter\\HTTP",
-            "Psr\\Log"
-        ]
-    },
-    {
-        "name": "App\\Controllers\\Front",
-        "size": 3000,
-        "relations": [
-            "App\\Models",
-            "CodeIgniter\\Files",
-            "CodeIgniter\\HTTP",
-            "Psr\\Log"
-        ]
-    },
-    {
-        "name": "App\\Controllers\\Front\\DashboardModules",
-        "size": 3000,
-        "relations": [
-            "App\\Models"
-        ]
-    },
-    {
-        "name": "App\\Controllers\\Front\\CompleteCaseActions",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "App\\Controllers\\Front\\SubAssignments",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "App\\ThirdParty",
-        "size": 3000,
-        "relations": []
-    },
-    {
         "name": "App\\Filters",
         "size": 3000,
         "relations": [
-            "CodeIgniter\\CodeIgniter\\Filters",
             "CodeIgniter\\HTTP",
             "App\\Models"
         ]
-    },
-    {
-        "name": "CodeIgniter\\CodeIgniter\\Filters",
-        "size": 3000,
-        "relations": []
     },
     {
         "name": "Config",
         "size": 3000,
         "relations": [
-            "App\\Services",
-            "App\\ThirdParty",
             "CodeIgniter\\Debug",
-            "global"
-        ]
-    },
-    {
-        "name": "App\\Services",
-        "size": 3000,
-        "relations": [
-            "App\\Models"
+            "global",
+            "App\\Services",
+            "App\\ThirdParty"
         ]
     },
     {
@@ -348,6 +330,18 @@
     },
     {
         "name": "global",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "App\\Services",
+        "size": 3000,
+        "relations": [
+            "App\\Models"
+        ]
+    },
+    {
+        "name": "App\\ThirdParty",
         "size": 3000,
         "relations": []
     }
