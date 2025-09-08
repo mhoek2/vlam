@@ -30,6 +30,16 @@ Setup
         php spark shield:setup
 	  
 #. Create a Mysql database with PhpMyAdmin and import ``sql/vlam.sql``
+#. Modify file: app/Config/App.php and match $baseURL with your desired url 
+#. Modify file: app/Config/Database.php and enter database credentials
+#. Give valid permissions to writable folder and subfolders
+    .. code-block:: bash
+   
+   		# This will add permissions, use valid user, commoly www-data for apache2 servers
+		sudo chown -R www-data writable
+
+
+
 
 .. tip::
 
