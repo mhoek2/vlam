@@ -5,6 +5,7 @@ Configure
 #. Ensure database connection variables are correctly set in ``app/Config/Database.php``
 #. Ensure 'csrf' is uncommented in ``$globals`` ``app/Config/Filters.php``
 #. Ensure services are in place in ``app/Config/Services.php`` 
+
 #. Give valid permissions to writable folder and subfolders
     .. code-block:: bash
 
@@ -50,5 +51,13 @@ Configure
         sudo a2dissite 000-default.conf
         sudo systemctl reload apache2
 
+#. TIP: Temporary enable error printing:
+    .. code-block:: bash
+
+        nano app/Config/Boot/production.php
+        # Change:
+        ini_set('display_errors', '0');
+        # To:
+        ini_set('display_errors', '1');
 
 You should have a correctly setup cloned version
