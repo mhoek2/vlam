@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.2.1deb3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 11, 2025 at 02:32 PM
--- Server version: 8.0.42-0ubuntu0.20.04.1
--- PHP Version: 7.4.33
+-- Host: localhost:3306
+-- Generation Time: Sep 08, 2025 at 11:34 AM
+-- Server version: 8.0.43-0ubuntu0.24.04.1
+-- PHP Version: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hklab69_vlam`
+-- Database: `vlam`
 --
 
 -- --------------------------------------------------------
@@ -40,6 +39,13 @@ CREATE TABLE `assignments` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+--
+-- Dumping data for table `assignments`
+--
+
+INSERT INTO `assignments` (`id`, `meeting_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `sub_assignment`, `created_at`) VALUES
+(1, 1, 0, 'Opdracht 1', '<p>Dit is de intro van de test opdracht</p>', '', 'Dit is een test opdracht', 'default', '2025-09-08 11:04:15');
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +62,13 @@ CREATE TABLE `assignment_entry` (
   `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+--
+-- Dumping data for table `assignment_entry`
+--
+
+INSERT INTO `assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`, `optional`) VALUES
+(1, 0, 'Vraag 1', '', 1, 'mcq-2', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -68,6 +81,17 @@ CREATE TABLE `assignment_entry_properties` (
   `content` text NOT NULL,
   `sort_order` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `assignment_entry_properties`
+--
+
+INSERT INTO `assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
+(1, 1, 'Ja', 1),
+(2, 1, 'Nee', 3),
+(3, 1, 'Misschien', 2),
+(4, 1, 'Absoluut', 0),
+(5, 1, 'Zeker niet', 4);
 
 -- --------------------------------------------------------
 
@@ -97,6 +121,14 @@ CREATE TABLE `auth_groups_users` (
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `auth_groups_users`
+--
+
+INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
+(2, 2, 'admin', '2025-09-08 11:01:17'),
+(3, 16, 'user', '2025-09-08 11:32:34');
+
 -- --------------------------------------------------------
 
 --
@@ -123,13 +155,8 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-06-11 07:34:30', '2025-02-05 09:20:35', '2025-06-11 07:34:30'),
-(3, 3, 'email_password', NULL, 'user1@vlam.nl', '$2y$12$2qVsxlZTaVhyA1ne60qDaudYkCX9VIdj4ObMlAOamVFtWfICm3/6i', NULL, NULL, 0, '2025-03-28 19:09:26', '2025-02-13 08:21:52', '2025-03-28 19:09:26'),
-(4, 4, 'email_password', NULL, 'user2@vlam.nl', '$2y$12$vJPJlsyJgkXCerGvzzc1PePQQ7sOWNed3Rb.98HwrO7fkl09ZofrC', NULL, NULL, 0, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31'),
-(5, 5, 'email_password', NULL, 'user3@vlam.nl', '$2y$12$76GI7FOlmaDpflY6JZgrR.mxs5hyDb.7UR0h7pddjQ3xW99oyplJm', NULL, NULL, 0, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57'),
-(6, 6, 'email_password', NULL, 'user4@vlam.nl', '$2y$12$6AfG80CW1Kdd6NjkBsGNeO/cmb9ll/ZIOe.//ul1Q8AzKpvuOnQmW', NULL, NULL, 0, '2025-06-11 11:13:02', '2025-02-13 08:23:13', '2025-06-11 11:13:02'),
-(7, 7, 'email_password', NULL, 'user5@vlam.nl', '$2y$12$aGbP0bWzJ4bxjHZjtytlDOfnyc3qtC4..pLaKPsAH5eGXnK8dhY5e', NULL, NULL, 0, '2025-06-11 12:06:58', '2025-02-13 08:23:40', '2025-06-11 12:06:58'),
-(15, 15, 'email_password', NULL, 'user6@vlam.nl', '$2y$12$y91iuFAsF4LxeHRND0zQ3ek1vUovbQTk.CHOk3EGVbatUJgh3YP8a', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:22');
+(2, 2, 'email_password', '', 'admin@vlam.nl', '$2y$12$CFeavzQijA.w4yu7.276auOuovnwGJQtKFj59AEVcu3EFllrXs4yG', NULL, NULL, 0, '2025-09-08 09:57:48', '2025-02-05 09:20:35', '2025-09-08 09:57:48'),
+(16, 16, 'email_password', NULL, 'wdevries@vlam.nl', '$2y$12$IRs0exF7MYaGO6.MCkNsnuooeM8xgtymOcTaaIOLWaqKyi2YA0/mm', NULL, NULL, 0, '2025-09-08 11:33:38', '2025-09-08 11:32:33', '2025-09-08 11:33:38');
 
 -- --------------------------------------------------------
 
@@ -329,6 +356,13 @@ CREATE TABLE `trainings` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `trainings`
+--
+
+INSERT INTO `trainings` (`id`, `name`, `started`, `stopped`, `created_at`) VALUES
+(1, 'Test Training', '2025-09-08 11:33:03', NULL, '2025-09-08 11:32:42');
+
 -- --------------------------------------------------------
 
 --
@@ -348,6 +382,13 @@ CREATE TABLE `training_assignments` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+--
+-- Dumping data for table `training_assignments`
+--
+
+INSERT INTO `training_assignments` (`id`, `training_id`, `meeting_id`, `sort_order`, `name`, `intro`, `outro`, `info`, `sub_assignment`, `created_at`) VALUES
+(1, 1, 1, 0, 'Opdracht 1', '<p>Dit is de intro van de test opdracht</p>', '', 'Dit is een test opdracht', 'default', '2025-09-08 11:33:03');
+
 -- --------------------------------------------------------
 
 --
@@ -364,6 +405,13 @@ CREATE TABLE `training_assignment_entry` (
   `optional` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+--
+-- Dumping data for table `training_assignment_entry`
+--
+
+INSERT INTO `training_assignment_entry` (`id`, `sort_order`, `name`, `info`, `assignment_id`, `type`, `optional`) VALUES
+(1, 0, 'Vraag 1', '', 1, 'mcq-2', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -376,6 +424,17 @@ CREATE TABLE `training_assignment_entry_properties` (
   `content` text NOT NULL,
   `sort_order` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `training_assignment_entry_properties`
+--
+
+INSERT INTO `training_assignment_entry_properties` (`id`, `entry_id`, `content`, `sort_order`) VALUES
+(1, 1, 'Ja', 1),
+(2, 1, 'Nee', 3),
+(3, 1, 'Misschien', 2),
+(4, 1, 'Absoluut', 0),
+(5, 1, 'Zeker niet', 4);
 
 -- --------------------------------------------------------
 
@@ -469,6 +528,18 @@ CREATE TABLE `training_meetings` (
   `intro` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `training_meetings`
+--
+
+INSERT INTO `training_meetings` (`id`, `training_id`, `name`, `info`, `intro`) VALUES
+(1, 1, 1, 'Kennismaking en werkvoorwaarden', '<h2><span style=\"color:hsl(270,75%,60%);\">Lorem Ipsum332</span></h2><h4><i>\"Neque <span style=\"background-color:hsl(30,75%,60%);\">porro quisquam </span>est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"</i></h4><p><strong>Lorem Ipsum</strong><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>'),
+(2, 1, 2, 'Kwaliteiten en persoonlijk profiel', ''),
+(3, 1, 3, 'Het belang van een sterk CV', ''),
+(4, 1, 4, 'Openheid geven', ''),
+(5, 1, 5, 'Ervaringen van een oud student', ''),
+(6, 1, 6, 'Solicitatiegesprek en actieplan', '');
+
 -- --------------------------------------------------------
 
 --
@@ -493,6 +564,13 @@ CREATE TABLE `training_users` (
   `training_id` int NOT NULL,
   `user_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `training_users`
+--
+
+INSERT INTO `training_users` (`id`, `training_id`, `user_id`) VALUES
+(1, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -553,12 +631,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `firstname`, `middlename`, `lastname`, `status`, `status_message`, `active`, `last_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (2, 'vlam_admin', 'Admin', '', 'Vlam', NULL, NULL, 1, NULL, '2025-02-05 09:20:35', '2025-02-05 09:20:35', NULL),
-(3, 'user1', 'User', '', '1', NULL, NULL, 1, NULL, '2025-02-13 08:21:52', '2025-02-13 08:21:52', NULL),
-(4, 'user2', 'User', '', '2', NULL, NULL, 1, NULL, '2025-02-13 08:22:30', '2025-02-13 08:22:31', NULL),
-(5, 'user3', 'User', '', '3', NULL, NULL, 1, NULL, '2025-02-13 08:22:57', '2025-02-13 08:22:57', NULL),
-(6, 'user4', 'User', '', '4', NULL, NULL, 1, NULL, '2025-02-13 08:23:13', '2025-02-13 08:23:14', NULL),
-(7, 'user5', 'User', '', '5', NULL, NULL, 1, NULL, '2025-02-13 08:23:39', '2025-02-13 08:23:40', NULL),
-(15, 'user6', 'User', 'as', 'a.', NULL, NULL, 0, NULL, '2025-03-11 13:30:21', '2025-03-11 13:30:21', NULL);
+(16, 'wdevries', 'Willem', 'De', 'Vries', NULL, NULL, 0, NULL, '2025-09-08 11:32:33', '2025-09-08 11:32:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -825,19 +898,19 @@ ALTER TABLE `user_meta`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry`
 --
 ALTER TABLE `assignment_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `assignment_entry_properties`
 --
 ALTER TABLE `assignment_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `assignment_result`
@@ -849,13 +922,13 @@ ALTER TABLE `assignment_result`
 -- AUTO_INCREMENT for table `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `auth_identities`
 --
 ALTER TABLE `auth_identities`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `auth_logins`
@@ -927,25 +1000,25 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `trainings`
 --
 ALTER TABLE `trainings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `training_assignments`
 --
 ALTER TABLE `training_assignments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `training_assignment_entry`
 --
 ALTER TABLE `training_assignment_entry`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `training_assignment_entry_properties`
 --
 ALTER TABLE `training_assignment_entry_properties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `training_assignment_result`
@@ -981,7 +1054,7 @@ ALTER TABLE `training_case_result`
 -- AUTO_INCREMENT for table `training_meetings`
 --
 ALTER TABLE `training_meetings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `training_schedule`
@@ -993,7 +1066,7 @@ ALTER TABLE `training_schedule`
 -- AUTO_INCREMENT for table `training_users`
 --
 ALTER TABLE `training_users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `training_user_meta`
@@ -1011,7 +1084,7 @@ ALTER TABLE `uploads`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user_meta`

@@ -16,30 +16,21 @@ Setup
 #. Open a terminal of choice and change current directory to the root directory of the project folder.
 #. Run the following command
     .. code-block:: bash
-	
+
         # This will install the dependencies set in composer.json
         composer install
-		
+
 #. Or, manually 
     .. code-block:: bash
-   
-   		# This will not install dev-tools
+
+        # This will not install dev-tools
         composer create-project codeigniter4/appstarter vlam
         composer require phpdocumentor/shim
         composer require codeigniter4/shield:dev-develop
         php spark shield:setup
-	  
+
+
 #. Create a Mysql database with PhpMyAdmin and import ``sql/vlam.sql``
-#. Modify file: app/Config/App.php and match $baseURL with your desired url 
-#. Modify file: app/Config/Database.php and enter database credentials
-#. Give valid permissions to writable folder and subfolders
-    .. code-block:: bash
-   
-   		# This will add permissions, use valid user, commoly www-data for apache2 servers
-		sudo chown -R www-data writable
-
-
-
 
 .. tip::
 
