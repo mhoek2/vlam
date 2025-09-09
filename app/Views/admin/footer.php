@@ -20,6 +20,16 @@
             menuItem.classList.toggle('hidden');
         }
     }
+	
+	document.addEventListener('scroll', function (event) {
+		if (window.scrollY > 0)
+		{
+			$('header').addClass('collapse');	
+		}
+		else {
+			$('header').removeClass('collapse');	
+		}
+	}, true );
 </script>
 
 </body>
