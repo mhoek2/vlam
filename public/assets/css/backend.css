@@ -446,23 +446,23 @@ footer {
 			color: #666;
 			font-weight: bold;
 		}
-	header.collapse ~ div.breadcrumbs {
+	header.collapse ~ .breadcrumbs {
     	top: 68px;
 		background: var(--button-background-color);
 		border-bottom: 1px solid #d0dafb;
 		box-shadow: 0px 17px 20px 0px #f7f7f7;
 	    z-index: 1005;
 	}
-		.breadcrumbs > ul > li span {
+		header.collapse ~ .breadcrumbs > ul > li span {
 			color: #434343;
 		}
-		.breadcrumbs > ul > li a {
+		header.collapse ~ .breadcrumbs > ul > li a {
 			color: var(--button-text-color);
 		}
-		.breadcrumbs > ul > li a:hover {
+		header.collapse ~ .breadcrumbs > ul > li a:hover {
 			color: #0056b3;
 		}
-		.breadcrumbs > ul > li:not(:last-child)::after {
+		header.collapse ~ .breadcrumbs > ul > li:not(:last-child)::after {
 			color: var(--button-text-color);
 		}
 /* TABLES */
