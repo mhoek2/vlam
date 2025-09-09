@@ -73,6 +73,14 @@
                 <a href="guide/getting-started/configure.html#configure" class="">Configure</a>
                 
             </li>
+                    <li>
+                <a href="guide/getting-started/cloning.html#cloning" class="">Cloning</a>
+                
+            </li>
+                    <li>
+                <a href="guide/getting-started/updating.html#updating" class="">Updating</a>
+                
+            </li>
             </ul>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -223,6 +231,72 @@
 </li>
 
     <li>Ensure services are in place in <code>app/Config/Services.php</code>
+</li>
+
+    <li><dl>
+                        <dt>Give valid permissions to writable folder and subfolders</dt>
+        
+        <dd><pre><code class="language-bash"># This will add permissions, use valid user, commonly www-data for apache2 servers
+sudo chown -R www-data writable</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>Enable modrewrite</dt>
+        
+        <dd><pre><code class="language-bash"># Check if modrewrite is enabled:
+apache2ctl -M | grep rewrite
+
+# when nothing returns, enable using:
+sudo a2enmod rewrite
+sudo systemctl restart apache2</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>Create Virtual Host</dt>
+        
+        <dd><pre><code class="language-bash"># When you don&#039;t have this set up already, add a vhost.
+# sudo nano /etc/apache2/sites-available/vlam.your-domain.com.conf
+&lt;VirtualHost *:80&gt;
+    ServerName vlam.your-domain.com
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/vlam/public
+
+    &lt;Directory /var/www/html/vlam/public&gt;
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/vlam_error.log
+    CustomLog ${APACHE_LOG_DIR}/vlam_access.log combined
+&lt;/VirtualHost&gt;
+
+# save &amp; exit
+sudo a2ensite vlam.your-domain.com.conf
+sudo systemctl reload apache2
+
+# disable default vhost:
+sudo a2dissite 000-default.conf
+sudo systemctl reload apache2</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>TIP: Temporary enable error printing:</dt>
+        
+        <dd><pre><code class="language-bash">nano app/Config/Boot/production.php
+# Change:
+ini_set(&#039;display_errors&#039;, &#039;0&#039;);
+# To:
+ini_set(&#039;display_errors&#039;, &#039;1&#039;);</code></pre>
+</dd>
+            </dl>
 </li>
 
 </ol>
