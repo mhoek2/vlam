@@ -1,10 +1,70 @@
 Configure
 =========
 
-#. Set variable ``$baseURL`` in ``app/Config/App.php`` to the proper root url. eg: http://example.com/
+A few things need to be set-up and configured.
+
+Some composer modules might have changed been updated, so we want to verify a few things.
+
+Setup domain
+------------
+
+#. Set variable ``$baseURL`` in ``app/Config/App.php`` to the root url of your server. eg: http://vlam.your-domain.com/
+    .. code-block:: php
+
+        /**
+        * --------------------------------------------------------------------------
+        * Base Site URL
+        * --------------------------------------------------------------------------
+        *
+        * URL to your CodeIgniter root. Typically, this will be your base URL,
+        * WITH a trailing slash:
+        *
+        * E.g., http://example.com/
+        */
+        public string $baseURL = 'http://vlam.your-domain.com/';
+
 #. Ensure database connection variables are correctly set in ``app/Config/Database.php``
+    .. code-block:: php
+
+        /**
+        * The default database connection.
+        *
+        * @var array<string, mixed>
+        */
+        public array $default = [
+            'DSN'          => '',
+            'hostname'     => 'localhost',
+            'username'     => 'your-username',
+            'password'     => 'your-password',
+            'database'     => 'your-database-name',
+            'DBDriver'     => 'MySQLi',
+
+Verify
+------
+
 #. Ensure 'csrf' is uncommented in ``$globals`` ``app/Config/Filters.php``
+    .. code-block:: php
+
+        public array $globals = [
+            'before' => [
+                // 'honeypot',
+                'csrf',
+                // 'invalidchars',
+            ],
+            'after' => [
+                // 'honeypot',
+                // 'secureheaders',
+            ],
+        ];
 #. Ensure services are in place in ``app/Config/Services.php`` 
+#. The Login controller is a clone of Shield's, this prevents the custom login page from being overwritten. 
+        Ensure ``Controllers\LoginController::loginView()`` matches ``CodeIgniter\Shield\Controllers\LoginController::loginView()``.
+		
+		
+Configure Apache server
+-----------------------
+
+If you run a fresh apache webserver, you might want to set up the following.
 
 #. Give valid permissions to writable folder and subfolders
     .. code-block:: bash
@@ -60,4 +120,7 @@ Configure
         # To:
         ini_set('display_errors', '1');
 
-You should have a correctly setup cloned version
+
+.. tip::
+	You should now be able to see a correctly setup instance when you navigate to: http://vlam.your-domain.com/
+	

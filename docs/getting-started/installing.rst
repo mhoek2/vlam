@@ -20,7 +20,15 @@ Setup
         # This will install the dependencies set in composer.json
         composer install
 
-#. Or, manually 
+`Proceed to: Configure <configure.rst>`_
+
+
+
+
+Manual (Not recommended)
+------------------------
+#. Download the .zip file containg project files.
+#. Extract to your webserver, then open a terminal in the project folder.
     .. code-block:: bash
 
         # This will not install dev-tools
@@ -31,16 +39,5 @@ Setup
 
 
 #. Create a Mysql database with PhpMyAdmin and import ``sql/vlam.sql``
-
-.. tip::
-
-	For **development** use a local web server such as `XAMPP<https://www.apachefriends.org/>`_, or just apache with php and MySQL if you prefer custom installation.
-	
-	- Instead of **step 2**. Clone the repository using your preferred **GIT** workflow for version control.
-
-.. tip::
-
-	The Login controller is a clone of Shield's, preventing your custom login page from being overwritten.
-	Ensure ``Controllers\LoginController::loginView()`` matches ``CodeIgniter\Shield\Controllers\LoginController::loginView()``.
 
 `Proceed to: Configure <configure.rst>`_

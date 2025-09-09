@@ -23,7 +23,7 @@ Example module
     {
     	protected $sort = 5;
     	protected $css_class = 'wide';
-    	//protected $visible = fakse;
+    	//protected $visible = false;
     
     	public function index( &$data ) : string
     	{
