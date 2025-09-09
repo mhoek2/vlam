@@ -8,6 +8,7 @@ use CodeIgniter\I18n\Time;
 use App\Models\Meetings;
 use App\Models\Trainings;
 use App\Models\TrainingUsers;
+use App\Models\TrainingUserMeta;
 use App\Models\TrainingSchedule;
 use App\Models\Users;
 
@@ -49,7 +50,20 @@ class TrainingController extends BaseController
 		$trainingMeetings->where('training_id', $training_id)->delete();	
 		
 		$trainingAssignments = new TrainingAssignments();
-		$trainingAssignments->where('training_id', $training_id)->delete();	
+		$trainingAssignments->where('training_id', $training_id)->delete();
+		
+		// clear user meta.
+		$members = $this->trainingMembers->getMembers( $training_id );
+		
+		if ( $members != null )
+		{
+			$trainingUserMeta = new TrainingUserMeta();
+			
+			foreach( $members as $member )
+			{
+				$trainingUserMeta->where('user_id', (int)$member["user_id"])->delete();
+			}
+		} 
 	}
 		
 	private function cloneAssignmentsAndCases( int $training_id )
@@ -249,13 +263,16 @@ class TrainingController extends BaseController
 		$meeting_ids = $this->request->getPost('meeting_ids');
         $meeting_dates = $this->request->getPost('meeting_dates');
 
-		foreach ( $meeting_ids as $meeting_id )
+		if ( $meeting_ids != null )
 		{
-			$this->TrainingSchedule->replace([ 
-				'training_id' 	=> $training_id, 
-				'meeting_id' 	=> $meeting_id,
-				'date' 			=> $meeting_dates[$meeting_id]
-            ]);
+			foreach ( $meeting_ids as $meeting_id )
+			{
+				$this->TrainingSchedule->replace([ 
+					'training_id' 	=> $training_id, 
+					'meeting_id' 	=> $meeting_id,
+					'date' 			=> $meeting_dates[$meeting_id]
+				]);
+			}
 		}
 
 		return $this->response->setJSON([
