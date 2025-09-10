@@ -172,7 +172,7 @@ else {
 				</section>
 			</div>
 
-			<div id="user_response_container" class="request-response"></div>
+			<div id="form_response_container" class="request-response"></div>
 			
 			<?php if( 1 == 0 ) { // disabled, switched to xhr reqruest ?>
 				<div class="request-response">
@@ -255,6 +255,7 @@ else {
 			const formData = $(this).serialize();
 			
 			button_handler( event.originalEvent.submitter, BUTTON_LOADING );
+			$('#form_response_container').empty();
 			
 			$.ajax({
 				url: '<?= $action ?>',
@@ -265,9 +266,9 @@ else {
 
 					// Handle the response from the server
 					//$('#responseMessage').html('<p>' + response.message + '</p>');
-					$('#user_response_container').empty();
-
 					if (response.status === 'success') {
+						$('#form_response_container').append('<p class="success">' + response.message + '</p>');
+						
 						button_handler( event.originalEvent.submitter, BUTTON_SUCCESS );
 						
 						if ( response.redirect != null ) {
@@ -278,7 +279,7 @@ else {
 
 					if (response.status === 'error' && response.errors) {
 						$.each(response.errors, function(field, errorMessage) {
-							$('#user_response_container').append('<p class="error">' + errorMessage + '</p>');
+							$('#form_response_container').append('<p class="error">' + errorMessage + '</p>');
 						});
 
 						button_handler( event.originalEvent.submitter, BUTTON_ERROR );
@@ -286,7 +287,7 @@ else {
 				},
 				error: function(xhr, status, error) {
 					// Handle any error
-					$('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
+					$('#form_response_container').append('<p class="error">An error occurred while submitting the form.</p>');
 
 					button_handler( event.originalEvent.submitter, BUTTON_ERROR );
 				}
@@ -312,6 +313,7 @@ else {
                 const formData = $(this).serialize();
 
 				button_handler( event.originalEvent.submitter, BUTTON_LOADING );
+				$('#password_response_container').empty();
 				
                 $.ajax({
 					url: '<?=base_url(route_to('admin.user.change_password', $selected_user['id']))?>',
@@ -319,8 +321,7 @@ else {
                     data: formData,
                     success: function(response) {
 						updateCSRFMeta(response);
-						$('#password_response_container').empty();
-
+						
                        	if (response.status === 'success') {
 							$('#password_response_container').append('<p class="success">' + response.message + '</p>');
 							$(this).find('.form-group').remove();

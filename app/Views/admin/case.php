@@ -40,6 +40,8 @@
 				<?php endforeach; ?>
 			</select>
 
+			<div id="form_response_container" class="request-response"></div>
+				
 			<?= csrf_field() ?>
 
 			<div class="actions">
@@ -108,14 +110,28 @@
                     success: function(response) {
 						updateCSRFMeta(response);
 
-                        // Handle the response from the server
-                        $('#responseMessage').html('<p>' + response.message + '</p>');
+						if (response.status === 'success') {
+							$('#form_response_container').append('<p class="success">' + response.message + '</p>');
 
-						button_handler( event.originalEvent.submitter, BUTTON_SUCCESS );
+							button_handler( event.originalEvent.submitter, BUTTON_SUCCESS );
+
+							if ( response.redirect != null ) {
+								window.location.href = response.redirect;
+							}
+							return;
+						}
+
+						if (response.status === 'error' && response.errors) {
+							$.each(response.errors, function(field, errorMessage) {
+								$('#form_response_container').append('<p class="error">' + errorMessage + '</p>');
+							});
+
+							button_handler( event.originalEvent.submitter, BUTTON_ERROR );
+						}
                     },
                     error: function(xhr, status, error) {
                         // Handle any error
-                        $('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
+                       	$('#form_response_container').append('<p class="error">An error occurred while submitting the form.</p>');
 
 						button_handler( event.originalEvent.submitter, BUTTON_ERROR );
 					}

@@ -30,8 +30,11 @@ class MeetingController extends BaseController
         ]);
 
         return $this->response->setJSON([
-			'message' 			=> 'Form submitted successfully!',
-			'new_csrf_token'	=> csrf_hash(),
+			'status' 			=> 'success', 
+			'message' 			=> 'Opgeslagen!',
+			'errors'			=> null,
+			'redirect'			=> null,
+			'new_csrf_token' 	=> csrf_hash(),
 		]);
     }
 

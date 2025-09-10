@@ -60,7 +60,10 @@ class AssignmentController extends BaseController
         ]);
 
 		return $this->response->setJSON([
-			'message' 			=> 'Form submitted successfully!',
+			'status' 			=> 'success', 
+			'message' 			=> 'Opgeslagen!',
+			'errors'			=> null,
+			'redirect'			=> null,
 			'new_csrf_token' 	=> csrf_hash(),
 		]);
 	}
