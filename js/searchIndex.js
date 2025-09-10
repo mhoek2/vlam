@@ -551,6 +551,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-UserController.html#method_new_user"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\UserController\u003A\u003AgenerateUniqueUsername\u0028\u0029",
+            "name": "generateUniqueUsername",
+            "summary": "Create\u0020a\u0020random\u0020unique\u0020username",
+            "url": "classes/App-Controllers-Admin-UserController.html#method_generateUniqueUsername"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\UserController\u003A\u003Anew_user_create\u0028\u0029",
             "name": "new_user_create",
             "summary": "Create\u0020new\u0020user",
