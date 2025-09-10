@@ -63,6 +63,39 @@
     font-weight: 600;
 }
 
+.button-action {
+	
+}
+	.button-action .text {
+	}
+		.button-action .icon {
+		}
+		.button-action .icon::after {
+			content: "\f0c7";
+			font-family: "Font Awesome 5 Free";
+			font-weight: 500;
+		}
+		.button-action.loading .icon::after {
+			content: "\f110";
+			font-weight: 900;
+		}
+		.button-action.loading .icon {
+			-webkit-animation:button-action-loading  4s linear infinite;
+			-moz-animation:button-action-loading  4s linear infinite;
+			animation:button-action-loading  4s linear infinite;
+		}
+		.button-action.success .icon::after {
+			content: "\f00c";
+			font-weight: 900;
+		}
+		.button-action.error .icon::after {
+			content: "\f06a";
+			font-weight: 900;
+		}
+		@-moz-keyframes button-action-loading 		{ 100% { -moz-transform: rotate(360deg); } }
+		@-webkit-keyframes button-action-loading 	{ 100% { -webkit-transform: rotate(360deg); } }
+		@keyframes button-action-loading 			{ 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } } 
+
 .button-alert {
 	all: unset;
 	min-height:45px;
@@ -523,6 +556,10 @@ table {
 	font-weight: initial !important;
 }
 	.request-response p.alert {
+		background: var(--button-alert-background-color) !important;
+		color: var(--button-alert-text-color) !important;
+	}
+	.request-response p.error {
 		background: var(--button-alert-background-color) !important;
 		color: var(--button-alert-text-color) !important;
 	}

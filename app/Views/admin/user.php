@@ -69,8 +69,12 @@ else {
 					font-weight:600;
 				}
 				.edit-user-info .meta span.email {
-					font-size: 13px;
+					font-size: 14px;
 					color: #555;
+				}
+				.edit-user-info .meta span.username {
+					font-size: 10px;
+					color: #e186ab;
 				}
 
 		/*
@@ -98,10 +102,11 @@ else {
 <section class="main">
     <div class="content">
 
-		<form action="<?=$action?>" method="post">
+		<form action="<?=$action?>" method="post" id="user_form">
 			<div class="container">
 				<section class="block">
 					<?php if(empty($selected_user) ): ?>
+						<?php if( 1 == 0 ) { // disabled, switched to xhr reqruest ?>
 						<div class="form-group">
 							<label for="username">Username</label>
 							<input type="text" id="username" name="username" class="form-control" value="<?= old('username') ?>">
@@ -109,15 +114,12 @@ else {
 								<?= \Config\Services::validation()->getError('username') ?>
 							</div>
 						</div>
+						<?php } ?>
 
 						<div class="form-group">
 							<label for="email">Email</label>
 							<input type="email" id="email" name="email" class="form-control" value="<?= old('email') ?>">
-							<div class="text-danger">
-								<?= \Config\Services::validation()->getError('email') ?>
-							</div>
 						</div>
-
 
 						<h3>Wachtwoord</h3>
 
@@ -138,8 +140,8 @@ else {
 							<div class="profile"><?=$selected_user['shortname']?></div>
 							<div class="meta">
 								<span class="name"><?=$selected_user['fullname']?></span>
-								<span><?=$selected_user['username']?></span>
 								<span class="email"><?=$selected_user['email']?></span>
+								<span class="username"><?=$selected_user['username']?></span>
 								<?php if( !empty($selected_user['training_id'])) : ?>
 									<a class="button-primary" href="<?=base_url(route_to('admin.user.insight', $selected_user['id']))?>">Inzicht training</a>
 								<?php endif ?>
@@ -147,20 +149,18 @@ else {
 
 						</div>
 					<?php endif ?>
+				</section>
+				<section>
+					<h3>Persoonsgegevens</h3>
 
-					<?php
+					<?php 
 					$additional_fields = [
 						['field' => 'firstname', 	'name' => "First name"],
 						['field' => 'middlename', 	'name' => "Middle name"],
 						['field' => 'lastname', 	'name' => "Last name"],
 					];
-					?>
-
-				</section>
-				<section>
-					<h3>Persoonsgegevens</h3>
-
-					<?php foreach($additional_fields as $item): ?>
+	
+					foreach($additional_fields as $item): ?>
 						<div class="form-group">
 							<label for="name"><?=$item['name']?></label>
 							<input type="text" id="<?=$item['field']?>" name="<?=$item['field']?>" class="form-control" value="<?= !empty($selected_user) ? $selected_user[$item['field']] : old($item['field']) ?>">
@@ -172,24 +172,31 @@ else {
 				</section>
 			</div>
 
-			<div class="request-response">
-				<?php if (session('error') !== null) : ?>
-						<p class="alert"><?= esc(session('error')) ?></p>
-				<?php elseif (session('errors') !== null) : ?>
-					<?php if (is_array(session('errors'))) : ?>
-						<?php foreach (session('errors') as $error) : ?>
-							<p class="alert"><?= esc($error) ?></p>
-						<?php endforeach ?>
-					<?php else : ?>
-						<p class="alert"><?= esc(session('errors')) ?></p>
+			<div id="user_response_container" class="request-response"></div>
+			
+			<?php if( 1 == 0 ) { // disabled, switched to xhr reqruest ?>
+				<div class="request-response">
+					<?php if (session('error') !== null) : ?>
+							<p class="alert"><?= esc(session('error')) ?></p>
+					<?php elseif (session('errors') !== null) : ?>
+						<?php if (is_array(session('errors'))) : ?>
+							<?php foreach (session('errors') as $error) : ?>
+								<p class="alert"><?= esc($error) ?></p>
+							<?php endforeach ?>
+						<?php else : ?>
+							<p class="alert"><?= esc(session('errors')) ?></p>
+						<?php endif ?>
 					<?php endif ?>
-				<?php endif ?>
-			</div>
+				</div>
+			<?php } ?>
 
 			<?= csrf_field() ?>
 
 			<div class="actions">
-				<button type="submit" class="button-primary"><?=$action_button?></button>
+				<button type="submit" class="button-primary button-action">
+					<div class="icon"></div>
+					<div class="text"><?=$action_button?></div>
+				</button>
 			</div>
 		</form>
 
@@ -216,11 +223,12 @@ else {
 
 					<?= csrf_field() ?>
 
-					<div id="password_error_container" class="request-response"></div>
+					<div id="password_response_container" class="request-response"></div>
 
 					<div class="actions">
-						<button type="submit" class="button-alert">
-							<i class="fa-regular fa-floppy-disk"></i>Wijzigen
+						<button type="submit" class="button-alert button-action">
+							<div class="icon"></div>
+							<div class="text">Wijzigen</div>
 						</button>
 					</div>
 				</form>
@@ -241,7 +249,52 @@ else {
 
 		<?=updateCSRFMeta() // csrf helper ?>
 
-		<?php if(!empty($selected_user) ): ?>
+		$('#user_form').submit(function (event) {
+			event.preventDefault();
+			
+			const formData = $(this).serialize();
+			
+			button_handler( event.originalEvent.submitter, BUTTON_LOADING );
+			
+			$.ajax({
+				url: '<?= $action ?>',
+				type: 'POST',
+				data: formData,
+				success: function(response) {
+					updateCSRFMeta(response);
+
+					// Handle the response from the server
+					//$('#responseMessage').html('<p>' + response.message + '</p>');
+					$('#user_response_container').empty();
+
+					if (response.status === 'success') {
+						button_handler( event.originalEvent.submitter, BUTTON_SUCCESS );
+						
+						if ( response.redirect != null ) {
+							window.location.href = response.redirect;
+						}
+						return;
+					}
+
+					if (response.status === 'error' && response.errors) {
+						$.each(response.errors, function(field, errorMessage) {
+							$('#user_response_container').append('<p class="error">' + errorMessage + '</p>');
+						});
+
+						button_handler( event.originalEvent.submitter, BUTTON_ERROR );
+					}
+				},
+				error: function(xhr, status, error) {
+					// Handle any error
+					$('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
+
+					button_handler( event.originalEvent.submitter, BUTTON_ERROR );
+				}
+			});
+		});
+		
+		
+		<?php if ( !empty($selected_user) ): ?>
 
 			$(document).on('click', '#change_password', function()
 			{
@@ -258,28 +311,39 @@ else {
 
                 const formData = $(this).serialize();
 
+				button_handler( event.originalEvent.submitter, BUTTON_LOADING );
+				
                 $.ajax({
 					url: '<?=base_url(route_to('admin.user.change_password', $selected_user['id']))?>',
                     type: 'POST',
                     data: formData,
                     success: function(response) {
 						updateCSRFMeta(response);
-						$('#password_error_container').empty();
+						$('#password_response_container').empty();
 
                        	if (response.status === 'success') {
-							$('#password_error_container').append('<p class="success">' + response.message + '</p>');
+							$('#password_response_container').append('<p class="success">' + response.message + '</p>');
 							$(this).find('.form-group').remove();
 							$(this).find('.actions').remove();
+							
+							button_handler( event.originalEvent.submitter, BUTTON_SUCCESS );
+							
+							if ( response.redirect != null ) {
+								window.location.href = response.redirect;
+							}
 							return;
 						}
 
 						if (response.status === 'error' && response.errors) {
 							$.each(response.errors, function(field, errorMessage) {
-								$('#password_error_container').append('<p class="error">' + errorMessage + '</p>');
+								$('#password_response_container').append('<p class="error">' + errorMessage + '</p>');
 							});
+							
+							button_handler( event.originalEvent.submitter, BUTTON_ERROR );
 						}
                     }.bind(this),
                     error: function(xhr, status, error) {
+						button_handler( event.originalEvent.submitter, BUTTON_ERROR );
                         $('#change_password_form').parent().html('<p class="error">Er is iets mis gegaan!</p>');
                     }
                 });
@@ -287,10 +351,11 @@ else {
 
 			$(document).on('click', '#delete_user', function()
 			{
+				const confirmation = confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?');
+				
 				if (confirmation) {
 					//
-					// Use a form to perform this action
-					// allows to make use of csrf tokenization and redirect back functionalities
+					// Use a virtual form for csrf tokenization and redirect back functionalities
 					//
 
 					const form = document.createElement('form');

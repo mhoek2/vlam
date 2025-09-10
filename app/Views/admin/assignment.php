@@ -45,8 +45,9 @@
             <?= csrf_field() ?>
 
 			<div class="actions">
-				<button type="submit" class="button-primary">
-					<i class="fa-regular fa-floppy-disk"></i>Opslaan
+				<button type="submit" class="button-primary button-action">
+					<div class="icon"></div>
+					<div class="text">Opslaan</div>
 				</button>
 			</div>
         </form>
@@ -124,6 +125,8 @@
                 const formData = $(this).serialize();
 				//formData += '&<?= csrf_token() ?>=' + $('meta[name="csrf-token"]').attr('content');
 
+				button_handler( event.originalEvent.submitter, BUTTON_LOADING );
+				
                 $.ajax({
 					url: '<?= base_url(route_to('admin.assignment.save', $assignment["id"])) ?>',
                     type: 'POST',
@@ -134,10 +137,14 @@
                         // Handle the response from the server
                         $('#responseMessage').html('<p>' + response.message + '</p>');
 						checkSubAssignmentType();
+						
+						button_handler( event.originalEvent.submitter, BUTTON_SUCCESS );
                     },
                     error: function(xhr, status, error) {
                         // Handle any error
                         $('#responseMessage').html('<p>An error occurred while submitting the form.</p>');
+						
+						button_handler( event.originalEvent.submitter, BUTTON_ERROR );
                     }
                 });
             });

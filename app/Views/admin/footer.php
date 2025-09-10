@@ -30,6 +30,25 @@
 			$('header').removeClass('collapse');	
 		}
 	}, true );
+	
+	// button state handling
+	const BUTTON_LOADING 	= "loading";
+	const BUTTON_SUCCESS 	= "success";
+	const BUTTON_ERROR 		= "error";
+	const BUTTON_STATES 	= [BUTTON_LOADING, BUTTON_SUCCESS, BUTTON_ERROR];
+
+	function button_handler( button, type )
+	{
+		for ( const state of BUTTON_STATES )
+		{
+			if ( state === type ) {
+				$(button).addClass( state); 
+				continue;
+			}
+			
+			$(button).removeClass( state );
+		}
+	}
 </script>
 
 </body>

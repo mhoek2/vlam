@@ -44,7 +44,6 @@
                 <tr>
                     <th width="150">Gebruikersnaam</th>
                     <th>Naam</th>
-                    <th width="150">Email</th>
                     <th width="150">Rol</th>
                     <th width="150">Training</th>
                 </tr>
@@ -57,11 +56,10 @@
 								<?=$item['shortname']?>
 							</div>
 							<a href="<?=base_url(route_to('admin.user', $item['id']))?>">
-								<?=$item['username']?>
+								<?=$item['email']?>
 							</a>
 						</td>
                         <td><?=$item['fullname']?></td>
-                        <td><?=$item['email']?></td>
                         <td><?=$item['group']?></td>
                         <td>
 							<?php if ( !is_null($item['training_id'])): ?>

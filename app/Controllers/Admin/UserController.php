@@ -32,6 +32,21 @@ class UserController extends BaseController
 	}
 	
     /**
+     * Create a random unique username
+     *
+	 * Usernames are not used for the login system, but prefer to keep the username field.
+     */
+	protected function generateUniqueUsername(): string
+	{
+		do {
+			$username = bin2hex( random_bytes(10) ); // 20 hex chars
+		} 
+		while ( $this->userModel->where('username', $username)->countAllResults() > 0 );
+
+		return $username;
+	}
+	
+    /**
      * Create new user
      *
 	 * function borrowed from:
@@ -55,17 +70,26 @@ class UserController extends BaseController
             'lastname' => $this->request->getPost('lastname'),
         ];
 		
-		
 		$rules = array_merge($rules, $additionalRules);
 
-		// Validation failed
-	    if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+		$allowedPostFields = array_keys($rules);
+		$userData = $this->request->getPost($allowedPostFields);
+		$userData['username'] = $this->generateUniqueUsername();
+
+		// Validate
+	    if ( !$this->validateData( $userData, $rules, [], config('Auth')->DBGroup ) ) {
+            //return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());	
+			return $this->response->setJSON([
+				'status' 			=> 'error',
+				'message' 			=> 'Er is iets mis gegaan',
+				'errors'			=> $this->validator->getErrors(),
+				'redirect'			=> null,
+				'new_csrf_token'	=> csrf_hash(),
+			]);
         }
 		
         // Save the user
-        $allowedPostFields = array_keys($rules);
-        $user              = $users->createNewUser($this->request->getPost($allowedPostFields));
+        $user = $users->createNewUser( $userData );
 
         // Workaround for email only registration/login
         if ($user->username === null) {
@@ -75,7 +99,14 @@ class UserController extends BaseController
         try {
             $users->save($user);
         } catch (ValidationException $e) {
-            return redirect()->back()->withInput()->with('errors', $users->errors());
+            //return redirect()->back()->withInput()->with('errors', $users->errors());
+			return $this->response->setJSON([
+				'status' 			=> 'error',
+				'message' 			=> 'Er is iets mis gegaan',
+				'errors'			=> $this->validator->getErrors(),
+				'redirect'			=> null,
+				'new_csrf_token'	=> csrf_hash(),
+			]);
         }
 
         // To get the complete user object with ID, we need to get from the database
@@ -92,7 +123,14 @@ class UserController extends BaseController
 	
 		$post = $this->request->getPost();
 
-		return redirect()->to(route_to('admin.user', $user->id));
+		//return redirect()->to(route_to('admin.users'));
+        return $this->response->setJSON([
+			'status' 			=> 'success',
+			'message' 			=> 'Gebruiker is aangemaakt',
+			'errors'			=> null,
+			'redirect'			=> base_url(route_to('admin.users')),
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 	
 	public function update( int $user_id ) {
@@ -113,22 +151,36 @@ class UserController extends BaseController
 
 		// Validation failed
 		if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {	
-			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+			//return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+			
+			return $this->response->setJSON([
+				'status' 			=> 'error',
+				'message' 			=> 'Er is iets mis gegaan',
+				'errors'			=> $this->validator->getErrors(),
+				'redirect'			=> null,
+				'new_csrf_token'	=> csrf_hash(),
+			]);
 		} 
 		
 		$db = \Config\Database::connect();
         $builder = $db->table('users');
         $builder->where('id', $user_id)->update($data);
 		
-		return redirect()->to(route_to('admin.user', $user_id));
+		//return redirect()->to(route_to('admin.user', $user_id));
+		
+        return $this->response->setJSON([
+			'status' 			=> 'success',
+			'message' 			=> 'Gebruiker is aangepast',
+			'errors'			=> null,
+			'redirect'			=> null,
+			'new_csrf_token'	=> csrf_hash(),
+		]);
 	}
 
 	public function delete( int $user_id )
 	{
 		$user = auth()->user(); // current user
 
-		return redirect()->back()->with('error', 'You cannot delete your own account.');
-		
 		if ($user->id === $user_id) {
 			return redirect()->back()->with('error', 'You cannot delete your own account.');
 		}
@@ -158,7 +210,9 @@ class UserController extends BaseController
 	    if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
 			return $this->response->setJSON([
 				'status' 			=> 'error',
+				'message'			=> 'Er is iets mis gegaan',
 				'errors'			=> $this->validator->getErrors(),
+				'redirect'			=> null,
 				'new_csrf_token' 	=> csrf_hash(),
 			]);
         }
@@ -171,7 +225,9 @@ class UserController extends BaseController
 		
 		return $this->response->setJSON([
 			'status' 			=> 'success', 
-			'message'			=> 'Wachtwoord is gewijzigd!', 
+			'message'			=> 'Wachtwoord is gewijzigd!',
+			'errors'			=> null,
+			'redirect'			=> null,
 			'new_csrf_token' 	=> csrf_hash(),
 		]);
 	}
