@@ -21,11 +21,11 @@ class AssignmentEntry extends Model
 	 * When adding types, <u>make sure</u> to add the new 'type' to the enum in the database.
 	 */
     public $type_enum = [ 
-        ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze',			'is_input' => true,		'short' => 'Keuze'],
-        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2',	'is_input' => true,		'short' => 'Keuze'],
-        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3',	'is_input' => true,		'short' => 'Keuze'],
-        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input',		'is_input' => true,		'short' => 'Invoer'], 
-        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator',	'is_input' => false,	'short' => 'Scheiding'],
+        ['type' => 'mcq',               'group' => 'mcq', 	'name' => '1 kiezen',		'is_input' => true,		'short' => 'Keuze'],
+        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => '2 kiezen',		'is_input' => true,		'short' => 'Keuze'],
+        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => '3 kiezen',		'is_input' => true,		'short' => 'Keuze'],
+        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Vrije invoer',	'is_input' => true,		'short' => 'Invoer'], 
+        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Scheidingstekst','is_input' => false,	'short' => 'Scheiding'],
         ['type' => 'video_youtube',    	'group' => 'video', 'name' => 'Youtube video',	'is_input' => false,	'short' => 'Video']
     ];
 

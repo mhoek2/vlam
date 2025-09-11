@@ -17,11 +17,11 @@ Located in Model: ``app/Models/AssignmentEntry.php`` and ``app/Models/CaseEntry.
 
 .. code-block:: php
     public $type_enum = [ 
-        ['type' => 'mcq',               'group' => 'mcq', 	'name' => 'Keuze'],
-        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => 'Keuze uit 2'],
-        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => 'Keuze uit 3'],
-        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Text Input'], 
-        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Text Separator']
+        ['type' => 'mcq',               'group' => 'mcq', 	'name' => '1 kiezen'],
+        ['type' => 'mcq-2',             'group' => 'mcq', 	'name' => '2 kiezen'],
+        ['type' => 'mcq-3',             'group' => 'mcq', 	'name' => '3 kiezen'],
+        ['type' => 'text_input',        'group' => NULL, 	'name' => 'Vrije invoer'], 
+        ['type' => 'text_separator',    'group' => NULL, 	'name' => 'Scheidingstekst']
     ];
 	
 Note
