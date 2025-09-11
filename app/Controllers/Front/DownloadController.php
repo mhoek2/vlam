@@ -18,13 +18,19 @@ class DownloadController extends BaseController
 		$segments = $this->request->getUri()->getSegments();
 
 		array_shift($segments);
-		$filepath = implode('/', $segments);
+		$relative_path = urldecode(implode('/', $segments));
+		$absolute_path = WRITEPATH . $relative_path;
 
-		$path = WRITEPATH . $filepath;
+		$filedata = $uploads->where('path', $relative_path)->find();
 
-		$filedata = $uploads->where('path', $filepath)->find()[0];
+		if ( !is_array($filedata) || empty($filedata) )
+		{
+			throw new \CodeIgniter\Exceptions\PageNotFoundException("Not found");
+		}
+
+		$filedata = $filedata[0];
 		
-		if ( is_null($filedata) || !file_exists($path) ) {
+		if ( is_null($filedata) || !file_exists($absolute_path) ) {
 			throw new \CodeIgniter\Exceptions\PageNotFoundException("Not found");
 		}
 		
@@ -51,7 +57,7 @@ class DownloadController extends BaseController
 				// finally, check if file is sharable/public ..
 				// this is not implemented yet!
 				//
-				// think user profile picture etc, will be a path like : writable/uploads/user_data/*/public/*.*
+				// think user profile picture etc, will be a relative path like : writable/uploads/user_data/*/public/*.*
 				//$permission = true;
 				//echo "same training";
 			}
@@ -65,6 +71,6 @@ class DownloadController extends BaseController
 				->send();
 		}
 		
-		return $this->response->download($path, null);
+		return $this->response->download($absolute_path, null);
     }
 }
