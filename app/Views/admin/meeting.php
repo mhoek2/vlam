@@ -18,16 +18,16 @@
             <label>Intro<label>
             <textarea name="intro" id="intro"><?=$meeting["intro"]?></textarea>
 
-			<div id="form_response_container" class="request-response"></div>		
-				
             <?= csrf_field() ?>
 
 			<div class="actions">
-				<button type="submit" class="button-primary button-action">
+				<button type="submit" class="button-primary button-action save">
 					<div class="icon"></div>
 					<div class="text">Opslaan</div>
 				</button>
 			</div>
+
+			<div id="form_response_container" class="request-response"></div>
         </form>
     </div>
 </section>
@@ -71,6 +71,10 @@
 							if ( response.redirect != null ) {
 								window.location.href = response.redirect;
 							}
+							
+							setTimeout(function(){
+								$('#form_response_container').html("");
+							}, 1250);
 							return;
 						}
 

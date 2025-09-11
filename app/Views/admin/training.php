@@ -143,7 +143,7 @@
 			<?= csrf_field() ?>
 
 			<div class="actions">
-				<button type="submit" class="button-primary button-action">
+				<button type="submit" class="button-primary button-action save">
 					<div class="icon"></div>
 					<div class="text">Opslaan</div>
 				</button>

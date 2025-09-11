@@ -171,8 +171,6 @@ else {
 					<?php endforeach ?>
 				</section>
 			</div>
-
-			<div id="form_response_container" class="request-response"></div>
 			
 			<?php if( 1 == 0 ) { // disabled, switched to xhr reqruest ?>
 				<div class="request-response">
@@ -193,11 +191,13 @@ else {
 			<?= csrf_field() ?>
 
 			<div class="actions">
-				<button type="submit" class="button-primary button-action">
+				<button type="submit" class="button-primary button-action save">
 					<div class="icon"></div>
 					<div class="text"><?=$action_button?></div>
 				</button>
 			</div>
+
+			<div id="form_response_container" class="request-response"></div>
 		</form>
 
 		<?php if(!empty($selected_user) ): ?>
@@ -223,14 +223,14 @@ else {
 
 					<?= csrf_field() ?>
 
-					<div id="password_response_container" class="request-response"></div>
-
 					<div class="actions">
-						<button type="submit" class="button-alert button-action">
+						<button type="submit" class="button-alert button-action save">
 							<div class="icon"></div>
 							<div class="text">Wijzigen</div>
 						</button>
 					</div>
+
+					<div id="password_response_container" class="request-response"></div>
 				</form>
 			</div>
 
@@ -274,6 +274,10 @@ else {
 						if ( response.redirect != null ) {
 							window.location.href = response.redirect;
 						}
+
+						setTimeout(function(){
+							$('#form_response_container').html("");
+						}, 1250);
 						return;
 					}
 

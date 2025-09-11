@@ -36,18 +36,18 @@
 		
 		<div class="separator"></div>
 		
-		<button class="delete-entry" data-entry-id="<?= $id ?>">
-			<i class="fa-regular fa-trash-can"></i>
+		<button class="delete-entry button-action trash" data-entry-id="<?= $id ?>">
+			<div class="icon"></div>
 		</button>
 
 		<button class="toggle-properties">
 			<i class="fa-solid fa-bars"></i>
 		</button>
 	</div>
-	
+
 	<div class="properties" style="display: none;">
 		<ul id="properties-list-<?= $id ?>"></ul>
-		
+
 		<div class="properties-actions">
 			<input type="text" id="new-property-<?= $id ?>" placeholder="option">
 			<button class="add-property" data-entry-id="<?= $id ?>">

@@ -81,6 +81,10 @@
 					top:10px;
 					right:10px;*/
 				}
+				.grid-container .entry .details .toggle-properties.disabled {
+					color:#e3e2e2;
+					cursor: default;
+				}
 				.grid-container .entry .details .delete-entry {
 					all:unset;
 					font-size: 18px;

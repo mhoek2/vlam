@@ -40,17 +40,18 @@
 				<?php endforeach; ?>
 			</select>
 
-			<div id="form_response_container" class="request-response"></div>
-				
+
 			<?= csrf_field() ?>
 
 			<div class="actions">
-				<button type="submit" class="button-primary button-action">
+				<button type="submit" class="button-primary button-action save">
 					<div class="icon"></div>
 					<div class="text">Opslaan</div>
 				</button>
 			</div>
-        </form>
+				
+			<div id="form_response_container" class="request-response"></div>	      
+		</form>
     </div>
 </section>
 
@@ -118,6 +119,10 @@
 							if ( response.redirect != null ) {
 								window.location.href = response.redirect;
 							}
+							
+							setTimeout(function(){
+								$('#form_response_container').html("");
+							}, 1250);
 							return;
 						}
 
@@ -267,11 +272,13 @@
 			}
 		});
 
-		$(document).on('click', '.delete-entry', function () {
+		$(document).on('click', '.delete-entry', function (event) {
 			const confirmation = confirm('Are you sure you want to delete this entry?');
 			const entryId = $(this).closest('.entry').data('entry-id');
 
 			if (confirmation) {
+				button_handler( event.currentTarget, BUTTON_LOADING );
+				
 				$.ajax({
 					url: '<?=current_url()?>/delete_entry',
 					method: 'POST',
@@ -283,9 +290,19 @@
 						updateCSRFMeta(response);
 
 						if (response.status === 'success') {
-							$(this).closest('.entry').remove();
+							button_handler( event.currentTarget, BUTTON_SUCCESS );
+							
+							setTimeout( function(){
+								$(this).closest('.entry').remove();							
+							}.bind(this), 1250 );
 						}
-					}.bind(this)
+						else {
+							button_handler( event.currentTarget, BUTTON_ERROR );
+						}
+					}.bind(this),
+                    error: function(xhr, status, error) {
+						button_handler( event.currentTarget, BUTTON_ERROR );
+					}
 				});
 			}
 		});
@@ -348,11 +365,11 @@
 										<i class="fa-solid fa-grip-vertical"></i>
 									</div>
 									<input type="text" class="edit-property" data-property-id="${property.id}" value="${property.content}">
-									<button class="save-property" data-property-id="${property.id}">
-										<i class="fa-regular fa-floppy-disk"></i>
+									<button class="save-property button-action save" data-property-id="${property.id}">
+										<div class="icon"></div>
 									</button>
-									<button class="delete-property" data-property-id="${property.id}">
-										<i class="fa-regular fa-trash-can"></i>
+									<button class="delete-property button-action trash" data-property-id="${property.id}">
+										<div class="icon"></div>
 									</button>
 								</li>
 							`);
@@ -364,7 +381,9 @@
 							propertyList.append(`
 								<li data-property-id="${property.id}">
 									<textarea id="${textareaId}" class="edit-property" data-property-id="${property.id}">${property.content}</textarea>
-									<button class="save-property" data-property-id="${property.id}">Save</button>
+									<button class="save-property button-action save" data-property-id="${property.id}">
+										<div class="icon"></div>
+									</button>
 								</li>
 							`);
 
@@ -406,7 +425,7 @@
 			});
 		}
 
-		$(document).on('click', '.save-property', function () {
+		$(document).on('click', '.save-property', function (event) {
 			const entryType = $(this).closest('.entry').data('type');
 			const propertyId = $(this).data('property-id');
 			let newPropertyContent = $(this).siblings('.edit-property').val();
@@ -418,6 +437,8 @@
 			}
 
 			if (newPropertyContent.trim()) {
+				button_handler( event.currentTarget, BUTTON_LOADING );
+				
 				$.ajax({
 					url: '<?=current_url()?>/update_property',
 					method: 'POST',
@@ -430,18 +451,31 @@
 						updateCSRFMeta(response);
 
 						if (response.status === 'success') {
-							alert('Property updated successfully!');
+							button_handler( event.currentTarget, BUTTON_SUCCESS );
+							
+							setTimeout( function(){
+								// reset to save icon
+								button_handler( event.currentTarget, BUTTON_SAVE );
+							}, 500 );
 						}
+						else {
+							button_handler( event.currentTarget, BUTTON_ERROR );
+						}
+					},
+                    error: function(xhr, status, error) {
+						button_handler( event.currentTarget, BUTTON_ERROR );
 					}
 				});
 			}
 		});
 
-		$(document).on('click', '.delete-property', function () {
+		$(document).on('click', '.delete-property', function (event) {
 			const propertyId = $(this).data('property-id');
 			const confirmation = confirm('Are you sure you want to delete this property?');
 
 			if (confirmation) {
+				button_handler( event.currentTarget, BUTTON_LOADING );
+				
 				$.ajax({
 					url: '<?=current_url()?>/delete_property/' + propertyId,
 					method: 'POST',
@@ -452,9 +486,19 @@
 						updateCSRFMeta(response);
 
 						if (response.status === 'success') {
-							$(this).closest('li').remove();
+							button_handler( event.currentTarget, BUTTON_SUCCESS );
+							
+							setTimeout( function(){
+								$(this).closest('li').remove();								
+							}.bind(this), 1250 );
 						}
-					}.bind(this)
+						else {
+							button_handler( event.currentTarget, BUTTON_ERROR );
+						}
+					}.bind(this),
+                    error: function(xhr, status, error) {
+						button_handler( event.currentTarget, BUTTON_ERROR );
+					}
 				});
 			}
 		});

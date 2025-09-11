@@ -71,8 +71,16 @@
 		.button-action .icon {
 		}
 		.button-action .icon::after {
-			content: "\f0c7";
+			content: "\e4e9";	/* default is save */
 			font-family: "Font Awesome 5 Free";
+			font-weight: 900;
+		}
+		.button-action.save .icon::after {
+			content: "\f0c7";
+			font-weight: 500;
+		}
+		.button-action.trash .icon::after {
+			content: "\f2ed";
 			font-weight: 500;
 		}
 		.button-action.loading .icon::after {
@@ -544,7 +552,8 @@ table {
     }
 
 .request-response {
-
+    justify-content: flex-end;
+    display: flex;
 }
 
 .request-response p  {

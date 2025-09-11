@@ -36,11 +36,11 @@
 		
 		<div class="separator"></div>
 		
-		<button class="delete-entry" data-entry-id="<?= $id ?>">
-			<i class="fa-regular fa-trash-can"></i>
+		<button class="delete-entry button-action trash" data-entry-id="<?= $id ?>">
+			<div class="icon"></div>
 		</button>
 		
-		<button class="toggle-properties">
+		<button class="toggle-properties <?php echo ($type == 'text_input') ? 'disabled' : '' ?>">
 			<i class="fa-solid fa-bars"></i>
 		</button>
     </div>
