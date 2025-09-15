@@ -156,6 +156,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-BaseController.html#method_initController"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\BaseController\u003A\u003Aget_live_route\u0028\u0029",
+            "name": "get_live_route",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-BaseController.html#method_get_live_route"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\BaseController\u003A\u003A\u0024request",
             "name": "request",
             "summary": "Instance\u0020of\u0020the\u0020main\u0020Request\u0020object.",
