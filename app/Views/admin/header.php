@@ -66,7 +66,7 @@
                     <div class="profile"><?=$user["shortname"]?></div>
                     <div class="meta">
                         <span><b><?=$user["firstname"]?> <?=$user["middlename"]?></b> <?=$user["lastname"]?></span>
-                        <span class="email"><?=$user["username"]?></span>
+                        <span class="email"><?=$user["email"]?></span>
                     </div>
                 </div>
                 <ul>
