@@ -1946,6 +1946,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-User.html"
         },                {
+            "fqsen": "\\App\\Models\\User\u003A\u003AgetFullUserData\u0028\u0029",
+            "name": "getFullUserData",
+            "summary": "",
+            "url": "classes/App-Models-User.html#method_getFullUserData"
+        },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AgetUserInfo\u0028\u0029",
             "name": "getUserInfo",
             "summary": "",
