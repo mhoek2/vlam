@@ -332,7 +332,9 @@ class TrainingController extends BaseController
                 ->orLike('lastname', $searchTerm)
             ->groupEnd()
 			->join('training_users', 'training_users.user_id = users.id', 'left') // Left join with training_users
+			->join('auth_groups_users', 'auth_groups_users.user_id = users.id', 'left') // Left join with auth_groups_users
 			->where('training_users.user_id IS NULL')
+			->where('auth_groups_users.group !=', 'admin')
 			->findAll(10);
 		
         return $this->response->setJSON( $users );
