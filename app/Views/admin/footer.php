@@ -1,3 +1,10 @@
+
+<?php if( isset($live_url) && $live_url ) { ?>
+	<a href="<?=$live_url?>" class="live-page">
+		<i class="fa-regular fa-eye"></i>
+	</a>
+<?php } ?>
+
 <!--
 <footer>
     <div class="environment">

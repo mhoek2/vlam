@@ -131,6 +131,7 @@ class AssignmentController extends BaseController
         $this->data['cases_view'] = view('admin/cases', $this->data);		
 		
 		$this->data['text_editor'] = service('text_editor');
+		$this->data['live_url'] = $this->get_live_route('front.assignment', $this->data['meeting']['id'], $assignment_id);
 		
 		$this->data['sub_assignments'] = $this->get_sub_assignments( $this->data['assignment'] );
 		

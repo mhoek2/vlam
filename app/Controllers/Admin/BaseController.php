@@ -70,4 +70,9 @@ abstract class BaseController extends Controller
 		$this->data['header'] = NULL;
 		$this->data['footer'] = NULL;
     }
+	
+	public function get_live_route( string $route, ...$args )
+	{
+		return base_url(route_to($route, ...$args));
+	}
 }

@@ -120,6 +120,7 @@ class CaseController extends BaseController
 		$this->data['complete_actions'] = $this->get_complete_actions( $this->data['case'] );
 		
 		$this->data['text_editor'] = service('text_editor');
+		$this->data['live_url'] = $this->get_live_route('front.case', $this->data['meeting']['id'], $this->data['assignment']['id'], $case_id);
 		
 		load_header( $this->data );
 		load_footer( $this->data );

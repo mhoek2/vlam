@@ -50,7 +50,8 @@ class MeetingController extends BaseController
         $this->data['assignments_view'] = view('admin/assignments', $this->data);
 
 		$this->data['text_editor'] = service('text_editor');
-
+		$this->data['live_url'] = $this->get_live_route('front.meeting', $meeting_id);
+		
 		load_header( $this->data );
 		load_footer( $this->data );
 		
