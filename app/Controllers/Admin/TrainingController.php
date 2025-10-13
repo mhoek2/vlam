@@ -160,6 +160,7 @@ class TrainingController extends BaseController
 			$trainingAssignmentEntryProperties->insert([
 				'entry_id' 		=> $oldToNewAssignmentEntryIdMap[ $property['entry_id'] ],	// set the cloned assignment entry id
 				'content' 		=> $property['content'],
+				'placeholder'	=> $property['placeholder'],
 				'sort_order' 	=> $property['sort_order'],
 			]);
 		}

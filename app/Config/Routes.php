@@ -100,6 +100,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => \Ap
 		$routes->get(	'get_properties/(:num)', 	'AssignmentController::get_properties/$1/$2');
 		$routes->post(	'properties_save_order', 	'AssignmentController::properties_save_order/$1');
 		$routes->post(	'update_property', 			'AssignmentController::update_property/$1');
+		$routes->post(	'mark_as_placeholder/(:num)','AssignmentController::mark_as_placeholder/$1/$2');
 		$routes->post(	'add_property', 			'AssignmentController::add_property');
 		$routes->post(	'save',						'AssignmentController::save/$1', 					['as' => 'admin.assignment.save']);
 		$routes->post(	'add_case', 				'CasesController::add_case');

@@ -74,6 +74,24 @@
 			content: "\e4e9";	/* default is save */
 			font-family: "Font Awesome 5 Free";
 			font-weight: 900;
+			transition:color ease-in-out 250ms;
+		}
+		.button-action.placeholder .icon::after {
+			content: "\f111";
+			font-weight: 500;
+		}
+		.button-action.placeholder:hover .icon::after {
+			content: "\f058";
+		}
+		.button-action.placeholder_active .icon::after {
+			content: "\f058";
+			color: #4892be;
+			font-weight: 500;
+		}
+		.button-action.placeholder_active:hover .icon::after {
+			content: "\f111";
+			color: inherit;
+			font-weight: 500;
 		}
 		.button-action.save .icon::after {
 			content: "\f0c7";

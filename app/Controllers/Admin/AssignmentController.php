@@ -316,6 +316,31 @@ class AssignmentController extends BaseController
 		]);
 	}
 
+	public function mark_as_placeholder( $assignment_id, $property_id )
+	{
+		$entry_id = $this->request->getPost('entry_id');
+		
+		// find current state
+		$current_state = $this->assignmentEntryProperties->find($property_id);
+		$current_is_marked = (!is_null($current_state) && $current_state['placeholder'] == 1);
+		
+		// first mark all properties as 0
+		$this->assignmentEntryProperties->where('entry_id', $entry_id)->set('placeholder', 0)->update();
+		
+		// when current state is not marked, mark it as active.
+		// else, mark is being removed (no action)
+		if ( !$current_is_marked )
+		{
+			$this->assignmentEntryProperties->update($property_id, ['placeholder' => 1]);
+		}
+		
+		return $this->response->setJSON([
+			'status' 			=> 'success',
+			'placeholder' 		=> !$current_is_marked ? 1 : 0, // flip the current state
+			'new_csrf_token' 	=> csrf_hash(),
+		]);
+	}
+	
 	public function update_property( $assignment_id )
 	{
 		$property_id = $this->request->getPost('property_id');

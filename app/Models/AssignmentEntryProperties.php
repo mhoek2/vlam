@@ -9,7 +9,7 @@ class AssignmentEntryProperties extends Model
     protected $table      = 'assignment_entry_properties';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['id', 'entry_id', 'content', 'sort_order'];
+    protected $allowedFields = ['id', 'entry_id', 'content', 'placeholder', 'sort_order'];
 	
 	/**
 	 * Validate whether the given property ID(s) exist for the specified entry.

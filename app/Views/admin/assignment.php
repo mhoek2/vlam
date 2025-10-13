@@ -389,12 +389,17 @@
 						//if (entryType.startsWith("mcq"))
 						if (entryTypeGroup === 'mcq')
 						{
+							let placeholder_state = parseInt(property.placeholder) === 1 ? BUTTON_PLACEHOLDER_AC : BUTTON_PLACEHOLDER;
+							
 							propertyList.append(`
 								<li data-property-id="${property.id}">
 									<div class="handle">
 										<i class="fa-solid fa-grip-vertical"></i>
 									</div>
 									<input type="text" id="mcq-property" class="edit-property" data-property-id="${property.id}" value="${property.content}">
+									<button class="placeholder-property button-action ${placeholder_state}" data-property-id="${property.id}">
+										<div class="icon"></div>
+									</button>
 									<button class="save-property button-action save" data-property-id="${property.id}">
 										<div class="icon"></div>
 									</button>
@@ -504,6 +509,51 @@
 			console.log('ewPropertyContent: ' + newPropertyContent);
 		});
 
+		$(document).on('click', '.placeholder-property', function (event) {
+			const entryId = $(this).closest('.entry').data('entry-id');
+			const entryType = $(this).closest('.entry').data('type');
+			const entryTypeGroup = entry_group_to_type[entryType];
+			const propertyId = $(this).data('property-id');
+
+			if (entryTypeGroup !== 'mcq')
+					return;
+
+			button_handler( event.currentTarget, BUTTON_LOADING );
+
+			$.ajax({
+				url: '<?=current_url()?>/mark_as_placeholder/' + propertyId,
+				method: 'POST',
+				data: {
+					entry_id: entryId,
+					property_id: propertyId,
+					<?=setCSRFPostData()?>
+				},
+				success: function (response) {
+					updateCSRFMeta(response);
+
+					if (response.status === 'success') {
+						button_handler( event.currentTarget, BUTTON_SUCCESS );
+
+						setTimeout( function(){
+							// set all to not marked state
+							const propertyList = $(`#properties-list-${entryId}`);
+							propertyList.find('.placeholder-property').removeClass(BUTTON_PLACEHOLDER_AC).addClass(BUTTON_PLACEHOLDER);
+
+							// set to new state
+							let placeholder_state = parseInt(response.placeholder) ? BUTTON_PLACEHOLDER_AC : BUTTON_PLACEHOLDER;
+							button_handler( event.currentTarget, placeholder_state );
+						}, 500 );
+					}
+					else {
+						button_handler( event.currentTarget, BUTTON_ERROR );
+					}
+				},
+				error: function(xhr, status, error) {
+					button_handler( event.currentTarget, BUTTON_ERROR );
+				}
+			});
+		});
+			
 		$(document).on('click', '.save-property', function (event) {
 			const entryType = $(this).closest('.entry').data('type');
 			const propertyId = $(this).data('property-id');

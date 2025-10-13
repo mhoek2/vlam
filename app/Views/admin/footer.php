@@ -39,12 +39,14 @@
 	}, true );
 	
 	// button state handling
-	const BUTTON_SAVE 		= "save";
-	const BUTTON_TASH 		= "trash";
-	const BUTTON_LOADING 	= "loading";
-	const BUTTON_SUCCESS 	= "success";
-	const BUTTON_ERROR 		= "error";
-	const BUTTON_STATES 	= [BUTTON_SAVE, BUTTON_TASH, BUTTON_LOADING, BUTTON_SUCCESS, BUTTON_ERROR];
+	const BUTTON_SAVE 			= "save";
+	const BUTTON_TASH 			= "trash";
+	const BUTTON_LOADING 		= "loading";
+	const BUTTON_SUCCESS 		= "success";
+	const BUTTON_ERROR 			= "error";
+	const BUTTON_PLACEHOLDER 	= "placeholder";
+	const BUTTON_PLACEHOLDER_AC = "placeholder_active";
+	const BUTTON_STATES 		= [BUTTON_SAVE, BUTTON_TASH, BUTTON_LOADING, BUTTON_SUCCESS, BUTTON_ERROR, BUTTON_PLACEHOLDER, BUTTON_PLACEHOLDER_AC];
 
 	function button_handler( button, type )
 	{
