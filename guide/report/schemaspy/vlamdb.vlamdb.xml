@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database name="vlamdb" schema="vlamdb" type="MySQL - 8.0.43-0ubuntu0.24.04.2">
    <tables>
-      <table catalog="vlamdb" name="assignment_entry" numRows="1" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="assignment_entry" numRows="14" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <child catalog="vlamdb" column="entry_id" foreignKey="assignment_entry_property_entry_id_foreign" implied="false" onDeleteCascade="true" table="assignment_entry_properties"/>
             <child catalog="vlamdb" column="entry_id" foreignKey="assignment_result_entry_id_foreign" implied="false" onDeleteCascade="true" table="assignment_result"/>
@@ -21,13 +21,14 @@
             <column ascending="true" name="assignment_id"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="assignment_entry_properties" numRows="5" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="assignment_entry_properties" numRows="24" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="entry_id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <parent catalog="vlamdb" column="id" foreignKey="assignment_entry_property_entry_id_foreign" implied="false" onDeleteCascade="true" table="assignment_entry"/>
          </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="content" nullable="false" remarks="" size="65535" type="TEXT" typeCode="-1"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="sort_order" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="placeholder" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="sort_order" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -65,7 +66,7 @@
             <column ascending="true" name="entry_id"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="assignments" numRows="1" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="assignments" numRows="2" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <child catalog="vlamdb" column="assignment_id" foreignKey="assignment_entry_assignment_id_foreign" implied="false" onDeleteCascade="true" table="assignment_entry"/>
             <child catalog="vlamdb" column="assignment_id" foreignKey="assignment_result_assignment_id_foreign" implied="false" onDeleteCascade="true" table="assignment_result"/>
@@ -337,7 +338,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="training_assignment_entry" numRows="1" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="training_assignment_entry" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <child catalog="vlamdb" column="entry_id" foreignKey="training_assignment_entry_properties_entry_id_foreign" implied="false" onDeleteCascade="true" table="training_assignment_entry_properties"/>
          </column>
@@ -357,13 +358,14 @@
             <column ascending="true" name="assignment_id"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="training_assignment_entry_properties" numRows="5" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="training_assignment_entry_properties" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="entry_id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <parent catalog="vlamdb" column="id" foreignKey="training_assignment_entry_properties_entry_id_foreign" implied="false" onDeleteCascade="true" table="training_assignment_entry"/>
          </column>
          <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="content" nullable="false" remarks="" size="65535" type="TEXT" typeCode="-1"/>
-         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="sort_order" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="placeholder" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="sort_order" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -396,7 +398,7 @@
             <column ascending="true" name="assignment_id"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="training_assignments" numRows="1" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="training_assignments" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <child catalog="vlamdb" column="assignment_id" foreignKey="training_assignment_entry_assignment_id_foreign" implied="false" onDeleteCascade="true" table="training_assignment_entry"/>
             <child catalog="vlamdb" column="assignment_id" foreignKey="training_assignment_result_assignment_id_foreign" implied="false" onDeleteCascade="true" table="training_assignment_result"/>
@@ -505,7 +507,7 @@
             <column ascending="true" name="assignment_id"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="training_meetings" numRows="6" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="training_meetings" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <child catalog="vlamdb" column="meeting_id" foreignKey="training_schedule_meeting_id_foreign" implied="false" onDeleteCascade="true" table="training_schedule"/>
          </column>
@@ -559,7 +561,7 @@
             <column ascending="true" name="name"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="training_users" numRows="1" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="training_users" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="training_id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <parent catalog="vlamdb" column="id" foreignKey="training_users_trainings_id_foreign" implied="false" onDeleteCascade="true" table="trainings"/>
@@ -582,7 +584,7 @@
             <column ascending="true" name="user_id"/>
          </index>
       </table>
-      <table catalog="vlamdb" name="trainings" numRows="1" remarks="" type="TABLE">
+      <table catalog="vlamdb" name="trainings" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
             <child catalog="vlamdb" column="training_id" foreignKey="training_assignments_trainings_id_foreign" implied="false" onDeleteCascade="true" table="training_assignments"/>
             <child catalog="vlamdb" column="training_id" foreignKey="training_meetings_trainings_id_foreign" implied="false" onDeleteCascade="true" table="training_meetings"/>
