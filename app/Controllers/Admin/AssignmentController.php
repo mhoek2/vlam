@@ -177,8 +177,16 @@ class AssignmentController extends BaseController
 		$entry['type_group'] = $this->assignmentEntry->find_group($entry['type']);
 		$entry['is_multi_type_group'] = !is_null($entry['type_group']) && ($this->assignmentEntry->group_counts[$entry['type_group']] > 1);
 		$entry['is_input'] = $this->assignmentEntry->user_input_type($entry['type']);
-		
+
 		// add default property if required for the new type
+		if ($new_entry_type === "mcq") {
+			$this->assignmentEntryProperties->insert([
+				'entry_id' 		=> $insert_id,
+				'content' 		=> "Kies een optie",
+				'placeholder'	=> 1,
+			]);
+		}
+		
 		if ($new_entry_type === "text_separator") {
 			$this->assignmentEntryProperties->insert([
 				'entry_id' 	=> $insert_id,
