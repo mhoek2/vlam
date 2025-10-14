@@ -71,6 +71,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controllers-Admin-AssignmentController.html#method_add_property"
         },                {
+            "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003Amark_as_placeholder\u0028\u0029",
+            "name": "mark_as_placeholder",
+            "summary": "",
+            "url": "classes/App-Controllers-Admin-AssignmentController.html#method_mark_as_placeholder"
+        },                {
             "fqsen": "\\App\\Controllers\\Admin\\AssignmentController\u003A\u003Aupdate_property\u0028\u0029",
             "name": "update_property",
             "summary": "",
