@@ -120,7 +120,7 @@ class TextEditorCKEditorGPL extends TextEditor
 								'emoji',
 								'link',
 								'insertImageViaUrl',
-								'mediaEmbed',
+								//'mediaEmbed',
 								'insertTable',
 								'blockQuote',
 								'htmlEmbed',

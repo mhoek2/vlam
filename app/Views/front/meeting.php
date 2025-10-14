@@ -11,7 +11,10 @@
 		</div>
        
         <h1 class="name"> <?=$meeting['info'];?></h1>
-        <p> <?=$meeting['intro'];?></p>
+		
+        <div class="ck-content">
+			<?=$meeting['intro'];?>
+		</div>
     </div>
 </section>
 

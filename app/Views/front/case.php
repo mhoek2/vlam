@@ -33,7 +33,9 @@
 		
         <h2><?=$case['name']?>: <?=$case['info']?></h2>
 
-        <?=$case['intro']?>
+		<div class="ck-content">
+        	<?=$case['intro']?>
+		</div>
 
 		<?php if (!is_null($start_url)):?>
 			<a class="button-primary" href="<?=$start_url?>">Start</a>

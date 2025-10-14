@@ -68,8 +68,10 @@
 
         <h2><?=$assignment['name']?>: <?=$assignment['info']?></h2>
 
-        <?=$assignment['intro']?>
-
+		<div class="ck-content">
+        	<?=$assignment['intro']?>
+		</div>
+		
         <form method="POST" id="assignment_form">
 			<div class="assignment-container">
 				<?php foreach ($entries as $item) { ?>

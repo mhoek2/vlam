@@ -23,9 +23,10 @@
     <?=$sidebar?>
 
     <div class="content">
-        
-        <?=$case['outro']?>
-
+        <div class="ck-content">
+        	<?=$case['outro']?>
+		</div>
+		
 		<div class="actions">
 			<a class="button-primary small" href="<?=$case_reset_url?>">
 				Opnieuw proberen
