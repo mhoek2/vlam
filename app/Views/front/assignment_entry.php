@@ -16,7 +16,9 @@
 
 		<select name="entries[<?=$id?>]" <?= (bool)!$optional ? 'required' : '' ?>>
 			<?php foreach ($properties as $property): ?>
-				<option value="<?= $property['id'] ?>" <?= $property['selected'] ? 'selected' : '' ?>><?= $property['content'] ?></option>
+				<option value="<?= $property['id'] ?>" <?= $property['selected'] ? 'selected' : '' ?> <?=(int)$property['placeholder'] ? "hidden" : ""?>>
+					<?= $property['content'] ?>
+				</option>
 			<?php endforeach; ?>
 		</select>
 
@@ -25,6 +27,7 @@
 
 		<div class="property-container" id="entry_<?=$id?>" data-max-selectable="<?= (int)$matches[1] ?>" <?= (bool)!$optional ? 'data-required' : '' ?>>
 			<?php foreach ($properties as $property): ?>
+				<?php if( (int)$property['placeholder'] == 1 ) continue; ?>
 				<div>
 					<input type="checkbox" name="entries[<?=$id?>][]" class="entry-property" id="e_<?=$id?>_p_<?=$property['id']?>" value="<?=$property['id']?>" 
 						<?= $property['selected'] ? 'checked' : '' ?>>

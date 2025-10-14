@@ -14,17 +14,26 @@ class AssignmentEntryProperties extends Model
 	/**
 	 * Validate whether the given property ID(s) exist for the specified entry.
 	 *
-	 * @param int $entry_id The ID of the entry to check against.
+	 * @param array $entry The entire entry data array
 	 * @param int|array|null $property_id The property ID or an array of IDs to validate.
 	 *
 	 * @return bool Returns true if all provided property IDs are valid, otherwise false.
 	 */
-	public function valid_property( int $entry_id, $property_id )
+	public function valid_property( $entry , $property_id )
 	{
 		if ( is_null($property_id) )
 			return false;
 		
-		$valid_ids = array_column( $this->where('entry_id', $entry_id)->findAll(), 'id');
+		$conditions = [
+			'entry_id' => $entry['id']
+		];
+		
+		// not optional, make sure the (also optional) placeholder is not selected
+		if (empty($entry['optional'])) {
+			$conditions['placeholder !='] = 1;
+		}
+		
+		$valid_ids = array_column( $this->where($conditions)->findAll(), 'id');
 
 		// Check if $property_id is an array or single value
 		if ( is_array($property_id) )

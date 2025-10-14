@@ -102,6 +102,10 @@
 				this.setCustomValidity('');
 			});
 		});
+		
+		$('.assignment-container select').on('change', function() {
+			this.setCustomValidity('');
+		});
 
 		// Validate if mcq-* type. where multiple options are asked. (check if at least one is selected)
 		function validate_mcq_properties()
@@ -122,6 +126,21 @@
 					const checkbox = checkboxes.first();
 					checkbox[0].setCustomValidity('Please select at least one option.');
 					checkbox[0].reportValidity();
+
+					isValid = false;
+				}
+			});
+			
+			$('.assignment-entry select').each(function() {
+				console.log($(this).prop('required'));
+				if ( !$(this).prop('required') )
+					return true; // Jqeury.each equivalent to continue, false for break;
+				
+				const selectedOption = this.options[this.selectedIndex];
+
+				if (selectedOption.hidden) {
+					this.setCustomValidity('Please select at least one option.');
+					this.reportValidity();
 
 					isValid = false;
 				}

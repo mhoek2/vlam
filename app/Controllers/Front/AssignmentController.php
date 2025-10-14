@@ -116,7 +116,7 @@ class AssignmentController extends BaseController
         foreach($post_entries as $entry_id => $property_id )
         {
 			$entry = $this->assignmentEntry->find($entry_id);
-			
+
 			if ( is_null($entry) ) 
 			{
 				array_push( $warnings, sprintf("Invalid entry id [%s]! .. what are you trying to do mate?", $entry_id) );
@@ -146,7 +146,7 @@ class AssignmentController extends BaseController
 					$property_id = -1;
 				
 				// validate property ids
-				else if ( !$this->assignmentEntryProperties->valid_property($entry_id, $property_id) )
+				else if ( !$this->assignmentEntryProperties->valid_property($entry, $property_id) )
 				{
 					array_push( $warnings, sprintf("Invalid entry property if [%s]! .. what are you trying to do mate?", $property_id) );
 					continue;
@@ -197,6 +197,7 @@ class AssignmentController extends BaseController
 		// set stored value for this entry, (property_id or the dynamic user input value)
 		$entry['value'] = $saved_results[$entry['id']] ?? '';			
 		$entry['properties'] = [];
+		//$entry['has_selected'] = false;
 		
 		foreach( $properties as $property )
 		{
@@ -207,6 +208,10 @@ class AssignmentController extends BaseController
 			$property['selected'] = isset($saved_results[$entry['id']]) && is_array($saved_results[$entry['id']]) && 
 				in_array($property['id'], $saved_results[$entry['id']]);
 
+			// check if this entry has at least one selected/saved item
+			//if ( $property['selected'] )
+			//	$entry['has_selected'] = true;
+			
 			array_push( $entry['properties'], $property );
 		}
 	}
@@ -219,7 +224,7 @@ class AssignmentController extends BaseController
 		$this->data['entry_types'] = $this->assignmentEntry->type_enum;
 
         // Entry properties
-		$this->data['properties'] = $this->assignmentEntryProperties->orderBy('sort_order', 'ASC')->findAll();
+		$this->data['properties'] = $this->assignmentEntryProperties->orderBy('placeholder', 'DESC')->orderBy('sort_order', 'ASC')->findAll();
 		
 		// Get saved user property ids and values
 		// create array $saved_results with structure:
