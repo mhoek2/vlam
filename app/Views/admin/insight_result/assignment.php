@@ -16,7 +16,7 @@
 							
 			<?php } else { ?>
 				<div class="entry ">
-					<h3><?=$entry['name']?></h3>
+					<h3><?=$entry['name']?> <?=!empty($entry['optional']) ? '<div class="optional">*optioneel</div>' : ''?></h3>
 
 					<div class="properties">
 						<?php foreach( $entry['properties'] as $property ): ?>

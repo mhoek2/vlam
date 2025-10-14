@@ -222,7 +222,12 @@
 	.container.insight .result .entry {
 		
 	}
-	
+		.container.insight .result .entry .optional {
+			font-weight: normal;
+			font-size: 10px;
+			color: var(--primary-color);
+			margin-bottom: -10px;
+		}
 		.container.insight .result .entry .properties {
 			display:flex;
 			flex-direction: column;
