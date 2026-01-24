@@ -11,6 +11,12 @@ Shield provides two primary methods Session-based and Access Token authenticatio
 
 It also provides HMAC SHA256 Token and JSON Web Token authentication. [official site](https://shield.codeigniter.com/)
 
+# :o: Getting-Started
+Private repo, to get started:
+1. Navigate to the ```gh-pages``` branch 
+2. download the zip and extract
+3. open index.html locally.
+
 # Devlogs:
 
 ## Devlog 001 - week 06

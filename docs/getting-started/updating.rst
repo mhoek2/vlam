@@ -15,7 +15,8 @@ Updating (cloned version only)
         cd /var/www/html/vlam
         sudo nano update.sh
 
-        # 1a. enter the following content:
+#. Write to update.sh
+    .. code-block:: bash
 
         #!/bin/bash
         #
@@ -37,9 +38,11 @@ Updating (cloned version only)
         fi
 
         # Update the repo
-        git pull git@vlam:repo-user/vlam.git
+        git pull git@github.com:repo-user/vlam.git
 
-        # 1b. make update.sh executable
+#. Make update.sh executable
+    .. code-block:: bash
+
         sudo chmod +x update.sh
 
 #. Run update.sh

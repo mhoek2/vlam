@@ -18,6 +18,12 @@ When the repository is private, a deployment key is required
         cd ~/.ssh/
         ssh-keygen -t rsa -b 4096 -C "vlam-deploy"
 
+#. *Optional SSH host: 
+    .. code-block:: bash
+
+        # use git@vlam instead of git@github.com
+        # for now, use git@github.com in the setup scripts (clone.sh & update.sh)
+
         # Add to ssh config
         nano ~/.ssh/config:
 
@@ -45,7 +51,8 @@ When the repository is private, a deployment key is required
         cd /var/www/html
         sudo nano clone.sh
 
-        # 1a. enter the following content:
+#. Write to clone.sh
+    .. code-block:: bash
 
         #!/bin/bash
         #
@@ -67,9 +74,11 @@ When the repository is private, a deployment key is required
         fi
 
         # Clone the repo
-        git clone git@vlam:repo-user/vlam.git
+        git clone git@github.com:repo-user/vlam.git
 
-        # 1b. make clone.sh executable
+#. Make clone.sh executable
+    .. code-block:: bash
+
         sudo chmod +x clone.sh
 
 #. Run clone.sh

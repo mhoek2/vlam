@@ -120,6 +120,14 @@ If you run a fresh apache webserver, you might want to set up the following.
         # To:
         ini_set('display_errors', '1');
 
+#. ERROR: Call to a member function getErrors() on null
+    .. code-block:: bash
+
+        # If you encounter a php error during login, likely reason is a glitch with shield.
+        # Try the following commands in the root of the project using the cli:
+
+        composer require codeigniter4/shield:^1.1
+        composer update
 
 .. tip::
 	You should now be able to see a correctly setup instance when you navigate to: http://vlam.your-domain.com/
