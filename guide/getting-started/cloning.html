@@ -241,7 +241,16 @@
         
         <dd><pre><code class="language-bash"># Create a ssh pub key
 cd ~/.ssh/
-ssh-keygen -t rsa -b 4096 -C &quot;vlam-deploy&quot;
+ssh-keygen -t rsa -b 4096 -C &quot;vlam-deploy&quot;</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>*Optional SSH host:</dt>
+        
+        <dd><pre><code class="language-bash"># use git@vlam instead of git@github.com
+# for now, use git@github.com in the setup scripts (clone.sh &amp; update.sh)
 
 # Add to ssh config
 nano ~/.ssh/config:
@@ -277,11 +286,15 @@ cat ~/.ssh/vlam-deploy.pub</code></pre>
         
         <dd><pre><code class="language-bash"># cd to your root webserver path.
 cd /var/www/html
-sudo nano clone.sh
+sudo nano clone.sh</code></pre>
+</dd>
+            </dl>
+</li>
 
-# 1a. enter the following content:
-
-#!/bin/bash
+    <li><dl>
+                        <dt>Write to clone.sh</dt>
+        
+        <dd><pre><code class="language-bash">#!/bin/bash
 #
 
 # Check if ssh-agent is running
@@ -301,10 +314,15 @@ else
 fi
 
 # Clone the repo
-git clone git@vlam:repo-user/vlam.git
+git clone git@github.com:repo-user/vlam.git</code></pre>
+</dd>
+            </dl>
+</li>
 
-# 1b. make clone.sh executable
-sudo chmod +x clone.sh</code></pre>
+    <li><dl>
+                        <dt>Make clone.sh executable</dt>
+        
+        <dd><pre><code class="language-bash">sudo chmod +x clone.sh</code></pre>
 </dd>
             </dl>
 </li>

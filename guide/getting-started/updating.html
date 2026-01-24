@@ -242,11 +242,15 @@
         
         <dd><pre><code class="language-bash"># cd to your root application instance path. (NOT server root like clone.sh)
 cd /var/www/html/vlam
-sudo nano update.sh
+sudo nano update.sh</code></pre>
+</dd>
+            </dl>
+</li>
 
-# 1a. enter the following content:
-
-#!/bin/bash
+    <li><dl>
+                        <dt>Write to update.sh</dt>
+        
+        <dd><pre><code class="language-bash">#!/bin/bash
 #
 
 # Check if ssh-agent is running
@@ -266,10 +270,15 @@ else
 fi
 
 # Update the repo
-git pull git@vlam:repo-user/vlam.git
+git pull git@github.com:repo-user/vlam.git</code></pre>
+</dd>
+            </dl>
+</li>
 
-# 1b. make update.sh executable
-sudo chmod +x update.sh</code></pre>
+    <li><dl>
+                        <dt>Make update.sh executable</dt>
+        
+        <dd><pre><code class="language-bash">sudo chmod +x update.sh</code></pre>
 </dd>
             </dl>
 </li>

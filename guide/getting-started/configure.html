@@ -389,6 +389,18 @@ ini_set(&#039;display_errors&#039;, &#039;1&#039;);</code></pre>
             </dl>
 </li>
 
+    <li><dl>
+                        <dt>ERROR: Call to a member function getErrors() on null</dt>
+        
+        <dd><pre><code class="language-bash"># If you encounter a php error during login, likely reason is a glitch with shield.
+# Try the following commands in the root of the project using the cli:
+
+composer require codeigniter4/shield:^1.1
+composer update</code></pre>
+</dd>
+            </dl>
+</li>
+
 </ol>
 
             <div class="phpdocumentor-admonition tip">
