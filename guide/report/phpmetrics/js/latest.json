@@ -13,14 +13,14 @@
         "lcom": 0.75,
         "instability": 0.25,
         "afferentCoupling": 0.78,
-        "efferentCoupling": 1.09,
+        "efferentCoupling": 1.08,
         "difficulty": 3.83,
         "mi": 105.05,
         "distance": 0.19,
         "incomingCDep": 2,
         "incomingPDep": 0.64,
-        "outgoingCDep": 6.91,
-        "outgoingPDep": 2.09,
+        "outgoingCDep": 6.82,
+        "outgoingPDep": 2,
         "classesPerPackage": 9.64
     },
     "sum": {

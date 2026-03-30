@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PhpMetrics report [2026-01-24 15:14:38]</title>
+    <title>PhpMetrics report [2026-03-30 12:32:01]</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico?v=v3.0.0-rc8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/milligram.min.css?v=v3.0.0-rc8">
@@ -50,7 +50,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2026-01-24 15:14:38        , with PHPMetrics v3.0.0-rc8 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2026-03-30 12:32:01        , with PHPMetrics v3.0.0-rc8 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -221,17 +221,32 @@
 
     var relations = [
     {
-        "name": "App\\Services",
-        "size": 3000,
-        "relations": [
-            "App\\Models"
-        ]
-    },
-    {
         "name": "App\\Models",
         "size": 3000,
         "relations": [
             "CodeIgniter\\I18n"
+        ]
+    },
+    {
+        "name": "CodeIgniter\\I18n",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "Config",
+        "size": 3000,
+        "relations": [
+            "App\\Services",
+            "App\\ThirdParty",
+            "CodeIgniter\\Debug",
+            "global"
+        ]
+    },
+    {
+        "name": "App\\Services",
+        "size": 3000,
+        "relations": [
+            "App\\Models"
         ]
     },
     {
@@ -240,28 +255,21 @@
         "relations": []
     },
     {
-        "name": "App\\Filters",
+        "name": "CodeIgniter\\Debug",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "global",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "App\\Controllers\\Front\\DashboardModules",
         "size": 3000,
         "relations": [
-            "CodeIgniter\\CodeIgniter\\Filters",
-            "CodeIgniter\\HTTP",
             "App\\Models"
         ]
-    },
-    {
-        "name": "CodeIgniter\\CodeIgniter\\Filters",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "CodeIgniter\\HTTP",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "CodeIgniter\\I18n",
-        "size": 3000,
-        "relations": []
     },
     {
         "name": "App\\Controllers\\Front",
@@ -274,6 +282,11 @@
         ]
     },
     {
+        "name": "CodeIgniter\\HTTP",
+        "size": 3000,
+        "relations": []
+    },
+    {
         "name": "Psr\\Log",
         "size": 3000,
         "relations": []
@@ -284,13 +297,6 @@
         "relations": []
     },
     {
-        "name": "App\\Controllers\\Front\\DashboardModules",
-        "size": 3000,
-        "relations": [
-            "App\\Models"
-        ]
-    },
-    {
         "name": "App\\Controllers\\Front\\SubAssignments",
         "size": 3000,
         "relations": []
@@ -299,6 +305,14 @@
         "name": "App\\Controllers\\Front\\CompleteCaseActions",
         "size": 3000,
         "relations": []
+    },
+    {
+        "name": "App\\Controllers",
+        "size": 3000,
+        "relations": [
+            "CodeIgniter\\HTTP",
+            "Psr\\Log"
+        ]
     },
     {
         "name": "App\\Controllers\\Admin",
@@ -324,32 +338,12 @@
         "relations": []
     },
     {
-        "name": "App\\Controllers",
+        "name": "App\\Filters",
         "size": 3000,
         "relations": [
             "CodeIgniter\\HTTP",
-            "Psr\\Log"
+            "App\\Models"
         ]
-    },
-    {
-        "name": "Config",
-        "size": 3000,
-        "relations": [
-            "CodeIgniter\\Debug",
-            "global",
-            "App\\Services",
-            "App\\ThirdParty"
-        ]
-    },
-    {
-        "name": "CodeIgniter\\Debug",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "global",
-        "size": 3000,
-        "relations": []
     }
 ];
 

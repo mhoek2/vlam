@@ -62,23 +62,41 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
-                <a href="guide/getting-started/installing.html#installation" class="">Installation</a>
+                <a href="guide/getting-started/setup.html#setup" class="">Setup</a>
                 
             </li>
                     <li>
-                <a href="guide/getting-started/deploy.html#deploy-backup" class="">Deploy backup</a>
+                <a href="guide/getting-started/install_docker.html#install-docker" class="">Install Docker</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="guide/development/index.html#development" class="">Development</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="guide/development/setup.html#setup" class="">Setup</a>
                 
             </li>
                     <li>
-                <a href="guide/getting-started/configure.html#configure" class="">Configure</a>
+                <a href="guide/development/configure_docker.html#configure-docker" class="">Configure Docker</a>
                 
             </li>
                     <li>
-                <a href="guide/getting-started/cloning.html#cloning" class="">Cloning</a>
+                <a href="guide/development/configure_dedicated.html#configure-dedicated-server" class="">Configure Dedicated Server</a>
                 
             </li>
                     <li>
-                <a href="guide/getting-started/updating.html#updating" class="">Updating</a>
+                <a href="guide/development/cloning.html#cloning" class="">Cloning</a>
+                
+            </li>
+                    <li>
+                <a href="guide/development/updating.html#updating" class="">Updating</a>
+                
+            </li>
+                    <li>
+                <a href="guide/development/github-packaging.html#github-packaging" class="">Github Packaging</a>
                 
             </li>
             </ul>
@@ -213,129 +231,234 @@
 </aside>
 
             <div class="phpdocumentor-column -nine phpdocumentor-content">
-                                        <section class="section " id="cloning">
-            <a id="cloning-guide"></a>
-
-            <h1>Cloning</h1>
-
-            <section class="section " id="cloning-private-repo-only">
-            <h2>Cloning (private repo only)</h2>
+                                        <section class="section " id="configure-dedicated-server">
+            <h1>Configure Dedicated Server</h1>
 
             
-    <p>When the repository is private, a deployment key is required</p>
+    <p>A few things need to be set-up and configured.</p>
+
+            
+    <p>Some composer modules might have changed been updated, so we want to verify a few things.</p>
 
             <div class="phpdocumentor-admonition tip">
                     <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
             <article>
         
-    <p>Replace &#039;repo-user&#039; in the following snippets with the repo owner username</p>
+    <p>Hosting environment requires <code>PHP&gt;8.2</code>
+ and <code>ext-intl</code>
+ extension enabled.</p>
 
     </article>
 </div>
+
+            <section class="section " id="adjust-the-env-configuration">
+            <h2>Adjust the .env configuration</h2>
 
             
     
 <ol>
     <li><dl>
-                        <dt>Create a public key using ssh-keygen</dt>
+                        <dt>Uncomment and point <code>app.baseURL</code>
+ in <code>.env</code>
+ to the root url of your server. eg: <a href="http://vlam.your-domain.com/">http://vlam.your-domain.com/</a></dt>
         
-        <dd><pre><code class="language-bash"># Create a ssh pub key
-cd ~/.ssh/
-ssh-keygen -t rsa -b 4096 -C &quot;vlam-deploy&quot;</code></pre>
+        <dd><pre><code class="language-php">app.baseURL = &#039;&#039;</code></pre>
 </dd>
             </dl>
 </li>
 
     <li><dl>
-                        <dt>*Optional SSH host:</dt>
+                        <dt>Ensure database connection variables uncommented and correctly set in <code>.env</code>
+</dt>
         
-        <dd><pre><code class="language-bash"># use git@vlam instead of git@github.com
-# for now, use git@github.com in the setup scripts (clone.sh &amp; update.sh)
-
-# Add to ssh config
-nano ~/.ssh/config:
-
-Host vlam
-  HostName github.com
-  User repo-user
-  IdentityFile ~/.ssh/vlam-deploy
-
-# Test authentication
-ssh -T git@vlam</code></pre>
-</dd>
-            </dl>
-</li>
-
-    <li>Go to GitHub.com and navigate to: <strong>Your repository -&gt; Settings -&gt; Deploy keys</strong>
-</li>
-
-    <li>Click <strong>Add a deploy key</strong>
- and keep it read-only!</li>
-
-    <li><dl>
-                        <dt>Enter a name, then copy the content of the .pub file in the value field.</dt>
-        
-        <dd><pre><code class="language-bash"># find the content of the .pub key:
-cat ~/.ssh/vlam-deploy.pub</code></pre>
-</dd>
-            </dl>
-</li>
-
-    <li><dl>
-                        <dt>Create a clone.sh file</dt>
-        
-        <dd><pre><code class="language-bash"># cd to your root webserver path.
-cd /var/www/html
-sudo nano clone.sh</code></pre>
-</dd>
-            </dl>
-</li>
-
-    <li><dl>
-                        <dt>Write to clone.sh</dt>
-        
-        <dd><pre><code class="language-bash">#!/bin/bash
-#
-
-# Check if ssh-agent is running
-if ! pgrep -u &quot;$USER&quot; ssh-agent &gt; /dev/null; then
-    echo &quot;Starting ssh-agent...&quot;
-    eval &quot;$(ssh-agent -s)&quot;
-else
-    echo &quot;ssh-agent already running.&quot;
-fi
-
-# Check if the key is already added
-if ! ssh-add -l | grep -q &quot;$(ssh-keygen -lf ~/.ssh/vlam-deploy | awk &#039;{print $2}&#039;)&quot;; then
-    echo &quot;Adding SSH key...&quot;
-    ssh-add ~/.ssh/vlam-deploy
-else
-    echo &quot;SSH key already added.&quot;
-fi
-
-# Clone the repo
-git clone git@github.com:repo-user/vlam.git</code></pre>
-</dd>
-            </dl>
-</li>
-
-    <li><dl>
-                        <dt>Make clone.sh executable</dt>
-        
-        <dd><pre><code class="language-bash">sudo chmod +x clone.sh</code></pre>
-</dd>
-            </dl>
-</li>
-
-    <li><dl>
-                        <dt>Run clone.sh</dt>
-        
-        <dd><pre><code class="language-bash">./clone.sh</code></pre>
+        <dd><pre><code class="language-php">database.default.hostname = localhost &lt;- Set this
+database.default.database = vlam_db
+database.default.username = vlam_user
+database.default.password = vlam_pass
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306</code></pre>
 </dd>
             </dl>
 </li>
 
 </ol>
+
+    </section>
+
+            <section class="section " id="when-not-using-the-env-file">
+            <h2>When not using the .env file:</h2>
+
+            
+    
+<ol>
+    <li><dl>
+                        <dt>Set variable <code>$baseURL</code>
+ in <code>app/Config/App.php</code>
+ to the root url of your server. eg: <a href="http://vlam.your-domain.com/">http://vlam.your-domain.com/</a></dt>
+        
+        <dd><pre><code class="language-php">/**
+* --------------------------------------------------------------------------
+* Base Site URL
+* --------------------------------------------------------------------------
+*
+* URL to your CodeIgniter root. Typically, this will be your base URL,
+* WITH a trailing slash:
+*
+* E.g., http://example.com/
+*/
+public string $baseURL = &#039;http://vlam.your-domain.com/&#039;;</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>Ensure database connection variables are correctly set in <code>app/Config/Database.php</code>
+</dt>
+        
+        <dd><pre><code class="language-php">/**
+* The default database connection.
+*
+* @var array&lt;string, mixed&gt;
+*/
+public array $default = [
+    &#039;DSN&#039;          =&gt; &#039;&#039;,
+    &#039;hostname&#039;     =&gt; &#039;localhost&#039;,
+    &#039;username&#039;     =&gt; &#039;your-username&#039;,
+    &#039;password&#039;     =&gt; &#039;your-password&#039;,
+    &#039;database&#039;     =&gt; &#039;your-database-name&#039;,
+    &#039;DBDriver&#039;     =&gt; &#039;MySQLi&#039;,</code></pre>
+</dd>
+            </dl>
+</li>
+
+</ol>
+
+    </section>
+
+            <section class="section " id="setup-database">
+            <h2>Setup Database</h2>
+
+            
+    <p>By default the sql/vlam.sql is imported. use phpmyadmin to import a local backup. Migrations are not supported for this project yet ..</p>
+
+    </section>
+
+            <section class="section " id="verify">
+            <h2>Verify</h2>
+
+            
+    
+<ol>
+    <li><dl>
+                        <dt>The Login controller is a clone of Shield&#039;s, this prevents the custom login page from being overwritten.</dt>
+        
+        <dd>Ensure <code>Controllers\LoginController::loginView()</code>
+ matches <code>CodeIgniter\Shield\Controllers\LoginController::loginView()</code>
+.</dd>
+            </dl>
+</li>
+
+</ol>
+
+    </section>
+
+            <section class="section " id="configure-apache-server">
+            <h2>Configure Apache server</h2>
+
+            
+    <p>If you run a fresh apache webserver, you might want to set up the following.</p>
+
+            
+    
+<ol>
+    <li><dl>
+                        <dt>Give valid permissions to writable folder and subfolders</dt>
+        
+        <dd><pre><code class="language-bash"># This will add permissions, use valid user, commonly www-data for apache2 servers
+sudo chown -R www-data writable</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>Enable modrewrite</dt>
+        
+        <dd><pre><code class="language-bash"># Check if modrewrite is enabled:
+apache2ctl -M | grep rewrite
+
+# when nothing returns, enable using:
+sudo a2enmod rewrite
+sudo systemctl restart apache2</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>Create Virtual Host</dt>
+        
+        <dd><pre><code class="language-bash"># When you don&#039;t have this set up already, add a vhost.
+# sudo nano /etc/apache2/sites-available/vlam.your-domain.com.conf
+&lt;VirtualHost *:80&gt;
+    ServerName vlam.your-domain.com
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/vlam/public
+
+    &lt;Directory /var/www/html/vlam/public&gt;
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/vlam_error.log
+    CustomLog ${APACHE_LOG_DIR}/vlam_access.log combined
+&lt;/VirtualHost&gt;
+
+# save &amp; exit
+sudo a2ensite vlam.your-domain.com.conf
+sudo systemctl reload apache2
+
+# disable default vhost:
+sudo a2dissite 000-default.conf
+sudo systemctl reload apache2</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>TIP: Temporary enable error printing:</dt>
+        
+        <dd><pre><code class="language-bash">nano app/Config/Boot/production.php
+# Change:
+ini_set(&#039;display_errors&#039;, &#039;0&#039;);
+# To:
+ini_set(&#039;display_errors&#039;, &#039;1&#039;);</code></pre>
+</dd>
+            </dl>
+</li>
+
+    <li><dl>
+                        <dt>ERROR: Call to a member function getErrors() on null</dt>
+        
+        <dd><pre><code class="language-bash"># If you encounter a php error during login, likely reason is a glitch with shield.
+# Try the following commands in the root of the project using the cli:
+
+composer require codeigniter4/shield:^1.1
+composer update</code></pre>
+</dd>
+            </dl>
+</li>
+
+</ol>
+
+    </section>
+
+            <section class="section " id="done">
+            <h2>Done</h2>
+
+            
+    <p>You should now be able to see a correctly setup instance when you navigate to: <a href="http://vlam.your-domain.com/">http://vlam.your-domain.com/</a></p>
 
     </section>
 
