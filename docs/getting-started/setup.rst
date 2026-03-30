@@ -51,5 +51,5 @@ Updating
         # pull latest & compose
         docker compose up -d --pull always
         
-        # update database if required
-        docker exec -it vlam_app php spark migrate
+        # update database if required ( not implemented )
+        #docker exec -it vlam_app php spark migrate
