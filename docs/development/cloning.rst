@@ -3,37 +3,50 @@
 Cloning
 =======
 
-Cloning (private repo only)
+Cloning (public repository)
+---------------------
+
+Clone repository using Git CLI
+    .. code-block:: bash
+
+        # Browse to the directory where you want to store the project.
+        # This example uses the root directory (/) and will create an "vlam" folder there.
+        # The cloned repository folder will serve as the root directory of the application
+        # (e.g., /vlam).
+        cd /
+        git clone https://github.com/mhoek2/vlam.git
+
+Cloning (private repository) - Linux
 ------------------------------
 
 When the repository is private, a deployment key is required
 
 .. tip::
-	Replace 'repo-user' in the following snippets with the repo owner username
+	If you use a fork, replace 'mhoek2' in the following snippets with your username
 
 #. Create a public key using ssh-keygen
     .. code-block:: bash
 
         # Create a ssh pub key
         cd ~/.ssh/
-        ssh-keygen -t rsa -b 4096 -C "vlam-deploy"
+        ssh-keygen -t rsa -b 4096 -C "vlm-deploy"
 
 #. *Optional SSH host: 
     .. code-block:: bash
 
-        # use git@vlam instead of git@github.com
+        # use git@vlm instead of git@github.com
         # for now, use git@github.com in the setup scripts (clone.sh & update.sh)
 
         # Add to ssh config
         nano ~/.ssh/config:
 
-        Host vlam
+        Host vlm
           HostName github.com
           User repo-user
-          IdentityFile ~/.ssh/vlam-deploy
+          IdentityFile ~/.ssh/vlm-deploy
 
         # Test authentication
-        ssh -T git@vlam
+        ssh -T git@vlm
 
 #. Go to GitHub.com and navigate to: **Your repository -> Settings -> Deploy keys**
 #. Click **Add a deploy key** and keep it read-only!
@@ -41,14 +54,19 @@ When the repository is private, a deployment key is required
     .. code-block:: bash
 
         # find the content of the .pub key:
-        cat ~/.ssh/vlam-deploy.pub
+        cat ~/.ssh/vlm-deploy.pub
 
 
 #. Create a clone.sh file
     .. code-block:: bash
 
-        # cd to your root webserver path.
+        # dedicated server:
+        # cd to the root of the webserver.
         cd /var/www/html
+
+        # or for docker:
+        cd /
+
         sudo nano clone.sh
 
 #. Write to clone.sh
@@ -58,23 +76,21 @@ When the repository is private, a deployment key is required
         #
 
         # Check if ssh-agent is running
-        if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+        if [ -z "$SSH_AUTH_SOCK" ]; then
             echo "Starting ssh-agent..."
             eval "$(ssh-agent -s)"
-        else
-            echo "ssh-agent already running."
         fi
 
         # Check if the key is already added
-        if ! ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/vlam-deploy | awk '{print $2}')"; then
+        if ! ssh-add -l | grep -q "vlm-deploy"; then
             echo "Adding SSH key..."
-            ssh-add ~/.ssh/vlam-deploy
+            ssh-add ~/.ssh/vlm-deploy
         else
             echo "SSH key already added."
         fi
 
         # Clone the repo
-        git clone git@github.com:repo-user/vlam.git
+        git clone git@github.com:mhoek2/vlam.git
 
 #. Make clone.sh executable
     .. code-block:: bash

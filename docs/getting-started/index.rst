@@ -7,8 +7,5 @@ Or you want to deploy a existing install, your'e in the right place.
 .. toctree::
     :maxdepth: 3
 
-    installing
-	deploy
-	configure
-	cloning
-	updating
+	setup
+	install_docker
