@@ -16,8 +16,18 @@ Setup Docker Package
         docker compose up -d --pull always
 
 #. Setup Database
+    .. code-block:: bash
+        # Use phpmyadmin to import a local backup if you dont want a fresh install.
+        # phpmyadmin: http://localhost/phpmyadmin
+        # Then you can skip the following commands ..
+        
+        # Fresh install using migrations and the seeder
+        # wait for database to be active and run:
+        docker exec -it vlam_app php spark migrate --all
 
-By default the sql/vlam.sql is imported. use phpmyadmin to import a local backup. Migrations are not supported for this project yet ..
+        # setup demo user(s) and training content
+        docker exec -it vlam2_app php spark db:seed DemoSeeder
+
 
 #. Dashboard is now accessable using the url set in .env
 

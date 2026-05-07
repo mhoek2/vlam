@@ -66,7 +66,15 @@ When not using the .env file:
 Setup Database
 ---------------
 
-By default the sql/vlam.sql is imported. use phpmyadmin to import a local backup. Migrations are not supported for this project yet ..
+#. Run the migration to create the database tables. See :ref:`Database Migrations <migrations>` for more info. or Run:
+    .. code-block:: bash
+        # phpmyadmin: http://localhost/phpmyadmin
+
+        # using dedicated app (hostname = localhost)
+        php spark migrate --all
+
+        # setup demo user(s) and training content
+        php spark db:seed DemoSeeder
 
 Verify
 ------
