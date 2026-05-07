@@ -53,9 +53,11 @@ class AddAllForeignKeys extends Migration
         $this->db->query("ALTER TABLE training_users ADD CONSTRAINT training_users_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE RESTRICT");
 
         $this->db->query("ALTER TABLE training_user_meta ADD CONSTRAINT training_user_meta_user_id_foreign FOREIGN KEY (user_id) REFERENCES training_users(user_id) ON DELETE CASCADE ON UPDATE RESTRICT");
-
+        
+        $this->db->query("ALTER TABLE uploads ADD CONSTRAINT uploads_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE RESTRICT");
+        
         $this->db->query("ALTER TABLE user_meta ADD CONSTRAINT user_meta_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE RESTRICT");
-    }
+     }
 
     public function down()
     {
@@ -105,6 +107,8 @@ class AddAllForeignKeys extends Migration
         $this->db->query("ALTER TABLE training_users DROP FOREIGN KEY training_users_user_id_foreign");
 
         $this->db->query("ALTER TABLE training_user_meta DROP FOREIGN KEY training_user_meta_user_id_foreign");
+
+        $this->db->query("ALTER TABLE uploads DROP FOREIGN KEY uploads_user_id_foreign");
 
         $this->db->query("ALTER TABLE user_meta DROP FOREIGN KEY user_meta_user_id_foreign");
 
