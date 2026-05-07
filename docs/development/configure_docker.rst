@@ -40,7 +40,14 @@ Setup domain
 Setup Database
 ---------------
 
-By default the sql/vlam.sql is imported. use phpmyadmin to import a local backup. Migrations are not supported for this project yet ..
+#. Run the migration to create the database tables. See :ref:`Database Migrations <migrations>` for more info. or Run:
+    .. code-block:: bash
+    
+        # using docker app container, prefix commands with docker exec -it vlam_app
+        docker exec -it vlam_app php spark migrate --all
+
+        # setup demo user(s) and training content
+        docker exec -it vlam_app php spark db:seed DemoSeeder
 
 Access Rights
 ------
